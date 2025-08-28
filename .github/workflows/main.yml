@@ -1,0 +1,47 @@
+name: Mirror pandas-cn docs → pandas2.3.0_cn
+
+on:
+  schedule:
+    - cron: '0 19 * * *'   # 每晚 03:00 CST
+  workflow_dispatch:        # 手动触发
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install wget
+        run: sudo apt-get update && sudo apt-get install -y wget
+
+      - name: Mirror site to pandas2.3.0_cn
+        run: |
+          # 如果目录已存在先清空（保留 .git）
+          rm -rf pandas2.3.0_cn
+          mkdir -p pandas2.3.0_cn
+          cd pandas2.3.0_cn
+          wget \
+            --mirror \
+            --convert-links \
+            --adjust-extension \
+            --page-requisites \
+            --no-parent \
+            --timeout=30 \
+            --tries=3 \
+            -e robots=off \
+            https://pandas.ac.cn/docs/
+
+          # 把下载后的目录名改成我们想要的
+          mv pandas.ac.cn/docs/* .
+          rmdir -p pandas.ac.cn/docs 2>/dev/null || true
+
+      - name: Commit & push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pandas2.3.0_cn
+          git diff --cached --quiet || (git commit -m "sync pandas-cn docs $(date -u +%F' '%T)" && git push)
