@@ -11,7 +11,7 @@ env:
   TARGET_DIR:   jupyter
   MIRROR_PROTO: https
   MIRROR_HOST:  docs.jupyter.org.cn
-  MIRROR_PATH:  en/latest/
+  MIRROR_PATH:  en/latest
 
 jobs:
   mirror:
