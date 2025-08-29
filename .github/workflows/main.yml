@@ -56,10 +56,24 @@ jobs:
           path: ${{ env.EXPORT_NAME }}
           retention-days: 30          # 保留 30 天，可按需调整
 
+      - name: Update README link (only once)
+        run: |
+          BASE_URL="https://${{ github.repository_owner }}.github.io/docs"
+          FULL_URL="${BASE_URL}/${TARGET_DIR}"
+          [ -f README.md ] || touch README.md
+          grep -qF "${FULL_URL}" README.md || echo "- [${TARGET_DIR}](${FULL_URL})" >> README.md
+
+      - name: Generate index.html from README.md
+        run: |
+          sudo apt-get install -y pandoc
+          [ -f README.md ] || touch README.md
+          pandoc README.md -f markdown -t html5 -s -o index.html \
+            --metadata title="Docs Index"
+
       - name: Commit & push
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main
-          git add "${TARGET_DIR}" "${TARGET_DIR}.zip"
+          git add "${TARGET_DIR}" "${TARGET_DIR}.zip" README.md index.html
           git diff --cached --quiet || (git commit -m "sync $(date -u +%F' '%T)" && git push)
