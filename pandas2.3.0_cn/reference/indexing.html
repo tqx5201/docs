@@ -1,0 +1,1665 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>索引对象 — pandas 2.2.1 文档 - pandas 数据分析库</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+
+<link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+<link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=fa44fd50.css">
+<link rel="stylesheet" type="text/css" href="../_static/plot_directive.css">
+<link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css">
+<link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css%3Fv=0a3b3ea7.css">
+<link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css">
+<link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css">
+
+<link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd">
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/documentation_options.js%3Fv=166560180"></script>
+<script src="../_static/doctools.js%3Fv=888ff710"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=f281be69"></script>
+<script src="../_static/design-tabs.js%3Fv=36754332"></script>
+<script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'reference/indexing';</script>
+<script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+<link rel="icon" href="../_static/favicon.ico">
+<link rel="index" title="Index" href="../genindex.html">
+<link rel="search" title="Search" href="../search.html">
+<link rel="next" title="pandas.Index" href="api/pandas.Index.html">
+<link rel="prev" title="pandas.api.types.is_scalar" href="api/pandas.api.types.is_scalar.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="docsearch:language" content="en">
+</head>
+<body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+<a class="skip-link" href="indexing.html#main-content">跳至主要内容</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button type="button" class="btn rounded-pill" id="pst-back-to-top">
+<i class="fa-solid fa-arrow-up"></i> 返回顶部
+</button>
+<input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+<label class="overlay overlay-primary" for="__primary"></label>
+<input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+<i class="fa-solid fa-magnifying-glass"></i> <input type="search" class="form-control" name="q" id="search-input" placeholder="搜索文档..." aria-label="搜索文档..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+<label class="sidebar-toggle primary-toggle" for="__primary">
+<span class="fa-solid fa-bars"></span>
+</label>
+<div class=" navbar-header-items__start">
+<div class="navbar-item">
+<a class="navbar-brand logo" href="../index.html">
+<img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.2.1 documentation - Home">
+<script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.2.1 documentation - Home"/>`);</script>
+</a></div>
+</div>
+<div class=" navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
+<nav class="navbar-nav">
+<p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+网站导航
+</p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../getting_started/index.html">
+入门
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../user_guide/index.html">
+用户指南
+</a>
+</li>
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html">
+API 参考
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../development/index.html">
+开发
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../whatsnew/index.html">
+发行说明
+</a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+</div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+<div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+<li class="nav-item">
+<a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+</li>
+<li class="nav-item">
+<a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+</li>
+<li class="nav-item">
+<a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+</div>
+<label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+<span class="fa-solid fa-outdent"></span>
+</label>
+</div>
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<nav class="navbar-nav">
+<p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+网站导航
+</p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../getting_started/index.html">
+入门
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../user_guide/index.html">
+用户指南
+</a>
+</li>
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html">
+API 参考
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../development/index.html">
+开发
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../whatsnew/index.html">
+发行说明
+</a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+<div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+<li class="nav-item">
+<a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+</li>
+<li class="nav-item">
+<a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+</li>
+<li class="nav-item">
+<a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+<div class="bd-toc-item navbar-nav">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="io.html">输入/输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general_functions.html">通用函数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="series.html">Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">pandas 数组、标量和数据类型</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="indexing.html#">索引对象</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.html">pandas.Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.values.html">pandas.Index.values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_monotonic_increasing.html">pandas.Index.is_monotonic_increasing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_monotonic_decreasing.html">pandas.Index.is_monotonic_decreasing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_unique.html">pandas.Index.is_unique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.has_duplicates.html">pandas.Index.has_duplicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.hasnans.html">pandas.Index.hasnans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.dtype.html">pandas.Index.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.inferred_type.html">pandas.Index.inferred_type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.shape.html">pandas.Index.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.name.html">pandas.Index.name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.names.html">pandas.Index.names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.nbytes.html">pandas.Index.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.ndim.html">pandas.Index.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.size.html">pandas.Index.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.empty.html">pandas.Index.empty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.T.html">pandas.Index.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.memory_usage.html">pandas.Index.memory_usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.all.html">pandas.Index.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.any.html">pandas.Index.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.argmin.html">pandas.Index.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.argmax.html">pandas.Index.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.copy.html">pandas.Index.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.delete.html">pandas.Index.delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.drop.html">pandas.Index.drop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.drop_duplicates.html">pandas.Index.drop_duplicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.duplicated.html">pandas.Index.duplicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.equals.html">pandas.Index.equals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.factorize.html">pandas.Index.factorize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.identical.html">pandas.Index.identical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.insert.html">pandas.Index.insert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_.html">pandas.Index.is_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_boolean.html">pandas.Index.is_boolean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_categorical.html">pandas.Index.is_categorical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_floating.html">pandas.Index.is_floating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_integer.html">pandas.Index.is_integer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_interval.html">pandas.Index.is_interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_numeric.html">pandas.Index.is_numeric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.is_object.html">pandas.Index.is_object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.min.html">pandas.Index.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.max.html">pandas.Index.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.reindex.html">pandas.Index.reindex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.rename.html">pandas.Index.rename</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.repeat.html">pandas.Index.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.where.html">pandas.Index.where</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.take.html">pandas.Index.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.putmask.html">pandas.Index.putmask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.unique.html">pandas.Index.unique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.nunique.html">pandas.Index.nunique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.value_counts.html">pandas.Index.value_counts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.set_names.html">pandas.Index.set_names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.droplevel.html">pandas.Index.droplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.fillna.html">pandas.Index.fillna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.dropna.html">pandas.Index.dropna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.isna.html">pandas.Index.isna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.notna.html">pandas.Index.notna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.astype.html">pandas.Index.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.item.html">pandas.Index.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.map.html">pandas.Index.map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.ravel.html">pandas.Index.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.to_list.html">pandas.Index.to_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.to_series.html">pandas.Index.to_series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.to_frame.html">pandas.Index.to_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.view.html">pandas.Index.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.argsort.html">pandas.Index.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.searchsorted.html">pandas.Index.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.sort_values.html">pandas.Index.sort_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.shift.html">pandas.Index.shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.append.html">pandas.Index.append</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.join.html">pandas.Index.join</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.intersection.html">pandas.Index.intersection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.union.html">pandas.Index.union</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.difference.html">pandas.Index.difference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.symmetric_difference.html">pandas.Index.symmetric_difference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.asof.html">pandas.Index.asof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.asof_locs.html">pandas.Index.asof_locs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.get_indexer.html">pandas.Index.get_indexer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.get_indexer_for.html">pandas.Index.get_indexer_for</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.get_indexer_non_unique.html">pandas.Index.get_indexer_non_unique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.get_level_values.html">pandas.Index.get_level_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.get_loc.html">pandas.Index.get_loc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.get_slice_bound.html">pandas.Index.get_slice_bound</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.isin.html">pandas.Index.isin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.slice_indexer.html">pandas.Index.slice_indexer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.slice_locs.html">pandas.Index.slice_locs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.RangeIndex.html">pandas.RangeIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.RangeIndex.start.html">pandas.RangeIndex.start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.RangeIndex.stop.html">pandas.RangeIndex.stop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.RangeIndex.step.html">pandas.RangeIndex.step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.RangeIndex.from_range.html">pandas.RangeIndex.from_range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.html">pandas.CategoricalIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.codes.html">pandas.CategoricalIndex.codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.categories.html">pandas.CategoricalIndex.categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.ordered.html">pandas.CategoricalIndex.ordered</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.rename_categories.html">pandas.CategoricalIndex.rename_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.reorder_categories.html">pandas.CategoricalIndex.reorder_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.add_categories.html">pandas.CategoricalIndex.add_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.remove_categories.html">pandas.CategoricalIndex.remove_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.remove_unused_categories.html">pandas.CategoricalIndex.remove_unused_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.set_categories.html">pandas.CategoricalIndex.set_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.as_ordered.html">pandas.CategoricalIndex.as_ordered</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.as_unordered.html">pandas.CategoricalIndex.as_unordered</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.map.html">pandas.CategoricalIndex.map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.CategoricalIndex.equals.html">pandas.CategoricalIndex.equals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.html">pandas.IntervalIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.from_arrays.html">pandas.IntervalIndex.from_arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.from_tuples.html">pandas.IntervalIndex.from_tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.from_breaks.html">pandas.IntervalIndex.from_breaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.left.html">pandas.IntervalIndex.left</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.right.html">pandas.IntervalIndex.right</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.mid.html">pandas.IntervalIndex.mid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.closed.html">pandas.IntervalIndex.closed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.length.html">pandas.IntervalIndex.length</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.values.html">pandas.IntervalIndex.values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.is_empty.html">pandas.IntervalIndex.is_empty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.is_non_overlapping_monotonic.html">pandas.IntervalIndex.is_non_overlapping_monotonic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.is_overlapping.html">pandas.IntervalIndex.is_overlapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.get_loc.html">pandas.IntervalIndex.get_loc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.get_indexer.html">pandas.IntervalIndex.get_indexer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.set_closed.html">pandas.IntervalIndex.set_closed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.contains.html">pandas.IntervalIndex.contains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.overlaps.html">pandas.IntervalIndex.overlaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IntervalIndex.to_tuples.html">pandas.IntervalIndex.to_tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.html">pandas.MultiIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.from_arrays.html">pandas.MultiIndex.from_arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.from_tuples.html">pandas.MultiIndex.from_tuples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.from_product.html">pandas.MultiIndex.from_product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.from_frame.html">pandas.MultiIndex.from_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.names.html">pandas.MultiIndex.names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.levels.html">pandas.MultiIndex.levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.codes.html">pandas.MultiIndex.codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.nlevels.html">pandas.MultiIndex.nlevels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.levshape.html">pandas.MultiIndex.levshape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.dtypes.html">pandas.MultiIndex.dtypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.set_levels.html">pandas.MultiIndex.set_levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.set_codes.html">pandas.MultiIndex.set_codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.to_flat_index.html">pandas.MultiIndex.to_flat_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.to_frame.html">pandas.MultiIndex.to_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.sortlevel.html">pandas.MultiIndex.sortlevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.droplevel.html">pandas.MultiIndex.droplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.swaplevel.html">pandas.MultiIndex.swaplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.reorder_levels.html">pandas.MultiIndex.reorder_levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.remove_unused_levels.html">pandas.MultiIndex.remove_unused_levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.drop.html">pandas.MultiIndex.drop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.copy.html">pandas.MultiIndex.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.append.html">pandas.MultiIndex.append</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.truncate.html">pandas.MultiIndex.truncate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.get_loc.html">pandas.MultiIndex.get_loc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.get_locs.html">pandas.MultiIndex.get_locs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.get_loc_level.html">pandas.MultiIndex.get_loc_level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.get_indexer.html">pandas.MultiIndex.get_indexer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.MultiIndex.get_level_values.html">pandas.MultiIndex.get_level_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.IndexSlice.html">pandas.IndexSlice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.html">pandas.DatetimeIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.year.html">pandas.DatetimeIndex.year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.month.html">pandas.DatetimeIndex.month</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.day.html">pandas.DatetimeIndex.day</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.hour.html">pandas.DatetimeIndex.hour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.minute.html">pandas.DatetimeIndex.minute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.second.html">pandas.DatetimeIndex.second</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.microsecond.html">pandas.DatetimeIndex.microsecond</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.nanosecond.html">pandas.DatetimeIndex.nanosecond</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.date.html">pandas.DatetimeIndex.date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.time.html">pandas.DatetimeIndex.time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.timetz.html">pandas.DatetimeIndex.timetz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.dayofyear.html">pandas.DatetimeIndex.dayofyear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.day_of_year.html">pandas.DatetimeIndex.day_of_year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.dayofweek.html">pandas.DatetimeIndex.dayofweek</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.day_of_week.html">pandas.DatetimeIndex.day_of_week</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.weekday.html">pandas.DatetimeIndex.weekday</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.quarter.html">pandas.DatetimeIndex.quarter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.tz.html">pandas.DatetimeIndex.tz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.freq.html">pandas.DatetimeIndex.freq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.freqstr.html">pandas.DatetimeIndex.freqstr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.is_month_start.html">pandas.DatetimeIndex.is_month_start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.is_month_end.html">pandas.DatetimeIndex.is_month_end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.is_quarter_start.html">pandas.DatetimeIndex.is_quarter_start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.is_quarter_end.html">pandas.DatetimeIndex.is_quarter_end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.is_year_start.html">pandas.DatetimeIndex.is_year_start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.is_year_end.html">pandas.DatetimeIndex.is_year_end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.is_leap_year.html">pandas.DatetimeIndex.is_leap_year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.inferred_freq.html">pandas.DatetimeIndex.inferred_freq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.indexer_at_time.html">pandas.DatetimeIndex.indexer_at_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.indexer_between_time.html">pandas.DatetimeIndex.indexer_between_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.normalize.html">pandas.DatetimeIndex.normalize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.strftime.html">pandas.DatetimeIndex.strftime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.snap.html">pandas.DatetimeIndex.snap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.tz_convert.html">pandas.DatetimeIndex.tz_convert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.tz_localize.html">pandas.DatetimeIndex.tz_localize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.round.html">pandas.DatetimeIndex.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.floor.html">pandas.DatetimeIndex.floor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.ceil.html">pandas.DatetimeIndex.ceil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.month_name.html">pandas.DatetimeIndex.month_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.day_name.html">pandas.DatetimeIndex.day_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.as_unit.html">pandas.DatetimeIndex.as_unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.to_period.html">pandas.DatetimeIndex.to_period</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.to_pydatetime.html">pandas.DatetimeIndex.to_pydatetime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.to_series.html">pandas.DatetimeIndex.to_series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.to_frame.html">pandas.DatetimeIndex.to_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.mean.html">pandas.DatetimeIndex.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DatetimeIndex.std.html">pandas.DatetimeIndex.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.html">pandas.TimedeltaIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.days.html">pandas.TimedeltaIndex.days</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.seconds.html">pandas.TimedeltaIndex.seconds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.microseconds.html">pandas.TimedeltaIndex.microseconds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.nanoseconds.html">pandas.TimedeltaIndex.nanoseconds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.components.html">pandas.TimedeltaIndex.components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.inferred_freq.html">pandas.TimedeltaIndex.inferred_freq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.as_unit.html">pandas.TimedeltaIndex.as_unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.to_pytimedelta.html">pandas.TimedeltaIndex.to_pytimedelta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.to_series.html">pandas.TimedeltaIndex.to_series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.round.html">pandas.TimedeltaIndex.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.floor.html">pandas.TimedeltaIndex.floor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.ceil.html">pandas.TimedeltaIndex.ceil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.to_frame.html">pandas.TimedeltaIndex.to_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.TimedeltaIndex.mean.html">pandas.TimedeltaIndex.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.html">pandas.PeriodIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.day.html">pandas.PeriodIndex.day</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.dayofweek.html">pandas.PeriodIndex.dayofweek</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.day_of_week.html">pandas.PeriodIndex.day_of_week</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.dayofyear.html">pandas.PeriodIndex.dayofyear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.day_of_year.html">pandas.PeriodIndex.day_of_year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.days_in_month.html">pandas.PeriodIndex.days_in_month</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.daysinmonth.html">pandas.PeriodIndex.daysinmonth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.end_time.html">pandas.PeriodIndex.end_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.freq.html">pandas.PeriodIndex.freq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.freqstr.html">pandas.PeriodIndex.freqstr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.hour.html">pandas.PeriodIndex.hour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.is_leap_year.html">pandas.PeriodIndex.is_leap_year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.minute.html">pandas.PeriodIndex.minute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.month.html">pandas.PeriodIndex.month</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.quarter.html">pandas.PeriodIndex.quarter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.qyear.html">pandas.PeriodIndex.qyear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.second.html">pandas.PeriodIndex.second</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.start_time.html">pandas.PeriodIndex.start_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.week.html">pandas.PeriodIndex.week</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.weekday.html">pandas.PeriodIndex.weekday</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.weekofyear.html">pandas.PeriodIndex.weekofyear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.year.html">pandas.PeriodIndex.year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.asfreq.html">pandas.PeriodIndex.asfreq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.strftime.html">pandas.PeriodIndex.strftime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.to_timestamp.html">pandas.PeriodIndex.to_timestamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.from_fields.html">pandas.PeriodIndex.from_fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.PeriodIndex.from_ordinals.html">pandas.PeriodIndex.from_ordinals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="offset_frequency.html">日期偏移</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resampling.html">重采样</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">样式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_value.html">缺失值</a></li>
+</ul>
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main id="main-content" class="bd-main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item">
+<nav aria-label="Breadcrumb">
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a href="../index.html" class="nav-link" aria-label="Home">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a href="index.html" class="nav-link">API 参考</a></li>
+<li class="breadcrumb-item active" aria-current="page">索引对象</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id="searchbox"></div>
+<article class="bd-article" role="main">
+<section id="index-objects">
+<span id="api-indexing"></span><h1>索引对象<a class="headerlink" href="indexing.html#index-objects" title="Link to this heading">#</a></h1>
+<section id="index">
+<h2>索引<a class="headerlink" href="indexing.html#index" title="Link to this heading">#</a></h2>
+<p><strong>许多这些方法或其变体在包含索引的对象（Series/DataFrame）上可用，并且在直接调用这些方法之前，最有可能使用这些方法。</strong></p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index</span></code></a>([data,&nbsp;dtype,&nbsp;copy,&nbsp;name,&nbsp;tupleize_cols])</p></td>
+<td><p>用于索引和对齐的不可变序列。</p></td>
+</tr>
+</tbody>
+</table>
+<section id="properties">
+<h3>属性<a class="headerlink" href="indexing.html#properties" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.values.html#pandas.Index.values" title="pandas.Index.values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.values</span></code></a></p></td>
+<td><p>返回表示索引中数据的数组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.is_monotonic_increasing.html#pandas.Index.is_monotonic_increasing" title="pandas.Index.is_monotonic_increasing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_monotonic_increasing</span></code></a></p></td>
+<td><p>如果值相等或递增，则返回布尔值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.is_monotonic_decreasing.html#pandas.Index.is_monotonic_decreasing" title="pandas.Index.is_monotonic_decreasing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_monotonic_decreasing</span></code></a></p></td>
+<td><p>如果值相等或递减，则返回布尔值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.is_unique.html#pandas.Index.is_unique" title="pandas.Index.is_unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_unique</span></code></a></p></td>
+<td><p>返回索引是否具有唯一值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.has_duplicates.html#pandas.Index.has_duplicates" title="pandas.Index.has_duplicates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.has_duplicates</span></code></a></p></td>
+<td><p>检查索引是否具有重复值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.hasnans.html#pandas.Index.hasnans" title="pandas.Index.hasnans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.hasnans</span></code></a></p></td>
+<td><p>如果存在任何 NaN，则返回 True。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.dtype.html#pandas.Index.dtype" title="pandas.Index.dtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.dtype</span></code></a></p></td>
+<td><p>返回底层数据的 dtype 对象。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.inferred_type.html#pandas.Index.inferred_type" title="pandas.Index.inferred_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.inferred_type</span></code></a></p></td>
+<td><p>返回从值推断出的类型的字符串。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.shape.html#pandas.Index.shape" title="pandas.Index.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.shape</span></code></a></p></td>
+<td><p>返回底层数据的形状元组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.name.html#pandas.Index.name" title="pandas.Index.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.name</span></code></a></p></td>
+<td><p>返回索引或多级索引名称。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.names.html#pandas.Index.names" title="pandas.Index.names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.names</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.nbytes.html#pandas.Index.nbytes" title="pandas.Index.nbytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.nbytes</span></code></a></p></td>
+<td><p>返回底层数据中的字节数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.ndim.html#pandas.Index.ndim" title="pandas.Index.ndim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.ndim</span></code></a></p></td>
+<td><p>底层数据的维度数，定义为 1。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.size.html#pandas.Index.size" title="pandas.Index.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.size</span></code></a></p></td>
+<td><p>返回底层数据中的元素数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.empty.html#pandas.Index.empty" title="pandas.Index.empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.empty</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.T.html#pandas.Index.T" title="pandas.Index.T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.T</span></code></a></p></td>
+<td><p>返回转置，定义为自身。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.memory_usage.html#pandas.Index.memory_usage" title="pandas.Index.memory_usage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.memory_usage</span></code></a>([deep])</p></td>
+<td><p>值的内存使用量。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="modifying-and-computations">
+<h3>修改和计算<a class="headerlink" href="indexing.html#modifying-and-computations" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.all.html#pandas.Index.all" title="pandas.Index.all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.all</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回所有元素是否为真值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.any.html#pandas.Index.any" title="pandas.Index.any"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.any</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回任何元素是否为真值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.argmin.html#pandas.Index.argmin" title="pandas.Index.argmin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.argmin</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回 Series 中最小值的整数位置。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.argmax.html#pandas.Index.argmax" title="pandas.Index.argmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.argmax</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回 Series 中最大值的整数位置。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.copy.html#pandas.Index.copy" title="pandas.Index.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.copy</span></code></a>([name,&nbsp;deep])</p></td>
+<td><p>创建此对象的副本。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.delete.html#pandas.Index.delete" title="pandas.Index.delete"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.delete</span></code></a>(loc)</p></td>
+<td><p>创建新的 Index，删除传递的位置。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.drop.html#pandas.Index.drop" title="pandas.Index.drop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.drop</span></code></a>(labels[,&nbsp;errors])</p></td>
+<td><p>创建新的 Index，删除传递的标签列表。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.drop_duplicates.html#pandas.Index.drop_duplicates" title="pandas.Index.drop_duplicates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.drop_duplicates</span></code></a>([,&nbsp;keep])</p></td>
+<td><p>返回删除重复值的 Index。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.duplicated.html#pandas.Index.duplicated" title="pandas.Index.duplicated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.duplicated</span></code></a>([keep])</p></td>
+<td><p>指示重复的索引值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.equals.html#pandas.Index.equals" title="pandas.Index.equals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.equals</span></code></a>(other)</p></td>
+<td><p>确定两个 Index 对象是否相等。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.factorize.html#pandas.Index.factorize" title="pandas.Index.factorize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.factorize</span></code></a>([sort,&nbsp;use_na_sentinel])</p></td>
+<td><p>将对象编码为枚举类型或分类变量。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.identical.html#pandas.Index.identical" title="pandas.Index.identical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.identical</span></code></a>(other)</p></td>
+<td><p>类似于 equals，但检查对象属性和类型是否也相等。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.insert.html#pandas.Index.insert" title="pandas.Index.insert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.insert</span></code></a>(loc,&nbsp;item)</p></td>
+<td><p>在指定位置插入新项目，创建新的索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.is_.html#pandas.Index.is_" title="pandas.Index.is_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_</span></code></a>(other)</p></td>
+<td><p>更灵活、更快的检查，类似于 <code class="docutils literal notranslate"><span class="pre">is</span></code>，但通过视图工作。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.is_boolean.html#pandas.Index.is_boolean" title="pandas.Index.is_boolean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_boolean</span></code></a>()</p></td>
+<td><p>(已弃用) 检查索引是否只包含布尔值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.is_categorical.html#pandas.Index.is_categorical" title="pandas.Index.is_categorical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_categorical</span></code></a>()</p></td>
+<td><p>(已弃用) 检查索引是否包含分类数据。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.is_floating.html#pandas.Index.is_floating" title="pandas.Index.is_floating"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_floating</span></code></a>()</p></td>
+<td><p>(已弃用) 检查索引是否为浮点类型。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.is_integer.html#pandas.Index.is_integer" title="pandas.Index.is_integer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_integer</span></code></a>()</p></td>
+<td><p>(已弃用) 检查索引是否只包含整数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.is_interval.html#pandas.Index.is_interval" title="pandas.Index.is_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_interval</span></code></a>()</p></td>
+<td><p>(已弃用) 检查索引是否包含 Interval 对象。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.is_numeric.html#pandas.Index.is_numeric" title="pandas.Index.is_numeric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_numeric</span></code></a>()</p></td>
+<td><p>(已弃用) 检查索引是否只包含数值数据。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.is_object.html#pandas.Index.is_object" title="pandas.Index.is_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.is_object</span></code></a>()</p></td>
+<td><p>(已弃用) 检查索引是否为 object 数据类型。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.min.html#pandas.Index.min" title="pandas.Index.min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.min</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回索引的最小值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.max.html#pandas.Index.max" title="pandas.Index.max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.max</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回索引的最大值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.reindex.html#pandas.Index.reindex" title="pandas.Index.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.reindex</span></code></a>(target[,&nbsp;method,&nbsp;level,&nbsp;...])</p></td>
+<td><p>使用目标值创建索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.rename.html#pandas.Index.rename" title="pandas.Index.rename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.rename</span></code></a>(name,&nbsp;*[,&nbsp;inplace])</p></td>
+<td><p>更改索引或多级索引的名称。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.repeat.html#pandas.Index.repeat" title="pandas.Index.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.repeat</span></code></a>(repeats[,&nbsp;axis])</p></td>
+<td><p>重复索引中的元素。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.where.html#pandas.Index.where" title="pandas.Index.where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.where</span></code></a>(cond[,&nbsp;other])</p></td>
+<td><p>替换条件为 False 的值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.take.html#pandas.Index.take" title="pandas.Index.take"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.take</span></code></a>(indices[,&nbsp;axis,&nbsp;allow_fill,&nbsp;...])</p></td>
+<td><p>返回由索引选择的数值的新索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.putmask.html#pandas.Index.putmask" title="pandas.Index.putmask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.putmask</span></code></a>(mask,&nbsp;value)</p></td>
+<td><p>返回一个使用掩码设置值的新的索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.unique.html#pandas.Index.unique" title="pandas.Index.unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.unique</span></code></a>([level])</p></td>
+<td><p>返回索引中的唯一值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.nunique.html#pandas.Index.nunique" title="pandas.Index.nunique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.nunique</span></code></a>([dropna])</p></td>
+<td><p>返回对象中唯一元素的数量。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.value_counts.html#pandas.Index.value_counts" title="pandas.Index.value_counts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.value_counts</span></code></a>([normalize,&nbsp;sort,&nbsp;...])</p></td>
+<td><p>返回一个包含唯一值计数的 Series。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="compatibility-with-multiindex">
+<h3>与 MultiIndex 的兼容性<a class="headerlink" href="indexing.html#compatibility-with-multiindex" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.set_names.html#pandas.Index.set_names" title="pandas.Index.set_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.set_names</span></code></a>(names,&nbsp;*[,&nbsp;level,&nbsp;inplace])</p></td>
+<td><p>设置索引或 MultiIndex 名称。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.droplevel.html#pandas.Index.droplevel" title="pandas.Index.droplevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.droplevel</span></code></a>([level])</p></td>
+<td><p>返回删除了请求级别(s)的索引。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="missing-values">
+<h3>缺失值<a class="headerlink" href="indexing.html#missing-values" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.fillna.html#pandas.Index.fillna" title="pandas.Index.fillna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.fillna</span></code></a>([value,&nbsp;downcast])</p></td>
+<td><p>用指定的值填充 NA/NaN 值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.dropna.html#pandas.Index.dropna" title="pandas.Index.dropna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.dropna</span></code></a>([how])</p></td>
+<td><p>返回没有 NA/NaN 值的索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.isna.html#pandas.Index.isna" title="pandas.Index.isna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.isna</span></code></a>()</p></td>
+<td><p>检测缺失值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.notna.html#pandas.Index.notna" title="pandas.Index.notna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.notna</span></code></a>()</p></td>
+<td><p>检测现有（非缺失）值。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conversion">
+<h3>转换<a class="headerlink" href="indexing.html#conversion" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.astype.html#pandas.Index.astype" title="pandas.Index.astype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.astype</span></code></a>(dtype[,&nbsp;copy])</p></td>
+<td><p>创建一个具有转换为 dtype 值的索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.item.html#pandas.Index.item" title="pandas.Index.item"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.item</span></code></a>()</p></td>
+<td><p>将底层数据的第一个元素作为 Python 标量返回。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.map.html#pandas.Index.map" title="pandas.Index.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.map</span></code></a>(mapper[,&nbsp;na_action])</p></td>
+<td><p>使用输入映射或函数映射值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.ravel.html#pandas.Index.ravel" title="pandas.Index.ravel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.ravel</span></code></a>([order])</p></td>
+<td><p>返回自身视图。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.to_list.html#pandas.Index.to_list" title="pandas.Index.to_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.to_list</span></code></a>()</p></td>
+<td><p>返回值的列表。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.to_series.html#pandas.Index.to_series" title="pandas.Index.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.to_series</span></code></a>([index,&nbsp;name])</p></td>
+<td><p>创建一个索引和值都等于索引键的 Series。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.to_frame.html#pandas.Index.to_frame" title="pandas.Index.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.to_frame</span></code></a>([index,&nbsp;name])</p></td>
+<td><p>创建一个包含索引的 DataFrame。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.view.html#pandas.Index.view" title="pandas.Index.view"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.view</span></code></a>([cls])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sorting">
+<h3>排序<a class="headerlink" href="indexing.html#sorting" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.argsort.html#pandas.Index.argsort" title="pandas.Index.argsort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.argsort</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回对索引进行排序的整数索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.searchsorted.html#pandas.Index.searchsorted" title="pandas.Index.searchsorted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.searchsorted</span></code></a>(value[,&nbsp;side,&nbsp;sorter])</p></td>
+<td><p>查找应插入元素以保持顺序的索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.sort_values.html#pandas.Index.sort_values" title="pandas.Index.sort_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.sort_values</span></code></a>([return_indexer,&nbsp;...])</p></td>
+<td><p>返回索引的排序副本。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="time-specific-operations">
+<h3>特定时间操作<a class="headerlink" href="indexing.html#time-specific-operations" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.shift.html#pandas.Index.shift" title="pandas.Index.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.shift</span></code></a>([periods,&nbsp;freq])</p></td>
+<td><p>将索引按所需的时间频率增量进行偏移。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="combining-joining-set-operations">
+<h3>组合/连接/集合操作<a class="headerlink" href="indexing.html#combining-joining-set-operations" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.append.html#pandas.Index.append" title="pandas.Index.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.append</span></code></a>(other)</p></td>
+<td><p>将多个 Index 选项拼接在一起。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.join.html#pandas.Index.join" title="pandas.Index.join"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.join</span></code></a>(other,&nbsp;*[,&nbsp;how,&nbsp;level,&nbsp;...])</p></td>
+<td><p>计算 join_index 和 indexers 以使数据结构符合新索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.intersection.html#pandas.Index.intersection" title="pandas.Index.intersection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.intersection</span></code></a>(other[,&nbsp;sort])</p></td>
+<td><p>形成两个 Index 对象的交集。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.union.html#pandas.Index.union" title="pandas.Index.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.union</span></code></a>(other[,&nbsp;sort])</p></td>
+<td><p>形成两个 Index 对象的并集。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.difference.html#pandas.Index.difference" title="pandas.Index.difference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.difference</span></code></a>(other[,&nbsp;sort])</p></td>
+<td><p>返回一个新的 Index，其中包含 index 中不在 <cite>other</cite> 中的元素。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.symmetric_difference.html#pandas.Index.symmetric_difference" title="pandas.Index.symmetric_difference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.symmetric_difference</span></code></a>(other[,&nbsp;...])</p></td>
+<td><p>计算两个 Index 对象的对称差。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="selecting">
+<h3>选择<a class="headerlink" href="indexing.html#selecting" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.asof.html#pandas.Index.asof" title="pandas.Index.asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.asof</span></code></a>(label)</p></td>
+<td><p>返回索引中的标签，如果不存在，则返回前一个标签。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.asof_locs.html#pandas.Index.asof_locs" title="pandas.Index.asof_locs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.asof_locs</span></code></a>(where,&nbsp;mask)</p></td>
+<td><p>返回索引中标签的位置（索引）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.get_indexer.html#pandas.Index.get_indexer" title="pandas.Index.get_indexer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.get_indexer</span></code></a>(target[,&nbsp;method,&nbsp;limit,&nbsp;...])</p></td>
+<td><p>根据当前索引计算新索引的 indexer 和 mask。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.get_indexer_for.html#pandas.Index.get_indexer_for" title="pandas.Index.get_indexer_for"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.get_indexer_for</span></code></a>(target)</p></td>
+<td><p>即使在非唯一情况下也能保证返回 indexer。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.get_indexer_non_unique.html#pandas.Index.get_indexer_non_unique" title="pandas.Index.get_indexer_non_unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.get_indexer_non_unique</span></code></a>(target)</p></td>
+<td><p>根据当前索引计算新索引的 indexer 和 mask。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.get_level_values.html#pandas.Index.get_level_values" title="pandas.Index.get_level_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.get_level_values</span></code></a>(level)</p></td>
+<td><p>返回请求级别的值索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.get_loc.html#pandas.Index.get_loc" title="pandas.Index.get_loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.get_loc</span></code></a>(key)</p></td>
+<td><p>获取请求标签的整数位置、切片或布尔掩码。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.get_slice_bound.html#pandas.Index.get_slice_bound" title="pandas.Index.get_slice_bound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.get_slice_bound</span></code></a>(label,&nbsp;side)</p></td>
+<td><p>计算对应于给定标签的切片边界。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.isin.html#pandas.Index.isin" title="pandas.Index.isin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.isin</span></code></a>(values[,&nbsp;level])</p></td>
+<td><p>返回一个布尔数组，其中索引值在 <cite>values</cite> 中。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.slice_indexer.html#pandas.Index.slice_indexer" title="pandas.Index.slice_indexer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.slice_indexer</span></code></a>([start,&nbsp;end,&nbsp;step])</p></td>
+<td><p>计算输入标签和步长的切片索引器。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Index.slice_locs.html#pandas.Index.slice_locs" title="pandas.Index.slice_locs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.slice_locs</span></code></a>([start,&nbsp;end,&nbsp;step])</p></td>
+<td><p>计算输入标签的切片位置。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="numeric-index">
+<span id="api-numericindex"></span><h2>数值索引<a class="headerlink" href="indexing.html#numeric-index" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.RangeIndex.html#pandas.RangeIndex" title="pandas.RangeIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RangeIndex</span></code></a>([start,&nbsp;stop,&nbsp;step,&nbsp;dtype,&nbsp;copy,&nbsp;...])</p></td>
+<td><p>实现单调整数范围的不可变索引。</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.RangeIndex.start.html#pandas.RangeIndex.start" title="pandas.RangeIndex.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RangeIndex.start</span></code></a></p></td>
+<td><p><cite>start</cite> 参数的值（如果未提供，则为 <code class="docutils literal notranslate"><span class="pre">0</span></code>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.RangeIndex.stop.html#pandas.RangeIndex.stop" title="pandas.RangeIndex.stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RangeIndex.stop</span></code></a></p></td>
+<td><p><cite>stop</cite> 参数的值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.RangeIndex.step.html#pandas.RangeIndex.step" title="pandas.RangeIndex.step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RangeIndex.step</span></code></a></p></td>
+<td><p><cite>step</cite> 参数的值（如果未提供，则为 <code class="docutils literal notranslate"><span class="pre">1</span></code>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.RangeIndex.from_range.html#pandas.RangeIndex.from_range" title="pandas.RangeIndex.from_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RangeIndex.from_range</span></code></a>(data[,&nbsp;name,&nbsp;dtype])</p></td>
+<td><p>从 <code class="docutils literal notranslate"><span class="pre">range</span></code> 对象创建 <a class="reference internal" href="api/pandas.RangeIndex.html#pandas.RangeIndex" title="pandas.RangeIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.RangeIndex</span></code></a>。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="categoricalindex">
+<span id="api-categoricalindex"></span><h2>分类索引<a class="headerlink" href="indexing.html#categoricalindex" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.html#pandas.CategoricalIndex" title="pandas.CategoricalIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex</span></code></a>([data,&nbsp;categories,&nbsp;...])</p></td>
+<td><p>基于底层 <a class="reference internal" href="api/pandas.Categorical.html#pandas.Categorical" title="pandas.Categorical"><code class="xref py py-class docutils literal notranslate"><span class="pre">Categorical</span></code></a> 的索引。</p></td>
+</tr>
+</tbody>
+</table>
+<section id="categorical-components">
+<h3>分类组件<a class="headerlink" href="indexing.html#categorical-components" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.codes.html#pandas.CategoricalIndex.codes" title="pandas.CategoricalIndex.codes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.codes</span></code></a></p></td>
+<td><p>此分类索引的类别代码。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.categories.html#pandas.CategoricalIndex.categories" title="pandas.CategoricalIndex.categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.categories</span></code></a></p></td>
+<td><p>此分类的类别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.ordered.html#pandas.CategoricalIndex.ordered" title="pandas.CategoricalIndex.ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.ordered</span></code></a></p></td>
+<td><p>类别是否具有有序关系。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.rename_categories.html#pandas.CategoricalIndex.rename_categories" title="pandas.CategoricalIndex.rename_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.rename_categories</span></code></a>(*args,&nbsp;...)</p></td>
+<td><p>重命名类别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.reorder_categories.html#pandas.CategoricalIndex.reorder_categories" title="pandas.CategoricalIndex.reorder_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.reorder_categories</span></code></a>(*args,&nbsp;...)</p></td>
+<td><p>按 new_categories 中指定的顺序重新排列类别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.add_categories.html#pandas.CategoricalIndex.add_categories" title="pandas.CategoricalIndex.add_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.add_categories</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>添加新类别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.remove_categories.html#pandas.CategoricalIndex.remove_categories" title="pandas.CategoricalIndex.remove_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.remove_categories</span></code></a>(*args,&nbsp;...)</p></td>
+<td><p>删除指定的类别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.remove_unused_categories.html#pandas.CategoricalIndex.remove_unused_categories" title="pandas.CategoricalIndex.remove_unused_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.remove_unused_categories</span></code></a>(...)</p></td>
+<td><p>删除未使用的类别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.set_categories.html#pandas.CategoricalIndex.set_categories" title="pandas.CategoricalIndex.set_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.set_categories</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将类别设置为指定的新的类别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.as_ordered.html#pandas.CategoricalIndex.as_ordered" title="pandas.CategoricalIndex.as_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.as_ordered</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将分类设置为有序。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.as_unordered.html#pandas.CategoricalIndex.as_unordered" title="pandas.CategoricalIndex.as_unordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.as_unordered</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将分类设置为无序。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id1">
+<h3>修改和计算<a class="headerlink" href="indexing.html#id1" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.map.html#pandas.CategoricalIndex.map" title="pandas.CategoricalIndex.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.map</span></code></a>(mapper[,&nbsp;na_action])</p></td>
+<td><p>使用输入映射或函数映射值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.CategoricalIndex.equals.html#pandas.CategoricalIndex.equals" title="pandas.CategoricalIndex.equals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalIndex.equals</span></code></a>(other)</p></td>
+<td><p>确定两个 CategoricalIndex 对象是否包含相同的元素。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="intervalindex">
+<span id="api-intervalindex"></span><h2>IntervalIndex<a class="headerlink" href="indexing.html#intervalindex" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.html#pandas.IntervalIndex" title="pandas.IntervalIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex</span></code></a>(data[,&nbsp;closed,&nbsp;dtype,&nbsp;copy,&nbsp;...])</p></td>
+<td><p>不可变的区间索引，这些区间在同一侧闭合。</p></td>
+</tr>
+</tbody>
+</table>
+<section id="intervalindex-components">
+<h3>IntervalIndex 组件<a class="headerlink" href="indexing.html#intervalindex-components" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.from_arrays.html#pandas.IntervalIndex.from_arrays" title="pandas.IntervalIndex.from_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.from_arrays</span></code></a>(left,&nbsp;right[,&nbsp;...])</p></td>
+<td><p>从定义左右边界的两个数组构造。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.from_tuples.html#pandas.IntervalIndex.from_tuples" title="pandas.IntervalIndex.from_tuples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.from_tuples</span></code></a>(data[,&nbsp;closed,&nbsp;...])</p></td>
+<td><p>从元组的数组类构造 IntervalIndex。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.from_breaks.html#pandas.IntervalIndex.from_breaks" title="pandas.IntervalIndex.from_breaks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.from_breaks</span></code></a>(breaks[,&nbsp;closed,&nbsp;...])</p></td>
+<td><p>从分割数组构造 IntervalIndex。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.left.html#pandas.IntervalIndex.left" title="pandas.IntervalIndex.left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.left</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.right.html#pandas.IntervalIndex.right" title="pandas.IntervalIndex.right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.right</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.mid.html#pandas.IntervalIndex.mid" title="pandas.IntervalIndex.mid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.mid</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.closed.html#pandas.IntervalIndex.closed" title="pandas.IntervalIndex.closed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.closed</span></code></a></p></td>
+<td><p>描述区间的包含侧的字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.length.html#pandas.IntervalIndex.length" title="pandas.IntervalIndex.length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.length</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.values.html#pandas.IntervalIndex.values" title="pandas.IntervalIndex.values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.values</span></code></a></p></td>
+<td><p>返回表示索引中数据的数组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.is_empty.html#pandas.IntervalIndex.is_empty" title="pandas.IntervalIndex.is_empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.is_empty</span></code></a></p></td>
+<td><p>指示区间是否为空，这意味着它不包含任何点。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.is_non_overlapping_monotonic.html#pandas.IntervalIndex.is_non_overlapping_monotonic" title="pandas.IntervalIndex.is_non_overlapping_monotonic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.is_non_overlapping_monotonic</span></code></a></p></td>
+<td><p>返回一个布尔值，指示 IntervalArray 是否是非重叠且单调的。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.is_overlapping.html#pandas.IntervalIndex.is_overlapping" title="pandas.IntervalIndex.is_overlapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.is_overlapping</span></code></a></p></td>
+<td><p>如果 IntervalIndex 包含重叠的区间，则返回 True，否则返回 False。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.get_loc.html#pandas.IntervalIndex.get_loc" title="pandas.IntervalIndex.get_loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.get_loc</span></code></a>(key)</p></td>
+<td><p>获取请求标签的整数位置、切片或布尔掩码。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.get_indexer.html#pandas.IntervalIndex.get_indexer" title="pandas.IntervalIndex.get_indexer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.get_indexer</span></code></a>(target[,&nbsp;method,&nbsp;...])</p></td>
+<td><p>根据当前索引计算新索引的 indexer 和 mask。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.set_closed.html#pandas.IntervalIndex.set_closed" title="pandas.IntervalIndex.set_closed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.set_closed</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回一个在指定侧闭合的相同 IntervalArray。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.contains.html#pandas.IntervalIndex.contains" title="pandas.IntervalIndex.contains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.contains</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>逐元素检查 Intervals 是否包含该值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.overlaps.html#pandas.IntervalIndex.overlaps" title="pandas.IntervalIndex.overlaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.overlaps</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>逐元素检查 Interval 是否与 IntervalArray 中的值重叠。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.IntervalIndex.to_tuples.html#pandas.IntervalIndex.to_tuples" title="pandas.IntervalIndex.to_tuples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex.to_tuples</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回一个 ndarray（如果 self 是 IntervalArray）或 Index（如果 self 是 IntervalIndex），其中包含形式为 (left, right) 的元组。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="multiindex">
+<span id="api-multiindex"></span><h2>MultiIndex<a class="headerlink" href="indexing.html#multiindex" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.html#pandas.MultiIndex" title="pandas.MultiIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex</span></code></a>([levels,&nbsp;codes,&nbsp;sortorder,&nbsp;...])</p></td>
+<td><p>用于 pandas 对象的多级或分层索引对象。</p></td>
+</tr>
+</tbody>
+</table>
+<section id="multiindex-constructors">
+<h3>MultiIndex 构造函数<a class="headerlink" href="indexing.html#multiindex-constructors" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.from_arrays.html#pandas.MultiIndex.from_arrays" title="pandas.MultiIndex.from_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.from_arrays</span></code></a>(arrays[,&nbsp;sortorder,&nbsp;...])</p></td>
+<td><p>将数组转换为 MultiIndex。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.from_tuples.html#pandas.MultiIndex.from_tuples" title="pandas.MultiIndex.from_tuples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.from_tuples</span></code></a>(tuples[,&nbsp;sortorder,&nbsp;...])</p></td>
+<td><p>将元组列表转换为 MultiIndex。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.from_product.html#pandas.MultiIndex.from_product" title="pandas.MultiIndex.from_product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.from_product</span></code></a>(iterables[,&nbsp;...])</p></td>
+<td><p>从多个可迭代对象的笛卡尔积创建 MultiIndex。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.from_frame.html#pandas.MultiIndex.from_frame" title="pandas.MultiIndex.from_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.from_frame</span></code></a>(df[,&nbsp;sortorder,&nbsp;names])</p></td>
+<td><p>从 DataFrame 创建 MultiIndex。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="multiindex-properties">
+<h3>多级索引属性<a class="headerlink" href="indexing.html#multiindex-properties" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.names.html#pandas.MultiIndex.names" title="pandas.MultiIndex.names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.names</span></code></a></p></td>
+<td><p>多级索引中各级别的名称。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.levels.html#pandas.MultiIndex.levels" title="pandas.MultiIndex.levels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.levels</span></code></a></p></td>
+<td><p>多级索引的级别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.codes.html#pandas.MultiIndex.codes" title="pandas.MultiIndex.codes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.codes</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.nlevels.html#pandas.MultiIndex.nlevels" title="pandas.MultiIndex.nlevels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.nlevels</span></code></a></p></td>
+<td><p>此多级索引中级别的整数数量。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.levshape.html#pandas.MultiIndex.levshape" title="pandas.MultiIndex.levshape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.levshape</span></code></a></p></td>
+<td><p>包含每个级别长度的元组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.dtypes.html#pandas.MultiIndex.dtypes" title="pandas.MultiIndex.dtypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.dtypes</span></code></a></p></td>
+<td><p>返回底层多级索引的dtypes作为Series。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="multiindex-components">
+<h3>多级索引组件<a class="headerlink" href="indexing.html#multiindex-components" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.set_levels.html#pandas.MultiIndex.set_levels" title="pandas.MultiIndex.set_levels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.set_levels</span></code></a>(levels,&nbsp;*[,&nbsp;level,&nbsp;...])</p></td>
+<td><p>在多级索引上设置新的级别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.set_codes.html#pandas.MultiIndex.set_codes" title="pandas.MultiIndex.set_codes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.set_codes</span></code></a>(codes,&nbsp;*[,&nbsp;level,&nbsp;...])</p></td>
+<td><p>在多级索引上设置新的代码。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.to_flat_index.html#pandas.MultiIndex.to_flat_index" title="pandas.MultiIndex.to_flat_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.to_flat_index</span></code></a>()</p></td>
+<td><p>将多级索引转换为包含级别值的元组的索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.to_frame.html#pandas.MultiIndex.to_frame" title="pandas.MultiIndex.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.to_frame</span></code></a>([index,&nbsp;name,&nbsp;...])</p></td>
+<td><p>创建一个DataFrame，其列为多级索引的级别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.sortlevel.html#pandas.MultiIndex.sortlevel" title="pandas.MultiIndex.sortlevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.sortlevel</span></code></a>([level,&nbsp;ascending,&nbsp;...])</p></td>
+<td><p>在请求的级别对多级索引进行排序。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.droplevel.html#pandas.MultiIndex.droplevel" title="pandas.MultiIndex.droplevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.droplevel</span></code></a>([level])</p></td>
+<td><p>返回删除了请求级别(s)的索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.swaplevel.html#pandas.MultiIndex.swaplevel" title="pandas.MultiIndex.swaplevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.swaplevel</span></code></a>([i,&nbsp;j])</p></td>
+<td><p>交换级别i与级别j。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.reorder_levels.html#pandas.MultiIndex.reorder_levels" title="pandas.MultiIndex.reorder_levels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.reorder_levels</span></code></a>(order)</p></td>
+<td><p>使用输入顺序重新排列级别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.remove_unused_levels.html#pandas.MultiIndex.remove_unused_levels" title="pandas.MultiIndex.remove_unused_levels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.remove_unused_levels</span></code></a>()</p></td>
+<td><p>从当前多级索引创建新的多级索引，删除未使用的级别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.drop.html#pandas.MultiIndex.drop" title="pandas.MultiIndex.drop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.drop</span></code></a>(codes[,&nbsp;level,&nbsp;errors])</p></td>
+<td><p>创建一个新的 <a class="reference internal" href="api/pandas.MultiIndex.html#pandas.MultiIndex" title="pandas.MultiIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.MultiIndex</span></code></a>，删除传递的代码列表。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.copy.html#pandas.MultiIndex.copy" title="pandas.MultiIndex.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.copy</span></code></a>([names,&nbsp;deep,&nbsp;name])</p></td>
+<td><p>创建此对象的副本。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.append.html#pandas.MultiIndex.append" title="pandas.MultiIndex.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.append</span></code></a>(other)</p></td>
+<td><p>将多个 Index 选项拼接在一起。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.truncate.html#pandas.MultiIndex.truncate" title="pandas.MultiIndex.truncate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.truncate</span></code></a>([before,&nbsp;after])</p></td>
+<td><p>在两个标签/元组之间切片索引，返回新的 MultiIndex。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="multiindex-selecting">
+<h3>MultiIndex 选择<a class="headerlink" href="indexing.html#multiindex-selecting" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.get_loc.html#pandas.MultiIndex.get_loc" title="pandas.MultiIndex.get_loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.get_loc</span></code></a>(key)</p></td>
+<td><p>获取标签或标签元组的位置。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.get_locs.html#pandas.MultiIndex.get_locs" title="pandas.MultiIndex.get_locs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.get_locs</span></code></a>(seq)</p></td>
+<td><p>获取标签序列的位置。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.get_loc_level.html#pandas.MultiIndex.get_loc_level" title="pandas.MultiIndex.get_loc_level"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.get_loc_level</span></code></a>(key[,&nbsp;level,&nbsp;...])</p></td>
+<td><p>获取请求的标签/级别的位置和切片索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.MultiIndex.get_indexer.html#pandas.MultiIndex.get_indexer" title="pandas.MultiIndex.get_indexer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.get_indexer</span></code></a>(target[,&nbsp;method,&nbsp;...])</p></td>
+<td><p>根据当前索引计算新索引的 indexer 和 mask。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.MultiIndex.get_level_values.html#pandas.MultiIndex.get_level_values" title="pandas.MultiIndex.get_level_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiIndex.get_level_values</span></code></a>(level)</p></td>
+<td><p>返回请求级别的标签值向量。</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.IndexSlice.html#pandas.IndexSlice" title="pandas.IndexSlice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IndexSlice</span></code></a></p></td>
+<td><p>创建一个对象，以便更容易地执行多级索引切片。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="datetimeindex">
+<span id="api-datetimeindex"></span><h2>DatetimeIndex<a class="headerlink" href="indexing.html#datetimeindex" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.html#pandas.DatetimeIndex" title="pandas.DatetimeIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex</span></code></a>([data,&nbsp;freq,&nbsp;tz,&nbsp;normalize,&nbsp;...])</p></td>
+<td><p>不可变的类似 ndarray 的 datetime64 数据。</p></td>
+</tr>
+</tbody>
+</table>
+<section id="time-date-components">
+<h3>时间/日期组件<a class="headerlink" href="indexing.html#time-date-components" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.year.html#pandas.DatetimeIndex.year" title="pandas.DatetimeIndex.year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.year</span></code></a></p></td>
+<td><p>日期时间的年份。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.month.html#pandas.DatetimeIndex.month" title="pandas.DatetimeIndex.month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.month</span></code></a></p></td>
+<td><p>月份以 1 月 = 1，12 月 = 12 表示。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.day.html#pandas.DatetimeIndex.day" title="pandas.DatetimeIndex.day"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.day</span></code></a></p></td>
+<td><p>日期的时间。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.hour.html#pandas.DatetimeIndex.hour" title="pandas.DatetimeIndex.hour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.hour</span></code></a></p></td>
+<td><p>日期的小时。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.minute.html#pandas.DatetimeIndex.minute" title="pandas.DatetimeIndex.minute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.minute</span></code></a></p></td>
+<td><p>日期的分钟。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.second.html#pandas.DatetimeIndex.second" title="pandas.DatetimeIndex.second"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.second</span></code></a></p></td>
+<td><p>日期的秒。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.microsecond.html#pandas.DatetimeIndex.microsecond" title="pandas.DatetimeIndex.microsecond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.microsecond</span></code></a></p></td>
+<td><p>日期的微秒。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.nanosecond.html#pandas.DatetimeIndex.nanosecond" title="pandas.DatetimeIndex.nanosecond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.nanosecond</span></code></a></p></td>
+<td><p>日期的纳秒。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.date.html#pandas.DatetimeIndex.date" title="pandas.DatetimeIndex.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.date</span></code></a></p></td>
+<td><p>返回 Python <a class="reference external" href="https://docs.pythonlang.cn/3/library/datetime.html#datetime.date" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> 对象的 NumPy 数组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.time.html#pandas.DatetimeIndex.time" title="pandas.DatetimeIndex.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.time</span></code></a></p></td>
+<td><p>返回 <a class="reference external" href="https://docs.pythonlang.cn/3/library/datetime.html#datetime.time" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.time</span></code></a> 对象的 NumPy 数组。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.timetz.html#pandas.DatetimeIndex.timetz" title="pandas.DatetimeIndex.timetz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.timetz</span></code></a></p></td>
+<td><p>返回带有时区的 <a class="reference external" href="https://docs.pythonlang.cn/3/library/datetime.html#datetime.time" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.time</span></code></a> 对象的 NumPy 数组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.dayofyear.html#pandas.DatetimeIndex.dayofyear" title="pandas.DatetimeIndex.dayofyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.dayofyear</span></code></a></p></td>
+<td><p>一年中的序数天。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.day_of_year.html#pandas.DatetimeIndex.day_of_year" title="pandas.DatetimeIndex.day_of_year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.day_of_year</span></code></a></p></td>
+<td><p>一年中的序数天。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.dayofweek.html#pandas.DatetimeIndex.dayofweek" title="pandas.DatetimeIndex.dayofweek"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.dayofweek</span></code></a></p></td>
+<td><p>一周中的某一天，星期一 = 0，星期日 = 6。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.day_of_week.html#pandas.DatetimeIndex.day_of_week" title="pandas.DatetimeIndex.day_of_week"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.day_of_week</span></code></a></p></td>
+<td><p>一周中的某一天，星期一 = 0，星期日 = 6。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.weekday.html#pandas.DatetimeIndex.weekday" title="pandas.DatetimeIndex.weekday"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.weekday</span></code></a></p></td>
+<td><p>一周中的某一天，星期一 = 0，星期日 = 6。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.quarter.html#pandas.DatetimeIndex.quarter" title="pandas.DatetimeIndex.quarter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.quarter</span></code></a></p></td>
+<td><p>日期所在的季度。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.tz.html#pandas.DatetimeIndex.tz" title="pandas.DatetimeIndex.tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.tz</span></code></a></p></td>
+<td><p>返回时区。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.freq.html#pandas.DatetimeIndex.freq" title="pandas.DatetimeIndex.freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.freq</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.freqstr.html#pandas.DatetimeIndex.freqstr" title="pandas.DatetimeIndex.freqstr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.freqstr</span></code></a></p></td>
+<td><p>如果设置了频率对象，则将其作为字符串返回，否则返回 None。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.is_month_start.html#pandas.DatetimeIndex.is_month_start" title="pandas.DatetimeIndex.is_month_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.is_month_start</span></code></a></p></td>
+<td><p>指示日期是否为该月的第一天。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.is_month_end.html#pandas.DatetimeIndex.is_month_end" title="pandas.DatetimeIndex.is_month_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.is_month_end</span></code></a></p></td>
+<td><p>指示日期是否为该月的最后一天。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.is_quarter_start.html#pandas.DatetimeIndex.is_quarter_start" title="pandas.DatetimeIndex.is_quarter_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.is_quarter_start</span></code></a></p></td>
+<td><p>指示日期是否为季度的第一天。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.is_quarter_end.html#pandas.DatetimeIndex.is_quarter_end" title="pandas.DatetimeIndex.is_quarter_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.is_quarter_end</span></code></a></p></td>
+<td><p>指示日期是否为季度的最后一天。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.is_year_start.html#pandas.DatetimeIndex.is_year_start" title="pandas.DatetimeIndex.is_year_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.is_year_start</span></code></a></p></td>
+<td><p>指示日期是否为一年的第一天。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.is_year_end.html#pandas.DatetimeIndex.is_year_end" title="pandas.DatetimeIndex.is_year_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.is_year_end</span></code></a></p></td>
+<td><p>指示日期是否为一年的最后一天。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.is_leap_year.html#pandas.DatetimeIndex.is_leap_year" title="pandas.DatetimeIndex.is_leap_year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.is_leap_year</span></code></a></p></td>
+<td><p>如果日期属于闰年，则为布尔指示器。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.inferred_freq.html#pandas.DatetimeIndex.inferred_freq" title="pandas.DatetimeIndex.inferred_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.inferred_freq</span></code></a></p></td>
+<td><p>尝试返回由 infer_freq 生成的表示频率的字符串。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id2">
+<h3>选择<a class="headerlink" href="indexing.html#id2" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.indexer_at_time.html#pandas.DatetimeIndex.indexer_at_time" title="pandas.DatetimeIndex.indexer_at_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.indexer_at_time</span></code></a>(time[,&nbsp;asof])</p></td>
+<td><p>返回特定时间的值的索引位置。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.indexer_between_time.html#pandas.DatetimeIndex.indexer_between_time" title="pandas.DatetimeIndex.indexer_between_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.indexer_between_time</span></code></a>(...[,&nbsp;...])</p></td>
+<td><p>返回特定时间范围内的值的索引位置。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h3>特定时间操作<a class="headerlink" href="indexing.html#id3" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.normalize.html#pandas.DatetimeIndex.normalize" title="pandas.DatetimeIndex.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.normalize</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将时间转换为午夜。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.strftime.html#pandas.DatetimeIndex.strftime" title="pandas.DatetimeIndex.strftime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.strftime</span></code></a>(date_format)</p></td>
+<td><p>使用指定的 date_format 转换为索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.snap.html#pandas.DatetimeIndex.snap" title="pandas.DatetimeIndex.snap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.snap</span></code></a>([freq])</p></td>
+<td><p>将时间戳捕捉到最近发生的频率。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.tz_convert.html#pandas.DatetimeIndex.tz_convert" title="pandas.DatetimeIndex.tz_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.tz_convert</span></code></a>(tz)</p></td>
+<td><p>将时区感知的日期时间数组/索引从一个时区转换为另一个时区。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.tz_localize.html#pandas.DatetimeIndex.tz_localize" title="pandas.DatetimeIndex.tz_localize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.tz_localize</span></code></a>(tz[,&nbsp;ambiguous,&nbsp;...])</p></td>
+<td><p>将时区无感知的日期时间数组/索引本地化为时区感知的日期时间数组/索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.round.html#pandas.DatetimeIndex.round" title="pandas.DatetimeIndex.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.round</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行舍入操作，以指定的 <cite>freq</cite> 为单位。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.floor.html#pandas.DatetimeIndex.floor" title="pandas.DatetimeIndex.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.floor</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行向下取整操作，以指定的 <cite>freq</cite> 为单位。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.ceil.html#pandas.DatetimeIndex.ceil" title="pandas.DatetimeIndex.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.ceil</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行向上取整操作，以指定的 <cite>freq</cite> 为单位。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.month_name.html#pandas.DatetimeIndex.month_name" title="pandas.DatetimeIndex.month_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.month_name</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回指定语言环境的月份名称。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.day_name.html#pandas.DatetimeIndex.day_name" title="pandas.DatetimeIndex.day_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.day_name</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回指定语言环境的星期名称。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h3>转换<a class="headerlink" href="indexing.html#id4" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.as_unit.html#pandas.DatetimeIndex.as_unit" title="pandas.DatetimeIndex.as_unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.as_unit</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>转换为具有给定单位分辨率的数据类型。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.to_period.html#pandas.DatetimeIndex.to_period" title="pandas.DatetimeIndex.to_period"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.to_period</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将数据转换为特定频率的 PeriodArray/PeriodIndex。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.to_pydatetime.html#pandas.DatetimeIndex.to_pydatetime" title="pandas.DatetimeIndex.to_pydatetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.to_pydatetime</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回一个包含 <code class="docutils literal notranslate"><span class="pre">datetime.datetime</span></code> 对象的 ndarray。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.to_series.html#pandas.DatetimeIndex.to_series" title="pandas.DatetimeIndex.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.to_series</span></code></a>([index,&nbsp;name])</p></td>
+<td><p>创建一个索引和值都等于索引键的 Series。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.to_frame.html#pandas.DatetimeIndex.to_frame" title="pandas.DatetimeIndex.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.to_frame</span></code></a>([index,&nbsp;name])</p></td>
+<td><p>创建一个包含索引的 DataFrame。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="methods">
+<h3>方法<a class="headerlink" href="indexing.html#methods" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.mean.html#pandas.DatetimeIndex.mean" title="pandas.DatetimeIndex.mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.mean</span></code></a>(*[,&nbsp;skipna,&nbsp;axis])</p></td>
+<td><p>返回数组的平均值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.DatetimeIndex.std.html#pandas.DatetimeIndex.std" title="pandas.DatetimeIndex.std"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.std</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回指定轴上的样本标准差。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="timedeltaindex">
+<h2>TimedeltaIndex<a class="headerlink" href="indexing.html#timedeltaindex" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.html#pandas.TimedeltaIndex" title="pandas.TimedeltaIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code></a>([data,&nbsp;unit,&nbsp;freq,&nbsp;closed,&nbsp;...])</p></td>
+<td><p>不可变的 timedelta64 数据索引。</p></td>
+</tr>
+</tbody>
+</table>
+<section id="components">
+<h3>组件<a class="headerlink" href="indexing.html#components" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.days.html#pandas.TimedeltaIndex.days" title="pandas.TimedeltaIndex.days"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.days</span></code></a></p></td>
+<td><p>每个元素的天数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.seconds.html#pandas.TimedeltaIndex.seconds" title="pandas.TimedeltaIndex.seconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.seconds</span></code></a></p></td>
+<td><p>每个元素的秒数（>= 0 且小于 1 天）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.microseconds.html#pandas.TimedeltaIndex.microseconds" title="pandas.TimedeltaIndex.microseconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.microseconds</span></code></a></p></td>
+<td><p>每个元素的微秒数（>= 0 且小于 1 秒）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.nanoseconds.html#pandas.TimedeltaIndex.nanoseconds" title="pandas.TimedeltaIndex.nanoseconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.nanoseconds</span></code></a></p></td>
+<td><p>每个元素的纳秒数（>= 0 且小于 1 微秒）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.components.html#pandas.TimedeltaIndex.components" title="pandas.TimedeltaIndex.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.components</span></code></a></p></td>
+<td><p>返回一个包含 Timedeltas 的各个分辨率组件的 DataFrame。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.inferred_freq.html#pandas.TimedeltaIndex.inferred_freq" title="pandas.TimedeltaIndex.inferred_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.inferred_freq</span></code></a></p></td>
+<td><p>尝试返回由 infer_freq 生成的表示频率的字符串。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id5">
+<h3>转换<a class="headerlink" href="indexing.html#id5" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.as_unit.html#pandas.TimedeltaIndex.as_unit" title="pandas.TimedeltaIndex.as_unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.as_unit</span></code></a>(unit)</p></td>
+<td><p>转换为具有给定单位分辨率的数据类型。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.to_pytimedelta.html#pandas.TimedeltaIndex.to_pytimedelta" title="pandas.TimedeltaIndex.to_pytimedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.to_pytimedelta</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回一个包含 datetime.timedelta 对象的 ndarray。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.to_series.html#pandas.TimedeltaIndex.to_series" title="pandas.TimedeltaIndex.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.to_series</span></code></a>([index,&nbsp;name])</p></td>
+<td><p>创建一个索引和值都等于索引键的 Series。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.round.html#pandas.TimedeltaIndex.round" title="pandas.TimedeltaIndex.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.round</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行舍入操作，以指定的 <cite>freq</cite> 为单位。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.floor.html#pandas.TimedeltaIndex.floor" title="pandas.TimedeltaIndex.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.floor</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行向下取整操作，以指定的 <cite>freq</cite> 为单位。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.ceil.html#pandas.TimedeltaIndex.ceil" title="pandas.TimedeltaIndex.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.ceil</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行向上取整操作，以指定的 <cite>freq</cite> 为单位。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.to_frame.html#pandas.TimedeltaIndex.to_frame" title="pandas.TimedeltaIndex.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.to_frame</span></code></a>([index,&nbsp;name])</p></td>
+<td><p>创建一个包含索引的 DataFrame。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id6">
+<h3>方法<a class="headerlink" href="indexing.html#id6" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.TimedeltaIndex.mean.html#pandas.TimedeltaIndex.mean" title="pandas.TimedeltaIndex.mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex.mean</span></code></a>(*[,&nbsp;skipna,&nbsp;axis])</p></td>
+<td><p>返回数组的平均值。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="periodindex">
+<h2>PeriodIndex<a class="headerlink" href="indexing.html#periodindex" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.html#pandas.PeriodIndex" title="pandas.PeriodIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex</span></code></a>([data,&nbsp;ordinal,&nbsp;freq,&nbsp;dtype,&nbsp;...])</p></td>
+<td><p>不可变的 ndarray，保存表示时间段的序数值。</p></td>
+</tr>
+</tbody>
+</table>
+<section id="id7">
+<h3>属性<a class="headerlink" href="indexing.html#id7" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.day.html#pandas.PeriodIndex.day" title="pandas.PeriodIndex.day"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.day</span></code></a></p></td>
+<td><p>时间段的日期。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.dayofweek.html#pandas.PeriodIndex.dayofweek" title="pandas.PeriodIndex.dayofweek"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.dayofweek</span></code></a></p></td>
+<td><p>一周中的某一天，星期一 = 0，星期日 = 6。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.day_of_week.html#pandas.PeriodIndex.day_of_week" title="pandas.PeriodIndex.day_of_week"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.day_of_week</span></code></a></p></td>
+<td><p>一周中的某一天，星期一 = 0，星期日 = 6。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.dayofyear.html#pandas.PeriodIndex.dayofyear" title="pandas.PeriodIndex.dayofyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.dayofyear</span></code></a></p></td>
+<td><p>一年中的序数天。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.day_of_year.html#pandas.PeriodIndex.day_of_year" title="pandas.PeriodIndex.day_of_year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.day_of_year</span></code></a></p></td>
+<td><p>一年中的序数天。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.days_in_month.html#pandas.PeriodIndex.days_in_month" title="pandas.PeriodIndex.days_in_month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.days_in_month</span></code></a></p></td>
+<td><p>月份的天数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.daysinmonth.html#pandas.PeriodIndex.daysinmonth" title="pandas.PeriodIndex.daysinmonth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.daysinmonth</span></code></a></p></td>
+<td><p>月份的天数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.end_time.html#pandas.PeriodIndex.end_time" title="pandas.PeriodIndex.end_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.end_time</span></code></a></p></td>
+<td><p>获取时间段结束的 Timestamp。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.freq.html#pandas.PeriodIndex.freq" title="pandas.PeriodIndex.freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.freq</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.freqstr.html#pandas.PeriodIndex.freqstr" title="pandas.PeriodIndex.freqstr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.freqstr</span></code></a></p></td>
+<td><p>如果设置了频率对象，则将其作为字符串返回，否则返回 None。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.hour.html#pandas.PeriodIndex.hour" title="pandas.PeriodIndex.hour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.hour</span></code></a></p></td>
+<td><p>时间段的小时。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.is_leap_year.html#pandas.PeriodIndex.is_leap_year" title="pandas.PeriodIndex.is_leap_year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.is_leap_year</span></code></a></p></td>
+<td><p>逻辑值，指示日期是否属于闰年。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.minute.html#pandas.PeriodIndex.minute" title="pandas.PeriodIndex.minute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.minute</span></code></a></p></td>
+<td><p>时间段的分钟。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.month.html#pandas.PeriodIndex.month" title="pandas.PeriodIndex.month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.month</span></code></a></p></td>
+<td><p>月份以 1 月 = 1，12 月 = 12 表示。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.quarter.html#pandas.PeriodIndex.quarter" title="pandas.PeriodIndex.quarter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.quarter</span></code></a></p></td>
+<td><p>日期所在的季度。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.qyear.html#pandas.PeriodIndex.qyear" title="pandas.PeriodIndex.qyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.qyear</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.second.html#pandas.PeriodIndex.second" title="pandas.PeriodIndex.second"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.second</span></code></a></p></td>
+<td><p>时间段的秒。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.start_time.html#pandas.PeriodIndex.start_time" title="pandas.PeriodIndex.start_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.start_time</span></code></a></p></td>
+<td><p>获取周期的开始时间戳。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.week.html#pandas.PeriodIndex.week" title="pandas.PeriodIndex.week"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.week</span></code></a></p></td>
+<td><p>一年中的星期序数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.weekday.html#pandas.PeriodIndex.weekday" title="pandas.PeriodIndex.weekday"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.weekday</span></code></a></p></td>
+<td><p>一周中的某一天，星期一 = 0，星期日 = 6。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.weekofyear.html#pandas.PeriodIndex.weekofyear" title="pandas.PeriodIndex.weekofyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.weekofyear</span></code></a></p></td>
+<td><p>一年中的星期序数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.year.html#pandas.PeriodIndex.year" title="pandas.PeriodIndex.year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.year</span></code></a></p></td>
+<td><p>周期的年份。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id8">
+<h3>方法<a class="headerlink" href="indexing.html#id8" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.asfreq.html#pandas.PeriodIndex.asfreq" title="pandas.PeriodIndex.asfreq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.asfreq</span></code></a>([freq,&nbsp;how])</p></td>
+<td><p>将 PeriodArray 转换为指定的频率 <cite>freq</cite>。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.strftime.html#pandas.PeriodIndex.strftime" title="pandas.PeriodIndex.strftime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.strftime</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>使用指定的 date_format 转换为索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.to_timestamp.html#pandas.PeriodIndex.to_timestamp" title="pandas.PeriodIndex.to_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.to_timestamp</span></code></a>([freq,&nbsp;how])</p></td>
+<td><p>转换为 DatetimeArray/Index。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.from_fields.html#pandas.PeriodIndex.from_fields" title="pandas.PeriodIndex.from_fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.from_fields</span></code></a>(*[,&nbsp;year,&nbsp;quarter,&nbsp;...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.PeriodIndex.from_ordinals.html#pandas.PeriodIndex.from_ordinals" title="pandas.PeriodIndex.from_ordinals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.from_ordinals</span></code></a>(ordinals,&nbsp;*,&nbsp;freq)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</article>
+<footer class="prev-next-footer">
+<div class="prev-next-area">
+<a class="left-prev" href="api/pandas.api.types.is_scalar.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">previous</p> <p class="prev-next-title">pandas.api.types.is_scalar</p> </div> </a> <a class="right-next" href="api/pandas.Index.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">next</p> <p class="prev-next-title">pandas.Index</p> </div> <i class="fa-solid fa-angle-right"></i> </a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> 本页内容
+</div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#index">索引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#properties">属性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#modifying-and-computations">修改和计算</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#compatibility-with-multiindex">与 MultiIndex 的兼容性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#missing-values">缺失值</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#conversion">转换</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#sorting">排序</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#time-specific-operations">特定时间操作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#combining-joining-set-operations">组合/连接/集合操作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#selecting">选择</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#numeric-index">数值索引</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#categoricalindex">分类索引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#categorical-components">分类组件</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#id1">修改和计算</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#intervalindex">区间索引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#intervalindex-components">区间索引组件</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#multiindex">多级索引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#multiindex-constructors">多级索引构造函数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#multiindex-properties">多级索引属性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#multiindex-components">多级索引组件</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#multiindex-selecting">多级索引选择</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#datetimeindex">日期时间索引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#time-date-components">时间/日期组件</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#id2">选择</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#id3">特定时间操作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#id4">转换</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#methods">方法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#timedeltaindex">时间差索引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#components">组件</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#id5">转换</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#id6">方法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#periodindex">周期索引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#id7">属性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="indexing.html#id8">方法</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+<div class="sidebar-secondary-item">
+<div class="tocsection sourcelink">
+<a href="../_sources/reference/indexing.rst.txt">
+<i class="fa-solid fa-file-lines"></i> 显示源代码
+</a>
+</div>
+</div>
+</div></div>
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+
+<script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+<footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+<div class="footer-items__start">
+<div class="footer-item"><p class="copyright">
+© 2024, pandas 通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>.
+</p></div>
+<div class="footer-item">
+<p class="sphinx-version">
+使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 7.2.6 创建。
+<br>
+</p>
+</div>
+</div>
+<div class="footer-items__end">
+<div class="footer-item">
+<p class="theme-version">
+使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx 主题</a> 0.14.4 构建。
+</p></div>
+</div>
+</div>
+</footer>
+
+</body></html>

@@ -1,0 +1,1669 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>图表可视化 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/visualization';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Table Visualization" href="style.html" />
+    <link rel="prev" title="Nullable Boolean data type" href="boolean.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="visualization.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">站点导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">站点导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10min.html">pandas 十分钟教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本核心功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具 (文本, CSV, HDF5, …)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引和选择数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">MultiIndex / 高级索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、拼接和比较</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">重塑和透视表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">处理文本数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">处理缺失数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">重复标签</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可空整型数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可空布尔数据类型</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="visualization.html#">图表可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">Group by: 分割-应用-组合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">提升性能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">扩展到大型数据集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">实用代码片段</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">用户指南</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">图表可视化</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="chart-visualization">
+<span id="visualization"></span><h1>图表可视化<a class="headerlink" href="visualization.html#chart-visualization" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>以下示例假设您正在使用 <a class="reference external" href="https://jupyter.org.cn/">Jupyter</a>。</p>
+</div>
+<p>本节演示了通过图表进行可视化。有关表格数据的可视化信息，请参阅<a class="reference internal" href="style.html"><span class="doc">表格可视化</span></a>一节。</p>
+<p>我们使用标准的约定来引用 Matplotlib API</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="gp">In [2]: </span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">"all"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>我们在 pandas 中提供了基础功能，以便轻松创建外观不错的图表。有关超出本文档基础功能的其他可视化库，请参阅<a class="reference external" href="https://pandas.ac.cn/community/ecosystem.html">生态系统页面</a>。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><code class="docutils literal notranslate"><span class="pre">np.random</span></code> 的所有调用都使用 123456 作为种子。</p>
+</div>
+<section id="basic-plotting-plot">
+<span id="visualization-basic"></span><h2>基本绘图：<code class="docutils literal notranslate"><span class="pre">plot</span></code><a class="headerlink" href="visualization.html#basic-plotting-plot" title="Permalink to this heading">#</a></h2>
+<p>我们将演示基础知识，有关高级策略，请参阅<a class="reference internal" href="cookbook.html#cookbook-plotting"><span class="std std-ref">实用代码片段</span></a>。</p>
+<p>Series 和 DataFrame 上的 <code class="docutils literal notranslate"><span class="pre">plot</span></code> 方法只是 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plt.plot()</span></code></a> 的一个简单包装器。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456</span><span class="p">)</span>
+
+<span class="gp">In [4]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"1/1/2000"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+
+<span class="gp">In [5]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [6]: </span><span class="n">ts</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/series_plot_basic.png" src="../_images/series_plot_basic.png">
+<p>如果索引包含日期，它会调用 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.figure.Figure.autofmt_xdate.html#matplotlib.figure.Figure.autofmt_xdate" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gcf().autofmt_xdate()</span></code></a> 来尝试按上述方式美化 x 轴的格式。</p>
+<p>在 DataFrame 上，<a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> 是一个方便的方法，用于绘制所有带标签的列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">"ABCD"</span><span class="p">))</span>
+
+<span class="gp">In [8]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [9]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [10]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_basic.png" src="../_images/frame_plot_basic.png">
+<p>您可以使用 <code class="docutils literal notranslate"><span class="pre">plot()</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">x</span></code> 和 <code class="docutils literal notranslate"><span class="pre">y</span></code> 关键字来绘制一列与另一列的关系。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">])</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [12]: </span><span class="n">df3</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))))</span>
+
+<span class="gp">In [13]: </span><span class="n">df3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"B"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/df_plot_xy.png" src="../_images/df_plot_xy.png">
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>有关更多格式和样式选项，请参阅下面的<a class="reference internal" href="visualization.html#visualization-formatting"><span class="std std-ref">格式化</span></a>。</p>
+</div>
+</section>
+<section id="other-plots">
+<span id="visualization-other"></span><h2>其他图表<a class="headerlink" href="visualization.html#other-plots" title="Permalink to this heading">#</a></h2>
+<p>绘图方法除了默认的折线图之外，还支持多种绘图样式。这些方法可以通过 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> 的 <code class="docutils literal notranslate"><span class="pre">kind</span></code> 关键字参数提供，包括：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="visualization.html#visualization-barplot"><span class="std std-ref">“bar”</span></a> 或 <a class="reference internal" href="visualization.html#visualization-barplot"><span class="std std-ref">“barh”</span></a> 用于条形图</p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-hist"><span class="std std-ref">“hist”</span></a> 用于直方图</p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-box"><span class="std std-ref">“box”</span></a> 用于箱线图</p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-kde"><span class="std std-ref">“kde”</span></a> 或 <a class="reference internal" href="visualization.html#visualization-kde"><span class="std std-ref">“density”</span></a> 用于密度图</p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-area-plot"><span class="std std-ref">“area”</span></a> 用于面积图</p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-scatter"><span class="std std-ref">“scatter”</span></a> 用于散点图</p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-hexbin"><span class="std std-ref">“hexbin”</span></a> 用于六边形分箱图</p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-pie"><span class="std std-ref">“pie”</span></a> 用于饼图</p></li>
+</ul>
+<p>例如，条形图可以通过以下方式创建：</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [15]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/bar_plot_ex.png" src="../_images/bar_plot_ex.png">
+<p>您也可以使用 <code class="docutils literal notranslate"><span class="pre">DataFrame.plot.&lt;kind&gt;</span></code> 方法来创建这些其他图表，而不是提供 <code class="docutils literal notranslate"><span class="pre">kind</span></code> 关键字参数。这使得发现绘图方法及其特定参数变得更容易。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="gp">In [17]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.&lt;</span><span class="n">TAB</span><span class="o">&gt;</span>  <span class="c1"># noqa: E225, E999</span>
+<span class="go">df.plot.area     df.plot.barh     df.plot.density  df.plot.hist     df.plot.line     df.plot.scatter</span>
+<span class="go">df.plot.bar      df.plot.box      df.plot.hexbin   df.plot.kde      df.plot.pie</span>
+</pre></div>
+</div>
+<p>除了这些 <code class="docutils literal notranslate"><span class="pre">kind</span></code> 之外，还有 <a class="reference internal" href="visualization.html#visualization-hist"><span class="std std-ref">DataFrame.hist()</span></a> 和 <a class="reference internal" href="visualization.html#visualization-box"><span class="std std-ref">DataFrame.boxplot()</span></a> 方法，它们使用单独的接口。</p>
+<p>最后，<code class="docutils literal notranslate"><span class="pre">pandas.plotting</span></code> 中有几个<a class="reference internal" href="visualization.html#visualization-tools"><span class="std std-ref">绘图函数</span></a>，它们接受 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 作为参数。这些包括：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="visualization.html#visualization-scatter-matrix"><span class="std std-ref">散点矩阵</span></a></p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-andrews-curves"><span class="std std-ref">安德鲁斯曲线</span></a></p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-parallel-coordinates"><span class="std std-ref">平行坐标</span></a></p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-lag"><span class="std std-ref">滞后图</span></a></p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-autocorrelation"><span class="std std-ref">自相关图</span></a></p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-bootstrap"><span class="std std-ref">自助法图</span></a></p></li>
+<li><p><a class="reference internal" href="visualization.html#visualization-radviz"><span class="std std-ref">RadViz</span></a></p></li>
+</ul>
+<p>图表还可以添加<a class="reference internal" href="visualization.html#visualization-errorbars"><span class="std std-ref">误差棒</span></a>或<a class="reference internal" href="visualization.html#visualization-table"><span class="std std-ref">表格</span></a>。</p>
+<section id="bar-plots">
+<span id="visualization-barplot"></span><h3>条形图<a class="headerlink" href="visualization.html#bar-plots" title="Permalink to this heading">#</a></h3>
+<p>对于带标签的非时间序列数据，您可能希望生成条形图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [19]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">();</span>
+
+<span class="gp">In [20]: </span><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/bar_plot_ex.png" src="../_images/bar_plot_ex.png">
+<p>调用 DataFrame 的 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.bar.html#pandas.DataFrame.plot.bar" title="pandas.DataFrame.plot.bar"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot.bar()</span></code></a> 方法会生成一个多条形图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">])</span>
+
+<span class="gp">In [22]: </span><span class="n">df2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/bar_plot_multi_ex.png" src="../_images/bar_plot_multi_ex.png">
+<p>要生成堆叠条形图，请传递 <code class="docutils literal notranslate"><span class="pre">stacked=True</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">df2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/bar_plot_stacked_ex.png" src="../_images/bar_plot_stacked_ex.png">
+<p>要获取水平条形图，请使用 <code class="docutils literal notranslate"><span class="pre">barh</span></code> 方法。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">df2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/barh_plot_stacked_ex.png" src="../_images/barh_plot_stacked_ex.png">
+</section>
+<section id="histograms">
+<span id="visualization-hist"></span><h3>直方图<a class="headerlink" href="visualization.html#histograms" title="Permalink to this heading">#</a></h3>
+<p>可以使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.hist.html#pandas.DataFrame.plot.hist" title="pandas.DataFrame.plot.hist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.hist()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.Series.plot.hist.html#pandas.Series.plot.hist" title="pandas.Series.plot.hist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot.hist()</span></code></a> 方法绘制直方图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span>
+<span class="gp">   ....: </span>        <span class="s2">"a"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">   ....: </span>        <span class="s2">"b"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+<span class="gp">   ....: </span>        <span class="s2">"c"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="p">},</span>
+<span class="gp">   ....: </span>    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">],</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [26]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [27]: </span><span class="n">df4</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/hist_new.png" src="../_images/hist_new.png">
+<p>直方图可以使用 <code class="docutils literal notranslate"><span class="pre">stacked=True</span></code> 进行堆叠。可以通过 <code class="docutils literal notranslate"><span class="pre">bins</span></code> 关键字更改分箱大小。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [29]: </span><span class="n">df4</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/hist_new_stacked.png" src="../_images/hist_new_stacked.png">
+<p>您可以传递 matplotlib <code class="docutils literal notranslate"><span class="pre">hist</span></code> 支持的其他关键字。例如，水平和累积直方图可以通过 <code class="docutils literal notranslate"><span class="pre">orientation='horizontal'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">cumulative=True</span></code> 绘制。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [31]: </span><span class="n">df4</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="s2">"horizontal"</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/hist_new_kwargs.png" src="../_images/hist_new_kwargs.png">
+<p>有关更多信息，请参阅 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.hist.html#matplotlib.axes.Axes.hist" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hist</span></code></a> 方法和 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.hist.html">matplotlib hist 文档</a>。</p>
+<p>绘制直方图的现有接口 <code class="docutils literal notranslate"><span class="pre">DataFrame.hist</span></code> 仍然可以使用。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [33]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">hist</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/hist_plot_ex.png" src="../_images/hist_plot_ex.png">
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.hist.html#pandas.DataFrame.hist" title="pandas.DataFrame.hist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.hist()</span></code></a> 在多个子图上绘制列的直方图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [35]: </span><span class="n">df</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_hist_ex.png" src="../_images/frame_hist_ex.png">
+<p>可以指定 <code class="docutils literal notranslate"><span class="pre">by</span></code> 关键字来绘制分组直方图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+
+<span class="gp">In [37]: </span><span class="n">data</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../_images/grouped_hist.png" src="../_images/grouped_hist.png">
+<p>此外，<code class="docutils literal notranslate"><span class="pre">by</span></code> 关键字也可以在 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.hist.html#pandas.DataFrame.plot.hist" title="pandas.DataFrame.plot.hist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.hist()</span></code></a> 中指定。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">1.4.0 版本新增。</span></p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span>
+<span class="gp">   ....: </span>        <span class="s2">"a"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">"x"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">,</span> <span class="s2">"z"</span><span class="p">],</span> <span class="mi">1000</span><span class="p">),</span>
+<span class="gp">   ....: </span>        <span class="s2">"b"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">"e"</span><span class="p">,</span> <span class="s2">"f"</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">],</span> <span class="mi">1000</span><span class="p">),</span>
+<span class="gp">   ....: </span>        <span class="s2">"c"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+<span class="gp">   ....: </span>        <span class="s2">"d"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="p">},</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [39]: </span><span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../_images/grouped_hist_by.png" src="../_images/grouped_hist_by.png">
+</section>
+<section id="box-plots">
+<span id="visualization-box"></span><h3>箱线图<a class="headerlink" href="visualization.html#box-plots" title="Permalink to this heading">#</a></h3>
+<p>可以通过调用 <a class="reference internal" href="../reference/api/pandas.Series.plot.box.html#pandas.Series.plot.box" title="pandas.Series.plot.box"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot.box()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.box.html#pandas.DataFrame.plot.box" title="pandas.DataFrame.plot.box"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.box()</span></code></a>，或者 <a class="reference internal" href="../reference/api/pandas.DataFrame.boxplot.html#pandas.DataFrame.boxplot" title="pandas.DataFrame.boxplot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.boxplot()</span></code></a> 来绘制箱线图，以可视化每列中值的分布。</p>
+<p>例如，这是一个箱线图，表示在 [0,1) 上均匀随机变量的 10 次观测的五次试验。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">])</span>
+
+<span class="gp">In [41]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/box_plot_new.png" src="../_images/box_plot_new.png">
+<p>箱线图可以通过传递 <code class="docutils literal notranslate"><span class="pre">color</span></code> 关键字进行着色。您可以传递一个 <code class="docutils literal notranslate"><span class="pre">dict</span></code>，其键为 <code class="docutils literal notranslate"><span class="pre">boxes</span></code>、<code class="docutils literal notranslate"><span class="pre">whiskers</span></code>、<code class="docutils literal notranslate"><span class="pre">medians</span></code> 和 <code class="docutils literal notranslate"><span class="pre">caps</span></code>。如果 <code class="docutils literal notranslate"><span class="pre">dict</span></code> 中缺少某些键，则使用默认颜色对应艺术家。此外，箱线图还有 <code class="docutils literal notranslate"><span class="pre">sym</span></code> 关键字来指定异常值样式。</p>
+<p>当您通过 <code class="docutils literal notranslate"><span class="pre">color</span></code> 关键字传递其他类型的参数时，它将直接传递给 Matplotlib，用于所有 <code class="docutils literal notranslate"><span class="pre">boxes</span></code>、<code class="docutils literal notranslate"><span class="pre">whiskers</span></code>、<code class="docutils literal notranslate"><span class="pre">medians</span></code> 和 <code class="docutils literal notranslate"><span class="pre">caps</span></code> 的着色。</p>
+<p>颜色将应用于所有绘制的箱体。如果您想要更复杂的着色，可以通过传递 <a class="reference internal" href="visualization.html#visualization-box-return"><span class="std std-ref">return_type</span></a> 获取每个绘制的艺术家。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">color</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">   ....: </span>    <span class="s2">"boxes"</span><span class="p">:</span> <span class="s2">"DarkGreen"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="s2">"whiskers"</span><span class="p">:</span> <span class="s2">"DarkOrange"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="s2">"medians"</span><span class="p">:</span> <span class="s2">"DarkBlue"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="s2">"caps"</span><span class="p">:</span> <span class="s2">"Gray"</span><span class="p">,</span>
+<span class="gp">   ....: </span><span class="p">}</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [43]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="s2">"r+"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/box_new_colorize.png" src="../_images/box_new_colorize.png">
+<p>此外，您还可以传递 Matplotlib <code class="docutils literal notranslate"><span class="pre">boxplot</span></code> 支持的其他关键字。例如，水平和自定义位置的箱线图可以通过 <code class="docutils literal notranslate"><span class="pre">vert=False</span></code> 和 <code class="docutils literal notranslate"><span class="pre">positions</span></code> 关键字绘制。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]);</span>
+</pre></div>
+</div>
+<img alt="../_images/box_new_kwargs.png" src="../_images/box_new_kwargs.png">
+<p>有关更多信息，请参阅 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.boxplot.html#matplotlib.axes.Axes.boxplot" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">boxplot</span></code></a> 方法和 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.boxplot.html">matplotlib boxplot 文档</a>。</p>
+<p>绘制箱线图的现有接口 <code class="docutils literal notranslate"><span class="pre">DataFrame.boxplot</span></code> 仍然可以使用。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="gp">In [46]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [47]: </span><span class="n">bp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/box_plot_ex.png" src="../_images/box_plot_ex.png">
+<p>您可以使用 <code class="docutils literal notranslate"><span class="pre">by</span></code> 关键字参数创建分层箱线图来创建分组。例如，</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Col1"</span><span class="p">,</span> <span class="s2">"Col2"</span><span class="p">])</span>
+
+<span class="gp">In [49]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"X"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+
+<span class="gp">In [50]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [51]: </span><span class="n">bp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"X"</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/box_plot_ex2.png" src="../_images/box_plot_ex2.png">
+<p>您也可以传递要绘制的列的子集，以及按多列分组。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [52]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Col1"</span><span class="p">,</span> <span class="s2">"Col2"</span><span class="p">,</span> <span class="s2">"Col3"</span><span class="p">])</span>
+
+<span class="gp">In [53]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"X"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+
+<span class="gp">In [54]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"Y"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+
+<span class="gp">In [55]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [56]: </span><span class="n">bp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">[</span><span class="s2">"Col1"</span><span class="p">,</span> <span class="s2">"Col2"</span><span class="p">],</span> <span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">"X"</span><span class="p">,</span> <span class="s2">"Y"</span><span class="p">])</span>
+</pre></div>
+</div>
+<img alt="../_images/box_plot_ex3.png" src="../_images/box_plot_ex3.png">
+<p>您也可以使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.box.html#pandas.DataFrame.plot.box" title="pandas.DataFrame.plot.box"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.box()</span></code></a> 创建分组，例如：</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">1.4.0 版本新增。</span></p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Col1"</span><span class="p">,</span> <span class="s2">"Col2"</span><span class="p">,</span> <span class="s2">"Col3"</span><span class="p">])</span>
+
+<span class="gp">In [58]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"X"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+
+<span class="gp">In [59]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [60]: </span><span class="n">bp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="p">[</span><span class="s2">"Col1"</span><span class="p">,</span> <span class="s2">"Col2"</span><span class="p">],</span> <span class="n">by</span><span class="o">=</span><span class="s2">"X"</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/box_plot_ex4.png" src="../_images/box_plot_ex4.png">
+<p id="visualization-box-return">在 <code class="docutils literal notranslate"><span class="pre">boxplot</span></code> 中，返回类型可以通过 <code class="docutils literal notranslate"><span class="pre">return_type</span></code> 关键字控制。有效选项为 <code class="docutils literal notranslate"><span class="pre">{"axes",</span> <span class="pre">"dict",</span> <span class="pre">"both",</span> <span class="pre">None}</span></code>。由 <code class="docutils literal notranslate"><span class="pre">DataFrame.boxplot</span></code> 与 <code class="docutils literal notranslate"><span class="pre">by</span></code> 关键字创建的分面也会影响输出类型。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">返回类型</span></code></p></th>
+<th class="head"><p>分面</p></th>
+<th class="head"><p>输出类型</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">无</span></code></p></td>
+<td><p>否</p></td>
+<td><p>轴</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">无</span></code></p></td>
+<td><p>是</p></td>
+<td><p>2D 轴数组</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'axes'</span></code></p></td>
+<td><p>否</p></td>
+<td><p>轴</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'axes'</span></code></p></td>
+<td><p>是</p></td>
+<td><p>轴的 Series</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'dict'</span></code></p></td>
+<td><p>否</p></td>
+<td><p>艺术家的 dict</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'dict'</span></code></p></td>
+<td><p>是</p></td>
+<td><p>艺术家的 dict 的 Series</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">'both'</span></code></p></td>
+<td><p>否</p></td>
+<td><p>命名元组</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">'both'</span></code></p></td>
+<td><p>是</p></td>
+<td><p>命名元组的 Series</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Groupby.boxplot</span></code> 总是返回一个 <code class="docutils literal notranslate"><span class="pre">return_type</span></code> 的 <code class="docutils literal notranslate"><span class="pre">Series</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+
+<span class="gp">In [62]: </span><span class="n">df_box</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="gp">In [63]: </span><span class="n">df_box</span><span class="p">[</span><span class="s2">"g"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="gp">In [64]: </span><span class="n">df_box</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_box</span><span class="p">[</span><span class="s2">"g"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">3</span>
+
+<span class="gp">In [65]: </span><span class="n">bp</span> <span class="o">=</span> <span class="n">df_box</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"g"</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/boxplot_groupby.png" src="../_images/boxplot_groupby.png">
+<p>上面的子图首先按数值列分割，然后按 <code class="docutils literal notranslate"><span class="pre">g</span></code> 列的值分割。下面的子图首先按 <code class="docutils literal notranslate"><span class="pre">g</span></code> 的值分割，然后按数值列分割。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">bp</span> <span class="o">=</span> <span class="n">df_box</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span><span class="o">.</span><span class="n">boxplot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/groupby_boxplot_vis.png" src="../_images/groupby_boxplot_vis.png">
+</section>
+<section id="area-plot">
+<span id="visualization-area-plot"></span><h3>面积图<a class="headerlink" href="visualization.html#area-plot" title="Permalink to this heading">#</a></h3>
+<p>您可以使用 <a class="reference internal" href="../reference/api/pandas.Series.plot.area.html#pandas.Series.plot.area" title="pandas.Series.plot.area"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot.area()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.area.html#pandas.DataFrame.plot.area" title="pandas.DataFrame.plot.area"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.area()</span></code></a> 创建面积图。面积图默认是堆叠的。要生成堆叠面积图，每列的值必须都是正数或都是负数。</p>
+<p>当输入数据包含 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> 时，它将自动填充为 0。如果您想丢弃或用不同值填充，请在调用 <code class="docutils literal notranslate"><span class="pre">plot</span></code> 之前使用 <code class="xref py py-func docutils literal notranslate"><span class="pre">dataframe.dropna()</span></code> 或 <code class="xref py py-func docutils literal notranslate"><span class="pre">dataframe.fillna()</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">])</span>
+
+<span class="gp">In [68]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/area_plot_stacked.png" src="../_images/area_plot_stacked.png">
+<p>要生成非堆叠图，请传递 <code class="docutils literal notranslate"><span class="pre">stacked=False</span></code>。Alpha 值默认为 0.5，除非另有指定。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [69]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">stacked</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/area_plot_unstacked.png" src="../_images/area_plot_unstacked.png">
+</section>
+<section id="scatter-plot">
+<span id="visualization-scatter"></span><h3>散点图<a class="headerlink" href="visualization.html#scatter-plot" title="Permalink to this heading">#</a></h3>
+<p>散点图可以使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.scatter.html#pandas.DataFrame.plot.scatter" title="pandas.DataFrame.plot.scatter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.scatter()</span></code></a> 方法绘制。散点图需要用于 x 轴和 y 轴的数值列。这些可以通过 <code class="docutils literal notranslate"><span class="pre">x</span></code> 和 <code class="docutils literal notranslate"><span class="pre">y</span></code> 关键字指定。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">])</span>
+
+<span class="gp">In [71]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"species"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">[</span><span class="s2">"setosa"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"versicolor"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"virginica"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [72]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"b"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/scatter_plot.png" src="../_images/scatter_plot.png">
+<p>要在单个轴中绘制多个列组，请重复 <code class="docutils literal notranslate"><span class="pre">plot</span></code> 方法并指定目标 <code class="docutils literal notranslate"><span class="pre">ax</span></code>。建议指定 <code class="docutils literal notranslate"><span class="pre">color</span></code> 和 <code class="docutils literal notranslate"><span class="pre">label</span></code> 关键字以区分每个组。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"DarkBlue"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Group 1"</span><span class="p">)</span>
+
+<span class="gp">In [74]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"c"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"d"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"DarkGreen"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Group 2"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/scatter_plot_repeated.png" src="../_images/scatter_plot_repeated.png">
+<p>关键字 <code class="docutils literal notranslate"><span class="pre">c</span></code> 可以指定为列的名称，以提供每个点的颜色。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"c"</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/scatter_plot_colored.png" src="../_images/scatter_plot_colored.png">
+<p>如果将分类列传递给 <code class="docutils literal notranslate"><span class="pre">c</span></code>，则会生成一个离散的颜色条。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">1.3.0 版本新增。</span></p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"viridis"</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/scatter_plot_categorical.png" src="../_images/scatter_plot_categorical.png">
+<p>您可以传递 matplotlib <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html#matplotlib.axes.Axes.scatter" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">scatter</span></code></a> 支持的其他关键字。下面的示例展示了如何使用 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的一列作为气泡大小来创建气泡图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">"c"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">200</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/scatter_plot_bubble.png" src="../_images/scatter_plot_bubble.png">
+<p>有关更多信息，请参阅 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html#matplotlib.axes.Axes.scatter" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">scatter</span></code></a> 方法和 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.scatter.html">matplotlib scatter 文档</a>。</p>
+</section>
+<section id="hexagonal-bin-plot">
+<span id="visualization-hexbin"></span><h3>六边形分箱图<a class="headerlink" href="visualization.html#hexagonal-bin-plot" title="Permalink to this heading">#</a></h3>
+<p>您可以使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.hexbin.html#pandas.DataFrame.plot.hexbin" title="pandas.DataFrame.plot.hexbin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.hexbin()</span></code></a> 创建六边形分箱图。如果您的数据过于密集，无法单独绘制每个点，六边形分箱图可以作为散点图的一个有用替代方案。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [78]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span>
+
+<span class="gp">In [79]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="gp">In [80]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">gridsize</span><span class="o">=</span><span class="mi">25</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/hexbin_plot.png" src="../_images/hexbin_plot.png">
+<p>一个有用的关键字参数是 <code class="docutils literal notranslate"><span class="pre">gridsize</span></code>；它控制 x 方向的六边形数量，默认为 100。较大的 <code class="docutils literal notranslate"><span class="pre">gridsize</span></code> 意味着更多、更小的分箱。</p>
+<p>默认情况下，计算每个 <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code> 点周围计数的直方图。您可以通过向 <code class="docutils literal notranslate"><span class="pre">C</span></code> 和 <code class="docutils literal notranslate"><span class="pre">reduce_C_function</span></code> 参数传递值来指定替代聚合。<code class="docutils literal notranslate"><span class="pre">C</span></code> 指定每个 <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code> 点的值，<code class="docutils literal notranslate"><span class="pre">reduce_C_function</span></code> 是一个接受一个参数的函数，它将分箱中的所有值归约为一个单一的数字（例如 <code class="docutils literal notranslate"><span class="pre">mean</span></code>、<code class="docutils literal notranslate"><span class="pre">max</span></code>、<code class="docutils literal notranslate"><span class="pre">sum</span></code>、<code class="docutils literal notranslate"><span class="pre">std</span></code>）。在此示例中，位置由列 <code class="docutils literal notranslate"><span class="pre">a</span></code> 和 <code class="docutils literal notranslate"><span class="pre">b</span></code> 给出，而值由列 <code class="docutils literal notranslate"><span class="pre">z</span></code> 给出。分箱使用 NumPy 的 <code class="docutils literal notranslate"><span class="pre">max</span></code> 函数进行聚合。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [81]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span>
+
+<span class="gp">In [82]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="gp">In [83]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"z"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="gp">In [84]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hexbin</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="s2">"z"</span><span class="p">,</span> <span class="n">reduce_C_function</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">gridsize</span><span class="o">=</span><span class="mi">25</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/hexbin_plot_agg.png" src="../_images/hexbin_plot_agg.png">
+<p>有关更多信息，请参阅 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.hexbin.html#matplotlib.axes.Axes.hexbin" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">hexbin</span></code></a> 方法和 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.hexbin.html">matplotlib hexbin 文档</a>。</p>
+</section>
+<section id="pie-plot">
+<span id="visualization-pie"></span><h3>饼图<a class="headerlink" href="visualization.html#pie-plot" title="Permalink to this heading">#</a></h3>
+<p>您可以使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.pie.html#pandas.DataFrame.plot.pie" title="pandas.DataFrame.plot.pie"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.pie()</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.Series.plot.pie.html#pandas.Series.plot.pie" title="pandas.Series.plot.pie"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot.pie()</span></code></a> 创建饼图。如果您的数据包含任何 <code class="docutils literal notranslate"><span class="pre">NaN</span></code>，它们将自动填充为 0。如果您的数据中有任何负值，将引发 <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [85]: </span><span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"series"</span><span class="p">)</span>
+
+<span class="gp">In [86]: </span><span class="n">series</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../_images/series_pie_plot.png" src="../_images/series_pie_plot.png">
+<p>对于饼图，最好使用方形图，即图的宽高比为 1。您可以创建具有相等宽度和高度的图，或者在绘制后通过在返回的 <code class="docutils literal notranslate"><span class="pre">axes</span></code> 对象上调用 <code class="docutils literal notranslate"><span class="pre">ax.set_aspect('equal')</span></code> 来强制宽高比相等。</p>
+<p>请注意，使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 绘制饼图要求您要么通过 <code class="docutils literal notranslate"><span class="pre">y</span></code> 参数指定目标列，要么指定 <code class="docutils literal notranslate"><span class="pre">subplots=True</span></code>。当指定 <code class="docutils literal notranslate"><span class="pre">y</span></code> 时，将绘制所选列的饼图。如果指定 <code class="docutils literal notranslate"><span class="pre">subplots=True</span></code>，则将每列的饼图绘制为子图。默认情况下，每个饼图都会绘制图例；指定 <code class="docutils literal notranslate"><span class="pre">legend=False</span></code> 可将其隐藏。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [87]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"x"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">]</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [88]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../_images/df_pie_plot.png" src="../_images/df_pie_plot.png">
+<p>您可以使用 <code class="docutils literal notranslate"><span class="pre">labels</span></code> 和 <code class="docutils literal notranslate"><span class="pre">colors</span></code> 关键字来指定每个扇区的标签和颜色。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>大多数 pandas 绘图使用 <code class="docutils literal notranslate"><span class="pre">label</span></code> 和 <code class="docutils literal notranslate"><span class="pre">color</span></code> 参数（请注意它们没有“s”）。为了与 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.pie.html#matplotlib.pyplot.pie" title="(in Matplotlib v3.10.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.pie()</span></code></a> 保持一致，您必须使用 <code class="docutils literal notranslate"><span class="pre">labels</span></code> 和 <code class="docutils literal notranslate"><span class="pre">colors</span></code>。</p>
+</div>
+<p>如果要隐藏扇区标签，请指定 <code class="docutils literal notranslate"><span class="pre">labels=None</span></code>。如果指定了 <code class="docutils literal notranslate"><span class="pre">fontsize</span></code>，该值将应用于扇区标签。此外，Matplotlib <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.pie.html#matplotlib.pyplot.pie" title="(in Matplotlib v3.10.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.pie()</span></code></a> 支持的其他关键字也可以使用。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [89]: </span><span class="n">series</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"AA"</span><span class="p">,</span> <span class="s2">"BB"</span><span class="p">,</span> <span class="s2">"CC"</span><span class="p">,</span> <span class="s2">"DD"</span><span class="p">],</span>
+<span class="gp">   ....: </span>    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">"r"</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">],</span>
+<span class="gp">   ....: </span>    <span class="n">autopct</span><span class="o">=</span><span class="s2">"</span><span class="si">%.2f</span><span class="s2">"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+<span class="gp">   ....: </span><span class="p">);</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<img alt="../_images/series_pie_plot_options.png" src="../_images/series_pie_plot_options.png">
+<p>如果您传入的总和小于 1.0 的值，它们将被重新缩放，使其总和为 1。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [90]: </span><span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"series2"</span><span class="p">)</span>
+
+<span class="gp">In [91]: </span><span class="n">series</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../_images/series_pie_plot_semi.png" src="../_images/series_pie_plot_semi.png">
+<p>有关更多信息，请参阅 <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.pie.html">matplotlib 饼图文档</a>。</p>
+</section>
+</section>
+<section id="plotting-with-missing-data">
+<span id="visualization-missing-data"></span><h2>缺失数据绘图<a class="headerlink" href="visualization.html#plotting-with-missing-data" title="Permalink to this heading">#</a></h2>
+<p>pandas 试图务实地处理包含缺失数据的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 绘图。缺失值根据图表类型被丢弃、忽略或填充。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>图表类型</p></th>
+<th class="head"><p>NaN 处理</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>折线图</p></td>
+<td><p>在 NaN 处留出空白</p></td>
+</tr>
+<tr class="row-odd"><td><p>折线图（堆叠）</p></td>
+<td><p>填充 0</p></td>
+</tr>
+<tr class="row-even"><td><p>条形图</p></td>
+<td><p>填充 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>散点图</p></td>
+<td><p>丢弃 NaN</p></td>
+</tr>
+<tr class="row-even"><td><p>直方图</p></td>
+<td><p>丢弃 NaN（按列）</p></td>
+</tr>
+<tr class="row-odd"><td><p>箱线图</p></td>
+<td><p>丢弃 NaN（按列）</p></td>
+</tr>
+<tr class="row-even"><td><p>面积图</p></td>
+<td><p>填充 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>KDE</p></td>
+<td><p>丢弃 NaN（按列）</p></td>
+</tr>
+<tr class="row-even"><td><p>六边形分箱图</p></td>
+<td><p>丢弃 NaN</p></td>
+</tr>
+<tr class="row-odd"><td><p>饼图</p></td>
+<td><p>填充 0</p></td>
+</tr>
+</tbody>
+</table>
+<p>如果这些默认行为不符合您的需求，或者您希望明确如何处理缺失值，请考虑在绘图之前使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.fillna.html#pandas.DataFrame.fillna" title="pandas.DataFrame.fillna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fillna()</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.DataFrame.dropna.html#pandas.DataFrame.dropna" title="pandas.DataFrame.dropna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dropna()</span></code></a>。</p>
+</section>
+<section id="plotting-tools">
+<span id="visualization-tools"></span><h2>绘图工具<a class="headerlink" href="visualization.html#plotting-tools" title="Permalink to this heading">#</a></h2>
+<p>这些函数可以从 <code class="docutils literal notranslate"><span class="pre">pandas.plotting</span></code> 导入，并接受 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 作为参数。</p>
+<section id="scatter-matrix-plot">
+<span id="visualization-scatter-matrix"></span><h3>散点矩阵图<a class="headerlink" href="visualization.html#scatter-matrix-plot" title="Permalink to this heading">#</a></h3>
+<p>您可以使用 <code class="docutils literal notranslate"><span class="pre">pandas.plotting</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">scatter_matrix</span></code> 方法创建散点图矩阵。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [92]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">scatter_matrix</span>
+
+<span class="gp">In [93]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">])</span>
+
+<span class="gp">In [94]: </span><span class="n">scatter_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">diagonal</span><span class="o">=</span><span class="s2">"kde"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/scatter_matrix_kde.png" src="../_images/scatter_matrix_kde.png">
+</section>
+<section id="density-plot">
+<span id="visualization-kde"></span><h3>密度图<a class="headerlink" href="visualization.html#density-plot" title="Permalink to this heading">#</a></h3>
+<p>您可以使用 <a class="reference internal" href="../reference/api/pandas.Series.plot.kde.html#pandas.Series.plot.kde" title="pandas.Series.plot.kde"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot.kde()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.kde.html#pandas.DataFrame.plot.kde" title="pandas.DataFrame.plot.kde"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot.kde()</span></code></a> 方法创建密度图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [95]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+
+<span class="gp">In [96]: </span><span class="n">ser</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">kde</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/kde_plot.png" src="../_images/kde_plot.png">
+</section>
+<section id="andrews-curves">
+<span id="visualization-andrews-curves"></span><h3>安德鲁斯曲线<a class="headerlink" href="visualization.html#andrews-curves" title="Permalink to this heading">#</a></h3>
+<p>安德鲁斯曲线允许将多元数据绘制为大量曲线，这些曲线是使用样本属性作为傅里叶级数系数创建的。有关更多信息，请参阅<a class="reference external" href="https://en.wikipedia.org/wiki/Andrews_plot">维基百科条目</a>。通过为每个类别着色，可以可视化数据聚类。属于同一类别的样本曲线通常会更接近并形成更大的结构。</p>
+<p><strong>注意</strong>：“Iris”数据集可<a class="reference external" href="https://raw.githubusercontent.com/pandas-dev/pandas/main/pandas/tests/io/data/csv/iris.csv">在此处</a>获取。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [97]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">andrews_curves</span>
+
+<span class="gp">In [98]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/iris.data"</span><span class="p">)</span>
+
+<span class="gp">In [99]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [100]: </span><span class="n">andrews_curves</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/andrews_curves.png" src="../_images/andrews_curves.png">
+</section>
+<section id="parallel-coordinates">
+<span id="visualization-parallel-coordinates"></span><h3>平行坐标<a class="headerlink" href="visualization.html#parallel-coordinates" title="Permalink to this heading">#</a></h3>
+<p>平行坐标是一种绘制多元数据的绘图技术，有关介绍请参阅<a class="reference external" href="https://en.wikipedia.org/wiki/Parallel_coordinates">维基百科条目</a>。平行坐标允许人们查看数据中的聚类并视觉估计其他统计数据。使用平行坐标时，点表示为连接的线段。每条垂直线代表一个属性。一组连接的线段代表一个数据点。倾向于聚类的点将显得更靠近。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [101]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">parallel_coordinates</span>
+
+<span class="gp">In [102]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/iris.data"</span><span class="p">)</span>
+
+<span class="gp">In [103]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [104]: </span><span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/parallel_coordinates.png" src="../_images/parallel_coordinates.png">
+</section>
+<section id="lag-plot">
+<span id="visualization-lag"></span><h3>滞后图<a class="headerlink" href="visualization.html#lag-plot" title="Permalink to this heading">#</a></h3>
+<p>滞后图用于检查数据集或时间序列是否随机。随机数据在滞后图中不应显示任何结构。非随机结构意味着底层数据不是随机的。<code class="docutils literal notranslate"><span class="pre">lag</span></code> 参数可以传递，当 <code class="docutils literal notranslate"><span class="pre">lag=1</span></code> 时，该图本质上是 <code class="docutils literal notranslate"><span class="pre">data[:-1]</span></code> 与 <code class="docutils literal notranslate"><span class="pre">data[1:]</span></code> 的关系图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [105]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">lag_plot</span>
+
+<span class="gp">In [106]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [107]: </span><span class="n">spacing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">99</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">99</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="gp">In [108]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">spacing</span><span class="p">))</span>
+
+<span class="gp">In [109]: </span><span class="n">lag_plot</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/lag_plot.png" src="../_images/lag_plot.png">
+</section>
+<section id="autocorrelation-plot">
+<span id="visualization-autocorrelation"></span><h3>自相关图<a class="headerlink" href="visualization.html#autocorrelation-plot" title="Permalink to this heading">#</a></h3>
+<p>自相关图通常用于检查时间序列的随机性。这通过计算不同时间滞后数据值的自相关来实现。如果时间序列是随机的，则这些自相关对于任何和所有时间滞后分离都应接近零。如果时间序列是非随机的，则一个或多个自相关将显著非零。图中显示的水平线对应于 95% 和 99% 的置信区间。虚线是 99% 的置信区间。有关自相关图的更多信息，请参阅<a class="reference external" href="https://en.wikipedia.org/wiki/Correlogram">维基百科条目</a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">autocorrelation_plot</span>
+
+<span class="gp">In [111]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [112]: </span><span class="n">spacing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="gp">In [113]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">spacing</span><span class="p">))</span>
+
+<span class="gp">In [114]: </span><span class="n">autocorrelation_plot</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/autocorrelation_plot.png" src="../_images/autocorrelation_plot.png">
+</section>
+<section id="bootstrap-plot">
+<span id="visualization-bootstrap"></span><h3>自助法图<a class="headerlink" href="visualization.html#bootstrap-plot" title="Permalink to this heading">#</a></h3>
+<p>自助法图用于直观评估统计量的不确定性，例如均值、中位数、中域等。从数据集中选择指定大小的随机子集，计算该子集的统计量，并重复该过程指定次数。由此产生的图和直方图构成了自助法图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [115]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">bootstrap_plot</span>
+
+<span class="gp">In [116]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+
+<span class="gp">In [117]: </span><span class="n">bootstrap_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"grey"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/bootstrap_plot.png" src="../_images/bootstrap_plot.png">
+</section>
+<section id="radviz">
+<span id="visualization-radviz"></span><h3>RadViz<a class="headerlink" href="visualization.html#radviz" title="Permalink to this heading">#</a></h3>
+<p>RadViz 是一种可视化多元数据的方法。它基于简单的弹簧张力最小化算法。基本上，您在平面上设置了一组点。在我们的例子中，它们均匀分布在单位圆上。每个点代表一个属性。然后您假设数据集中的每个样本都通过弹簧连接到这些点，弹簧的刚度与该属性的数值成比例（它们被归一化到单位区间）。我们的样本在平面上达到平衡的点（作用在我们样本上的力达到平衡的点）就是代表我们样本的点将被绘制的位置。根据样本所属的类别，它将以不同的颜色着色。有关更多信息，请参阅 R 包 <a class="reference external" href="https://cran.r-project.cn/web/packages/Radviz/index.html">Radviz</a>。</p>
+<p><strong>注意</strong>：“Iris”数据集可<a class="reference external" href="https://raw.githubusercontent.com/pandas-dev/pandas/main/pandas/tests/io/data/csv/iris.csv">在此处</a>获取。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [118]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">radviz</span>
+
+<span class="gp">In [119]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/iris.data"</span><span class="p">)</span>
+
+<span class="gp">In [120]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [121]: </span><span class="n">radviz</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/radviz.png" src="../_images/radviz.png">
+</section>
+</section>
+<section id="plot-formatting">
+<span id="visualization-formatting"></span><h2>绘图格式<a class="headerlink" href="visualization.html#plot-formatting" title="Permalink to this heading">#</a></h2>
+<section id="setting-the-plot-style">
+<h3>设置绘图样式<a class="headerlink" href="visualization.html#setting-the-plot-style" title="Permalink to this heading">#</a></h3>
+<p>从 1.5 版本及更高版本开始，Matplotlib 提供了一系列预配置的绘图样式。设置样式可以轻松地让图表呈现您想要的一般外观。设置样式就像在创建图表之前调用 <code class="docutils literal notranslate"><span class="pre">matplotlib.style.use(my_plot_style)</span></code> 一样简单。例如，您可以写入 <code class="docutils literal notranslate"><span class="pre">matplotlib.style.use('ggplot')</span></code> 以获得 ggplot 样式的图表。</p>
+<p>您可以在 <code class="docutils literal notranslate"><span class="pre">matplotlib.style.available</span></code> 查看各种可用的样式名称，并且尝试它们非常容易。</p>
+</section>
+<section id="general-plot-style-arguments">
+<h3>通用绘图样式参数<a class="headerlink" href="visualization.html#general-plot-style-arguments" title="Permalink to this heading">#</a></h3>
+<p>大多数绘图方法都有一组关键字参数，用于控制返回图表的布局和格式。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [122]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [123]: </span><span class="n">ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"k--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Series"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/series_plot_basic2.png" src="../_images/series_plot_basic2.png">
+<p>对于每种图表类型（例如 <code class="docutils literal notranslate"><span class="pre">line</span></code>、<code class="docutils literal notranslate"><span class="pre">bar</span></code>、<code class="docutils literal notranslate"><span class="pre">scatter</span></code>），任何附加的参数关键字都会传递给相应的 Matplotlib 函数（<a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ax.plot()</span></code></a>、<a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.bar.html#matplotlib.axes.Axes.bar" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ax.bar()</span></code></a>、<a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html#matplotlib.axes.Axes.scatter" title="(in Matplotlib v3.10.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ax.scatter()</span></code></a>）。这些可以用于控制除了 pandas 提供之外的其他样式。</p>
+</section>
+<section id="controlling-the-legend">
+<h3>控制图例<a class="headerlink" href="visualization.html#controlling-the-legend" title="Permalink to this heading">#</a></h3>
+<p>您可以将 <code class="docutils literal notranslate"><span class="pre">legend</span></code> 参数设置为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 以隐藏图例，图例默认显示。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [124]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">"ABCD"</span><span class="p">))</span>
+
+<span class="gp">In [125]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [126]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_basic_noleg.png" src="../_images/frame_plot_basic_noleg.png">
+</section>
+<section id="controlling-the-labels">
+<h3>控制标签<a class="headerlink" href="visualization.html#controlling-the-labels" title="Permalink to this heading">#</a></h3>
+<p>您可以设置 <code class="docutils literal notranslate"><span class="pre">xlabel</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ylabel</span></code> 参数，为图表的 x 轴和 y 轴提供自定义标签。默认情况下，pandas 会将索引名称作为 xlabel，而 ylabel 留空。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [127]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+
+<span class="gp">In [128]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">"new x"</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">"new y"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/plot_xlabel_ylabel.png" src="../_images/plot_xlabel_ylabel.png">
+</section>
+<section id="scales">
+<h3>刻度<a class="headerlink" href="visualization.html#scales" title="Permalink to this heading">#</a></h3>
+<p>您可以传递 <code class="docutils literal notranslate"><span class="pre">logy</span></code> 以获取对数刻度的 Y 轴。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [129]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"1/1/2000"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+
+<span class="gp">In [130]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+
+<span class="gp">In [131]: </span><span class="n">ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/series_plot_logy.png" src="../_images/series_plot_logy.png">
+<p>另请参阅 <code class="docutils literal notranslate"><span class="pre">logx</span></code> 和 <code class="docutils literal notranslate"><span class="pre">loglog</span></code> 关键字参数。</p>
+</section>
+<section id="plotting-on-a-secondary-y-axis">
+<h3>在辅助 Y 轴上绘图<a class="headerlink" href="visualization.html#plotting-on-a-secondary-y-axis" title="Permalink to this heading">#</a></h3>
+<p>要在辅助 y 轴上绘制数据，请使用 <code class="docutils literal notranslate"><span class="pre">secondary_y</span></code> 关键字。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [132]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+
+<span class="gp">In [133]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"B"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">secondary_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"g"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/series_plot_secondary_y.png" src="../_images/series_plot_secondary_y.png">
+<p>要绘制 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中的某些列，请将列名提供给 <code class="docutils literal notranslate"><span class="pre">secondary_y</span></code> 关键字。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [134]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [135]: </span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">secondary_y</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+
+<span class="gp">In [136]: </span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"CD scale"</span><span class="p">);</span>
+
+<span class="gp">In [137]: </span><span class="n">ax</span><span class="o">.</span><span class="n">right_ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"AB scale"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_secondary_y.png" src="../_images/frame_plot_secondary_y.png">
+<p>请注意，绘制在辅助 y 轴上的列在图例中会自动标记为“(right)”。要关闭自动标记，请使用 <code class="docutils literal notranslate"><span class="pre">mark_right=False</span></code> 关键字。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [138]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [139]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">secondary_y</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">],</span> <span class="n">mark_right</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_secondary_y_no_right.png" src="../_images/frame_plot_secondary_y_no_right.png">
+</section>
+<section id="custom-formatters-for-timeseries-plots">
+<span id="plotting-formatters"></span><h3>时间序列图表的自定义格式化器<a class="headerlink" href="visualization.html#custom-formatters-for-timeseries-plots" title="Permalink to this heading">#</a></h3>
+<p>pandas 为时间序列图表提供了自定义格式化器。这些格式化器改变了日期和时间轴标签的格式。默认情况下，自定义格式化器仅应用于由 pandas 使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot()</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.Series.plot.html#pandas.Series.plot" title="pandas.Series.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot()</span></code></a> 创建的图表。要使它们应用于所有图表，包括 Matplotlib 创建的图表，请设置选项 <code class="docutils literal notranslate"><span class="pre">pd.options.plotting.matplotlib.register_converters</span> <span class="pre">=</span> <span class="pre">True</span></code> 或使用 <a class="reference internal" href="../reference/api/pandas.plotting.register_matplotlib_converters.html#pandas.plotting.register_matplotlib_converters" title="pandas.plotting.register_matplotlib_converters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.plotting.register_matplotlib_converters()</span></code></a>。</p>
+</section>
+<section id="suppressing-tick-resolution-adjustment">
+<h3>抑制刻度分辨率调整<a class="headerlink" href="visualization.html#suppressing-tick-resolution-adjustment" title="Permalink to this heading">#</a></h3>
+<p>pandas 包含对常规频率时间序列数据的自动刻度分辨率调整。对于 pandas 无法推断频率信息的有限情况（例如，在外部创建的 <code class="docutils literal notranslate"><span class="pre">twinx</span></code> 中），您可以选择抑制此行为以用于对齐目的。</p>
+<p>这是默认行为，请注意 x 轴刻度标签的执行方式：</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [140]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [141]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/ser_plot_suppress.png" src="../_images/ser_plot_suppress.png">
+<p>使用 <code class="docutils literal notranslate"><span class="pre">x_compat</span></code> 参数，您可以抑制此行为。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [142]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [143]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_compat</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/ser_plot_suppress_parm.png" src="../_images/ser_plot_suppress_parm.png">
+<p>如果您有多个需要抑制的图，则 <code class="docutils literal notranslate"><span class="pre">pandas.plotting.plot_params</span></code> 中的 <code class="docutils literal notranslate"><span class="pre">use</span></code> 方法可以在 <code class="docutils literal notranslate"><span class="pre">with</span></code> 语句中使用。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [144]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [145]: </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">plot_params</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"x_compat"</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+<span class="gp">   .....: </span>    <span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"r"</span><span class="p">)</span>
+<span class="gp">   .....: </span>    <span class="n">df</span><span class="p">[</span><span class="s2">"B"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"g"</span><span class="p">)</span>
+<span class="gp">   .....: </span>    <span class="n">df</span><span class="p">[</span><span class="s2">"C"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"b"</span><span class="p">)</span>
+<span class="gp">   .....: </span>
+</pre></div>
+</div>
+<img alt="../_images/ser_plot_suppress_context.png" src="../_images/ser_plot_suppress_context.png">
+</section>
+<section id="automatic-date-tick-adjustment">
+<h3>自动日期刻度调整<a class="headerlink" href="visualization.html#automatic-date-tick-adjustment" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code> 现在使用原生 matplotlib 刻度定位器方法，对于刻度标签重叠的图，调用 matplotlib 的自动日期刻度调整功能很有用。</p>
+<p>有关更多信息，请参阅 <code class="xref py py-meth docutils literal notranslate"><span class="pre">autofmt_xdate</span></code> 方法和 <a class="reference external" href="https://matplotlib.net.cn/2.0.2/users/recipes.html#fixing-common-date-annoyances">matplotlib 文档</a>。</p>
+</section>
+<section id="subplots">
+<h3>子图<a class="headerlink" href="visualization.html#subplots" title="Permalink to this heading">#</a></h3>
+<p>DataFrame 中的每个 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 都可以使用 <code class="docutils literal notranslate"><span class="pre">subplots</span></code> 关键字绘制在不同的轴上。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [146]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_subplots.png" src="../_images/frame_plot_subplots.png">
+</section>
+<section id="using-layout-and-targeting-multiple-axes">
+<h3>使用布局并指定多个坐标轴<a class="headerlink" href="visualization.html#using-layout-and-targeting-multiple-axes" title="Permalink to this heading">#</a></h3>
+<p>子图的布局可以通过 <code class="docutils literal notranslate"><span class="pre">layout</span></code> 关键字指定。它可以接受 <code class="docutils literal notranslate"><span class="pre">(rows,</span> <span class="pre">columns)</span></code>。 <code class="docutils literal notranslate"><span class="pre">layout</span></code> 关键字也可以在 <code class="docutils literal notranslate"><span class="pre">hist</span></code> 和 <code class="docutils literal notranslate"><span class="pre">boxplot</span></code> 中使用。如果输入无效，将引发 <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>。</p>
+<p>由 <code class="docutils literal notranslate"><span class="pre">layout</span></code> 指定的行数 x 列数可容纳的轴数量必须大于所需子图的数量。如果布局可以容纳比所需更多的轴，则不绘制空白轴。与 NumPy 数组的 <code class="docutils literal notranslate"><span class="pre">reshape</span></code> 方法类似，您可以对一个维度使用 <code class="docutils literal notranslate"><span class="pre">-1</span></code>，以根据另一个维度自动计算所需的行数或列数。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [147]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_subplots_layout.png" src="../_images/frame_plot_subplots_layout.png">
+<p>上面的例子与使用以下代码相同：</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [148]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>所需的列数（3）是根据要绘制的序列数量和给定的行数（2）推断出来的。</p>
+<p>您可以通过 <code class="docutils literal notranslate"><span class="pre">ax</span></code> 关键字将预先创建的多个轴作为列表传递。这允许更复杂的布局。传递的轴数量必须与要绘制的子图数量相同。</p>
+<p>当通过 <code class="docutils literal notranslate"><span class="pre">ax</span></code> 关键字传递多个轴时，<code class="docutils literal notranslate"><span class="pre">layout</span></code>、<code class="docutils literal notranslate"><span class="pre">sharex</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sharey</span></code> 关键字不影响输出。您应该显式传递 <code class="docutils literal notranslate"><span class="pre">sharex=False</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sharey=False</span></code>，否则您将看到警告。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [149]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="gp">In [150]: </span><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="gp">In [151]: </span><span class="n">target1</span> <span class="o">=</span> <span class="p">[</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]]</span>
+
+<span class="gp">In [152]: </span><span class="n">target2</span> <span class="o">=</span> <span class="p">[</span><span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]]</span>
+
+<span class="gp">In [153]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">target1</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+
+<span class="gp">In [154]: </span><span class="p">(</span><span class="o">-</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">target2</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_subplots_multi_ax.png" src="../_images/frame_plot_subplots_multi_ax.png">
+<p>另一个选项是向 <a class="reference internal" href="../reference/api/pandas.Series.plot.html#pandas.Series.plot" title="pandas.Series.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot()</span></code></a> 传递 <code class="docutils literal notranslate"><span class="pre">ax</span></code> 参数，以在特定轴上绘图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [155]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456</span><span class="p">)</span>
+
+<span class="gp">In [156]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"1/1/2000"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+
+<span class="gp">In [157]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [158]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">"ABCD"</span><span class="p">))</span>
+
+<span class="gp">In [159]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [160]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [161]: </span><span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="gp">In [162]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+
+<span class="gp">In [163]: </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span>
+
+<span class="gp">In [164]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"B"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span>
+
+<span class="gp">In [165]: </span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"B"</span><span class="p">);</span>
+
+<span class="gp">In [166]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"C"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+
+<span class="gp">In [167]: </span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"C"</span><span class="p">);</span>
+
+<span class="gp">In [168]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"D"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span>
+
+<span class="gp">In [169]: </span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"D"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/series_plot_multi.png" src="../_images/series_plot_multi.png">
+</section>
+<section id="plotting-with-error-bars">
+<span id="visualization-errorbars"></span><h3>带误差棒的绘图<a class="headerlink" href="visualization.html#plotting-with-error-bars" title="Permalink to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.Series.plot.html#pandas.Series.plot" title="pandas.Series.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot()</span></code></a> 支持带误差棒的绘图。</p>
+<p>水平和垂直误差棒可以通过 <code class="docutils literal notranslate"><span class="pre">plot()</span></code> 的 <code class="docutils literal notranslate"><span class="pre">xerr</span></code> 和 <code class="docutils literal notranslate"><span class="pre">yerr</span></code> 关键字参数提供。误差值可以通过多种格式指定：</p>
+<ul class="simple">
+<li><p>作为 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 或 <code class="docutils literal notranslate"><span class="pre">dict</span></code>，其中包含与绘图 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的 <code class="docutils literal notranslate"><span class="pre">columns</span></code> 属性匹配的列名，或与 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 的 <code class="docutils literal notranslate"><span class="pre">name</span></code> 属性匹配。</p></li>
+<li><p>作为 <code class="docutils literal notranslate"><span class="pre">str</span></code>，表示绘图 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的哪些列包含误差值。</p></li>
+<li><p>作为原始值（<code class="docutils literal notranslate"><span class="pre">list</span></code>、<code class="docutils literal notranslate"><span class="pre">tuple</span></code> 或 <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>）。必须与绘图 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>/<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 的长度相同。</p></li>
+</ul>
+<p>这是一个轻松绘制分组均值及其原始数据标准差的方法示例。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Generate the data</span>
+<span class="gp">In [170]: </span><span class="n">ix3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span>
+<span class="gp">   .....: </span>        <span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">],</span>
+<span class="gp">   .....: </span>        <span class="p">[</span><span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">"letter"</span><span class="p">,</span> <span class="s2">"word"</span><span class="p">],</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [171]: </span><span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">{</span>
+<span class="gp">   .....: </span>        <span class="s2">"data1"</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">   .....: </span>        <span class="s2">"data2"</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="p">},</span>
+<span class="gp">   .....: </span>    <span class="n">index</span><span class="o">=</span><span class="n">ix3</span><span class="p">,</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="go"># Group by index labels and take the means and standard deviations</span>
+<span class="go"># for each group</span>
+<span class="gp">In [172]: </span><span class="n">gp3</span> <span class="o">=</span> <span class="n">df3</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="p">(</span><span class="s2">"letter"</span><span class="p">,</span> <span class="s2">"word"</span><span class="p">))</span>
+
+<span class="gp">In [173]: </span><span class="n">means</span> <span class="o">=</span> <span class="n">gp3</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="gp">In [174]: </span><span class="n">errors</span> <span class="o">=</span> <span class="n">gp3</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="gp">In [175]: </span><span class="n">means</span>
+<span class="gh">Out[175]: </span>
+<span class="go">                data1     data2</span>
+<span class="go">letter word                    </span>
+<span class="go">a      bar   3.500000  6.000000</span>
+<span class="go">       foo   4.666667  6.666667</span>
+<span class="go">b      bar   3.666667  4.000000</span>
+<span class="go">       foo   3.000000  4.500000</span>
+
+<span class="gp">In [176]: </span><span class="n">errors</span>
+<span class="gh">Out[176]: </span>
+<span class="go">                data1     data2</span>
+<span class="go">letter word                    </span>
+<span class="go">a      bar   0.707107  1.414214</span>
+<span class="go">       foo   3.785939  2.081666</span>
+<span class="go">b      bar   2.081666  2.645751</span>
+<span class="go">       foo   1.414214  0.707107</span>
+
+<span class="go"># Plot</span>
+<span class="gp">In [177]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="gp">In [178]: </span><span class="n">means</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">yerr</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/errorbar_example.png" src="../_images/errorbar_example.png">
+<p>也支持不对称误差棒，但这种情况下必须提供原始误差值。对于长度为 <code class="docutils literal notranslate"><span class="pre">N</span></code> 的 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>，应提供一个 <code class="docutils literal notranslate"><span class="pre">2xN</span></code> 数组，表示下限和上限（或左和右）误差。对于 <code class="docutils literal notranslate"><span class="pre">MxN</span></code> 的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>，不对称误差应在一个 <code class="docutils literal notranslate"><span class="pre">Mx2xN</span></code> 数组中。</p>
+<p>这是一个使用非对称误差棒绘制最小/最大范围的方法示例。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [179]: </span><span class="n">mins</span> <span class="o">=</span> <span class="n">gp3</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+<span class="gp">In [180]: </span><span class="n">maxs</span> <span class="o">=</span> <span class="n">gp3</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="go"># errors should be positive, and defined in the order of lower, upper</span>
+<span class="gp">In [181]: </span><span class="n">errors</span> <span class="o">=</span> <span class="p">[[</span><span class="n">means</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">mins</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">maxs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">means</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df3</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+
+<span class="go"># Plot</span>
+<span class="gp">In [182]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="gp">In [183]: </span><span class="n">means</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">yerr</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/errorbar_asymmetrical_example.png" src="../_images/errorbar_asymmetrical_example.png">
+</section>
+<section id="plotting-tables">
+<span id="visualization-table"></span><h3>绘制表格<a class="headerlink" href="visualization.html#plotting-tables" title="Permalink to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.Series.plot.html#pandas.Series.plot" title="pandas.Series.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.plot()</span></code></a> 现在支持使用 Matplotlib 表格绘图，通过 <code class="docutils literal notranslate"><span class="pre">table</span></code> 关键字实现。<code class="docutils literal notranslate"><span class="pre">table</span></code> 关键字可以接受 <code class="docutils literal notranslate"><span class="pre">bool</span></code>、<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>。绘制表格的简单方法是指定 <code class="docutils literal notranslate"><span class="pre">table=True</span></code>。数据将被转置以符合 Matplotlib 的默认布局。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [184]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456</span><span class="p">)</span>
+
+<span class="gp">In [185]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+
+<span class="gp">In [186]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">])</span>
+
+<span class="gp">In [187]: </span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">tick_top</span><span class="p">()</span>  <span class="c1"># Display x-axis ticks on top.</span>
+
+<span class="gp">In [188]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/line_plot_table_true.png" src="../_images/line_plot_table_true.png">
+<p>此外，您可以将不同的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 传递给 <code class="docutils literal notranslate"><span class="pre">table</span></code> 关键字。数据将按打印方法中显示的方式绘制（不自动转置）。如果需要，应手动转置，如下例所示。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [189]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">6.75</span><span class="p">))</span>
+
+<span class="gp">In [190]: </span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">tick_top</span><span class="p">()</span>  <span class="c1"># Display x-axis ticks on top.</span>
+
+<span class="gp">In [191]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/line_plot_table_data.png" src="../_images/line_plot_table_data.png">
+<p>还存在一个辅助函数 <code class="docutils literal notranslate"><span class="pre">pandas.plotting.table</span></code>，它从 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 创建表格，并将其添加到 <code class="docutils literal notranslate"><span class="pre">matplotlib.Axes</span></code> 实例中。此函数可以接受 Matplotlib <a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.axes.Axes.table.html">table</a> 具有的关键字。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [192]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">table</span>
+
+<span class="gp">In [193]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [194]: </span><span class="n">table</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper right"</span><span class="p">,</span> <span class="n">colWidths</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]);</span>
+
+<span class="gp">In [195]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/line_plot_table_describe.png" src="../_images/line_plot_table_describe.png">
+<p><strong>注意</strong>：您可以使用 <code class="docutils literal notranslate"><span class="pre">axes.tables</span></code> 属性获取轴上的表格实例，以便进行进一步的装饰。有关更多信息，请参阅 <a class="reference external" href="https://matplotlib.net.cn/api/axes_api.html#matplotlib.axes.Axes.table">matplotlib 表格文档</a>。</p>
+</section>
+<section id="colormaps">
+<span id="visualization-colormaps"></span><h3>颜色映射<a class="headerlink" href="visualization.html#colormaps" title="Permalink to this heading">#</a></h3>
+<p>绘制大量列时的一个潜在问题是，由于默认颜色的重复，可能难以区分某些序列。为了解决这个问题，<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 绘图支持使用 <code class="docutils literal notranslate"><span class="pre">colormap</span></code> 参数，该参数接受 Matplotlib <a class="reference external" href="https://matplotlib.net.cn/api/cm_api.html">颜色映射</a>或注册到 Matplotlib 的颜色映射名称字符串。默认 Matplotlib 颜色映射的可视化可在<a class="reference external" href="https://matplotlib.net.cn/stable/gallery/color/colormap_reference.html">此处</a>获取。</p>
+<p>由于 matplotlib 不直接支持基于线的图的颜色映射，因此颜色是根据 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中列数确定的均匀间距选择的。没有考虑背景颜色，因此某些颜色映射会生成不易见的线条。</p>
+<p>要使用 cubehelix 颜色映射，我们可以传递 <code class="docutils literal notranslate"><span class="pre">colormap='cubehelix'</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [196]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456</span><span class="p">)</span>
+
+<span class="gp">In [197]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="gp">In [198]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [199]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [200]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">colormap</span><span class="o">=</span><span class="s2">"cubehelix"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/cubehelix.png" src="../_images/cubehelix.png">
+<p>或者，我们可以直接传递颜色映射本身。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [201]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">cm</span>
+
+<span class="gp">In [202]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [203]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">colormap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">cubehelix</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/cubehelix_cm.png" src="../_images/cubehelix_cm.png">
+<p>颜色映射也可以用于其他图表类型，例如条形图。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [204]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456</span><span class="p">)</span>
+
+<span class="gp">In [205]: </span><span class="n">dd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span>
+
+<span class="gp">In [206]: </span><span class="n">dd</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [207]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [208]: </span><span class="n">dd</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">colormap</span><span class="o">=</span><span class="s2">"Greens"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/greens.png" src="../_images/greens.png">
+<p>平行坐标图</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [209]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [210]: </span><span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s2">"gist_rainbow"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/parallel_gist_rainbow.png" src="../_images/parallel_gist_rainbow.png">
+<p>安德鲁斯曲线图</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [211]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [212]: </span><span class="n">andrews_curves</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s2">"winter"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/andrews_curve_winter.png" src="../_images/andrews_curve_winter.png">
+</section>
+</section>
+<section id="plotting-directly-with-matplotlib">
+<h2>直接使用 Matplotlib 绘图<a class="headerlink" href="visualization.html#plotting-directly-with-matplotlib" title="Permalink to this heading">#</a></h2>
+<p>在某些情况下，直接使用 Matplotlib 准备图表可能仍然是更可取或必要的，例如当 pandas 尚不支持某种类型的图表或自定义时。<code class="docutils literal notranslate"><span class="pre">Series</span></code> 和 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 对象表现得像数组，因此可以直接传递给 Matplotlib 函数而无需显式转换。</p>
+<p>pandas 还会自动注册识别日期索引的格式化程序和定位器，从而将日期和时间支持扩展到 Matplotlib 中几乎所有可用的绘图类型。尽管这种格式不提供与通过 pandas 绘图时相同的精细程度，但在绘制大量点时可能会更快。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [213]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123456</span><span class="p">)</span>
+
+<span class="gp">In [214]: </span><span class="n">price</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span>
+<span class="gp">   .....: </span>    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"2000-1-1"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"B"</span><span class="p">),</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [215]: </span><span class="n">ma</span> <span class="o">=</span> <span class="n">price</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="gp">In [216]: </span><span class="n">mstd</span> <span class="o">=</span> <span class="n">price</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="gp">In [217]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [218]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">price</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="s2">"k"</span><span class="p">);</span>
+
+<span class="gp">In [219]: </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ma</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">);</span>
+
+<span class="gp">In [220]: </span><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">mstd</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ma</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mstd</span><span class="p">,</span> <span class="n">ma</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mstd</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/bollinger.png" src="../_images/bollinger.png">
+</section>
+<section id="plotting-backends">
+<h2>绘图后端<a class="headerlink" href="visualization.html#plotting-backends" title="Permalink to this heading">#</a></h2>
+<p>pandas 可以通过第三方绘图后端进行扩展。主要思想是让用户选择不同于基于 Matplotlib 的默认绘图后端。</p>
+<p>这可以通过在 <code class="docutils literal notranslate"><span class="pre">plot</span></code> 函数中将“backend.module”作为参数 <code class="docutils literal notranslate"><span class="pre">backend</span></code> 传递来实现。例如：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">"backend.module"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>或者，您也可以全局设置此选项，这样您就不需要在每次 <code class="docutils literal notranslate"><span class="pre">plot</span></code> 调用中指定关键字。例如：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"plotting.backend"</span><span class="p">,</span> <span class="s2">"backend.module"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>或者</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s2">"backend.module"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>这或多或少等同于：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">backend.module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">backend</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>然后，后端模块可以使用其他可视化工具（Bokeh、Altair、hvplot 等）来生成图表。一些为 pandas 实现后端的库列在<a class="reference external" href="https://pandas.ac.cn/community/ecosystem.html">生态系统页面</a>上。</p>
+<p>开发者指南可在<a class="reference external" href="../dev/development/extending.html#plotting-backends">https://pandas.ac.cn/docs/dev/development/extending.html#plotting-backends</a> 找到。</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="boolean.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">可空布尔数据类型</p> </div> </a> <a class="right-next" href="style.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">表格可视化</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#basic-plotting-plot">基本绘图：<code class="docutils literal notranslate"><span class="pre">plot</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#other-plots">其他图表</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#bar-plots">条形图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#histograms">直方图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#box-plots">箱线图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#area-plot">面积图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#scatter-plot">散点图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#hexagonal-bin-plot">六边形分箱图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#pie-plot">饼图</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#plotting-with-missing-data">缺失数据绘图</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#plotting-tools">绘图工具</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#scatter-matrix-plot">散点矩阵图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#density-plot">密度图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#andrews-curves">安德鲁斯曲线</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#parallel-coordinates">平行坐标</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#lag-plot">滞后图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#autocorrelation-plot">自相关图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#bootstrap-plot">自助法图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#radviz">RadViz</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#plot-formatting">绘图格式</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#setting-the-plot-style">设置绘图样式</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#general-plot-style-arguments">通用绘图样式参数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#controlling-the-legend">控制图例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#controlling-the-labels">控制标签</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#scales">刻度</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#plotting-on-a-secondary-y-axis">在辅助 Y 轴上绘图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#custom-formatters-for-timeseries-plots">时间序列图表的自定义格式化器</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#suppressing-tick-resolution-adjustment">抑制刻度分辨率调整</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#automatic-date-tick-adjustment">自动日期刻度调整</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#subplots">子图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#using-layout-and-targeting-multiple-axes">使用布局并指定多个坐标轴</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#plotting-with-error-bars">带误差棒的绘图</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#plotting-tables">绘制表格</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#colormaps">颜色映射</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#plotting-directly-with-matplotlib">直接使用 Matplotlib 绘图</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="visualization.html#plotting-backends">绘图后端</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/visualization.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

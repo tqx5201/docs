@@ -1,0 +1,2071 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>系列 — pandas 2.2.1 文档 - pandas 数据分析库</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+
+<link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+<link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=fa44fd50.css">
+<link rel="stylesheet" type="text/css" href="../_static/plot_directive.css">
+<link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css">
+<link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css%3Fv=0a3b3ea7.css">
+<link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css">
+<link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css">
+
+<link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd">
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/documentation_options.js%3Fv=166560180"></script>
+<script src="../_static/doctools.js%3Fv=888ff710"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=f281be69"></script>
+<script src="../_static/design-tabs.js%3Fv=36754332"></script>
+<script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'reference/series';</script>
+<script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+<link rel="icon" href="../_static/favicon.ico">
+<link rel="index" title="Index" href="../genindex.html">
+<link rel="search" title="Search" href="../search.html">
+<link rel="next" title="pandas.Series" href="api/pandas.Series.html">
+<link rel="prev" title="pandas.api.interchange.from_dataframe" href="api/pandas.api.interchange.from_dataframe.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="docsearch:language" content="en">
+</head>
+<body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+<a class="skip-link" href="series.html#main-content">跳至主要内容</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button type="button" class="btn rounded-pill" id="pst-back-to-top">
+<i class="fa-solid fa-arrow-up"></i> 返回顶部
+</button>
+<input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+<label class="overlay overlay-primary" for="__primary"></label>
+<input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+<i class="fa-solid fa-magnifying-glass"></i> <input type="search" class="form-control" name="q" id="search-input" placeholder="搜索文档..." aria-label="搜索文档..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+<label class="sidebar-toggle primary-toggle" for="__primary">
+<span class="fa-solid fa-bars"></span>
+</label>
+<div class=" navbar-header-items__start">
+<div class="navbar-item">
+<a class="navbar-brand logo" href="../index.html">
+<img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.2.1 documentation - Home">
+<script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.2.1 documentation - Home"/>`);</script>
+</a></div>
+</div>
+<div class=" navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
+<nav class="navbar-nav">
+<p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+网站导航
+</p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../getting_started/index.html">
+入门
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../user_guide/index.html">
+用户指南
+</a>
+</li>
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html">
+API 参考
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../development/index.html">
+开发
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../whatsnew/index.html">
+发行说明
+</a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+</div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+<div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+<li class="nav-item">
+<a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+</li>
+<li class="nav-item">
+<a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+</li>
+<li class="nav-item">
+<a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+</div>
+<label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+<span class="fa-solid fa-outdent"></span>
+</label>
+</div>
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<nav class="navbar-nav">
+<p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+网站导航
+</p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../getting_started/index.html">
+入门
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../user_guide/index.html">
+用户指南
+</a>
+</li>
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html">
+API 参考
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../development/index.html">
+开发
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../whatsnew/index.html">
+发行说明
+</a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+<div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+<li class="nav-item">
+<a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+</li>
+<li class="nav-item">
+<a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+</li>
+<li class="nav-item">
+<a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+<div class="bd-toc-item navbar-nav">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="io.html">输入/输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general_functions.html">通用函数</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="series.html#">系列</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.html">pandas.Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.index.html">pandas.Series.index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.array.html">pandas.Series.array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.values.html">pandas.Series.values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dtype.html">pandas.Series.dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.shape.html">pandas.Series.shape</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.nbytes.html">pandas.Series.nbytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.ndim.html">pandas.Series.ndim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.size.html">pandas.Series.size</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.T.html">pandas.Series.T</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.memory_usage.html">pandas.Series.memory_usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.hasnans.html">pandas.Series.hasnans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.empty.html">pandas.Series.empty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dtypes.html">pandas.Series.dtypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.name.html">pandas.Series.name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.flags.html">pandas.Series.flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.set_flags.html">pandas.Series.set_flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.astype.html">pandas.Series.astype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.convert_dtypes.html">pandas.Series.convert_dtypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.infer_objects.html">pandas.Series.infer_objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.copy.html">pandas.Series.copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.bool.html">pandas.Series.bool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_numpy.html">pandas.Series.to_numpy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_period.html">pandas.Series.to_period</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_timestamp.html">pandas.Series.to_timestamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_list.html">pandas.Series.to_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.__array__.html">pandas.Series.__array__</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.get.html">pandas.Series.get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.at.html">pandas.Series.at</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.iat.html">pandas.Series.iat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.loc.html">pandas.Series.loc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.iloc.html">pandas.Series.iloc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.__iter__.html">pandas.Series.__iter__</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.items.html">pandas.Series.items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.keys.html">pandas.Series.keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.pop.html">pandas.Series.pop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.item.html">pandas.Series.item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.xs.html">pandas.Series.xs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.add.html">pandas.Series.add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sub.html">pandas.Series.sub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.mul.html">pandas.Series.mul</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.div.html">pandas.Series.div</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.truediv.html">pandas.Series.truediv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.floordiv.html">pandas.Series.floordiv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.mod.html">pandas.Series.mod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.pow.html">pandas.Series.pow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.radd.html">pandas.Series.radd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rsub.html">pandas.Series.rsub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rmul.html">pandas.Series.rmul</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rdiv.html">pandas.Series.rdiv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rtruediv.html">pandas.Series.rtruediv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rfloordiv.html">pandas.Series.rfloordiv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rmod.html">pandas.Series.rmod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rpow.html">pandas.Series.rpow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.combine.html">pandas.Series.combine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.combine_first.html">pandas.Series.combine_first</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.round.html">pandas.Series.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.lt.html">pandas.Series.lt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.gt.html">pandas.Series.gt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.le.html">pandas.Series.le</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.ge.html">pandas.Series.ge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.ne.html">pandas.Series.ne</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.eq.html">pandas.Series.eq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.product.html">pandas.Series.product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dot.html">pandas.Series.dot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.apply.html">pandas.Series.apply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.agg.html">pandas.Series.agg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.aggregate.html">pandas.Series.aggregate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.transform.html">pandas.Series.transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.map.html">pandas.Series.map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.groupby.html">pandas.Series.groupby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rolling.html">pandas.Series.rolling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.expanding.html">pandas.Series.expanding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.ewm.html">pandas.Series.ewm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.pipe.html">pandas.Series.pipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.abs.html">pandas.Series.abs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.all.html">pandas.Series.all</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.any.html">pandas.Series.any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.autocorr.html">pandas.Series.autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.between.html">pandas.Series.between</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.clip.html">pandas.Series.clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.corr.html">pandas.Series.corr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.count.html">pandas.Series.count</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cov.html">pandas.Series.cov</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cummax.html">pandas.Series.cummax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cummin.html">pandas.Series.cummin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cumprod.html">pandas.Series.cumprod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cumsum.html">pandas.Series.cumsum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.describe.html">pandas.Series.describe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.diff.html">pandas.Series.diff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.factorize.html">pandas.Series.factorize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.kurt.html">pandas.Series.kurt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.max.html">pandas.Series.max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.mean.html">pandas.Series.mean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.median.html">pandas.Series.median</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.min.html">pandas.Series.min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.mode.html">pandas.Series.mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.nlargest.html">pandas.Series.nlargest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.nsmallest.html">pandas.Series.nsmallest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.pct_change.html">pandas.Series.pct_change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.prod.html">pandas.Series.prod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.quantile.html">pandas.Series.quantile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rank.html">pandas.Series.rank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sem.html">pandas.Series.sem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.skew.html">pandas.Series.skew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.std.html">pandas.Series.std</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sum.html">pandas.Series.sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.var.html">pandas.Series.var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.kurtosis.html">pandas.Series.kurtosis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.unique.html">pandas.Series.unique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.nunique.html">pandas.Series.nunique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.is_unique.html">pandas.Series.is_unique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.is_monotonic_increasing.html">pandas.Series.is_monotonic_increasing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.is_monotonic_decreasing.html">pandas.Series.is_monotonic_decreasing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.value_counts.html">pandas.Series.value_counts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.align.html">pandas.Series.align</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.case_when.html">pandas.Series.case_when</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.drop.html">pandas.Series.drop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.droplevel.html">pandas.Series.droplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.drop_duplicates.html">pandas.Series.drop_duplicates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.duplicated.html">pandas.Series.duplicated</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.equals.html">pandas.Series.equals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.first.html">pandas.Series.first</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.head.html">pandas.Series.head</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.idxmax.html">pandas.Series.idxmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.idxmin.html">pandas.Series.idxmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.isin.html">pandas.Series.isin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.last.html">pandas.Series.last</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.reindex.html">pandas.Series.reindex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.reindex_like.html">pandas.Series.reindex_like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rename.html">pandas.Series.rename</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.rename_axis.html">pandas.Series.rename_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.reset_index.html">pandas.Series.reset_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sample.html">pandas.Series.sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.set_axis.html">pandas.Series.set_axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.take.html">pandas.Series.take</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.tail.html">pandas.Series.tail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.truncate.html">pandas.Series.truncate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.where.html">pandas.Series.where</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.mask.html">pandas.Series.mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.add_prefix.html">pandas.Series.add_prefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.add_suffix.html">pandas.Series.add_suffix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.filter.html">pandas.Series.filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.backfill.html">pandas.Series.backfill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.bfill.html">pandas.Series.bfill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dropna.html">pandas.Series.dropna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.ffill.html">pandas.Series.ffill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.fillna.html">pandas.Series.fillna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.interpolate.html">pandas.Series.interpolate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.isna.html">pandas.Series.isna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.isnull.html">pandas.Series.isnull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.notna.html">pandas.Series.notna</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.notnull.html">pandas.Series.notnull</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.pad.html">pandas.Series.pad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.replace.html">pandas.Series.replace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.argsort.html">pandas.Series.argsort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.argmin.html">pandas.Series.argmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.argmax.html">pandas.Series.argmax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.reorder_levels.html">pandas.Series.reorder_levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sort_values.html">pandas.Series.sort_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sort_index.html">pandas.Series.sort_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.swaplevel.html">pandas.Series.swaplevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.unstack.html">pandas.Series.unstack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.explode.html">pandas.Series.explode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.searchsorted.html">pandas.Series.searchsorted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.ravel.html">pandas.Series.ravel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.repeat.html">pandas.Series.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.squeeze.html">pandas.Series.squeeze</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.view.html">pandas.Series.view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.compare.html">pandas.Series.compare</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.update.html">pandas.Series.update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.asfreq.html">pandas.Series.asfreq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.asof.html">pandas.Series.asof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.shift.html">pandas.Series.shift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.first_valid_index.html">pandas.Series.first_valid_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.last_valid_index.html">pandas.Series.last_valid_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.resample.html">pandas.Series.resample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.tz_convert.html">pandas.Series.tz_convert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.tz_localize.html">pandas.Series.tz_localize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.at_time.html">pandas.Series.at_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.between_time.html">pandas.Series.between_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.html">pandas.Series.str</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.html">pandas.Series.cat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.html">pandas.Series.dt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sparse.html">pandas.Series.sparse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.DataFrame.sparse.html">pandas.DataFrame.sparse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Index.str.html">pandas.Index.str</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.date.html">pandas.Series.dt.date</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.time.html">pandas.Series.dt.time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.timetz.html">pandas.Series.dt.timetz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.year.html">pandas.Series.dt.year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.month.html">pandas.Series.dt.month</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.day.html">pandas.Series.dt.day</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.hour.html">pandas.Series.dt.hour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.minute.html">pandas.Series.dt.minute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.second.html">pandas.Series.dt.second</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.microsecond.html">pandas.Series.dt.microsecond</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.nanosecond.html">pandas.Series.dt.nanosecond</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.dayofweek.html">pandas.Series.dt.dayofweek</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.day_of_week.html">pandas.Series.dt.day_of_week</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.weekday.html">pandas.Series.dt.weekday</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.dayofyear.html">pandas.Series.dt.dayofyear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.day_of_year.html">pandas.Series.dt.day_of_year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.days_in_month.html">pandas.Series.dt.days_in_month</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.quarter.html">pandas.Series.dt.quarter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.is_month_start.html">pandas.Series.dt.is_month_start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.is_month_end.html">pandas.Series.dt.is_month_end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.is_quarter_start.html">pandas.Series.dt.is_quarter_start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.is_quarter_end.html">pandas.Series.dt.is_quarter_end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.is_year_start.html">pandas.Series.dt.is_year_start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.is_year_end.html">pandas.Series.dt.is_year_end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.is_leap_year.html">pandas.Series.dt.is_leap_year</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.daysinmonth.html">pandas.Series.dt.daysinmonth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.days_in_month.html">pandas.Series.dt.days_in_month</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.tz.html">pandas.Series.dt.tz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.freq.html">pandas.Series.dt.freq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.unit.html">pandas.Series.dt.unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.normalize.html">pandas.Series.dt.normalize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.isocalendar.html">pandas.Series.dt.isocalendar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.to_period.html">pandas.Series.dt.to_period</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.to_pydatetime.html">pandas.Series.dt.to_pydatetime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.tz_localize.html">pandas.Series.dt.tz_localize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.tz_convert.html">pandas.Series.dt.tz_convert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.normalize.html">pandas.Series.dt.normalize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.strftime.html">pandas.Series.dt.strftime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.round.html">pandas.Series.dt.round</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.floor.html">pandas.Series.dt.floor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.ceil.html">pandas.Series.dt.ceil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.month_name.html">pandas.Series.dt.month_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.day_name.html">pandas.Series.dt.day_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.as_unit.html">pandas.Series.dt.as_unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.qyear.html">pandas.Series.dt.qyear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.start_time.html">pandas.Series.dt.start_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.end_time.html">pandas.Series.dt.end_time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.days.html">pandas.Series.dt.days</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.seconds.html">pandas.Series.dt.seconds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.microseconds.html">pandas.Series.dt.microseconds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.nanoseconds.html">pandas.Series.dt.nanoseconds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.components.html">pandas.Series.dt.components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.unit.html">pandas.Series.dt.unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.to_pytimedelta.html">pandas.Series.dt.to_pytimedelta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.total_seconds.html">pandas.Series.dt.total_seconds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.dt.as_unit.html">pandas.Series.dt.as_unit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.capitalize.html">pandas.Series.str.capitalize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.casefold.html">pandas.Series.str.casefold</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.cat.html">pandas.Series.str.cat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.center.html">pandas.Series.str.center</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.contains.html">pandas.Series.str.contains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.count.html">pandas.Series.str.count</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.decode.html">pandas.Series.str.decode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.encode.html">pandas.Series.str.encode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.endswith.html">pandas.Series.str.endswith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.extract.html">pandas.Series.str.extract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.extractall.html">pandas.Series.str.extractall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.find.html">pandas.Series.str.find</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.findall.html">pandas.Series.str.findall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.fullmatch.html">pandas.Series.str.fullmatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.get.html">pandas.Series.str.get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.index.html">pandas.Series.str.index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.join.html">pandas.Series.str.join</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.len.html">pandas.Series.str.len</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.ljust.html">pandas.Series.str.ljust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.lower.html">pandas.Series.str.lower</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.lstrip.html">pandas.Series.str.lstrip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.match.html">pandas.Series.str.match</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.normalize.html">pandas.Series.str.normalize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.pad.html">pandas.Series.str.pad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.partition.html">pandas.Series.str.partition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.removeprefix.html">pandas.Series.str.removeprefix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.removesuffix.html">pandas.Series.str.removesuffix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.repeat.html">pandas.Series.str.repeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.replace.html">pandas.Series.str.replace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.rfind.html">pandas.Series.str.rfind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.rindex.html">pandas.Series.str.rindex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.rjust.html">pandas.Series.str.rjust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.rpartition.html">pandas.Series.str.rpartition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.rstrip.html">pandas.Series.str.rstrip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.slice.html">pandas.Series.str.slice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.slice_replace.html">pandas.Series.str.slice_replace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.split.html">pandas.Series.str.split</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.rsplit.html">pandas.Series.str.rsplit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.startswith.html">pandas.Series.str.startswith</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.strip.html">pandas.Series.str.strip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.swapcase.html">pandas.Series.str.swapcase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.title.html">pandas.Series.str.title</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.translate.html">pandas.Series.str.translate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.upper.html">pandas.Series.str.upper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.wrap.html">pandas.Series.str.wrap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.zfill.html">pandas.Series.str.zfill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.isalnum.html">pandas.Series.str.isalnum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.isalpha.html">pandas.Series.str.isalpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.isdigit.html">pandas.Series.str.isdigit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.isspace.html">pandas.Series.str.isspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.islower.html">pandas.Series.str.islower</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.isupper.html">pandas.Series.str.isupper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.istitle.html">pandas.Series.str.istitle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.isnumeric.html">pandas.Series.str.isnumeric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.isdecimal.html">pandas.Series.str.isdecimal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.str.get_dummies.html">pandas.Series.str.get_dummies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.categories.html">pandas.Series.cat.categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.ordered.html">pandas.Series.cat.ordered</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.codes.html">pandas.Series.cat.codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.rename_categories.html">pandas.Series.cat.rename_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.reorder_categories.html">pandas.Series.cat.reorder_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.add_categories.html">pandas.Series.cat.add_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.remove_categories.html">pandas.Series.cat.remove_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.remove_unused_categories.html">pandas.Series.cat.remove_unused_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.set_categories.html">pandas.Series.cat.set_categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.as_ordered.html">pandas.Series.cat.as_ordered</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.cat.as_unordered.html">pandas.Series.cat.as_unordered</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sparse.npoints.html">pandas.Series.sparse.npoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sparse.density.html">pandas.Series.sparse.density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sparse.fill_value.html">pandas.Series.sparse.fill_value</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sparse.sp_values.html">pandas.Series.sparse.sp_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sparse.from_coo.html">pandas.Series.sparse.from_coo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.sparse.to_coo.html">pandas.Series.sparse.to_coo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.list.flatten.html">pandas.Series.list.flatten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.list.len.html">pandas.Series.list.len</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.list.__getitem__.html">pandas.Series.list.__getitem__</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.struct.dtypes.html">pandas.Series.struct.dtypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.struct.field.html">pandas.Series.struct.field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.struct.explode.html">pandas.Series.struct.explode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Flags.html">pandas.Flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.attrs.html">pandas.Series.attrs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.html">pandas.Series.plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.area.html">pandas.Series.plot.area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.bar.html">pandas.Series.plot.bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.barh.html">pandas.Series.plot.barh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.box.html">pandas.Series.plot.box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.density.html">pandas.Series.plot.density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.hist.html">pandas.Series.plot.hist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.kde.html">pandas.Series.plot.kde</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.line.html">pandas.Series.plot.line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.plot.pie.html">pandas.Series.plot.pie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.hist.html">pandas.Series.hist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_pickle.html">pandas.Series.to_pickle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_csv.html">pandas.Series.to_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_dict.html">pandas.Series.to_dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_excel.html">pandas.Series.to_excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_frame.html">pandas.Series.to_frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_xarray.html">pandas.Series.to_xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_hdf.html">pandas.Series.to_hdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_sql.html">pandas.Series.to_sql</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_json.html">pandas.Series.to_json</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_string.html">pandas.Series.to_string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_clipboard.html">pandas.Series.to_clipboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_latex.html">pandas.Series.to_latex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.Series.to_markdown.html">pandas.Series.to_markdown</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">pandas 数组、标量和数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="offset_frequency.html">日期偏移量</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resampling.html">重采样</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">样式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_value.html">缺失值</a></li>
+</ul>
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main id="main-content" class="bd-main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item">
+<nav aria-label="Breadcrumb">
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a href="../index.html" class="nav-link" aria-label="Home">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a href="index.html" class="nav-link">API 参考</a></li>
+<li class="breadcrumb-item active" aria-current="page">序列</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id="searchbox"></div>
+<article class="bd-article" role="main">
+<section id="series">
+<span id="api-series"></span><h1>序列<a class="headerlink" href="series.html#series" title="Link to this heading">#</a></h1>
+<section id="constructor">
+<h2>构造函数<a class="headerlink" href="series.html#constructor" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series</span></code></a>([data,&nbsp;index,&nbsp;dtype,&nbsp;name,&nbsp;copy,&nbsp;...])</p></td>
+<td><p>具有轴标签（包括时间序列）的一维 ndarray。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h2>属性<a class="headerlink" href="series.html#attributes" title="Link to this heading">#</a></h2>
+<p><strong>轴</strong></p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.index.html#pandas.Series.index" title="pandas.Series.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.index</span></code></a></p></td>
+<td><p>序列的索引（轴标签）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.array.html#pandas.Series.array" title="pandas.Series.array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.array</span></code></a></p></td>
+<td><p>支持此序列或索引的数据的 ExtensionArray。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.values.html#pandas.Series.values" title="pandas.Series.values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.values</span></code></a></p></td>
+<td><p>根据 dtype 返回序列作为 ndarray 或类似 ndarray 的对象。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dtype.html#pandas.Series.dtype" title="pandas.Series.dtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dtype</span></code></a></p></td>
+<td><p>返回底层数据的 dtype 对象。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.shape.html#pandas.Series.shape" title="pandas.Series.shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.shape</span></code></a></p></td>
+<td><p>返回底层数据的形状元组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.nbytes.html#pandas.Series.nbytes" title="pandas.Series.nbytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.nbytes</span></code></a></p></td>
+<td><p>返回底层数据的字节数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.ndim.html#pandas.Series.ndim" title="pandas.Series.ndim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.ndim</span></code></a></p></td>
+<td><p>底层数据的维度数，定义为 1。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.size.html#pandas.Series.size" title="pandas.Series.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.size</span></code></a></p></td>
+<td><p>返回底层数据的元素数量。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.T.html#pandas.Series.T" title="pandas.Series.T"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.T</span></code></a></p></td>
+<td><p>返回转置，定义为自身。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.memory_usage.html#pandas.Series.memory_usage" title="pandas.Series.memory_usage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.memory_usage</span></code></a>([index,&nbsp;deep])</p></td>
+<td><p>返回序列的内存使用量。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.hasnans.html#pandas.Series.hasnans" title="pandas.Series.hasnans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.hasnans</span></code></a></p></td>
+<td><p>如果存在任何 NaN，则返回 True。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.empty.html#pandas.Series.empty" title="pandas.Series.empty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.empty</span></code></a></p></td>
+<td><p>指示序列/数据帧是否为空。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dtypes.html#pandas.Series.dtypes" title="pandas.Series.dtypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dtypes</span></code></a></p></td>
+<td><p>返回底层数据的 dtype 对象。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.name.html#pandas.Series.name" title="pandas.Series.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.name</span></code></a></p></td>
+<td><p>返回序列的名称。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.flags.html#pandas.Series.flags" title="pandas.Series.flags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.flags</span></code></a></p></td>
+<td><p>获取与该 pandas 对象关联的属性。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.set_flags.html#pandas.Series.set_flags" title="pandas.Series.set_flags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.set_flags</span></code></a>(*[,&nbsp;copy,&nbsp;...])</p></td>
+<td><p>返回具有更新标志的新对象。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conversion">
+<h2>转换<a class="headerlink" href="series.html#conversion" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.astype.html#pandas.Series.astype" title="pandas.Series.astype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.astype</span></code></a>(dtype[,&nbsp;copy,&nbsp;errors])</p></td>
+<td><p>将 pandas 对象转换为指定的 dtype <code class="docutils literal notranslate"><span class="pre">dtype</span></code>。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.convert_dtypes.html#pandas.Series.convert_dtypes" title="pandas.Series.convert_dtypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.convert_dtypes</span></code></a>([infer_objects,&nbsp;...])</p></td>
+<td><p>使用支持 <code class="docutils literal notranslate"><span class="pre">pd.NA</span></code> 的数据类型将列转换为最佳可能的数据类型。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.infer_objects.html#pandas.Series.infer_objects" title="pandas.Series.infer_objects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.infer_objects</span></code></a>([copy])</p></td>
+<td><p>尝试为对象列推断更好的数据类型。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.copy.html#pandas.Series.copy" title="pandas.Series.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.copy</span></code></a>([deep])</p></td>
+<td><p>复制此对象的索引和数据。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.bool.html#pandas.Series.bool" title="pandas.Series.bool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.bool</span></code></a>()</p></td>
+<td><p>(已弃用) 返回单个元素 Series 或 DataFrame 的布尔值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.to_numpy.html#pandas.Series.to_numpy" title="pandas.Series.to_numpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_numpy</span></code></a>([dtype,&nbsp;copy,&nbsp;na_value])</p></td>
+<td><p>表示此 Series 或 Index 中值的 NumPy ndarray。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_period.html#pandas.Series.to_period" title="pandas.Series.to_period"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_period</span></code></a>([freq,&nbsp;copy])</p></td>
+<td><p>将 Series 从 DatetimeIndex 转换为 PeriodIndex。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.to_timestamp.html#pandas.Series.to_timestamp" title="pandas.Series.to_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_timestamp</span></code></a>([freq,&nbsp;how,&nbsp;copy])</p></td>
+<td><p>转换为 Timestamp 的 DatetimeIndex，位于周期的<em>开始</em>。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_list.html#pandas.Series.to_list" title="pandas.Series.to_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_list</span></code></a>()</p></td>
+<td><p>返回值的列表。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.__array__.html#pandas.Series.__array__" title="pandas.Series.__array__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.__array__</span></code></a>([dtype])</p></td>
+<td><p>将值作为 NumPy 数组返回。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="indexing-iteration">
+<h2>索引，迭代<a class="headerlink" href="series.html#indexing-iteration" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.get.html#pandas.Series.get" title="pandas.Series.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.get</span></code></a>(key[,&nbsp;default])</p></td>
+<td><p>从对象中获取给定键的项目（例如：DataFrame 列）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.at.html#pandas.Series.at" title="pandas.Series.at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.at</span></code></a></p></td>
+<td><p>访问行/列标签对的单个值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.iat.html#pandas.Series.iat" title="pandas.Series.iat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.iat</span></code></a></p></td>
+<td><p>通过整数位置访问行/列对的单个值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.loc.html#pandas.Series.loc" title="pandas.Series.loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.loc</span></code></a></p></td>
+<td><p>通过标签或布尔数组访问一组行和列。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.iloc.html#pandas.Series.iloc" title="pandas.Series.iloc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.iloc</span></code></a></p></td>
+<td><p>(已弃用) 纯粹基于整数位置的索引，用于按位置进行选择。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.__iter__.html#pandas.Series.__iter__" title="pandas.Series.__iter__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.__iter__</span></code></a>()</p></td>
+<td><p>返回值的迭代器。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.items.html#pandas.Series.items" title="pandas.Series.items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.items</span></code></a>()</p></td>
+<td><p>懒惰地迭代 (索引, 值) 元组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.keys.html#pandas.Series.keys" title="pandas.Series.keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.keys</span></code></a>()</p></td>
+<td><p>返回索引的别名。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.pop.html#pandas.Series.pop" title="pandas.Series.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.pop</span></code></a>(item)</p></td>
+<td><p>返回项目并从系列中删除。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.item.html#pandas.Series.item" title="pandas.Series.item"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.item</span></code></a>()</p></td>
+<td><p>将底层数据的第一个元素作为 Python 标量返回。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.xs.html#pandas.Series.xs" title="pandas.Series.xs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.xs</span></code></a>(key[,&nbsp;axis,&nbsp;level,&nbsp;drop_level])</p></td>
+<td><p>从 Series/DataFrame 返回横截面。</p></td>
+</tr>
+</tbody>
+</table>
+<p>有关 <code class="docutils literal notranslate"><span class="pre">.at</span></code>、<code class="docutils literal notranslate"><span class="pre">.iat</span></code>、<code class="docutils literal notranslate"><span class="pre">.loc</span></code> 和 <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> 的更多信息，请参阅 <a class="reference internal" href="../user_guide/indexing.html#indexing"><span class="std std-ref">索引文档</span></a>。</p>
+</section>
+<section id="binary-operator-functions">
+<h2>二元运算符函数<a class="headerlink" href="series.html#binary-operator-functions" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.add.html#pandas.Series.add" title="pandas.Series.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.add</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回系列和 other 的加法，逐元素（二元运算符 <cite>add</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.sub.html#pandas.Series.sub" title="pandas.Series.sub"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sub</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回系列和 other 的减法，逐元素（二元运算符 <cite>sub</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.mul.html#pandas.Series.mul" title="pandas.Series.mul"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.mul</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回系列和 other 的乘法，逐元素（二元运算符 <cite>mul</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.div.html#pandas.Series.div" title="pandas.Series.div"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.div</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回系列和 other 的浮点除法，逐元素（二元运算符 <cite>truediv</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.truediv.html#pandas.Series.truediv" title="pandas.Series.truediv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.truediv</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回系列和 other 的浮点除法，逐元素（二元运算符 <cite>truediv</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.floordiv.html#pandas.Series.floordiv" title="pandas.Series.floordiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.floordiv</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素整数除法（二元运算符 <cite>floordiv</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.mod.html#pandas.Series.mod" title="pandas.Series.mod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.mod</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素取模（二元运算符 <cite>mod</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.pow.html#pandas.Series.pow" title="pandas.Series.pow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.pow</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素指数幂（二元运算符 <cite>pow</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.radd.html#pandas.Series.radd" title="pandas.Series.radd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.radd</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素加法（二元运算符 <cite>radd</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.rsub.html#pandas.Series.rsub" title="pandas.Series.rsub"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rsub</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素减法（二元运算符 <cite>rsub</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.rmul.html#pandas.Series.rmul" title="pandas.Series.rmul"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rmul</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素乘法（二元运算符 <cite>rmul</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.rdiv.html#pandas.Series.rdiv" title="pandas.Series.rdiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rdiv</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素浮点数除法（二元运算符 <cite>rtruediv</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.rtruediv.html#pandas.Series.rtruediv" title="pandas.Series.rtruediv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rtruediv</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素浮点数除法（二元运算符 <cite>rtruediv</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.rfloordiv.html#pandas.Series.rfloordiv" title="pandas.Series.rfloordiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rfloordiv</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;...])</p></td>
+<td><p>返回 Series 和 other 的逐元素整数除法（二元运算符 <cite>rfloordiv</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.rmod.html#pandas.Series.rmod" title="pandas.Series.rmod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rmod</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回 Series 和 other 的逐元素取模（二元运算符 <cite>rmod</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.rpow.html#pandas.Series.rpow" title="pandas.Series.rpow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rpow</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回级数和其他元素的指数幂（二元运算符 <cite>rpow</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.combine.html#pandas.Series.combine" title="pandas.Series.combine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.combine</span></code></a>(other,&nbsp;func[,&nbsp;fill_value])</p></td>
+<td><p>根据 <cite>func</cite> 将 Series 与 Series 或标量组合。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.combine_first.html#pandas.Series.combine_first" title="pandas.Series.combine_first"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.combine_first</span></code></a>(other)</p></td>
+<td><p>使用 'other' 中相同位置的值更新空元素。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.round.html#pandas.Series.round" title="pandas.Series.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.round</span></code></a>([decimals])</p></td>
+<td><p>将 Series 中的每个值舍入到给定的位数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.lt.html#pandas.Series.lt" title="pandas.Series.lt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.lt</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回级数和其他元素的“小于”（二元运算符 <cite>lt</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.gt.html#pandas.Series.gt" title="pandas.Series.gt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.gt</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回级数和其他元素的“大于”（二元运算符 <cite>gt</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.le.html#pandas.Series.le" title="pandas.Series.le"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.le</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回级数和其他元素的“小于或等于”（二元运算符 <cite>le</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.ge.html#pandas.Series.ge" title="pandas.Series.ge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.ge</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回级数和其他元素的“大于或等于”（二元运算符 <cite>ge</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.ne.html#pandas.Series.ne" title="pandas.Series.ne"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.ne</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回级数和其他元素的“不等于”（二元运算符 <cite>ne</cite>）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.eq.html#pandas.Series.eq" title="pandas.Series.eq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.eq</span></code></a>(other[,&nbsp;level,&nbsp;fill_value,&nbsp;axis])</p></td>
+<td><p>返回级数和其他元素的“等于”（二元运算符 <cite>eq</cite>）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.product.html#pandas.Series.product" title="pandas.Series.product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.product</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only,&nbsp;...])</p></td>
+<td><p>返回请求轴上值的乘积。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dot.html#pandas.Series.dot" title="pandas.Series.dot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dot</span></code></a>(other)</p></td>
+<td><p>计算 Series 与 other 的列之间的点积。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="function-application-groupby-window">
+<h2>函数应用、GroupBy 和窗口<a class="headerlink" href="series.html#function-application-groupby-window" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.apply.html#pandas.Series.apply" title="pandas.Series.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.apply</span></code></a>(func[,&nbsp;convert_dtype,&nbsp;args,&nbsp;by_row])</p></td>
+<td><p>对 Series 的值调用函数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.agg.html#pandas.Series.agg" title="pandas.Series.agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.agg</span></code></a>([func,&nbsp;axis])</p></td>
+<td><p>使用一个或多个操作对指定轴进行聚合。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.aggregate.html#pandas.Series.aggregate" title="pandas.Series.aggregate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.aggregate</span></code></a>([func,&nbsp;axis])</p></td>
+<td><p>使用一个或多个操作对指定轴进行聚合。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.transform.html#pandas.Series.transform" title="pandas.Series.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.transform</span></code></a>(func[,&nbsp;axis])</p></td>
+<td><p>对 self 调用 <code class="docutils literal notranslate"><span class="pre">func</span></code>，生成一个与 self 具有相同轴形状的 Series。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.map.html#pandas.Series.map" title="pandas.Series.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.map</span></code></a>(arg[,&nbsp;na_action])</p></td>
+<td><p>根据输入映射或函数映射 Series 的值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.groupby.html#pandas.Series.groupby" title="pandas.Series.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.groupby</span></code></a>([by,&nbsp;axis,&nbsp;level,&nbsp;as_index,&nbsp;...])</p></td>
+<td><p>使用映射器或列的 Series 对 Series 进行分组。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.rolling.html#pandas.Series.rolling" title="pandas.Series.rolling"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rolling</span></code></a>(window[,&nbsp;min_periods,&nbsp;...])</p></td>
+<td><p>提供滚动窗口计算。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.expanding.html#pandas.Series.expanding" title="pandas.Series.expanding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.expanding</span></code></a>([min_periods,&nbsp;axis,&nbsp;method])</p></td>
+<td><p>提供扩展窗口计算。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.ewm.html#pandas.Series.ewm" title="pandas.Series.ewm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.ewm</span></code></a>([com,&nbsp;span,&nbsp;halflife,&nbsp;alpha,&nbsp;...])</p></td>
+<td><p>提供指数加权 (EW) 计算。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.pipe.html#pandas.Series.pipe" title="pandas.Series.pipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.pipe</span></code></a>(func,&nbsp;*args,&nbsp;**kwargs)</p></td>
+<td><p>应用期望 Series 或 DataFrames 的可链接函数。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="computations-descriptive-stats">
+<span id="api-series-stats"></span><h2>计算 / 描述性统计<a class="headerlink" href="series.html#computations-descriptive-stats" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.abs.html#pandas.Series.abs" title="pandas.Series.abs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.abs</span></code></a>()</p></td>
+<td><p>返回一个 Series/DataFrame，其中包含每个元素的绝对数值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.all.html#pandas.Series.all" title="pandas.Series.all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.all</span></code></a>([axis,&nbsp;bool_only,&nbsp;skipna])</p></td>
+<td><p>返回所有元素是否为 True，可能跨越轴。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.any.html#pandas.Series.any" title="pandas.Series.any"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.any</span></code></a>(*[,&nbsp;axis,&nbsp;bool_only,&nbsp;skipna])</p></td>
+<td><p>返回任何元素是否为 True，可能跨越轴。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.autocorr.html#pandas.Series.autocorr" title="pandas.Series.autocorr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.autocorr</span></code></a>([lag])</p></td>
+<td><p>计算滞后 N 自相关。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.between.html#pandas.Series.between" title="pandas.Series.between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.between</span></code></a>(left,&nbsp;right[,&nbsp;inclusive])</p></td>
+<td><p>返回等效于 left &lt;= series &lt;= right 的布尔型 Series。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.clip.html#pandas.Series.clip" title="pandas.Series.clip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.clip</span></code></a>([lower,&nbsp;upper,&nbsp;axis,&nbsp;inplace])</p></td>
+<td><p>在输入阈值处修剪值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.corr.html#pandas.Series.corr" title="pandas.Series.corr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.corr</span></code></a>(other[,&nbsp;method,&nbsp;min_periods])</p></td>
+<td><p>计算与 <cite>other</cite> Series 的相关性，排除缺失值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.count.html#pandas.Series.count" title="pandas.Series.count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.count</span></code></a>()</p></td>
+<td><p>返回 Series 中非 NA/空观察值的个数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cov.html#pandas.Series.cov" title="pandas.Series.cov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cov</span></code></a>(other[,&nbsp;min_periods,&nbsp;ddof])</p></td>
+<td><p>计算与 Series 的协方差，排除缺失值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.cummax.html#pandas.Series.cummax" title="pandas.Series.cummax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cummax</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回 DataFrame 或 Series 轴上的累积最大值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cummin.html#pandas.Series.cummin" title="pandas.Series.cummin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cummin</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回 DataFrame 或 Series 轴上的累积最小值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.cumprod.html#pandas.Series.cumprod" title="pandas.Series.cumprod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cumprod</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回 DataFrame 或 Series 轴上的累积乘积。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cumsum.html#pandas.Series.cumsum" title="pandas.Series.cumsum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cumsum</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回 DataFrame 或 Series 轴上的累积和。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.describe.html#pandas.Series.describe" title="pandas.Series.describe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.describe</span></code></a>([percentiles,&nbsp;include,&nbsp;exclude])</p></td>
+<td><p>生成描述性统计信息。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.diff.html#pandas.Series.diff" title="pandas.Series.diff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.diff</span></code></a>([periods])</p></td>
+<td><p>元素的一阶离散差分。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.factorize.html#pandas.Series.factorize" title="pandas.Series.factorize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.factorize</span></code></a>([sort,&nbsp;use_na_sentinel])</p></td>
+<td><p>将对象编码为枚举类型或分类变量。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.kurt.html#pandas.Series.kurt" title="pandas.Series.kurt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.kurt</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only])</p></td>
+<td><p>返回所请求轴上的无偏峰度。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.max.html#pandas.Series.max" title="pandas.Series.max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.max</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only])</p></td>
+<td><p>返回所请求轴上值的最大值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.mean.html#pandas.Series.mean" title="pandas.Series.mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.mean</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only])</p></td>
+<td><p>返回所请求轴上值的平均值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.median.html#pandas.Series.median" title="pandas.Series.median"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.median</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only])</p></td>
+<td><p>返回所请求轴上值的中间值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.min.html#pandas.Series.min" title="pandas.Series.min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.min</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only])</p></td>
+<td><p>返回所请求轴上值的最小值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.mode.html#pandas.Series.mode" title="pandas.Series.mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.mode</span></code></a>([dropna])</p></td>
+<td><p>返回 Series 的众数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.nlargest.html#pandas.Series.nlargest" title="pandas.Series.nlargest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.nlargest</span></code></a>([n,&nbsp;keep])</p></td>
+<td><p>返回最大的 <cite>n</cite> 个元素。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.nsmallest.html#pandas.Series.nsmallest" title="pandas.Series.nsmallest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.nsmallest</span></code></a>([n,&nbsp;keep])</p></td>
+<td><p>返回最小的 <cite>n</cite> 个元素。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.pct_change.html#pandas.Series.pct_change" title="pandas.Series.pct_change"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.pct_change</span></code></a>([periods,&nbsp;fill_method,&nbsp;...])</p></td>
+<td><p>当前元素与先前元素之间的分数变化。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.prod.html#pandas.Series.prod" title="pandas.Series.prod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.prod</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only,&nbsp;...])</p></td>
+<td><p>返回请求轴上值的乘积。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.quantile.html#pandas.Series.quantile" title="pandas.Series.quantile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.quantile</span></code></a>([q,&nbsp;interpolation])</p></td>
+<td><p>返回给定分位数的值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.rank.html#pandas.Series.rank" title="pandas.Series.rank"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rank</span></code></a>([axis,&nbsp;method,&nbsp;numeric_only,&nbsp;...])</p></td>
+<td><p>沿轴计算数值数据的秩（从 1 到 n）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.sem.html#pandas.Series.sem" title="pandas.Series.sem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sem</span></code></a>([axis,&nbsp;skipna,&nbsp;ddof,&nbsp;numeric_only])</p></td>
+<td><p>返回请求轴上的平均值的无偏标准误差。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.skew.html#pandas.Series.skew" title="pandas.Series.skew"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.skew</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only])</p></td>
+<td><p>返回请求轴上的无偏偏度。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.std.html#pandas.Series.std" title="pandas.Series.std"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.std</span></code></a>([axis,&nbsp;skipna,&nbsp;ddof,&nbsp;numeric_only])</p></td>
+<td><p>返回请求轴上的样本标准差。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.sum.html#pandas.Series.sum" title="pandas.Series.sum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sum</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only,&nbsp;...])</p></td>
+<td><p>返回请求轴上值的总和。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.var.html#pandas.Series.var" title="pandas.Series.var"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.var</span></code></a>([axis,&nbsp;skipna,&nbsp;ddof,&nbsp;numeric_only])</p></td>
+<td><p>返回请求轴上的无偏方差。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.kurtosis.html#pandas.Series.kurtosis" title="pandas.Series.kurtosis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.kurtosis</span></code></a>([axis,&nbsp;skipna,&nbsp;numeric_only])</p></td>
+<td><p>返回所请求轴上的无偏峰度。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.unique.html#pandas.Series.unique" title="pandas.Series.unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.unique</span></code></a>()</p></td>
+<td><p>返回 Series 对象的唯一值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.nunique.html#pandas.Series.nunique" title="pandas.Series.nunique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.nunique</span></code></a>([dropna])</p></td>
+<td><p>返回对象中唯一元素的数量。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.is_unique.html#pandas.Series.is_unique" title="pandas.Series.is_unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.is_unique</span></code></a></p></td>
+<td><p>如果对象中的值是唯一的，则返回布尔值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.is_monotonic_increasing.html#pandas.Series.is_monotonic_increasing" title="pandas.Series.is_monotonic_increasing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.is_monotonic_increasing</span></code></a></p></td>
+<td><p>如果对象中的值是单调递增的，则返回布尔值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.is_monotonic_decreasing.html#pandas.Series.is_monotonic_decreasing" title="pandas.Series.is_monotonic_decreasing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.is_monotonic_decreasing</span></code></a></p></td>
+<td><p>如果对象中的值是单调递减的，则返回布尔值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.value_counts.html#pandas.Series.value_counts" title="pandas.Series.value_counts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.value_counts</span></code></a>([normalize,&nbsp;sort,&nbsp;...])</p></td>
+<td><p>返回一个包含唯一值计数的 Series。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reindexing-selection-label-manipulation">
+<h2>重新索引/选择/标签操作<a class="headerlink" href="series.html#reindexing-selection-label-manipulation" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.align.html#pandas.Series.align" title="pandas.Series.align"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.align</span></code></a>(other[,&nbsp;join,&nbsp;axis,&nbsp;level,&nbsp;...])</p></td>
+<td><p>根据指定的连接方法，将两个对象在其轴上对齐。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.case_when.html#pandas.Series.case_when" title="pandas.Series.case_when"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.case_when</span></code></a>(caselist)</p></td>
+<td><p>替换条件为 True 的值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.drop.html#pandas.Series.drop" title="pandas.Series.drop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.drop</span></code></a>([labels,&nbsp;axis,&nbsp;index,&nbsp;columns,&nbsp;...])</p></td>
+<td><p>返回删除了指定索引标签的 Series。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.droplevel.html#pandas.Series.droplevel" title="pandas.Series.droplevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.droplevel</span></code></a>(level[,&nbsp;axis])</p></td>
+<td><p>返回删除了请求的索引/列级别(s)的 Series/DataFrame。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.drop_duplicates.html#pandas.Series.drop_duplicates" title="pandas.Series.drop_duplicates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.drop_duplicates</span></code></a>([,&nbsp;keep,&nbsp;inplace,&nbsp;...])</p></td>
+<td><p>返回删除了重复值的 Series。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.duplicated.html#pandas.Series.duplicated" title="pandas.Series.duplicated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.duplicated</span></code></a>([keep])</p></td>
+<td><p>指示重复的 Series 值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.equals.html#pandas.Series.equals" title="pandas.Series.equals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.equals</span></code></a>(other)</p></td>
+<td><p>测试两个对象是否包含相同的元素。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.first.html#pandas.Series.first" title="pandas.Series.first"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.first</span></code></a>(offset)</p></td>
+<td><p>(已弃用) 根据日期偏移选择时间序列数据的初始时间段。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.head.html#pandas.Series.head" title="pandas.Series.head"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.head</span></code></a>([n])</p></td>
+<td><p>返回前 <cite>n</cite> 行。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.idxmax.html#pandas.Series.idxmax" title="pandas.Series.idxmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.idxmax</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回最大值的行标签。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.idxmin.html#pandas.Series.idxmin" title="pandas.Series.idxmin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.idxmin</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回最小值的行标签。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.isin.html#pandas.Series.isin" title="pandas.Series.isin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.isin</span></code></a>(values)</p></td>
+<td><p>判断 Series 中的元素是否包含在 <cite>values</cite> 中。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.last.html#pandas.Series.last" title="pandas.Series.last"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.last</span></code></a>(offset)</p></td>
+<td><p>(已弃用) 根据日期偏移选择时间序列数据的最后几个周期。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.reindex.html#pandas.Series.reindex" title="pandas.Series.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.reindex</span></code></a>([index,&nbsp;axis,&nbsp;method,&nbsp;copy,&nbsp;...])</p></td>
+<td><p>将 Series 调整为新的索引，并可选地进行填充操作。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.reindex_like.html#pandas.Series.reindex_like" title="pandas.Series.reindex_like"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.reindex_like</span></code></a>(other[,&nbsp;method,&nbsp;copy,&nbsp;...])</p></td>
+<td><p>返回一个与其他对象具有匹配索引的对象。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.rename.html#pandas.Series.rename" title="pandas.Series.rename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rename</span></code></a>([index,&nbsp;axis,&nbsp;copy,&nbsp;inplace,&nbsp;...])</p></td>
+<td><p>更改 Series 索引标签或名称。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.rename_axis.html#pandas.Series.rename_axis" title="pandas.Series.rename_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.rename_axis</span></code></a>([mapper,&nbsp;index,&nbsp;axis,&nbsp;...])</p></td>
+<td><p>设置索引或列的轴名称。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.reset_index.html#pandas.Series.reset_index" title="pandas.Series.reset_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.reset_index</span></code></a>([level,&nbsp;drop,&nbsp;name,&nbsp;...])</p></td>
+<td><p>生成一个新的 DataFrame 或 Series，其索引已重置。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.sample.html#pandas.Series.sample" title="pandas.Series.sample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sample</span></code></a>([n,&nbsp;frac,&nbsp;replace,&nbsp;weights,&nbsp;...])</p></td>
+<td><p>从对象轴返回随机样本。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.set_axis.html#pandas.Series.set_axis" title="pandas.Series.set_axis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.set_axis</span></code></a>(labels,&nbsp;*[,&nbsp;axis,&nbsp;copy])</p></td>
+<td><p>将所需索引分配给给定轴。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.take.html#pandas.Series.take" title="pandas.Series.take"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.take</span></code></a>(indices[,&nbsp;axis])</p></td>
+<td><p>返回给定<em>位置</em>索引沿轴的元素。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.tail.html#pandas.Series.tail" title="pandas.Series.tail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.tail</span></code></a>([n])</p></td>
+<td><p>返回最后 <cite>n</cite> 行。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.truncate.html#pandas.Series.truncate" title="pandas.Series.truncate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.truncate</span></code></a>([before,&nbsp;after,&nbsp;axis,&nbsp;copy])</p></td>
+<td><p>在某个索引值之前和之后截断 Series 或 DataFrame。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.where.html#pandas.Series.where" title="pandas.Series.where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.where</span></code></a>(cond[,&nbsp;other,&nbsp;inplace,&nbsp;axis,&nbsp;level])</p></td>
+<td><p>替换条件为 False 的值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.mask.html#pandas.Series.mask" title="pandas.Series.mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.mask</span></code></a>(cond[,&nbsp;other,&nbsp;inplace,&nbsp;axis,&nbsp;level])</p></td>
+<td><p>替换条件为 True 的值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.add_prefix.html#pandas.Series.add_prefix" title="pandas.Series.add_prefix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.add_prefix</span></code></a>(prefix[,&nbsp;axis])</p></td>
+<td><p>在标签前添加字符串 <cite>prefix</cite>。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.add_suffix.html#pandas.Series.add_suffix" title="pandas.Series.add_suffix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.add_suffix</span></code></a>(suffix[,&nbsp;axis])</p></td>
+<td><p>在标签后添加字符串 <cite>suffix</cite>。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.filter.html#pandas.Series.filter" title="pandas.Series.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.filter</span></code></a>([items,&nbsp;like,&nbsp;regex,&nbsp;axis])</p></td>
+<td><p>根据指定的索引标签子集 DataFrame 行或列。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="missing-data-handling">
+<h2>缺失数据处理<a class="headerlink" href="series.html#missing-data-handling" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.backfill.html#pandas.Series.backfill" title="pandas.Series.backfill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.backfill</span></code></a>(*[,&nbsp;axis,&nbsp;inplace,&nbsp;limit,&nbsp;...])</p></td>
+<td><p>(已弃用) 使用下一个有效观测值填充缺失值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.bfill.html#pandas.Series.bfill" title="pandas.Series.bfill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.bfill</span></code></a>(*[,&nbsp;axis,&nbsp;inplace,&nbsp;limit,&nbsp;...])</p></td>
+<td><p>使用下一个有效观测值填充缺失值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dropna.html#pandas.Series.dropna" title="pandas.Series.dropna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dropna</span></code></a>(*[,&nbsp;axis,&nbsp;inplace,&nbsp;how,&nbsp;...])</p></td>
+<td><p>返回一个删除缺失值的新 Series。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.ffill.html#pandas.Series.ffill" title="pandas.Series.ffill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.ffill</span></code></a>(*[,&nbsp;axis,&nbsp;inplace,&nbsp;limit,&nbsp;...])</p></td>
+<td><p>通过将最后一个有效观测值传播到下一个有效观测值来填充 NA/NaN 值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.fillna.html#pandas.Series.fillna" title="pandas.Series.fillna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.fillna</span></code></a>([value,&nbsp;method,&nbsp;axis,&nbsp;...])</p></td>
+<td><p>使用指定的方法填充 NA/NaN 值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.interpolate.html#pandas.Series.interpolate" title="pandas.Series.interpolate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.interpolate</span></code></a>([method,&nbsp;axis,&nbsp;limit,&nbsp;...])</p></td>
+<td><p>使用插值方法填充 NaN 值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.isna.html#pandas.Series.isna" title="pandas.Series.isna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.isna</span></code></a>()</p></td>
+<td><p>检测缺失值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.isnull.html#pandas.Series.isnull" title="pandas.Series.isnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.isnull</span></code></a>()</p></td>
+<td><p>Series.isnull 是 Series.isna 的别名。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.notna.html#pandas.Series.notna" title="pandas.Series.notna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.notna</span></code></a>()</p></td>
+<td><p>检测现有（非缺失）值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.notnull.html#pandas.Series.notnull" title="pandas.Series.notnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.notnull</span></code></a>()</p></td>
+<td><p>Series.notnull 是 Series.notna 的别名。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.pad.html#pandas.Series.pad" title="pandas.Series.pad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.pad</span></code></a>(*[,&nbsp;axis,&nbsp;inplace,&nbsp;limit,&nbsp;downcast])</p></td>
+<td><p>（已弃用）通过将最后一个有效观测值传播到下一个有效观测值来填充 NA/NaN 值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.replace.html#pandas.Series.replace" title="pandas.Series.replace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.replace</span></code></a>([to_replace,&nbsp;value,&nbsp;inplace,&nbsp;...])</p></td>
+<td><p>将 <cite>to_replace</cite> 中给定的值替换为 <cite>value</cite>。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reshaping-sorting">
+<h2>重塑，排序<a class="headerlink" href="series.html#reshaping-sorting" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.argsort.html#pandas.Series.argsort" title="pandas.Series.argsort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.argsort</span></code></a>([axis,&nbsp;kind,&nbsp;order,&nbsp;stable])</p></td>
+<td><p>返回将对 Series 值进行排序的整数索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.argmin.html#pandas.Series.argmin" title="pandas.Series.argmin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.argmin</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回 Series 中最小值的整数位置。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.argmax.html#pandas.Series.argmax" title="pandas.Series.argmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.argmax</span></code></a>([axis,&nbsp;skipna])</p></td>
+<td><p>返回 Series 中最大值的整数位置。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.reorder_levels.html#pandas.Series.reorder_levels" title="pandas.Series.reorder_levels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.reorder_levels</span></code></a>(order)</p></td>
+<td><p>使用输入顺序重新排列索引级别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.sort_values.html#pandas.Series.sort_values" title="pandas.Series.sort_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sort_values</span></code></a>(*[,&nbsp;axis,&nbsp;ascending,&nbsp;...])</p></td>
+<td><p>按值排序。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.sort_index.html#pandas.Series.sort_index" title="pandas.Series.sort_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sort_index</span></code></a>(*[,&nbsp;axis,&nbsp;level,&nbsp;...])</p></td>
+<td><p>按索引标签对 Series 进行排序。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.swaplevel.html#pandas.Series.swaplevel" title="pandas.Series.swaplevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.swaplevel</span></code></a>([i,&nbsp;j,&nbsp;copy])</p></td>
+<td><p>在 <a class="reference internal" href="api/pandas.MultiIndex.html#pandas.MultiIndex" title="pandas.MultiIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiIndex</span></code></a> 中交换级别 i 和 j。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.unstack.html#pandas.Series.unstack" title="pandas.Series.unstack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.unstack</span></code></a>([level,&nbsp;fill_value,&nbsp;sort])</p></td>
+<td><p>将具有 MultiIndex 的 Series 展开（也称为透视），以生成 DataFrame。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.explode.html#pandas.Series.explode" title="pandas.Series.explode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.explode</span></code></a>([ignore_index])</p></td>
+<td><p>将列表式中的每个元素转换为一行。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.searchsorted.html#pandas.Series.searchsorted" title="pandas.Series.searchsorted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.searchsorted</span></code></a>(value[,&nbsp;side,&nbsp;sorter])</p></td>
+<td><p>查找应插入元素以保持顺序的索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.ravel.html#pandas.Series.ravel" title="pandas.Series.ravel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.ravel</span></code></a>([order])</p></td>
+<td><p>(已弃用) 将扁平化的基础数据作为 ndarray 或 ExtensionArray 返回。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.repeat.html#pandas.Series.repeat" title="pandas.Series.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.repeat</span></code></a>(repeats[,&nbsp;axis])</p></td>
+<td><p>重复 Series 的元素。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.squeeze.html#pandas.Series.squeeze" title="pandas.Series.squeeze"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.squeeze</span></code></a>([axis])</p></td>
+<td><p>将一维轴对象压缩为标量。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.view.html#pandas.Series.view" title="pandas.Series.view"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.view</span></code></a>([dtype])</p></td>
+<td><p>(已弃用) 创建 Series 的新视图。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="combining-comparing-joining-merging">
+<h2>组合 / 比较 / 连接 / 合并<a class="headerlink" href="series.html#combining-comparing-joining-merging" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.compare.html#pandas.Series.compare" title="pandas.Series.compare"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.compare</span></code></a>(other[,&nbsp;align_axis,&nbsp;...])</p></td>
+<td><p>与另一个 Series 比较并显示差异。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.update.html#pandas.Series.update" title="pandas.Series.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.update</span></code></a>(other)</p></td>
+<td><p>使用传递的 Series 中的值修改 Series。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="time-series-related">
+<h2>时间序列相关<a class="headerlink" href="series.html#time-series-related" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.asfreq.html#pandas.Series.asfreq" title="pandas.Series.asfreq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.asfreq</span></code></a>(freq[,&nbsp;method,&nbsp;how,&nbsp;...])</p></td>
+<td><p>将时间序列转换为指定的频率。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.asof.html#pandas.Series.asof" title="pandas.Series.asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.asof</span></code></a>(where[,&nbsp;subset])</p></td>
+<td><p>返回在 <cite>where</cite> 之前没有 NaN 的最后一行（或多行）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.shift.html#pandas.Series.shift" title="pandas.Series.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.shift</span></code></a>([periods,&nbsp;freq,&nbsp;axis,&nbsp;...])</p></td>
+<td><p>使用可选的时间 <cite>freq</cite> 将索引按所需周期数进行偏移。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.first_valid_index.html#pandas.Series.first_valid_index" title="pandas.Series.first_valid_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.first_valid_index</span></code></a>()</p></td>
+<td><p>返回第一个非 NA 值的索引，如果未找到非 NA 值，则返回 None。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.last_valid_index.html#pandas.Series.last_valid_index" title="pandas.Series.last_valid_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.last_valid_index</span></code></a>()</p></td>
+<td><p>返回最后一个非 NA 值的索引，如果未找到非 NA 值，则返回 None。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.resample.html#pandas.Series.resample" title="pandas.Series.resample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.resample</span></code></a>(rule[,&nbsp;axis,&nbsp;closed,&nbsp;label,&nbsp;...])</p></td>
+<td><p>对时间序列数据进行重采样。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.tz_convert.html#pandas.Series.tz_convert" title="pandas.Series.tz_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.tz_convert</span></code></a>(tz[,&nbsp;axis,&nbsp;level,&nbsp;copy])</p></td>
+<td><p>将带时区的轴转换为目标时区。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.tz_localize.html#pandas.Series.tz_localize" title="pandas.Series.tz_localize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.tz_localize</span></code></a>(tz[,&nbsp;axis,&nbsp;level,&nbsp;copy,&nbsp;...])</p></td>
+<td><p>将 Series 或 DataFrame 的无时区索引本地化为目标时区。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.at_time.html#pandas.Series.at_time" title="pandas.Series.at_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.at_time</span></code></a>(time[,&nbsp;asof,&nbsp;axis])</p></td>
+<td><p>选择特定时间（例如，上午 9:30）的值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.between_time.html#pandas.Series.between_time" title="pandas.Series.between_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.between_time</span></code></a>(start_time,&nbsp;end_time[,&nbsp;...])</p></td>
+<td><p>选择一天中特定时间段的值（例如，上午 9:00-9:30）。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="accessors">
+<h2>访问器<a class="headerlink" href="series.html#accessors" title="Link to this heading">#</a></h2>
+<p>pandas 在各种访问器下提供特定于数据类型的方法。这些是 <a class="reference internal" href="api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 中的独立命名空间，仅适用于特定数据类型。</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.html#pandas.Series.str" title="pandas.Series.str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">StringMethods</span></code></a> 的别名</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.cat.html#pandas.Series.cat" title="pandas.Series.cat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CategoricalAccessor</span></code></a> 的别名</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.html#pandas.Series.dt" title="pandas.Series.dt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CombinedDatetimelikeProperties</span></code></a> 的别名</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.sparse.html#pandas.Series.sparse" title="pandas.Series.sparse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sparse</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseAccessor</span></code></a> 的别名</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.DataFrame.sparse.html#pandas.DataFrame.sparse" title="pandas.DataFrame.sparse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.sparse</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseFrameAccessor</span></code></a> 的别名</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Index.str.html#pandas.Index.str" title="pandas.Index.str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.str</span></code></a></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">StringMethods</span></code></a> 的别名</p></td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>数据类型</p></th>
+<th class="head"><p>访问器</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Datetime、Timedelta、Period</p></td>
+<td><p><a class="reference internal" href="series.html#api-series-dt"><span class="std std-ref">dt</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>字符串</p></td>
+<td><p><a class="reference internal" href="series.html#api-series-str"><span class="std std-ref">str</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>分类</p></td>
+<td><p><a class="reference internal" href="series.html#api-series-cat"><span class="std std-ref">cat</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>稀疏</p></td>
+<td><p><a class="reference internal" href="series.html#api-series-sparse"><span class="std std-ref">sparse</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<section id="datetimelike-properties">
+<span id="api-series-dt"></span><h3>类似日期时间属性<a class="headerlink" href="series.html#datetimelike-properties" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Series.dt</span></code> 可用于访问系列的值作为类似日期时间的类型，并返回多个属性。这些属性可以通过 <code class="docutils literal notranslate"><span class="pre">Series.dt.&lt;property&gt;</span></code> 访问。</p>
+<section id="datetime-properties">
+<h4>日期时间属性<a class="headerlink" href="series.html#datetime-properties" title="Link to this heading">#</a></h4>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.date.html#pandas.Series.dt.date" title="pandas.Series.dt.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.date</span></code></a></p></td>
+<td><p>返回 python <a class="reference external" href="https://docs.pythonlang.cn/3/library/datetime.html#datetime.date" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> 对象的 numpy 数组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.time.html#pandas.Series.dt.time" title="pandas.Series.dt.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.time</span></code></a></p></td>
+<td><p>返回 <a class="reference external" href="https://docs.pythonlang.cn/3/library/datetime.html#datetime.time" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.time</span></code></a> 对象的 numpy 数组。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.timetz.html#pandas.Series.dt.timetz" title="pandas.Series.dt.timetz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.timetz</span></code></a></p></td>
+<td><p>返回带有时区的 <a class="reference external" href="https://docs.pythonlang.cn/3/library/datetime.html#datetime.time" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.time</span></code></a> 对象的 numpy 数组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.year.html#pandas.Series.dt.year" title="pandas.Series.dt.year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.year</span></code></a></p></td>
+<td><p>日期时间中的年份。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.month.html#pandas.Series.dt.month" title="pandas.Series.dt.month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.month</span></code></a></p></td>
+<td><p>月份，1 月为 1，12 月为 12。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.day.html#pandas.Series.dt.day" title="pandas.Series.dt.day"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.day</span></code></a></p></td>
+<td><p>日期时间中的日期。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.hour.html#pandas.Series.dt.hour" title="pandas.Series.dt.hour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.hour</span></code></a></p></td>
+<td><p>日期时间中的小时。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.minute.html#pandas.Series.dt.minute" title="pandas.Series.dt.minute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.minute</span></code></a></p></td>
+<td><p>日期时间中的分钟。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.second.html#pandas.Series.dt.second" title="pandas.Series.dt.second"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.second</span></code></a></p></td>
+<td><p>日期时间中的秒。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.microsecond.html#pandas.Series.dt.microsecond" title="pandas.Series.dt.microsecond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.microsecond</span></code></a></p></td>
+<td><p>日期时间中的微秒。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.nanosecond.html#pandas.Series.dt.nanosecond" title="pandas.Series.dt.nanosecond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.nanosecond</span></code></a></p></td>
+<td><p>日期时间中的纳秒。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.dayofweek.html#pandas.Series.dt.dayofweek" title="pandas.Series.dt.dayofweek"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.dayofweek</span></code></a></p></td>
+<td><p>一周中的日期，星期一为 0，星期日为 6。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.day_of_week.html#pandas.Series.dt.day_of_week" title="pandas.Series.dt.day_of_week"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.day_of_week</span></code></a></p></td>
+<td><p>一周中的日期，星期一为 0，星期日为 6。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.weekday.html#pandas.Series.dt.weekday" title="pandas.Series.dt.weekday"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.weekday</span></code></a></p></td>
+<td><p>一周中的日期，星期一为 0，星期日为 6。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.dayofyear.html#pandas.Series.dt.dayofyear" title="pandas.Series.dt.dayofyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.dayofyear</span></code></a></p></td>
+<td><p>一年中的序数日期。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.day_of_year.html#pandas.Series.dt.day_of_year" title="pandas.Series.dt.day_of_year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.day_of_year</span></code></a></p></td>
+<td><p>一年中的序数日期。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.days_in_month.html#pandas.Series.dt.days_in_month" title="pandas.Series.dt.days_in_month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.days_in_month</span></code></a></p></td>
+<td><p>该月的天数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.quarter.html#pandas.Series.dt.quarter" title="pandas.Series.dt.quarter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.quarter</span></code></a></p></td>
+<td><p>日期所在的季度。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.is_month_start.html#pandas.Series.dt.is_month_start" title="pandas.Series.dt.is_month_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.is_month_start</span></code></a></p></td>
+<td><p>指示日期是否为该月的第一天。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.is_month_end.html#pandas.Series.dt.is_month_end" title="pandas.Series.dt.is_month_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.is_month_end</span></code></a></p></td>
+<td><p>指示日期是否为该月的最后一天。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.is_quarter_start.html#pandas.Series.dt.is_quarter_start" title="pandas.Series.dt.is_quarter_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.is_quarter_start</span></code></a></p></td>
+<td><p>指示日期是否为季度的第一天。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.is_quarter_end.html#pandas.Series.dt.is_quarter_end" title="pandas.Series.dt.is_quarter_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.is_quarter_end</span></code></a></p></td>
+<td><p>指示日期是否为季度的最后一天。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.is_year_start.html#pandas.Series.dt.is_year_start" title="pandas.Series.dt.is_year_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.is_year_start</span></code></a></p></td>
+<td><p>指示日期是否为一年的第一天。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.is_year_end.html#pandas.Series.dt.is_year_end" title="pandas.Series.dt.is_year_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.is_year_end</span></code></a></p></td>
+<td><p>指示日期是否为一年的最后一天。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.is_leap_year.html#pandas.Series.dt.is_leap_year" title="pandas.Series.dt.is_leap_year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.is_leap_year</span></code></a></p></td>
+<td><p>布尔值指示符，指示日期是否属于闰年。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.daysinmonth.html#pandas.Series.dt.daysinmonth" title="pandas.Series.dt.daysinmonth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.daysinmonth</span></code></a></p></td>
+<td><p>该月的天数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.days_in_month.html#pandas.Series.dt.days_in_month" title="pandas.Series.dt.days_in_month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.days_in_month</span></code></a></p></td>
+<td><p>该月的天数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.tz.html#pandas.Series.dt.tz" title="pandas.Series.dt.tz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.tz</span></code></a></p></td>
+<td><p>返回时区。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.freq.html#pandas.Series.dt.freq" title="pandas.Series.dt.freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.freq</span></code></a></p></td>
+<td><p>返回此 PeriodArray 的频率对象。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.unit.html#pandas.Series.dt.unit" title="pandas.Series.dt.unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.unit</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.normalize.html#pandas.Series.dt.normalize" title="pandas.Series.dt.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.normalize</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将时间转换为午夜。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="datetime-methods">
+<h4>日期时间方法<a class="headerlink" href="series.html#datetime-methods" title="Link to this heading">#</a></h4>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.isocalendar.html#pandas.Series.dt.isocalendar" title="pandas.Series.dt.isocalendar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.isocalendar</span></code></a>()</p></td>
+<td><p>根据 ISO 8601 标准计算年份、周和日。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.to_period.html#pandas.Series.dt.to_period" title="pandas.Series.dt.to_period"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.to_period</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>以特定频率转换为 PeriodArray/PeriodIndex。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.to_pydatetime.html#pandas.Series.dt.to_pydatetime" title="pandas.Series.dt.to_pydatetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.to_pydatetime</span></code></a>()</p></td>
+<td><p>(已弃用) 将数据作为 <a class="reference external" href="https://docs.pythonlang.cn/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></a> 对象数组返回。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.tz_localize.html#pandas.Series.dt.tz_localize" title="pandas.Series.dt.tz_localize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.tz_localize</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将无时区 Datetime 数组/索引本地化为有时区 Datetime 数组/索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.tz_convert.html#pandas.Series.dt.tz_convert" title="pandas.Series.dt.tz_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.tz_convert</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将有时区 Datetime 数组/索引从一个时区转换为另一个时区。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.normalize.html#pandas.Series.dt.normalize" title="pandas.Series.dt.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.normalize</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将时间转换为午夜。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.strftime.html#pandas.Series.dt.strftime" title="pandas.Series.dt.strftime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.strftime</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>使用指定的 date_format 转换为索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.round.html#pandas.Series.dt.round" title="pandas.Series.dt.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.round</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行舍入操作，以达到指定的 <cite>freq</cite>。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.floor.html#pandas.Series.dt.floor" title="pandas.Series.dt.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.floor</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行向下取整操作，以达到指定的 <cite>freq</cite>。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.ceil.html#pandas.Series.dt.ceil" title="pandas.Series.dt.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.ceil</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>对数据执行向上取整操作，以达到指定的 <cite>freq</cite>。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.month_name.html#pandas.Series.dt.month_name" title="pandas.Series.dt.month_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.month_name</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回指定语言环境的月份名称。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.day_name.html#pandas.Series.dt.day_name" title="pandas.Series.dt.day_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.day_name</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回指定语言环境的星期名称。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.as_unit.html#pandas.Series.dt.as_unit" title="pandas.Series.dt.as_unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.as_unit</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="period-properties">
+<h4>周期属性<a class="headerlink" href="series.html#period-properties" title="Link to this heading">#</a></h4>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.qyear.html#pandas.Series.dt.qyear" title="pandas.Series.dt.qyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.qyear</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.start_time.html#pandas.Series.dt.start_time" title="pandas.Series.dt.start_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.start_time</span></code></a></p></td>
+<td><p>获取周期的开始时间戳。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.end_time.html#pandas.Series.dt.end_time" title="pandas.Series.dt.end_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.end_time</span></code></a></p></td>
+<td><p>获取周期的结束时间戳。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="timedelta-properties">
+<h4>时间增量属性<a class="headerlink" href="series.html#timedelta-properties" title="Link to this heading">#</a></h4>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.days.html#pandas.Series.dt.days" title="pandas.Series.dt.days"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.days</span></code></a></p></td>
+<td><p>每个元素的天数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.seconds.html#pandas.Series.dt.seconds" title="pandas.Series.dt.seconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.seconds</span></code></a></p></td>
+<td><p>每个元素的秒数（>= 0 且小于 1 天）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.microseconds.html#pandas.Series.dt.microseconds" title="pandas.Series.dt.microseconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.microseconds</span></code></a></p></td>
+<td><p>每个元素的微秒数（>= 0 且小于 1 秒）。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.nanoseconds.html#pandas.Series.dt.nanoseconds" title="pandas.Series.dt.nanoseconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.nanoseconds</span></code></a></p></td>
+<td><p>每个元素的纳秒数（>= 0 且小于 1 微秒）。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.components.html#pandas.Series.dt.components" title="pandas.Series.dt.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.components</span></code></a></p></td>
+<td><p>返回一个包含 Timedeltas 组件的 Dataframe。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.unit.html#pandas.Series.dt.unit" title="pandas.Series.dt.unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.unit</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="timedelta-methods">
+<h4>Timedelta 方法<a class="headerlink" href="series.html#timedelta-methods" title="Link to this heading">#</a></h4>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.to_pytimedelta.html#pandas.Series.dt.to_pytimedelta" title="pandas.Series.dt.to_pytimedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.to_pytimedelta</span></code></a>()</p></td>
+<td><p>返回一个包含原生 <a class="reference external" href="https://docs.pythonlang.cn/3/library/datetime.html#datetime.timedelta" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code></a> 对象的数组。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.dt.total_seconds.html#pandas.Series.dt.total_seconds" title="pandas.Series.dt.total_seconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.total_seconds</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>返回每个元素以秒为单位表示的总持续时间。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.dt.as_unit.html#pandas.Series.dt.as_unit" title="pandas.Series.dt.as_unit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dt.as_unit</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="string-handling">
+<span id="api-series-str"></span><h3>字符串处理<a class="headerlink" href="series.html#string-handling" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Series.str</span></code> 可用于访问系列的值作为字符串并对其应用多种方法。这些方法可以通过 <code class="docutils literal notranslate"><span class="pre">Series.str.&lt;function/property&gt;</span></code> 访问。</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.capitalize.html#pandas.Series.str.capitalize" title="pandas.Series.str.capitalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.capitalize</span></code></a>()</p></td>
+<td><p>将 Series/Index 中的字符串转换为首字母大写。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.casefold.html#pandas.Series.str.casefold" title="pandas.Series.str.casefold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.casefold</span></code></a>()</p></td>
+<td><p>将 Series/Index 中的字符串转换为小写。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.cat.html#pandas.Series.str.cat" title="pandas.Series.str.cat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.cat</span></code></a>([others,&nbsp;sep,&nbsp;na_rep,&nbsp;join])</p></td>
+<td><p>使用给定的分隔符连接 Series/Index 中的字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.center.html#pandas.Series.str.center" title="pandas.Series.str.center"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.center</span></code></a>(width[,&nbsp;fillchar])</p></td>
+<td><p>在 Series/Index 中的字符串的左侧和右侧填充空格。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.contains.html#pandas.Series.str.contains" title="pandas.Series.str.contains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.contains</span></code></a>(pat[,&nbsp;case,&nbsp;flags,&nbsp;na,&nbsp;...])</p></td>
+<td><p>测试模式或正则表达式是否包含在 Series 或 Index 的字符串中。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.count.html#pandas.Series.str.count" title="pandas.Series.str.count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.count</span></code></a>(pat[,&nbsp;flags])</p></td>
+<td><p>计算 Series/Index 中每个字符串中模式出现的次数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.decode.html#pandas.Series.str.decode" title="pandas.Series.str.decode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.decode</span></code></a>(encoding[,&nbsp;errors])</p></td>
+<td><p>使用指定的编码解码 Series/Index 中的字符字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.encode.html#pandas.Series.str.encode" title="pandas.Series.str.encode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.encode</span></code></a>(encoding[,&nbsp;errors])</p></td>
+<td><p>使用指定的编码对 Series/Index 中的字符字符串进行编码。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.endswith.html#pandas.Series.str.endswith" title="pandas.Series.str.endswith"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.endswith</span></code></a>(pat[,&nbsp;na])</p></td>
+<td><p>测试每个字符串元素的结尾是否与模式匹配。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.extract.html#pandas.Series.str.extract" title="pandas.Series.str.extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.extract</span></code></a>(pat[,&nbsp;flags,&nbsp;expand])</p></td>
+<td><p>将正则表达式 <cite>pat</cite> 中的捕获组提取为 DataFrame 中的列。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.extractall.html#pandas.Series.str.extractall" title="pandas.Series.str.extractall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.extractall</span></code></a>(pat[,&nbsp;flags])</p></td>
+<td><p>将正则表达式 <cite>pat</cite> 中的捕获组提取为 DataFrame 中的列。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.find.html#pandas.Series.str.find" title="pandas.Series.str.find"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.find</span></code></a>(sub[,&nbsp;start,&nbsp;end])</p></td>
+<td><p>返回 Series/Index 中每个字符串的最低索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.findall.html#pandas.Series.str.findall" title="pandas.Series.str.findall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.findall</span></code></a>(pat[,&nbsp;flags])</p></td>
+<td><p>在 Series/Index 中查找模式或正则表达式的所有出现。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.fullmatch.html#pandas.Series.str.fullmatch" title="pandas.Series.str.fullmatch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.fullmatch</span></code></a>(pat[,&nbsp;case,&nbsp;flags,&nbsp;na])</p></td>
+<td><p>确定每个字符串是否完全匹配正则表达式。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.get.html#pandas.Series.str.get" title="pandas.Series.str.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.get</span></code></a>(i)</p></td>
+<td><p>从每个组件中提取指定位置或指定键的元素。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.index.html#pandas.Series.str.index" title="pandas.Series.str.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.index</span></code></a>(sub[,&nbsp;start,&nbsp;end])</p></td>
+<td><p>返回 Series/Index 中每个字符串的最低索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.join.html#pandas.Series.str.join" title="pandas.Series.str.join"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.join</span></code></a>(sep)</p></td>
+<td><p>使用传递的分隔符连接 Series/Index 中作为元素包含的列表。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.len.html#pandas.Series.str.len" title="pandas.Series.str.len"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.len</span></code></a>()</p></td>
+<td><p>计算 Series/Index 中每个元素的长度。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.ljust.html#pandas.Series.str.ljust" title="pandas.Series.str.ljust"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.ljust</span></code></a>(width[,&nbsp;fillchar])</p></td>
+<td><p>在 Series/Index 中的字符串右侧填充。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.lower.html#pandas.Series.str.lower" title="pandas.Series.str.lower"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.lower</span></code></a>()</p></td>
+<td><p>将 Series/Index 中的字符串转换为小写。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.lstrip.html#pandas.Series.str.lstrip" title="pandas.Series.str.lstrip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.lstrip</span></code></a>([to_strip])</p></td>
+<td><p>删除前导字符。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.match.html#pandas.Series.str.match" title="pandas.Series.str.match"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.match</span></code></a>(pat[,&nbsp;case,&nbsp;flags,&nbsp;na])</p></td>
+<td><p>确定每个字符串是否以正则表达式的匹配项开头。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.normalize.html#pandas.Series.str.normalize" title="pandas.Series.str.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.normalize</span></code></a>(form)</p></td>
+<td><p>返回 Series/Index 中字符串的 Unicode 规范形式。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.pad.html#pandas.Series.str.pad" title="pandas.Series.str.pad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.pad</span></code></a>(width[,&nbsp;side,&nbsp;fillchar])</p></td>
+<td><p>将 Series/Index 中的字符串填充到宽度。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.partition.html#pandas.Series.str.partition" title="pandas.Series.str.partition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.partition</span></code></a>([sep,&nbsp;expand])</p></td>
+<td><p>在 <cite>sep</cite> 的第一次出现处拆分字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.removeprefix.html#pandas.Series.str.removeprefix" title="pandas.Series.str.removeprefix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.removeprefix</span></code></a>(prefix)</p></td>
+<td><p>从对象系列中删除前缀。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.removesuffix.html#pandas.Series.str.removesuffix" title="pandas.Series.str.removesuffix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.removesuffix</span></code></a>(suffix)</p></td>
+<td><p>从对象系列中删除后缀。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.repeat.html#pandas.Series.str.repeat" title="pandas.Series.str.repeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.repeat</span></code></a>(repeats)</p></td>
+<td><p>重复 Series 或 Index 中的每个字符串。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.replace.html#pandas.Series.str.replace" title="pandas.Series.str.replace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.replace</span></code></a>(pat,&nbsp;repl[,&nbsp;n,&nbsp;case,&nbsp;...])</p></td>
+<td><p>替换 Series/Index 中模式/正则表达式中的每个出现。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.rfind.html#pandas.Series.str.rfind" title="pandas.Series.str.rfind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.rfind</span></code></a>(sub[,&nbsp;start,&nbsp;end])</p></td>
+<td><p>返回 Series/Index 中每个字符串的最高索引。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.rindex.html#pandas.Series.str.rindex" title="pandas.Series.str.rindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.rindex</span></code></a>(sub[,&nbsp;start,&nbsp;end])</p></td>
+<td><p>返回 Series/Index 中每个字符串的最高索引。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.rjust.html#pandas.Series.str.rjust" title="pandas.Series.str.rjust"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.rjust</span></code></a>(width[,&nbsp;fillchar])</p></td>
+<td><p>在 Series/Index 中的字符串左侧填充。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.rpartition.html#pandas.Series.str.rpartition" title="pandas.Series.str.rpartition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.rpartition</span></code></a>([sep,&nbsp;expand])</p></td>
+<td><p>在 <cite>sep</cite> 的最后一次出现处分割字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.rstrip.html#pandas.Series.str.rstrip" title="pandas.Series.str.rstrip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.rstrip</span></code></a>([to_strip])</p></td>
+<td><p>删除尾随字符。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.slice.html#pandas.Series.str.slice" title="pandas.Series.str.slice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.slice</span></code></a>([start,&nbsp;stop,&nbsp;step])</p></td>
+<td><p>从 Series 或 Index 中的每个元素中切片子字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.slice_replace.html#pandas.Series.str.slice_replace" title="pandas.Series.str.slice_replace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.slice_replace</span></code></a>([start,&nbsp;stop,&nbsp;repl])</p></td>
+<td><p>用另一个值替换字符串的位置切片。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.split.html#pandas.Series.str.split" title="pandas.Series.str.split"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.split</span></code></a>([pat,&nbsp;n,&nbsp;expand,&nbsp;regex])</p></td>
+<td><p>围绕给定的分隔符/分隔符分割字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.rsplit.html#pandas.Series.str.rsplit" title="pandas.Series.str.rsplit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.rsplit</span></code></a>([pat,&nbsp;n,&nbsp;expand])</p></td>
+<td><p>围绕给定的分隔符/分隔符分割字符串。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.startswith.html#pandas.Series.str.startswith" title="pandas.Series.str.startswith"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.startswith</span></code></a>(pat[,&nbsp;na])</p></td>
+<td><p>测试每个字符串元素的开头是否与模式匹配。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.strip.html#pandas.Series.str.strip" title="pandas.Series.str.strip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.strip</span></code></a>([to_strip])</p></td>
+<td><p>删除前导和尾随字符。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.swapcase.html#pandas.Series.str.swapcase" title="pandas.Series.str.swapcase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.swapcase</span></code></a>()</p></td>
+<td><p>将 Series/Index 中的字符串转换为大小写转换。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.title.html#pandas.Series.str.title" title="pandas.Series.str.title"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.title</span></code></a>()</p></td>
+<td><p>将 Series/Index 中的字符串转换为标题大小写。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.translate.html#pandas.Series.str.translate" title="pandas.Series.str.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.translate</span></code></a>(table)</p></td>
+<td><p>通过给定的映射表映射字符串中的所有字符。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.upper.html#pandas.Series.str.upper" title="pandas.Series.str.upper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.upper</span></code></a>()</p></td>
+<td><p>将 Series/Index 中的字符串转换为大写。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.wrap.html#pandas.Series.str.wrap" title="pandas.Series.str.wrap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.wrap</span></code></a>(width,&nbsp;**kwargs)</p></td>
+<td><p>在指定行宽处换行 Series/Index 中的字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.zfill.html#pandas.Series.str.zfill" title="pandas.Series.str.zfill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.zfill</span></code></a>(width)</p></td>
+<td><p>通过在 Series/Index 中的字符串前面添加 '0' 字符来填充字符串。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.isalnum.html#pandas.Series.str.isalnum" title="pandas.Series.str.isalnum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.isalnum</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是字母数字。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.isalpha.html#pandas.Series.str.isalpha" title="pandas.Series.str.isalpha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.isalpha</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是字母。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.isdigit.html#pandas.Series.str.isdigit" title="pandas.Series.str.isdigit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.isdigit</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是数字。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.isspace.html#pandas.Series.str.isspace" title="pandas.Series.str.isspace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.isspace</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是空格。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.islower.html#pandas.Series.str.islower" title="pandas.Series.str.islower"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.islower</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是小写。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.isupper.html#pandas.Series.str.isupper" title="pandas.Series.str.isupper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.isupper</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是大写。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.istitle.html#pandas.Series.str.istitle" title="pandas.Series.str.istitle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.istitle</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是标题大小写。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.isnumeric.html#pandas.Series.str.isnumeric" title="pandas.Series.str.isnumeric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.isnumeric</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是数字。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.str.isdecimal.html#pandas.Series.str.isdecimal" title="pandas.Series.str.isdecimal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.isdecimal</span></code></a>()</p></td>
+<td><p>检查每个字符串中的所有字符是否都是十进制。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.str.get_dummies.html#pandas.Series.str.get_dummies" title="pandas.Series.str.get_dummies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.get_dummies</span></code></a>([sep])</p></td>
+<td><p>返回 Series 的虚拟/指示变量 DataFrame。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="categorical-accessor">
+<span id="api-series-cat"></span><h3>分类访问器<a class="headerlink" href="series.html#categorical-accessor" title="Link to this heading">#</a></h3>
+<p>分类数据类型特定的方法和属性可以在 <code class="docutils literal notranslate"><span class="pre">Series.cat</span></code> 访问器下使用。</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cat.categories.html#pandas.Series.cat.categories" title="pandas.Series.cat.categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.categories</span></code></a></p></td>
+<td><p>此分类的类别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.cat.ordered.html#pandas.Series.cat.ordered" title="pandas.Series.cat.ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.ordered</span></code></a></p></td>
+<td><p>类别是否具有有序关系。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cat.codes.html#pandas.Series.cat.codes" title="pandas.Series.cat.codes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.codes</span></code></a></p></td>
+<td><p>返回代码 Series 以及索引。</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cat.rename_categories.html#pandas.Series.cat.rename_categories" title="pandas.Series.cat.rename_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.rename_categories</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>重命名类别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.cat.reorder_categories.html#pandas.Series.cat.reorder_categories" title="pandas.Series.cat.reorder_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.reorder_categories</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>按 new_categories 中指定的顺序重新排序类别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cat.add_categories.html#pandas.Series.cat.add_categories" title="pandas.Series.cat.add_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.add_categories</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>添加新类别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.cat.remove_categories.html#pandas.Series.cat.remove_categories" title="pandas.Series.cat.remove_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.remove_categories</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>删除指定的类别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cat.remove_unused_categories.html#pandas.Series.cat.remove_unused_categories" title="pandas.Series.cat.remove_unused_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.remove_unused_categories</span></code></a>(*args,&nbsp;...)</p></td>
+<td><p>删除未使用的类别。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.cat.set_categories.html#pandas.Series.cat.set_categories" title="pandas.Series.cat.set_categories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.set_categories</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将类别设置为指定的新类别。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.cat.as_ordered.html#pandas.Series.cat.as_ordered" title="pandas.Series.cat.as_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.as_ordered</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将分类设置为有序。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.cat.as_unordered.html#pandas.Series.cat.as_unordered" title="pandas.Series.cat.as_unordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.cat.as_unordered</span></code></a>(*args,&nbsp;**kwargs)</p></td>
+<td><p>将分类设置为无序。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sparse-accessor">
+<span id="api-series-sparse"></span><h3>稀疏访问器<a class="headerlink" href="series.html#sparse-accessor" title="Link to this heading">#</a></h3>
+<p>稀疏数据类型特定的方法和属性在 <code class="docutils literal notranslate"><span class="pre">Series.sparse</span></code> 访问器下提供。</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.sparse.npoints.html#pandas.Series.sparse.npoints" title="pandas.Series.sparse.npoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sparse.npoints</span></code></a></p></td>
+<td><p>非 <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> 点的数量。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.sparse.density.html#pandas.Series.sparse.density" title="pandas.Series.sparse.density"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sparse.density</span></code></a></p></td>
+<td><p>非 <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> 点的百分比，以小数表示。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.sparse.fill_value.html#pandas.Series.sparse.fill_value" title="pandas.Series.sparse.fill_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sparse.fill_value</span></code></a></p></td>
+<td><p>在 <cite>data</cite> 中，<cite>fill_value</cite> 元素不会被存储。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.sparse.sp_values.html#pandas.Series.sparse.sp_values" title="pandas.Series.sparse.sp_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sparse.sp_values</span></code></a></p></td>
+<td><p>包含非 <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> 值的 ndarray。</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.sparse.from_coo.html#pandas.Series.sparse.from_coo" title="pandas.Series.sparse.from_coo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sparse.from_coo</span></code></a>(A[,&nbsp;dense_index])</p></td>
+<td><p>从 scipy.sparse.coo_matrix 创建一个具有稀疏值的 Series。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.sparse.to_coo.html#pandas.Series.sparse.to_coo" title="pandas.Series.sparse.to_coo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sparse.to_coo</span></code></a>([row_levels,&nbsp;...])</p></td>
+<td><p>从具有 MultiIndex 的 Series 创建一个 scipy.sparse.coo_matrix。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="list-accessor">
+<span id="api-series-list"></span><h3>列表访问器<a class="headerlink" href="series.html#list-accessor" title="Link to this heading">#</a></h3>
+<p>Arrow 列表数据类型特定的方法和属性在 <code class="docutils literal notranslate"><span class="pre">Series.list</span></code> 访问器下提供。</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.list.flatten.html#pandas.Series.list.flatten" title="pandas.Series.list.flatten"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.list.flatten</span></code></a>()</p></td>
+<td><p>展平列表值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.list.len.html#pandas.Series.list.len" title="pandas.Series.list.len"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.list.len</span></code></a>()</p></td>
+<td><p>返回 Series 中每个列表的长度。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.list.__getitem__.html#pandas.Series.list.__getitem__" title="pandas.Series.list.__getitem__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.list.__getitem__</span></code></a>(key)</p></td>
+<td><p>在 Series 中索引或切片列表。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="struct-accessor">
+<span id="api-series-struct"></span><h3>结构体访问器<a class="headerlink" href="series.html#struct-accessor" title="Link to this heading">#</a></h3>
+<p>Arrow 结构体 dtype 特定的方法和属性在 <code class="docutils literal notranslate"><span class="pre">Series.struct</span></code> 访问器下提供。</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.struct.dtypes.html#pandas.Series.struct.dtypes" title="pandas.Series.struct.dtypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.struct.dtypes</span></code></a></p></td>
+<td><p>返回结构体每个子字段的 dtype 对象。</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.struct.field.html#pandas.Series.struct.field" title="pandas.Series.struct.field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.struct.field</span></code></a>(name_or_index)</p></td>
+<td><p>将结构体的子字段提取为 Series。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.struct.explode.html#pandas.Series.struct.explode" title="pandas.Series.struct.explode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.struct.explode</span></code></a>()</p></td>
+<td><p>将结构体的所有子字段提取为 DataFrame。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="flags">
+<span id="api-series-flags"></span><h3>标志<a class="headerlink" href="series.html#flags" title="Link to this heading">#</a></h3>
+<p>标志是指 pandas 对象的属性。数据集的属性（如记录日期、访问的 URL 等）应存储在 <a class="reference internal" href="api/pandas.Series.attrs.html#pandas.Series.attrs" title="pandas.Series.attrs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Series.attrs</span></code></a> 中。</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Flags.html#pandas.Flags" title="pandas.Flags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Flags</span></code></a>(obj,&nbsp;*,&nbsp;allows_duplicate_labels)</p></td>
+<td><p>适用于 pandas 对象的标志。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="metadata">
+<span id="api-series-metadata"></span><h3>元数据<a class="headerlink" href="series.html#metadata" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="api/pandas.Series.attrs.html#pandas.Series.attrs" title="pandas.Series.attrs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Series.attrs</span></code></a> 是一个字典，用于存储此 Series 的全局元数据。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p><code class="docutils literal notranslate"><span class="pre">Series.attrs</span></code> 被认为是实验性的，可能会在没有警告的情况下更改。</p>
+</div>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.attrs.html#pandas.Series.attrs" title="pandas.Series.attrs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.attrs</span></code></a></p></td>
+<td><p>此数据集的全局属性字典。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="plotting">
+<h2>绘图<a class="headerlink" href="series.html#plotting" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Series.plot</span></code> 既是可调用方法，也是特定绘图方法的命名空间属性，形式为 <code class="docutils literal notranslate"><span class="pre">Series.plot.&lt;kind&gt;</span></code>。</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.plot.html#pandas.Series.plot" title="pandas.Series.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot</span></code></a>([kind,&nbsp;ax,&nbsp;figsize,&nbsp;....])</p></td>
+<td><p>Series 绘图访问器和方法</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.plot.area.html#pandas.Series.plot.area" title="pandas.Series.plot.area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.area</span></code></a>([x,&nbsp;y,&nbsp;stacked])</p></td>
+<td><p>绘制堆叠区域图。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.plot.bar.html#pandas.Series.plot.bar" title="pandas.Series.plot.bar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.bar</span></code></a>([x,&nbsp;y])</p></td>
+<td><p>垂直条形图。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.plot.barh.html#pandas.Series.plot.barh" title="pandas.Series.plot.barh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.barh</span></code></a>([x,&nbsp;y])</p></td>
+<td><p>创建水平条形图。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.plot.box.html#pandas.Series.plot.box" title="pandas.Series.plot.box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.box</span></code></a>([by])</p></td>
+<td><p>创建 DataFrame 列的箱线图。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.plot.density.html#pandas.Series.plot.density" title="pandas.Series.plot.density"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.density</span></code></a>([bw_method,&nbsp;ind])</p></td>
+<td><p>使用高斯核生成核密度估计图。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.plot.hist.html#pandas.Series.plot.hist" title="pandas.Series.plot.hist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.hist</span></code></a>([by,&nbsp;bins])</p></td>
+<td><p>绘制 DataFrame 列的一个直方图。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.plot.kde.html#pandas.Series.plot.kde" title="pandas.Series.plot.kde"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.kde</span></code></a>([bw_method,&nbsp;ind])</p></td>
+<td><p>使用高斯核生成核密度估计图。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.plot.line.html#pandas.Series.plot.line" title="pandas.Series.plot.line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.line</span></code></a>([x,&nbsp;y])</p></td>
+<td><p>将 Series 或 DataFrame 绘制为线。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.plot.pie.html#pandas.Series.plot.pie" title="pandas.Series.plot.pie"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.plot.pie</span></code></a>(**kwargs)</p></td>
+<td><p>生成饼图。</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.hist.html#pandas.Series.hist" title="pandas.Series.hist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.hist</span></code></a>([by,&nbsp;ax,&nbsp;grid,&nbsp;xlabelsize,&nbsp;...])</p></td>
+<td><p>使用 matplotlib 绘制输入序列的直方图。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="serialization-io-conversion">
+<h2>序列化 / IO / 转换<a class="headerlink" href="series.html#serialization-io-conversion" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_pickle.html#pandas.Series.to_pickle" title="pandas.Series.to_pickle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_pickle</span></code></a>(path,&nbsp;*[,&nbsp;compression,&nbsp;...])</p></td>
+<td><p>将对象序列化（pickle）到文件。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.to_csv.html#pandas.Series.to_csv" title="pandas.Series.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_csv</span></code></a>([path_or_buf,&nbsp;sep,&nbsp;na_rep,&nbsp;...])</p></td>
+<td><p>将对象写入逗号分隔值 (csv) 文件。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_dict.html#pandas.Series.to_dict" title="pandas.Series.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_dict</span></code></a>([,&nbsp;into])</p></td>
+<td><p>将 Series 转换为 {标签 -&gt; 值} 字典或类似字典的对象。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.to_excel.html#pandas.Series.to_excel" title="pandas.Series.to_excel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_excel</span></code></a>(excel_writer,&nbsp;*[,&nbsp;...])</p></td>
+<td><p>将对象写入 Excel 表格。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_frame.html#pandas.Series.to_frame" title="pandas.Series.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_frame</span></code></a>([name])</p></td>
+<td><p>将 Series 转换为 DataFrame。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.to_xarray.html#pandas.Series.to_xarray" title="pandas.Series.to_xarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_xarray</span></code></a>()</p></td>
+<td><p>从 pandas 对象返回一个 xarray 对象。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_hdf.html#pandas.Series.to_hdf" title="pandas.Series.to_hdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_hdf</span></code></a>(path_or_buf,&nbsp;*,&nbsp;key[,&nbsp;mode,&nbsp;...])</p></td>
+<td><p>使用 HDFStore 将包含的数据写入 HDF5 文件。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.to_sql.html#pandas.Series.to_sql" title="pandas.Series.to_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_sql</span></code></a>(name,&nbsp;con,&nbsp;*[,&nbsp;schema,&nbsp;...])</p></td>
+<td><p>将存储在 DataFrame 中的记录写入 SQL 数据库。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_json.html#pandas.Series.to_json" title="pandas.Series.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_json</span></code></a>([path_or_buf,&nbsp;orient,&nbsp;...])</p></td>
+<td><p>将对象转换为 JSON 字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.to_string.html#pandas.Series.to_string" title="pandas.Series.to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_string</span></code></a>([buf,&nbsp;na_rep,&nbsp;...])</p></td>
+<td><p>呈现 Series 的字符串表示形式。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_clipboard.html#pandas.Series.to_clipboard" title="pandas.Series.to_clipboard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_clipboard</span></code></a>([,&nbsp;excel,&nbsp;sep])</p></td>
+<td><p>将对象复制到系统剪贴板。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.Series.to_latex.html#pandas.Series.to_latex" title="pandas.Series.to_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_latex</span></code></a>([buf,&nbsp;columns,&nbsp;header,&nbsp;...])</p></td>
+<td><p>将对象呈现为 LaTeX 表格、长表格或嵌套表格。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.Series.to_markdown.html#pandas.Series.to_markdown" title="pandas.Series.to_markdown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.to_markdown</span></code></a>([buf,&nbsp;mode,&nbsp;index,&nbsp;...])</p></td>
+<td><p>以 Markdown 友好的格式打印 Series。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</article>
+<footer class="prev-next-footer">
+<div class="prev-next-area">
+<a class="left-prev" href="api/pandas.api.interchange.from_dataframe.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">previous</p> <p class="prev-next-title">pandas.api.interchange.from_dataframe</p> </div> </a> <a class="right-next" href="api/pandas.Series.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">next</p> <p class="prev-next-title">pandas.Series</p> </div> <i class="fa-solid fa-angle-right"></i> </a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> 本页内容
+</div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#constructor">构造函数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#attributes">属性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#conversion">转换</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#indexing-iteration">索引，迭代</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#binary-operator-functions">二元运算符函数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#function-application-groupby-window">函数应用，GroupBy 和窗口</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#computations-descriptive-stats">计算/描述性统计</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#reindexing-selection-label-manipulation">重新索引/选择/标签操作</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#missing-data-handling">缺失数据处理</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#reshaping-sorting">重塑，排序</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#combining-comparing-joining-merging">组合/比较/连接/合并</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#time-series-related">时间序列相关</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#accessors">访问器</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#datetimelike-properties">类似日期时间的属性</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#datetime-properties">日期时间属性</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#datetime-methods">日期时间方法</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#period-properties">周期属性</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#timedelta-properties">时间增量属性</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#timedelta-methods">时间增量方法</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#string-handling">字符串处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#categorical-accessor">分类访问器</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#sparse-accessor">稀疏访问器</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#list-accessor">列表访问器</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#struct-accessor">结构访问器</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#flags">标志</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#metadata">元数据</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#plotting">绘图</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="series.html#serialization-io-conversion">序列化/IO/转换</a></li>
+</ul>
+</nav></div>
+<div class="sidebar-secondary-item">
+<div class="tocsection sourcelink">
+<a href="../_sources/reference/series.rst.txt">
+<i class="fa-solid fa-file-lines"></i> 显示源代码
+</a>
+</div>
+</div>
+</div></div>
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+
+<script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+<footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+<div class="footer-items__start">
+<div class="footer-item"><p class="copyright">
+© 2024, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>.
+</p></div>
+<div class="footer-item">
+<p class="sphinx-version">
+使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 7.2.6 创建。
+<br>
+</p>
+</div>
+</div>
+<div class="footer-items__end">
+<div class="footer-item">
+<p class="theme-version">
+使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx 主题</a> 0.14.4 构建。
+</p></div>
+</div>
+</div>
+</footer>
+
+</body></html>

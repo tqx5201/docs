@@ -1,0 +1,1012 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>版本 0.10.1 (2013年1月22日) — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whatsnew/v0.10.1';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Version 0.10.0 (December 17, 2012)" href="v0.10.0.html" />
+    <link rel="prev" title="Version 0.11.0 (April 22, 2013)" href="v0.11.0.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="v0.10.1.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.3.0.html">2.3.0 (2025年6月4日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.2.3.html">2.2.3 (2024年9月20日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.2.html">2.2.2 (2024年4月10日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.1.html">2.2.1 (2024年2月22日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.0.html">2.2.0 (2024年1月19日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.1.4.html">2.1.4 (2023年12月8日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.3.html">2.1.3 (2023年11月10日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.2.html">2.1.2 (2023年10月26日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.1.html">2.1.1 (2023年9月20日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.0.html">2.1.0 (2023年8月30日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.0.3.html">2.0.3 (2023年6月28日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.2.html">2.0.2 (2023年5月29日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.1.html">2.0.1 (2023年4月24日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.0.html">2.0.0 (2023年4月3日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.5.3.html">1.5.3 (2023年1月18日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.2.html">1.5.2 (2022年11月21日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.1.html">1.5.1 (2022年10月19日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.0.html">1.5.0 (2022年9月19日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.4.4.html">1.4.4 (2022年8月31日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.3.html">1.4.3 (2022年6月23日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.2.html">1.4.2 (2022年4月2日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.1.html">1.4.1 (2022年2月12日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.0.html">1.4.0 (2022年1月22日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.3.5.html">1.3.5 (2021年12月12日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.4.html">1.3.4 (2021年10月17日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.3.html">1.3.3 (2021年9月12日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.2.html">1.3.2 (2021年8月15日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.1.html">1.3.1 (2021年7月25日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.0.html">1.3.0 (2021年7月2日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.2.5.html">1.2.5 (2021年6月22日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.4.html">1.2.4 (2021年4月12日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.3.html">1.2.3 (2021年3月2日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.2.html">1.2.2 (2021年2月9日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.1.html">1.2.1 (2021年1月20日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.0.html">1.2.0 (2020年12月26日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.1.5.html">1.1.5 (2020年12月7日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.4.html">1.1.4 (2020年10月30日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.3.html">1.1.3 (2020年10月5日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.2.html">1.1.2 (2020年9月8日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.1.html">1.1.1 (2020年8月20日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.0.html">1.1.0 (2020年7月28日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.0.5.html">1.0.5 (2020年6月17日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.4.html">1.0.4 (2020年5月28日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.3.html">1.0.3 (2020年3月17日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.2.html">1.0.2 (2020年3月12日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.1.html">1.0.1 (2020年2月5日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.0.html">1.0.0 (2020年1月29日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.25.3.html">0.25.3 (2019年10月31日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.2.html">0.25.2 (2019年10月15日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.1.html">0.25.1 (2019年8月21日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.0.html">0.25.0 (2019年7月18日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.24.2.html">0.24.2 (2019年3月12日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.1.html">0.24.1 (2019年2月3日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.0.html">0.24.0 (2019年1月25日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.23.4.html">0.23.4 (2018年8月3日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.3.html">0.23.3 (2018年7月7日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.2.html">0.23.2 (2018年7月5日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.1.html">0.23.1 (2018年6月12日) 中的新功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.0.html">0.23.0 (2018年5月15日) 中的新功能</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.22.0.html">版本 0.22.0 (2017年12月29日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.21.1.html">版本 0.21.1 (2017年12月12日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.0.html">版本 0.21.0 (2017年10月27日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.20.3.html">版本 0.20.3 (2017年7月7日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.2.html">版本 0.20.2 (2017年6月4日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.0.html">版本 0.20.1 (2017年5月5日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.19.2.html">版本 0.19.2 (2016年12月24日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.1.html">版本 0.19.1 (2016年11月3日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.0.html">版本 0.19.0 (2016年10月2日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.18.1.html">版本 0.18.1 (2016年5月3日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.18.0.html">版本 0.18.0 (2016年3月13日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.17.1.html">版本 0.17.1 (2015年11月21日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.17.0.html">版本 0.17.0 (2015年10月9日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.16.2.html">版本 0.16.2 (2015年6月12日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.1.html">版本 0.16.1 (2015年5月11日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.0.html">版本 0.16.0 (2015年3月22日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.15.2.html">版本 0.15.2 (2014年12月12日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.1.html">版本 0.15.1 (2014年11月9日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.0.html">版本 0.15.0 (2014年10月18日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.14.1.html">版本 0.14.1 (2014年7月11日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.14.0.html">版本 0.14.0 (2014年5月31日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.13.1.html">版本 0.13.1 (2014年2月3日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.13.0.html">版本 0.13.0 (2014年1月3日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.12.0.html">版本 0.12.0 (2013年7月24日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.11.0.html">版本 0.11.0 (2013年4月22日)</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="v0.10.1.html#">版本 0.10.1 (2013年1月22日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.10.0.html">版本 0.10.0 (2012年12月17日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.9.1.html">版本 0.9.1 (2012年11月14日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.9.0.html">版本 0.9.0 (2012年10月7日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.8.1.html">版本 0.8.1 (2012年7月22日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.8.0.html">版本 0.8.0 (2012年6月29日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.7.3.html">版本 0.7.3 (2012年4月12日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.2.html">版本 0.7.2 (2012年3月16日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.1.html">版本 0.7.1 (2012年2月29日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.0.html">版本 0.7.0 (2012年2月9日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.6.1.html">版本 0.6.1 (2011年12月13日)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.6.0.html">版本 0.6.0 (2011年11月25日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.5.0.html">版本 0.5.0 (2011年10月24日)</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.4.x.html">版本 0.4.1 到 0.4.3 (2011年9月25日 - 10月9日)</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">发行说明</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">版本...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="version-0-10-1-january-22-2013">
+<span id="whatsnew-0101"></span><h1>版本 0.10.1 (2013年1月22日)<a class="headerlink" href="v0.10.1.html#version-0-10-1-january-22-2013" title="链接到此标题">#</a></h1>
+<p>这是 0.10.0 的一个次要版本，包含新功能、改进和错误修复。特别是，Jeff Reback 对 HDFStore 功能做出了实质性的新贡献。</p>
+<p>已恢复采用 <code class="docutils literal notranslate"><span class="pre">inplace</span></code> 选项的函数所导致的不良 API 破坏，并添加了弃用警告。</p>
+<section id="api-changes">
+<h2>API 变更<a class="headerlink" href="v0.10.1.html#api-changes" title="链接到此标题">#</a></h2>
+<ul class="simple">
+<li><p>采用 <code class="docutils literal notranslate"><span class="pre">inplace</span></code> 选项的函数一如既往地返回调用对象。已添加弃用消息。</p></li>
+<li><p>Groupby 聚合中的 Max/Min 不再排除非数值数据 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2700">GH 2700</a>)</p></li>
+<li><p>对空 DataFrame 进行重采样现在返回一个空 DataFrame，而不是引发异常 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2640">GH 2640</a>)</p></li>
+<li><p>文件读取器现在在明确指定的整数列中发现 NA 值时会引发异常，而不是将该列转换为浮点数 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2631">GH 2631</a>)</p></li>
+<li><p>DatetimeIndex.unique 现在返回一个具有相同名称和</p></li>
+<li><p>时区的 DatetimeIndex，而不是一个数组 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2563">GH 2563</a>)</p></li>
+</ul>
+</section>
+<section id="new-features">
+<h2>新功能<a class="headerlink" href="v0.10.1.html#new-features" title="链接到此标题">#</a></h2>
+<ul class="simple">
+<li><p>支持 MySQL 数据库（由 Dan Allan 贡献）</p></li>
+</ul>
+</section>
+<section id="hdfstore">
+<h2>HDFStore<a class="headerlink" href="v0.10.1.html#hdfstore" title="链接到此标题">#</a></h2>
+<p>您可能需要升级现有数据文件。请访问主文档中的<strong>兼容性</strong>部分。</p>
+<p>您可以通过将列表传递给 <code class="docutils literal notranslate"><span class="pre">data_columns</span></code> 来指定（并索引）您希望能够对表执行查询的某些列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">store</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">HDFStore</span><span class="p">(</span><span class="s2">"store.h5"</span><span class="p">)</span>
+
+<span class="gp">In [2]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="gp">   ...: </span>    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"1/1/2000"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
+<span class="gp">   ...: </span>    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">],</span>
+<span class="gp">   ...: </span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [3]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"string"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"foo"</span>
+
+<span class="gp">In [4]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="s2">"string"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [5]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="s2">"string"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"bar"</span>
+
+<span class="gp">In [6]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"string2"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"cool"</span>
+
+<span class="gp">In [7]: </span><span class="n">df</span>
+<span class="gh">Out[7]: </span>
+<span class="go">                   A         B         C string string2</span>
+<span class="go">2000-01-01  0.469112 -0.282863 -1.509059    foo    cool</span>
+<span class="go">2000-01-02 -1.135632  1.212112 -0.173215    foo    cool</span>
+<span class="go">2000-01-03  0.119209 -1.044236 -0.861849    foo    cool</span>
+<span class="go">2000-01-04 -2.104569 -0.494929  1.071804    foo    cool</span>
+<span class="go">2000-01-05  0.721555 -0.706771 -1.039575    NaN    cool</span>
+<span class="go">2000-01-06  0.271860 -0.424972  0.567020    NaN    cool</span>
+<span class="go">2000-01-07  0.276232 -1.087401 -0.673690    foo    cool</span>
+<span class="go">2000-01-08  0.113648 -1.478427  0.524988    bar    cool</span>
+
+<span class="go"># on-disk operations</span>
+<span class="gp">In [8]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"df"</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"string"</span><span class="p">,</span> <span class="s2">"string2"</span><span class="p">])</span>
+
+<span class="gp">In [9]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"df"</span><span class="p">,</span> <span class="s2">"B&gt;0 and string=='foo'"</span><span class="p">)</span>
+<span class="gh">Out[9]: </span>
+<span class="go">                   A         B         C string string2</span>
+<span class="go">2000-01-02 -1.135632  1.212112 -0.173215    foo    cool</span>
+
+<span class="go"># this is in-memory version of this type of selection</span>
+<span class="gp">In [10]: </span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">B</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">string</span> <span class="o">==</span> <span class="s2">"foo"</span><span class="p">)]</span>
+<span class="gh">Out[10]: </span>
+<span class="go">                   A         B         C string string2</span>
+<span class="go">2000-01-02 -1.135632  1.212112 -0.173215    foo    cool</span>
+</pre></div>
+</div>
+<p>在可索引列或数据列中检索唯一值。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># note that this is deprecated as of 0.14.0</span>
+<span class="c1"># can be replicated by: store.select_column('df','index').unique()</span>
+<span class="n">store</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="s2">"df"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">)</span>
+<span class="n">store</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="s2">"df"</span><span class="p">,</span> <span class="s2">"string"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>您现在可以在数据列中存储 <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> 类型。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">df_mixed</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="gp">In [12]: </span><span class="n">df_mixed</span><span class="p">[</span><span class="s2">"datetime64"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"20010102"</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="n">df_mixed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_mixed</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [14]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"df_mixed"</span><span class="p">,</span> <span class="n">df_mixed</span><span class="p">)</span>
+
+<span class="gp">In [15]: </span><span class="n">df_mixed1</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"df_mixed"</span><span class="p">)</span>
+
+<span class="gp">In [16]: </span><span class="n">df_mixed1</span>
+<span class="gh">Out[16]: </span>
+<span class="go">                   A         B  ...  string2                    datetime64</span>
+<span class="go">2000-01-01  0.469112 -0.282863  ...     cool 1970-01-01 00:00:00.978393600</span>
+<span class="go">2000-01-02 -1.135632  1.212112  ...     cool 1970-01-01 00:00:00.978393600</span>
+<span class="go">2000-01-03  0.119209 -1.044236  ...     cool 1970-01-01 00:00:00.978393600</span>
+<span class="go">2000-01-04       NaN       NaN  ...     cool 1970-01-01 00:00:00.978393600</span>
+<span class="go">2000-01-05  0.721555 -0.706771  ...     cool 1970-01-01 00:00:00.978393600</span>
+<span class="go">2000-01-06  0.271860 -0.424972  ...     cool 1970-01-01 00:00:00.978393600</span>
+<span class="go">2000-01-07  0.276232 -1.087401  ...     cool 1970-01-01 00:00:00.978393600</span>
+<span class="go">2000-01-08  0.113648 -1.478427  ...     cool 1970-01-01 00:00:00.978393600</span>
+
+<span class="go">[8 rows x 6 columns]</span>
+
+<span class="gp">In [17]: </span><span class="n">df_mixed1</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="gh">Out[17]: </span>
+<span class="go">float64           3</span>
+<span class="go">object            2</span>
+<span class="go">datetime64[ns]    1</span>
+<span class="go">Name: count, dtype: int64</span>
+</pre></div>
+</div>
+<p>您可以传递 <code class="docutils literal notranslate"><span class="pre">columns</span></code> 关键字来选择过滤返回列的列表，这等同于传递 <code class="docutils literal notranslate"><span class="pre">Term('columns',list_of_columns_to_filter)</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"df"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+<span class="gh">Out[18]: </span>
+<span class="go">                   A         B</span>
+<span class="go">2000-01-01  0.469112 -0.282863</span>
+<span class="go">2000-01-02 -1.135632  1.212112</span>
+<span class="go">2000-01-03  0.119209 -1.044236</span>
+<span class="go">2000-01-04 -2.104569 -0.494929</span>
+<span class="go">2000-01-05  0.721555 -0.706771</span>
+<span class="go">2000-01-06  0.271860 -0.424972</span>
+<span class="go">2000-01-07  0.276232 -1.087401</span>
+<span class="go">2000-01-08  0.113648 -1.478427</span>
+</pre></div>
+</div>
+<p>在追加表时，<code class="docutils literal notranslate"><span class="pre">HDFStore</span></code> 现在会序列化 MultiIndex 数据帧。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="p">(</span><span class="n">levels</span><span class="o">=</span><span class="p">[[</span><span class="s1">'foo'</span><span class="p">,</span> <span class="s1">'bar'</span><span class="p">,</span> <span class="s1">'baz'</span><span class="p">,</span> <span class="s1">'qux'</span><span class="p">],</span>
+<span class="gp">   ....: </span>                              <span class="p">[</span><span class="s1">'one'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">]],</span>
+<span class="gp">   ....: </span>                      <span class="n">labels</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">   ....: </span>                              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span>
+<span class="gp">   ....: </span>                      <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">'foo'</span><span class="p">,</span> <span class="s1">'bar'</span><span class="p">])</span>
+<span class="gp">   ....:</span>
+
+<span class="gp">In [20]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+<span class="gp">   ....: </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'A'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">])</span>
+<span class="gp">   ....:</span>
+
+<span class="gp">In [21]: </span><span class="n">df</span>
+<span class="gh">Out[21]:</span>
+<span class="go">                  A         B         C</span>
+<span class="go">foo bar</span>
+<span class="go">foo one   -0.116619  0.295575 -1.047704</span>
+<span class="go">    two    1.640556  1.905836  2.772115</span>
+<span class="go">    three  0.088787 -1.144197 -0.633372</span>
+<span class="go">bar one    0.925372 -0.006438 -0.820408</span>
+<span class="go">    two   -0.600874 -1.039266  0.824758</span>
+<span class="go">baz two   -0.824095 -0.337730 -0.927764</span>
+<span class="go">    three -0.840123  0.248505 -0.109250</span>
+<span class="go">qux one    0.431977 -0.460710  0.336505</span>
+<span class="go">    two   -3.207595 -1.535854  0.409769</span>
+<span class="go">    three -0.673145 -0.741113 -0.110891</span>
+
+<span class="gp">In [22]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'mi'</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+<span class="gp">In [23]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'mi'</span><span class="p">)</span>
+<span class="gh">Out[23]:</span>
+<span class="go">                  A         B         C</span>
+<span class="go">foo bar</span>
+<span class="go">foo one   -0.116619  0.295575 -1.047704</span>
+<span class="go">    two    1.640556  1.905836  2.772115</span>
+<span class="go">    three  0.088787 -1.144197 -0.633372</span>
+<span class="go">bar one    0.925372 -0.006438 -0.820408</span>
+<span class="go">    two   -0.600874 -1.039266  0.824758</span>
+<span class="go">baz two   -0.824095 -0.337730 -0.927764</span>
+<span class="go">    three -0.840123  0.248505 -0.109250</span>
+<span class="go">qux one    0.431977 -0.460710  0.336505</span>
+<span class="go">    two   -3.207595 -1.535854  0.409769</span>
+<span class="go">    three -0.673145 -0.741113 -0.110891</span>
+
+<span class="go"># the levels are automatically included as data columns</span>
+<span class="gp">In [24]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'mi'</span><span class="p">,</span> <span class="s2">"foo='bar'"</span><span class="p">)</span>
+<span class="gh">Out[24]:</span>
+<span class="go">                A         B         C</span>
+<span class="go">foo bar</span>
+<span class="go">bar one  0.925372 -0.006438 -0.820408</span>
+<span class="go">    two -0.600874 -1.039266  0.824758</span>
+</pre></div>
+</div>
+<p>通过 <code class="docutils literal notranslate"><span class="pre">append_to_multiple</span></code> 进行多表创建，以及通过 <code class="docutils literal notranslate"><span class="pre">select_as_multiple</span></code> 进行选择，可以通过在选择器表上使用 <code class="docutils literal notranslate"><span class="pre">where</span></code> 来从多个表创建/选择并返回合并结果。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">df_mt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+<span class="gp">   ....: </span>    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"1/1/2000"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
+<span class="gp">   ....: </span>    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">],</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [20]: </span><span class="n">df_mt</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"bar"</span>
+
+<span class="go"># you can also create the tables individually</span>
+<span class="gp">In [21]: </span><span class="n">store</span><span class="o">.</span><span class="n">append_to_multiple</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span><span class="s2">"df1_mt"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">],</span> <span class="s2">"df2_mt"</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">df_mt</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="s2">"df1_mt"</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [22]: </span><span class="n">store</span>
+<span class="gh">Out[22]: </span>
+<span class="go">&lt;class 'pandas.io.pytables.HDFStore'&gt;</span>
+<span class="go">File path: store.h5</span>
+
+<span class="go"># individual tables were created</span>
+<span class="gp">In [23]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"df1_mt"</span><span class="p">)</span>
+<span class="gh">Out[23]: </span>
+<span class="go">                   A         B</span>
+<span class="go">2000-01-01  0.404705  0.577046</span>
+<span class="go">2000-01-02 -1.344312  0.844885</span>
+<span class="go">2000-01-03  0.357021 -0.674600</span>
+<span class="go">2000-01-04  0.276662 -0.472035</span>
+<span class="go">2000-01-05  0.895717  0.805244</span>
+<span class="go">2000-01-06 -1.170299 -0.226169</span>
+<span class="go">2000-01-07 -0.076467 -1.187678</span>
+<span class="go">2000-01-08  1.024180  0.569605</span>
+
+<span class="gp">In [24]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"df2_mt"</span><span class="p">)</span>
+<span class="gh">Out[24]: </span>
+<span class="go">                   C         D         E         F  foo</span>
+<span class="go">2000-01-01 -1.715002 -1.039268 -0.370647 -1.157892  bar</span>
+<span class="go">2000-01-02  1.075770 -0.109050  1.643563 -1.469388  bar</span>
+<span class="go">2000-01-03 -1.776904 -0.968914 -1.294524  0.413738  bar</span>
+<span class="go">2000-01-04 -0.013960 -0.362543 -0.006154 -0.923061  bar</span>
+<span class="go">2000-01-05 -1.206412  2.565646  1.431256  1.340309  bar</span>
+<span class="go">2000-01-06  0.410835  0.813850  0.132003 -0.827317  bar</span>
+<span class="go">2000-01-07  1.130127 -1.436737 -1.413681  1.607920  bar</span>
+<span class="go">2000-01-08  0.875906 -2.211372  0.974466 -2.006747  bar</span>
+
+<span class="go"># as a multiple</span>
+<span class="gp">In [25]: </span><span class="n">store</span><span class="o">.</span><span class="n">select_as_multiple</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">[</span><span class="s2">"df1_mt"</span><span class="p">,</span> <span class="s2">"df2_mt"</span><span class="p">],</span> <span class="n">where</span><span class="o">=</span><span class="p">[</span><span class="s2">"A&gt;0"</span><span class="p">,</span> <span class="s2">"B&gt;0"</span><span class="p">],</span> <span class="n">selector</span><span class="o">=</span><span class="s2">"df1_mt"</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[25]: </span>
+<span class="go">                   A         B         C         D         E         F  foo</span>
+<span class="go">2000-01-01  0.404705  0.577046 -1.715002 -1.039268 -0.370647 -1.157892  bar</span>
+<span class="go">2000-01-05  0.895717  0.805244 -1.206412  2.565646  1.431256  1.340309  bar</span>
+<span class="go">2000-01-08  1.024180  0.569605  0.875906 -2.211372  0.974466 -2.006747  bar</span>
+</pre></div>
+</div>
+<p><strong>改进</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HDFStore</span></code> 现在可以读取原生的 PyTables 表格式。</p></li>
+<li><p>您可以将 <code class="docutils literal notranslate"><span class="pre">nan_rep</span> <span class="pre">=</span> <span class="pre">'my_nan_rep'</span></code> 传递给 append，以更改磁盘上的默认 nan 表示（它会转换为/从 <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>），此默认值为 <code class="docutils literal notranslate"><span class="pre">nan</span></code>。</p></li>
+<li><p>您可以将 <code class="docutils literal notranslate"><span class="pre">index</span></code> 传递给 <code class="docutils literal notranslate"><span class="pre">append</span></code>。此参数默认为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。这将自动在表的<em>可索引列</em>和<em>数据列</em>上创建索引。</p></li>
+<li><p>您可以将 <code class="docutils literal notranslate"><span class="pre">chunksize=an</span> <span class="pre">integer</span></code> 传递给 <code class="docutils literal notranslate"><span class="pre">append</span></code>，以更改写入块大小（默认为 50000）。这将显著降低写入时的内存使用量。</p></li>
+<li><p>您可以将 <code class="docutils literal notranslate"><span class="pre">expectedrows=an</span> <span class="pre">integer</span></code> 传递给第一次 <code class="docutils literal notranslate"><span class="pre">append</span></code>，以设置 <code class="docutils literal notranslate"><span class="pre">PyTables</span></code> 预期的总行数。这将优化读/写性能。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Select</span></code> 现在支持传递 <code class="docutils literal notranslate"><span class="pre">start</span></code> 和 <code class="docutils literal notranslate"><span class="pre">stop</span></code>，以在选择中提供选择空间限制。</p></li>
+<li><p>大幅改进了文件解析器对 ISO8601 (例如 yyyy-mm-dd) 日期解析的支持 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2698">GH 2698</a>)</p></li>
+<li><p>允许 <code class="docutils literal notranslate"><span class="pre">DataFrame.merge</span></code> 处理对于 64 位整数而言过大的组合大小 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2690">GH 2690</a>)</p></li>
+<li><p>Series 现在具有一元求反 (-series) 和反转 (~series) 运算符 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2686">GH 2686</a>)</p></li>
+<li><p>DataFrame.plot 现在包含一个 <code class="docutils literal notranslate"><span class="pre">logx</span></code> 参数，用于将 x 轴更改为对数刻度 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2327">GH 2327</a>)</p></li>
+<li><p>Series 算术运算符现在可以处理常量和 ndarray 输入 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2574">GH 2574</a>)</p></li>
+<li><p>ExcelFile 现在接受 <code class="docutils literal notranslate"><span class="pre">kind</span></code> 参数来指定文件类型 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2613">GH 2613</a>)</p></li>
+<li><p>Series.str 方法的更快实现 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2602">GH 2602</a>)</p></li>
+</ul>
+<p><strong>错误修复</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HDFStore</span></code> 表现在可以正确存储 <code class="docutils literal notranslate"><span class="pre">float32</span></code> 类型（但不能与 <code class="docutils literal notranslate"><span class="pre">float64</span></code> 混合使用）</p></li>
+<li><p>修复了指定请求分段时 Google Analytics 前缀的问题 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2713">GH 2713</a>)。</p></li>
+<li><p>用于重置 Google Analytics 令牌存储的函数，以便用户可以从不正确设置的客户端密钥中恢复 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2687">GH 2687</a>)。</p></li>
+<li><p>修复了 groupby 错误，该错误在传入 MultiIndex 时导致段错误 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2706">GH 2706</a>)</p></li>
+<li><p>修复了将包含 datetime64 值的 Series 传递到 <code class="docutils literal notranslate"><span class="pre">to_datetime</span></code> 时导致虚假输出值的错误 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2699">GH 2699</a>)</p></li>
+<li><p>修复了当 pattern 不是有效正则表达式时，<code class="docutils literal notranslate"><span class="pre">pattern</span> <span class="pre">in</span> <span class="pre">HDFStore</span></code> 表达式中的错误 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2694">GH 2694</a>)</p></li>
+<li><p>修复了聚合布尔数据时的性能问题 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2692">GH 2692</a>)</p></li>
+<li><p>当给定布尔掩码键和一组新值时，Series __setitem__ 现在会将传入值与原始 Series 对齐 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2686">GH 2686</a>)</p></li>
+<li><p>修复了对具有大量组合值的 MultiIndex 级别执行计数排序时导致的 MemoryError (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2684">GH 2684</a>)</p></li>
+<li><p>修复了当索引是具有固定偏移时区的 DatetimeIndex 时导致绘图失败的错误 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2683">GH 2683</a>)</p></li>
+<li><p>修正了当偏移量超过 5 个工作日且起始日期在周末时，工作日减法逻辑的错误 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2680">GH 2680</a>)</p></li>
+<li><p>修复了 C 文件解析器在文件列数多于数据时行为异常的问题 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2668">GH 2668</a>)</p></li>
+<li><p>修复了文件读取器在存在隐式列和指定 <code class="docutils literal notranslate"><span class="pre">usecols</span></code> 值时导致列与数据不对齐的错误</p></li>
+<li><p>具有数值或日期时间索引的 DataFrame 现在在绘图前进行排序 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2609">GH 2609</a>)</p></li>
+<li><p>修复了 DataFrame.from_records 在传入 columns、index 但记录为空时出错的问题 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2633">GH 2633</a>)</p></li>
+<li><p>修复了 dtype 为 datetime64 时 Series 操作的多个错误 (<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2689">GH 2689</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2629">GH 2629</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/2626">GH 2626</a>)</p></li>
+</ul>
+<p>有关完整列表，请参阅<a class="reference internal" href="index.html#release"><span class="std std-ref">完整的发行说明</span></a>或 GitHub 上的问题追踪器。</p>
+</section>
+<section id="contributors">
+<span id="whatsnew-0-10-1-contributors"></span><h2>贡献者<a class="headerlink" href="v0.10.1.html#contributors" title="链接到此标题">#</a></h2>
+<p>共有 17 人为本次发布贡献了补丁。名字旁有“+”的人是首次贡献补丁。</p>
+<ul class="simple">
+<li><p>Andy Hayden +</p></li>
+<li><p>Anton I. Sipos +</p></li>
+<li><p>Chang She</p></li>
+<li><p>Christopher Whelan</p></li>
+<li><p>Damien Garaud +</p></li>
+<li><p>Dan Allan +</p></li>
+<li><p>Dieter Vandenbussche</p></li>
+<li><p>Garrett Drapala +</p></li>
+<li><p>Jay Parlar +</p></li>
+<li><p>Thouis (Ray) Jones +</p></li>
+<li><p>Vincent Arel-Bundock +</p></li>
+<li><p>Wes McKinney</p></li>
+<li><p>elpres</p></li>
+<li><p>herrfz +</p></li>
+<li><p>jreback</p></li>
+<li><p>svaksha +</p></li>
+<li><p>y-p</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="v0.11.0.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">版本 0.11.0 (2013年4月22日)</p> </div> </a> <a class="right-next" href="v0.10.0.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">版本 0.10.0 (2012年12月17日)</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="v0.10.1.html#api-changes">API 变更</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="v0.10.1.html#new-features">新功能</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="v0.10.1.html#hdfstore">HDFStore</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="v0.10.1.html#contributors">贡献者</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/whatsnew/v0.10.1.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源代码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

@@ -1,0 +1,787 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>如何操作文本数据 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/intro_tutorials/10_text_data';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Comparison with other tools" href="../comparison/index.html" />
+    <link rel="prev" title="How to handle time series data with ease" href="09_timeseries.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="10_text_data.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包概览</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">入门教程</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_table_oriented.html">pandas 处理哪些类型的数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_add_columns.html">如何从现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_calculate_statistics.html">如何计算汇总统计量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_reshape_table_layout.html">如何重塑表格布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_combine_dataframes.html">如何合并来自多个表的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="10_text_data.html#">如何操作文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../comparison/index.html">与其他工具的比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_r.html">与 R / R 库的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sql.html">与 SQL 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_spreadsheets.html">与电子表格的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sas.html">与 SAS 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_stata.html">与 Stata 的比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">开始使用</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">入门教程</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">如何...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="highlight-ipython notranslate" id="min-tut-10-text"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header gs-data-header">
+        <div class="gs-data-title">本教程使用的数据</div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item gs-data-list"><div data-bs-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+    <span class="badge bg-secondary">泰坦尼克号数据</span>
+</div>
+<div class="collapse" id="collapsedata">
+    <div class="card-body">
+        <p class="card-text"></p><p>本教程使用泰坦尼克号数据集，以 CSV 格式存储。数据包含以下数据列</p>
+<ul class="simple">
+<li><p>PassengerId: 每位乘客的 ID。</p></li>
+<li><p>Survived: 指示乘客是否幸存。<code class="docutils literal notranslate"><span class="pre">0</span></code> 表示是，<code class="docutils literal notranslate"><span class="pre">1</span></code> 表示否。</p></li>
+<li><p>Pclass: 3 种船票等级之一：<code class="docutils literal notranslate"><span class="pre">1</span></code> 等舱、<code class="docutils literal notranslate"><span class="pre">2</span></code> 等舱和 <code class="docutils literal notranslate"><span class="pre">3</span></code> 等舱。</p></li>
+<li><p>Name: 乘客姓名。</p></li>
+<li><p>Sex: 乘客性别。</p></li>
+<li><p>Age: 乘客年龄（岁）。</p></li>
+<li><p>SibSp: 同船的兄弟姐妹或配偶人数。</p></li>
+<li><p>Parch: 同船的父母或子女人数。</p></li>
+<li><p>Ticket: 乘客船票号。</p></li>
+<li><p>Fare: 票价。</p></li>
+<li><p>Cabin: 乘客舱位号。</p></li>
+<li><p>Embarked: 登船港口。</p></li>
+</ul>
+        <p></p>
+        <a href="https://github.com/pandas-dev/pandas/raw/main/doc/data/titanic.csv" class="btn btn-dark btn-sm">查看原始数据</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/titanic.csv"</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[3]: </span>
+<span class="go">   PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked</span>
+<span class="go">0            1         0       3  ...   7.2500   NaN         S</span>
+<span class="go">1            2         1       1  ...  71.2833   C85         C</span>
+<span class="go">2            3         1       3  ...   7.9250   NaN         S</span>
+<span class="go">3            4         1       1  ...  53.1000  C123         S</span>
+<span class="go">4            5         0       3  ...   8.0500   NaN         S</span>
+
+<span class="go">[5 rows x 12 columns]</span>
+</pre></div>
+</div>
+        </li>
+    </ul>
+</div><section id="how-to-manipulate-textual-data">
+<h1>如何操作文本数据<a class="headerlink" href="10_text_data.html#how-to-manipulate-textual-data" title="Link to this heading">#</a></h1>
+<ul class="task-bullet">
+    <li><p>将所有姓名字符转换为小写。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gh">Out[4]: </span>
+<span class="go">0                                braund, mr. owen harris</span>
+<span class="go">1      cumings, mrs. john bradley (florence briggs th...</span>
+<span class="go">2                                 heikkinen, miss. laina</span>
+<span class="go">3           futrelle, mrs. jacques heath (lily may peel)</span>
+<span class="go">4                               allen, mr. william henry</span>
+<span class="go">                             ...                        </span>
+<span class="go">886                                montvila, rev. juozas</span>
+<span class="go">887                         graham, miss. margaret edith</span>
+<span class="go">888             johnston, miss. catherine helen "carrie"</span>
+<span class="go">889                                behr, mr. karl howell</span>
+<span class="go">890                                  dooley, mr. patrick</span>
+<span class="go">Name: Name, Length: 891, dtype: object</span>
+</pre></div>
+</div>
+<p>要将 <code class="docutils literal notranslate"><span class="pre">Name</span></code> 列中的每个字符串转换为小写，请选择 <code class="docutils literal notranslate"><span class="pre">Name</span></code> 列（参见<a class="reference internal" href="03_subset_data.html#min-tut-03-subset"><span class="std std-ref">数据选择教程</span></a>），添加 <code class="docutils literal notranslate"><span class="pre">str</span></code> 访问器并应用 <code class="docutils literal notranslate"><span class="pre">lower</span></code> 方法。这样，每个字符串都会按元素进行转换。</p>
+    </li>
+</ul><p>与<a class="reference internal" href="09_timeseries.html#min-tut-09-timeseries"><span class="std std-ref">时间序列教程</span></a>中拥有 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 访问器的日期时间对象类似，在使用 <code class="docutils literal notranslate"><span class="pre">str</span></code> 访问器时，可以使用许多专门的字符串方法。这些方法通常与单个元素的等效内置字符串方法名称匹配，但会按元素（还记得<a class="reference internal" href="05_add_columns.html#min-tut-05-columns"><span class="std std-ref">按元素计算</span></a>吗？）应用于列中的每个值。</p>
+<ul class="task-bullet">
+    <li><p>通过提取逗号之前的部分，创建一个新列 <code class="docutils literal notranslate"><span class="pre">Surname</span></code>，其中包含乘客的姓氏。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+<span class="gh">Out[5]: </span>
+<span class="go">0                             [Braund,  Mr. Owen Harris]</span>
+<span class="go">1      [Cumings,  Mrs. John Bradley (Florence Briggs ...</span>
+<span class="go">2                              [Heikkinen,  Miss. Laina]</span>
+<span class="go">3        [Futrelle,  Mrs. Jacques Heath (Lily May Peel)]</span>
+<span class="go">4                            [Allen,  Mr. William Henry]</span>
+<span class="go">                             ...                        </span>
+<span class="go">886                             [Montvila,  Rev. Juozas]</span>
+<span class="go">887                      [Graham,  Miss. Margaret Edith]</span>
+<span class="go">888          [Johnston,  Miss. Catherine Helen "Carrie"]</span>
+<span class="go">889                             [Behr,  Mr. Karl Howell]</span>
+<span class="go">890                               [Dooley,  Mr. Patrick]</span>
+<span class="go">Name: Name, Length: 891, dtype: object</span>
+</pre></div>
+</div>
+<p>使用 <a class="reference internal" href="../../reference/api/pandas.Series.str.split.html#pandas.Series.str.split" title="pandas.Series.str.split"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.split()</span></code></a> 方法，每个值都将作为包含 2 个元素的列表返回。第一个元素是逗号之前的部分，第二个元素是逗号之后的部分。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Surname"</span><span class="p">]</span> <span class="o">=</span> <span class="n">titanic</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [7]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Surname"</span><span class="p">]</span>
+<span class="gh">Out[7]: </span>
+<span class="go">0         Braund</span>
+<span class="go">1        Cumings</span>
+<span class="go">2      Heikkinen</span>
+<span class="go">3       Futrelle</span>
+<span class="go">4          Allen</span>
+<span class="go">         ...    </span>
+<span class="go">886     Montvila</span>
+<span class="go">887       Graham</span>
+<span class="go">888     Johnston</span>
+<span class="go">889         Behr</span>
+<span class="go">890       Dooley</span>
+<span class="go">Name: Surname, Length: 891, dtype: object</span>
+</pre></div>
+</div>
+<p>由于我们只对代表姓氏的第一部分（元素 0）感兴趣，我们可以再次使用 <code class="docutils literal notranslate"><span class="pre">str</span></code> 访问器并应用 <a class="reference internal" href="../../reference/api/pandas.Series.str.get.html#pandas.Series.str.get" title="pandas.Series.str.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.get()</span></code></a> 来提取相关部分。实际上，这些字符串函数可以连接起来，一次性组合多个函数！</p>
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">查看用户指南</span><p>有关提取字符串部分的更多信息，请参阅用户指南中关于<a class="reference internal" href="../../user_guide/text.html#text-split"><span class="std std-ref">拆分和替换字符串</span></a>的部分。</p>
+</div><ul class="task-bullet">
+    <li><p>提取泰坦尼克号上女伯爵的乘客数据。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"Countess"</span><span class="p">)</span>
+<span class="gh">Out[8]: </span>
+<span class="go">0      False</span>
+<span class="go">1      False</span>
+<span class="go">2      False</span>
+<span class="go">3      False</span>
+<span class="go">4      False</span>
+<span class="go">       ...  </span>
+<span class="go">886    False</span>
+<span class="go">887    False</span>
+<span class="go">888    False</span>
+<span class="go">889    False</span>
+<span class="go">890    False</span>
+<span class="go">Name: Name, Length: 891, dtype: bool</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">titanic</span><span class="p">[</span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"Countess"</span><span class="p">)]</span>
+<span class="gh">Out[9]: </span>
+<span class="go">     PassengerId  Survived  Pclass  ... Cabin Embarked  Surname</span>
+<span class="go">759          760         1       1  ...   B77        S   Rothes</span>
+
+<span class="go">[1 rows x 13 columns]</span>
+</pre></div>
+</div>
+<p>(<em>对她的故事感兴趣？请看</em> <a class="reference external" href="https://en.wikipedia.org/wiki/No%C3%ABl_Leslie,_Countess_of_Rothes">维基百科</a><em>！</em>)</p>
+<p>字符串方法 <a class="reference internal" href="../../reference/api/pandas.Series.str.contains.html#pandas.Series.str.contains" title="pandas.Series.str.contains"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.contains()</span></code></a> 检查 <code class="docutils literal notranslate"><span class="pre">Name</span></code> 列中的每个值是否包含单词 <code class="docutils literal notranslate"><span class="pre">Countess</span></code>，并为每个值返回 <code class="docutils literal notranslate"><span class="pre">True</span></code>（<code class="docutils literal notranslate"><span class="pre">Countess</span></code> 是姓名的一部分）或 <code class="docutils literal notranslate"><span class="pre">False</span></code>（<code class="docutils literal notranslate"><span class="pre">Countess</span></code> 不是姓名的一部分）。此输出可用于使用<a class="reference internal" href="03_subset_data.html#min-tut-03-subset"><span class="std std-ref">数据子集教程</span></a>中引入的条件（布尔）索引来子选择数据。由于泰坦尼克号上只有一位女伯爵，我们得到了一行结果。</p>
+    </li>
+</ul><div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>字符串支持更强大的提取功能，因为 <a class="reference internal" href="../../reference/api/pandas.Series.str.contains.html#pandas.Series.str.contains" title="pandas.Series.str.contains"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.contains()</span></code></a> 和 <a class="reference internal" href="../../reference/api/pandas.Series.str.extract.html#pandas.Series.str.extract" title="pandas.Series.str.extract"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.extract()</span></code></a> 方法接受<a class="reference external" href="https://docs.pythonlang.cn/3/library/re.html">正则表达式</a>，但这超出了本教程的范围。</p>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">查看用户指南</span><p>有关提取字符串部分的更多信息，请参阅用户指南中关于<a class="reference internal" href="../../user_guide/text.html#text-extract"><span class="std std-ref">字符串匹配和提取</span></a>的部分。</p>
+</div><ul class="task-bullet">
+    <li><p>泰坦尼克号上哪位乘客的名字最长？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="gh">Out[10]: </span>
+<span class="go">0      23</span>
+<span class="go">1      51</span>
+<span class="go">2      22</span>
+<span class="go">3      44</span>
+<span class="go">4      24</span>
+<span class="go">       ..</span>
+<span class="go">886    21</span>
+<span class="go">887    28</span>
+<span class="go">888    40</span>
+<span class="go">889    21</span>
+<span class="go">890    19</span>
+<span class="go">Name: Name, Length: 891, dtype: int64</span>
+</pre></div>
+</div>
+<p>要获取最长的名字，我们首先需要获取 <code class="docutils literal notranslate"><span class="pre">Name</span></code> 列中每个名字的长度。通过使用 pandas 字符串方法，<a class="reference internal" href="../../reference/api/pandas.Series.str.len.html#pandas.Series.str.len" title="pandas.Series.str.len"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.len()</span></code></a> 函数将单独应用于每个名字（按元素）。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<span class="gh">Out[11]: </span><span class="go">307</span>
+</pre></div>
+</div>
+<p>接下来，我们需要获取表格中名字长度最长的对应位置，最好是索引标签。<a class="reference internal" href="../../reference/api/pandas.Series.idxmax.html#pandas.Series.idxmax" title="pandas.Series.idxmax"><code class="xref py py-meth docutils literal notranslate"><span class="pre">idxmax()</span></code></a> 方法正是为此而生。它不是字符串方法，而是应用于整数，因此不需要使用 <code class="docutils literal notranslate"><span class="pre">str</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(),</span> <span class="s2">"Name"</span><span class="p">]</span>
+<span class="gh">Out[12]: </span><span class="go">'Penasco y Castellana, Mrs. Victor de Satode (Maria Josefa Perez de Soto y Vallejo)'</span>
+</pre></div>
+</div>
+<p>根据行索引名称（<code class="docutils literal notranslate"><span class="pre">307</span></code>）和列（<code class="docutils literal notranslate"><span class="pre">Name</span></code>），我们可以使用<a class="reference internal" href="03_subset_data.html#min-tut-03-subset"><span class="std std-ref">子集化教程</span></a>中引入的 <code class="docutils literal notranslate"><span class="pre">loc</span></code> 运算符进行选择。</p>
+    </li>
+</ul><ul class="task-bullet">
+    <li><p>在“Sex”列中，将“male”的值替换为“M”，将“female”的值替换为“F”。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Sex_short"</span><span class="p">]</span> <span class="o">=</span> <span class="n">titanic</span><span class="p">[</span><span class="s2">"Sex"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">"male"</span><span class="p">:</span> <span class="s2">"M"</span><span class="p">,</span> <span class="s2">"female"</span><span class="p">:</span> <span class="s2">"F"</span><span class="p">})</span>
+
+<span class="gp">In [14]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Sex_short"</span><span class="p">]</span>
+<span class="gh">Out[14]: </span>
+<span class="go">0      M</span>
+<span class="go">1      F</span>
+<span class="go">2      F</span>
+<span class="go">3      F</span>
+<span class="go">4      M</span>
+<span class="go">      ..</span>
+<span class="go">886    M</span>
+<span class="go">887    F</span>
+<span class="go">888    F</span>
+<span class="go">889    M</span>
+<span class="go">890    M</span>
+<span class="go">Name: Sex_short, Length: 891, dtype: object</span>
+</pre></div>
+</div>
+<p>虽然 <a class="reference internal" href="../../reference/api/pandas.Series.replace.html#pandas.Series.replace" title="pandas.Series.replace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">replace()</span></code></a> 不是字符串方法，但它提供了一种方便的方式，可以使用映射或词汇表来转换特定值。它需要一个 <code class="docutils literal notranslate"><span class="pre">dictionary</span></code> 来定义映射 <code class="docutils literal notranslate"><span class="pre">{from</span> <span class="pre">:</span> <span class="pre">to}</span></code>。</p>
+    </li>
+</ul><div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>还有一个 <a class="reference internal" href="../../reference/api/pandas.Series.str.replace.html#pandas.Series.str.replace" title="pandas.Series.str.replace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">replace()</span></code></a> 方法可用于替换特定的字符集。但是，当有多个值的映射时，这将变得</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Sex_short"</span><span class="p">]</span> <span class="o">=</span> <span class="n">titanic</span><span class="p">[</span><span class="s2">"Sex"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"female"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">)</span>
+<span class="n">titanic</span><span class="p">[</span><span class="s2">"Sex_short"</span><span class="p">]</span> <span class="o">=</span> <span class="n">titanic</span><span class="p">[</span><span class="s2">"Sex_short"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"male"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>这将变得繁琐且容易出错。想象一下（或者自己尝试一下），如果这两个语句以相反的顺序应用会发生什么……</p>
+</div>
+<div class="shadow gs-callout gs-callout-remember">
+    <h4>记住</h4><ul class="simple">
+<li><p>字符串方法通过 <code class="docutils literal notranslate"><span class="pre">str</span></code> 访问器可用。</p></li>
+<li><p>字符串方法按元素工作，可用于条件索引。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">replace</span></code> 方法是一种根据给定字典转换值的便捷方法。</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">查看用户指南</span><p>在用户指南中关于<a class="reference internal" href="../../user_guide/text.html#text"><span class="std std-ref">处理文本数据</span></a>的页面中提供了完整概述。</p>
+</div></section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="09_timeseries.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">如何轻松处理时间序列数据</p> </div> </a> <a class="right-next" href="../comparison/index.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">与其他工具的比较</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/intro_tutorials/10_text_data.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源代码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

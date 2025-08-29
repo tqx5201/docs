@@ -1,0 +1,873 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>0.23.1 中的新特性（2018年6月12日）— pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whatsnew/v0.23.1';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="What’s new in 0.23.0 (May 15, 2018)" href="v0.23.0.html" />
+    <link rel="prev" title="What’s new in 0.23.2 (July 5, 2018)" href="v0.23.2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="v0.23.1.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.3.0.html">2.3.0 中的新特性（2025年6月4日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.2.3.html">2.2.3 中的新特性（2024年9月20日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.2.html">2.2.2 中的新特性（2024年4月10日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.1.html">2.2.1 中的新特性（2024年2月22日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.2.0.html">2.2.0 中的新特性（2024年1月19日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.1.4.html">2.1.4 中的新特性（2023年12月8日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.3.html">2.1.3 中的新特性（2023年11月10日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.2.html">2.1.2 中的新特性（2023年10月26日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.1.html">2.1.1 中的新特性（2023年9月20日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.1.0.html">2.1.0 中的新特性（2023年8月30日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v2.0.3.html">2.0.3 中的新特性（2023年6月28日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.2.html">2.0.2 中的新特性（2023年5月29日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.1.html">2.0.1 中的新特性（2023年4月24日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v2.0.0.html">2.0.0 中的新特性（2023年4月3日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.5.3.html">1.5.3 中的新特性（2023年1月18日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.2.html">1.5.2 中的新特性（2022年11月21日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.1.html">1.5.1 中的新特性（2022年10月19日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.5.0.html">1.5.0 中的新特性（2022年9月19日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.4.4.html">1.4.4 中的新特性（2022年8月31日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.3.html">1.4.3 中的新特性（2022年6月23日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.2.html">1.4.2 中的新特性（2022年4月2日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.1.html">1.4.1 中的新特性（2022年2月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.4.0.html">1.4.0 中的新特性（2022年1月22日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.3.5.html">1.3.5 中的新特性（2021年12月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.4.html">1.3.4 中的新特性（2021年10月17日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.3.html">1.3.3 中的新特性（2021年9月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.2.html">1.3.2 中的新特性（2021年8月15日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.1.html">1.3.1 中的新特性（2021年7月25日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.3.0.html">1.3.0 中的新特性（2021年7月2日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.2.5.html">1.2.5 中的新特性（2021年6月22日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.4.html">1.2.4 中的新特性（2021年4月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.3.html">1.2.3 中的新特性（2021年3月2日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.2.html">1.2.2 中的新特性（2021年2月9日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.1.html">1.2.1 中的新特性（2021年1月20日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.2.0.html">1.2.0 中的新特性（2020年12月26日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.1.5.html">1.1.5 中的新特性（2020年12月7日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.4.html">1.1.4 中的新特性（2020年10月30日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.3.html">1.1.3 中的新特性（2020年10月5日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.2.html">1.1.2 中的新特性（2020年9月8日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.1.html">1.1.1 中的新特性（2020年8月20日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.1.0.html">1.1.0 中的新特性（2020年7月28日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v1.0.5.html">1.0.5 中的新特性（2020年6月17日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.4.html">1.0.4 中的新特性（2020年5月28日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.3.html">1.0.3 中的新特性（2020年3月17日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.2.html">1.0.2 中的新特性（2020年3月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.1.html">1.0.1 中的新特性（2020年2月5日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v1.0.0.html">1.0.0 中的新特性（2020年1月29日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.25.3.html">0.25.3 中的新特性（2019年10月31日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.2.html">0.25.2 中的新特性（2019年10月15日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.1.html">0.25.1 中的新特性（2019年8月21日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.25.0.html">0.25.0 中的新特性（2019年7月18日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.24.2.html">0.24.2 中的新特性（2019年3月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.1.html">0.24.1 中的新特性（2019年2月3日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.24.0.html">0.24.0 中的新特性（2019年1月25日）</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.23.4.html">0.23.4 中的新特性（2018年8月3日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.3.html">0.23.3 中的新特性（2018年7月7日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.2.html">0.23.2 中的新特性（2018年7月5日）</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="v0.23.1.html#">0.23.1 中的新特性（2018年6月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.23.0.html">0.23.0 中的新特性（2018年5月15日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.22.0.html">版本 0.22.0（2017年12月29日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.21.1.html">版本 0.21.1（2017年12月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.21.0.html">版本 0.21.0（2017年10月27日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.20.3.html">版本 0.20.3（2017年7月7日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.2.html">版本 0.20.2（2017年6月4日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.20.0.html">版本 0.20.1（2017年5月5日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.19.2.html">版本 0.19.2（2016年12月24日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.1.html">版本 0.19.1（2016年11月3日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.19.0.html">版本 0.19.0（2016年10月2日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.18.1.html">版本 0.18.1（2016年5月3日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.18.0.html">版本 0.18.0（2016年3月13日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.17.1.html">版本 0.17.1（2015年11月21日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.17.0.html">版本 0.17.0（2015年10月9日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.16.2.html">版本 0.16.2（2015年6月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.1.html">版本 0.16.1（2015年5月11日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.16.0.html">版本 0.16.0（2015年3月22日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.15.2.html">版本 0.15.2（2014年12月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.1.html">版本 0.15.1（2014年11月9日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.15.0.html">版本 0.15.0（2014年10月18日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.14.1.html">版本 0.14.1（2014年7月11日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.14.0.html">版本 0.14.0（2014年5月31日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.13.1.html">版本 0.13.1（2014年2月3日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.13.0.html">版本 0.13.0（2014年1月3日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.12.0.html">版本 0.12.0（2013年7月24日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.11.0.html">版本 0.11.0（2013年4月22日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.10.1.html">版本 0.10.1（2013年1月22日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.10.0.html">版本 0.10.0（2012年12月17日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.9.1.html">版本 0.9.1（2012年11月14日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.9.0.html">版本 0.9.0（2012年10月7日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.8.1.html">版本 0.8.1（2012年7月22日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.8.0.html">版本 0.8.0（2012年6月29日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.7.3.html">版本 0.7.3（2012年4月12日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.2.html">版本 0.7.2（2012年3月16日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.1.html">版本 0.7.1（2012年2月29日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.7.0.html">版本 0.7.0（2012年2月9日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.6.1.html">版本 0.6.1（2011年12月13日）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="v0.6.0.html">版本 0.6.0（2011年11月25日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.5.0.html">版本 0.5.0（2011年10月24日）</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="v0.4.x.html">版本 0.4.1 至 0.4.3（2011年9月25日 - 10月9日）</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">发布说明</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">新特性...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="what-s-new-in-0-23-1-june-12-2018">
+<span id="whatsnew-0231"></span><h1>0.23.1 中的新特性（2018年6月12日）<a class="headerlink" href="v0.23.1.html#what-s-new-in-0-23-1-june-12-2018" title="Link to this heading">#</a></h1>
+<p>这是 0.23.x 系列的一个次要错误修复版本，包含一些小的回归修复和错误修复。我们建议所有用户升级到此版本。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>从2019年1月1日起，pandas 功能版本将仅支持 Python 3。详情请参阅<a class="reference external" href="https://pandas.ac.cn/pandas-docs/version/0.24/install.html#install-dropping-27">放弃 Python 2.7</a>。</p>
+</div>
+<nav class="contents local" id="what-s-new-in-v0-23-1">
+<p class="topic-title">v0.23.1 中的新特性</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="v0.23.1.html#fixed-regressions" id="id1">回归修复</a></p></li>
+<li><p><a class="reference internal" href="v0.23.1.html#performance-improvements" id="id2">性能改进</a></p></li>
+<li><p><a class="reference internal" href="v0.23.1.html#bug-fixes" id="id3">错误修复</a></p></li>
+<li><p><a class="reference internal" href="v0.23.1.html#contributors" id="id4">贡献者</a></p></li>
+</ul>
+</nav>
+<section id="fixed-regressions">
+<span id="whatsnew-0231-fixed-regressions"></span><h2>回归修复<a class="headerlink" href="v0.23.1.html#fixed-regressions" title="Link to this heading">#</a></h2>
+<p><strong>将 Series 与 datetime.date 进行比较</strong></p>
+<p>我们已撤销 0.23.0 中将包含日期时间的 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 与 <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> 对象进行比较的更改（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21152">GH 21152</a>）。在 pandas 0.22 及更早版本中，比较包含日期时间的 Series 和 <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> 对象会将 <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> 强制转换为 datetime 后再进行比较。这与 Python、NumPy 和 <a class="reference internal" href="../reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex" title="pandas.DatetimeIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code></a> 不一致，它们从不认为 datetime 和 <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> 相等。</p>
+<p>在 0.23.0 中，我们统一了 DatetimeIndex 和 Series 之间的操作，并在此过程中更改了日期时间 Series 与 <code class="docutils literal notranslate"><span class="pre">datetime.date</span></code> 之间的比较方式，且未发出警告。</p>
+<p>我们已暂时恢复 0.22.0 的行为，因此日期时间和日期可能会再次比较相等，但将在未来版本中恢复 0.23.0 的行为。</p>
+<p>总结一下，以下是 0.22.0、0.23.0、0.23.1 中的行为：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 0.22.0... Silently coerce the datetime.date</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">'2017'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">0</span>     <span class="kc">True</span>
+<span class="mi">1</span>    <span class="kc">False</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
+
+<span class="c1"># 0.23.0... Do not coerce the datetime.date</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">'2017'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">0</span>    <span class="kc">False</span>
+<span class="mi">1</span>    <span class="kc">False</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
+
+<span class="c1"># 0.23.1... Coerce the datetime.date with a warning</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">'2017'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span> <span class="ne">FutureWarning</span><span class="p">:</span> <span class="n">Comparing</span> <span class="n">Series</span> <span class="n">of</span> <span class="n">datetimes</span> <span class="k">with</span> <span class="s1">'datetime.date'</span><span class="o">.</span>  <span class="n">Currently</span><span class="p">,</span> <span class="n">the</span>
+<span class="s1">'datetime.date'</span> <span class="ow">is</span> <span class="n">coerced</span> <span class="n">to</span> <span class="n">a</span> <span class="n">datetime</span><span class="o">.</span> <span class="n">In</span> <span class="n">the</span> <span class="n">future</span> <span class="n">pandas</span> <span class="n">will</span>
+<span class="ow">not</span> <span class="n">coerce</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">values</span> <span class="ow">not</span> <span class="n">compare</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="s1">'datetime.date'</span><span class="o">.</span>
+<span class="n">To</span> <span class="n">retain</span> <span class="n">the</span> <span class="n">current</span> <span class="n">behavior</span><span class="p">,</span> <span class="n">convert</span> <span class="n">the</span> <span class="s1">'datetime.date'</span> <span class="n">to</span> <span class="n">a</span>
+<span class="n">datetime</span> <span class="k">with</span> <span class="s1">'pd.Timestamp'</span><span class="o">.</span>
+  <span class="c1">#!/bin/python3</span>
+<span class="mi">0</span>     <span class="kc">True</span>
+<span class="mi">1</span>    <span class="kc">False</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
+</pre></div>
+</div>
+<p>此外，排序比较在未来将引发 <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>。</p>
+<p><strong>其他修复</strong></p>
+<ul class="simple">
+<li><p>已恢复 <a class="reference internal" href="../reference/api/pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_sql()</span></code></a> 执行多值插入的功能，因为这在某些情况下会导致回归（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21103">GH 21103</a>）。未来这将可配置。</p></li>
+<li><p>修复了在时区感知数据中 <a class="reference internal" href="../reference/api/pandas.DatetimeIndex.date.html#pandas.DatetimeIndex.date" title="pandas.DatetimeIndex.date"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DatetimeIndex.date</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DatetimeIndex.time.html#pandas.DatetimeIndex.time" title="pandas.DatetimeIndex.time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DatetimeIndex.time</span></code></a> 属性的回归：<a class="reference internal" href="../reference/api/pandas.DatetimeIndex.time.html#pandas.DatetimeIndex.time" title="pandas.DatetimeIndex.time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DatetimeIndex.time</span></code></a> 返回了时区感知时间而不是时区非感知时间（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21267">GH 21267</a>），以及当输入日期具有非 UTC 时区时，<a class="reference internal" href="../reference/api/pandas.DatetimeIndex.date.html#pandas.DatetimeIndex.date" title="pandas.DatetimeIndex.date"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DatetimeIndex.date</span></code></a> 返回了不正确的日期（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21230">GH 21230</a>）。</p></li>
+<li><p>修复了当 <code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.io.json.json_normalize()</span></code> 在 JSON 嵌套级别中遇到 <code class="docutils literal notranslate"><span class="pre">None</span></code> 值时的回归，并确保不删除值为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 的键（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21158">GH 21158</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21356">GH 21356</a>）。</p></li>
+<li><p>当同时指定压缩和编码时，<a class="reference internal" href="../reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" title="pandas.DataFrame.to_csv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_csv()</span></code></a> 中的错误导致编码错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21241">GH 21241</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21118">GH 21118</a>）</p></li>
+<li><p>阻止 pandas 在使用 -OO 优化时导入的错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21071">GH 21071</a>）</p></li>
+<li><p>当 <code class="docutils literal notranslate"><span class="pre">value</span></code> 的个别类别是可迭代对象且 <code class="docutils literal notranslate"><span class="pre">value</span></code> 也是一个可迭代对象时，<code class="xref py py-meth docutils literal notranslate"><span class="pre">Categorical.fillna()</span></code> 中错误地引发 <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> 的错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21097">GH 21097</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/19788">GH 19788</a>）</p></li>
+<li><p>修复了构造函数在传入 <code class="docutils literal notranslate"><span class="pre">dtype=str</span></code> 时将 <code class="docutils literal notranslate"><span class="pre">None</span></code> 等 NA 值强制转换为字符串的回归（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21083">GH 21083</a>）</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">pivot_table()</span></code></a> 中，当 pivot 的 <code class="docutils literal notranslate"><span class="pre">index</span></code> 包含缺失值的有序 <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> 时，会产生不对齐结果的回归（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21133">GH 21133</a>）</p></li>
+<li><p>修复了在布尔索引/列上合并的回归（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21119">GH 21119</a>）。</p></li>
+</ul>
+</section>
+<section id="performance-improvements">
+<span id="whatsnew-0231-performance"></span><h2>性能改进<a class="headerlink" href="v0.23.1.html#performance-improvements" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>改进了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">CategoricalIndex.is_monotonic_increasing()</span></code>、<code class="xref py py-meth docutils literal notranslate"><span class="pre">CategoricalIndex.is_monotonic_decreasing()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">CategoricalIndex.is_monotonic()</span></code> 的性能（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21025">GH 21025</a>）</p></li>
+<li><p>改进了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">CategoricalIndex.is_unique()</span></code> 的性能（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21107">GH 21107</a>）</p></li>
+</ul>
+</section>
+<section id="bug-fixes">
+<span id="whatsnew-0231-bug-fixes"></span><h2>错误修复<a class="headerlink" href="v0.23.1.html#bug-fixes" title="Link to this heading">#</a></h2>
+<p><strong>分组/重采样/滚动操作</strong></p>
+<ul class="simple">
+<li><p>当对具有重复列名的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 应用多个聚合函数时，<a class="reference internal" href="../reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg" title="pandas.DataFrame.agg"><code class="xref py py-func docutils literal notranslate"><span class="pre">DataFrame.agg()</span></code></a> 中的错误会导致堆栈溢出（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21063">GH 21063</a>）</p></li>
+<li><p>在 <code class="xref py py-func docutils literal notranslate"><span class="pre">GroupBy.ffill()</span></code> 和 <code class="xref py py-func docutils literal notranslate"><span class="pre">GroupBy.bfill()</span></code> 中存在的错误，由于实现中使用了非稳定排序，导致分组内的填充不总是按预期应用（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21207">GH 21207</a>）</p></li>
+<li><p>在 <code class="xref py py-func docutils literal notranslate"><span class="pre">GroupBy.rank()</span></code> 中存在的错误，当指定 <code class="docutils literal notranslate"><span class="pre">method='dense'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">pct=True</span></code> 时，结果未能缩放到 100%</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.DataFrame.rolling.html#pandas.DataFrame.rolling" title="pandas.DataFrame.rolling"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.DataFrame.rolling()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.Series.rolling.html#pandas.Series.rolling" title="pandas.Series.rolling"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.Series.rolling()</span></code></a> 中存在的错误，其错误地接受了窗口大小为 0 而不是引发异常（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21286">GH 21286</a>）</p></li>
+</ul>
+<p><strong>数据类型特定</strong></p>
+<ul class="simple">
+<li><p>在 Python 3.5.2 上，<a class="reference internal" href="../reference/api/pandas.Series.str.replace.html#pandas.Series.str.replace" title="pandas.Series.str.replace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.replace()</span></code></a> 方法会抛出 <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> 的错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21078">GH 21078</a>）</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.Timedelta.html#pandas.Timedelta" title="pandas.Timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Timedelta</span></code></a> 中存在的错误，当传入带单位的浮点数时，会过早地对浮点精度进行四舍五入（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/14156">GH 14156</a>）</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.testing.assert_index_equal.html#pandas.testing.assert_index_equal" title="pandas.testing.assert_index_equal"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.testing.assert_index_equal()</span></code></a> 中存在的错误，当比较两个 <a class="reference internal" href="../reference/api/pandas.CategoricalIndex.html#pandas.CategoricalIndex" title="pandas.CategoricalIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">CategoricalIndex</span></code></a> 对象且参数 <code class="docutils literal notranslate"><span class="pre">check_categorical=False</span></code> 时，错误地引发了 <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code>（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/19776">GH 19776</a>）</p></li>
+</ul>
+<p><strong>稀疏</strong></p>
+<ul class="simple">
+<li><p>在 <code class="xref py py-attr docutils literal notranslate"><span class="pre">SparseArray.shape</span></code> 中存在的错误，之前它只返回 <code class="xref py py-attr docutils literal notranslate"><span class="pre">SparseArray.sp_values</span></code> 的形状（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21126">GH 21126</a>）</p></li>
+</ul>
+<p><strong>索引</strong></p>
+<ul class="simple">
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.Series.reset_index.html#pandas.Series.reset_index" title="pandas.Series.reset_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.reset_index()</span></code></a> 中存在的错误，当使用无效的级别名称时，未引发适当的错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/20925">GH 20925</a>）</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.interval_range.html#pandas.interval_range" title="pandas.interval_range"><code class="xref py py-func docutils literal notranslate"><span class="pre">interval_range()</span></code></a> 中存在的错误，当使用浮点数 <code class="docutils literal notranslate"><span class="pre">start</span></code> 或 <code class="docutils literal notranslate"><span class="pre">end</span></code> 指定 <code class="docutils literal notranslate"><span class="pre">start</span></code>/<code class="docutils literal notranslate"><span class="pre">periods</span></code> 或 <code class="docutils literal notranslate"><span class="pre">end</span></code>/<code class="docutils literal notranslate"><span class="pre">periods</span></code> 时（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21161">GH 21161</a>）</p></li>
+<li><p>在 <code class="xref py py-meth docutils literal notranslate"><span class="pre">MultiIndex.set_names()</span></code> 中存在的错误，当 <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> 的 <code class="docutils literal notranslate"><span class="pre">nlevels</span> <span class="pre">==</span> <span class="pre">1</span></code> 时会引发错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21149">GH 21149</a>）</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.IntervalIndex.html#pandas.IntervalIndex" title="pandas.IntervalIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntervalIndex</span></code></a> 构造函数中存在的错误，从分类数据创建 <code class="docutils literal notranslate"><span class="pre">IntervalIndex</span></code> 未得到完全支持（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21243">GH 21243</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21253">GH 21253</a>）</p></li>
+<li><p>在 <code class="xref py py-meth docutils literal notranslate"><span class="pre">MultiIndex.sort_index()</span></code> 中存在的错误，无法保证在 <code class="docutils literal notranslate"><span class="pre">level=1</span></code> 时正确排序；这也导致了特定 <a class="reference internal" href="../reference/api/pandas.DataFrame.stack.html#pandas.DataFrame.stack" title="pandas.DataFrame.stack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.stack()</span></code></a> 操作中的数据错位（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/20994">GH 20994</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/20945">GH 20945</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21052">GH 21052</a>）</p></li>
+</ul>
+<p><strong>绘图</strong></p>
+<ul class="simple">
+<li><p>新增关键字 (sharex, sharey) 用于开启/关闭由 pandas.DataFrame().groupby().boxplot() 生成的子图的 x/y 轴共享功能（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/20968">GH 20968</a>）</p></li>
+</ul>
+<p><strong>I/O</strong></p>
+<ul class="simple">
+<li><p>在指定 <code class="docutils literal notranslate"><span class="pre">compression='zip'</span></code> 的 I/O 方法中存在的错误，导致生成未压缩的 zip 归档文件（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/17778">GH 17778</a>, <a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21144">GH 21144</a>）</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.DataFrame.to_stata.html#pandas.DataFrame.to_stata" title="pandas.DataFrame.to_stata"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_stata()</span></code></a> 中存在的错误，阻止了将 DataFrame 导出到缓冲区和大多数类文件对象（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21041">GH 21041</a>）</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.read_stata.html#pandas.read_stata" title="pandas.read_stata"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_stata()</span></code></a> 和 <code class="xref py py-class docutils literal notranslate"><span class="pre">StataReader</span></code> 中存在的错误，在 Python 3 上未能正确解码 Stata 14 文件（dta 版本 118）中的 utf-8 字符串（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21244">GH 21244</a>）</p></li>
+<li><p>在 I/O JSON <a class="reference internal" href="../reference/api/pandas.read_json.html#pandas.read_json" title="pandas.read_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_json()</span></code></a> 中存在的错误，当使用 <code class="docutils literal notranslate"><span class="pre">orient='table'</span></code> 读取空 JSON 模式并转换回 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 时导致错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21287">GH 21287</a>）</p></li>
+</ul>
+<p><strong>重塑</strong></p>
+<ul class="simple">
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> 中存在的错误，当将 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 与 numpy 标量和元组名称连接时会引发错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21015">GH 21015</a>）</p></li>
+<li><p>在 <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> 警告消息中存在的错误，提供了关于未来行为的错误指导（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21101">GH 21101</a>）</p></li>
+</ul>
+<p><strong>其他</strong></p>
+<ul class="simple">
+<li><p>在 IPython 中对 <a class="reference internal" href="../reference/api/pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a> 进行 Tab 补全不再输出弃用警告（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21125">GH 21125</a>）</p></li>
+<li><p>阻止 pandas 在未安装 C++ 可再发行组件的 Windows 上使用的错误（<a class="extlink-issue reference external" href="https://github.com/pandas-dev/pandas/issues/21106">GH 21106</a>）</p></li>
+</ul>
+</section>
+<section id="contributors">
+<span id="whatsnew-0-23-1-contributors"></span><h2>贡献者<a class="headerlink" href="v0.23.1.html#contributors" title="Link to this heading">#</a></h2>
+<p>共有 30 人为本次发布贡献了补丁。名字旁边带有“+”的人是首次贡献补丁。</p>
+<ul class="simple">
+<li><p>Adam J. Stewart</p></li>
+<li><p>Adam Kim +</p></li>
+<li><p>Aly Sivji</p></li>
+<li><p>Chalmer Lowe +</p></li>
+<li><p>Damini Satya +</p></li>
+<li><p>Dr. Irv</p></li>
+<li><p>Gabe Fernando +</p></li>
+<li><p>Giftlin Rajaiah</p></li>
+<li><p>Jeff Reback</p></li>
+<li><p>Jeremy Schendel +</p></li>
+<li><p>Joris Van den Bossche</p></li>
+<li><p>Kalyan Gokhale +</p></li>
+<li><p>Kevin Sheppard</p></li>
+<li><p>Matthew Roeschke</p></li>
+<li><p>Max Kanter +</p></li>
+<li><p>Ming Li</p></li>
+<li><p>Pyry Kovanen +</p></li>
+<li><p>Stefano Cianciulli</p></li>
+<li><p>Tom Augspurger</p></li>
+<li><p>Uddeshya Singh +</p></li>
+<li><p>Wenhuan</p></li>
+<li><p>William Ayd</p></li>
+<li><p>chris-b1</p></li>
+<li><p>gfyoung</p></li>
+<li><p>h-vetinari</p></li>
+<li><p>nprad +</p></li>
+<li><p>ssikdar1 +</p></li>
+<li><p>tmnhat2001</p></li>
+<li><p>topper-123</p></li>
+<li><p>zertrin +</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="v0.23.2.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">0.23.2 中的新特性（2018年7月5日）</p> </div> </a> <a class="right-next" href="v0.23.0.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">0.23.0 中的新特性（2018年5月15日）</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="v0.23.1.html#fixed-regressions">回归修复</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="v0.23.1.html#performance-improvements">性能改进</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="v0.23.1.html#bug-fixes">错误修复</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="v0.23.1.html#contributors">贡献者</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/whatsnew/v0.23.1.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas，由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 提供。托管方 <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

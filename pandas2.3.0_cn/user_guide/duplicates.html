@@ -1,0 +1,975 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>重复标签 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/duplicates';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Categorical data" href="categorical.html" />
+    <link rel="prev" title="Working with missing data" href="missing_data.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="duplicates.html#main-content">跳到主内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10min.html">pandas 10 分钟</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本核心功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具（文本、CSV、HDF5 等）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引和数据选择</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">MultiIndex / 高级索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、拼接和比较</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">重塑和数据透视表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">处理文本数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">处理缺失数据</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="duplicates.html#">重复标签</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可空整数数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可空布尔数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">图表可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组：拆分-应用-组合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">提升性能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">扩展到大型数据集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">操作手册</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">用户指南</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">重复标签</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="duplicate-labels">
+<span id="duplicates"></span><h1>重复标签<a class="headerlink" href="duplicates.html#duplicate-labels" title="Link to this heading">#</a></h1>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code> 对象不要求是唯一的；你可以有重复的行或列标签。这最初可能有点令人困惑。如果你熟悉 SQL，你会知道行标签类似于表中的主键，并且你绝不希望 SQL 表中出现重复项。但是 pandas 的作用之一是在数据进入下游系统之前，清理杂乱的真实世界数据。而真实世界的数据确实存在重复项，即使在那些本应是唯一值的字段中也是如此。</p>
+<p>本节描述了重复标签如何改变某些操作的行为，以及如何防止操作过程中出现重复项，或者如何在出现重复项时检测它们。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="gp">In [2]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<section id="consequences-of-duplicate-labels">
+<h2>重复标签的后果<a class="headerlink" href="duplicates.html#consequences-of-duplicate-labels" title="Link to this heading">#</a></h2>
+<p>某些 pandas 方法（例如 <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.reindex()</span></code>）在存在重复项时无法工作。此时输出无法确定，因此 pandas 会引发错误。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span>
+
+<span class="gp">In [4]: </span><span class="n">s1</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">])</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">s1</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">])</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/series.py:5164,</span> in <span class="ni">Series.reindex</span><span class="nt">(self, index, axis, method, copy, level, fill_value, limit, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5147</span> <span class="nd">@doc</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5148</span>     <span class="n">NDFrame</span><span class="o">.</span><span class="n">reindex</span><span class="p">,</span>  <span class="c1"># type: ignore[has-type]</span>
+<span class="g g-Whitespace">   </span><span class="mi">5149</span>     <span class="n">klass</span><span class="o">=</span><span class="n">_shared_doc_kwargs</span><span class="p">[</span><span class="s2">"klass"</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5162</span>     <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5163</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Series</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">5164</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5165</span>         <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5166</span>         <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5167</span>         <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5168</span>         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5169</span>         <span class="n">fill_value</span><span class="o">=</span><span class="n">fill_value</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5170</span>         <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5171</span>         <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5172</span>     <span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/generic.py:5629,</span> in <span class="ni">NDFrame.reindex</span><span class="nt">(self, labels, index, columns, axis, method, copy, level, fill_value, limit, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5626</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reindex_multi</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5628</span> <span class="c1"># perform the reindex on the axes</span>
+<span class="ne">-&gt; </span><span class="mi">5629</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reindex_axes</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5630</span>     <span class="n">axes</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">fill_value</span><span class="p">,</span> <span class="n">copy</span>
+<span class="g g-Whitespace">   </span><span class="mi">5631</span> <span class="p">)</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"reindex"</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/generic.py:5652,</span> in <span class="ni">NDFrame._reindex_axes</span><span class="nt">(self, axes, level, limit, tolerance, method, fill_value, copy)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5649</span>     <span class="k">continue</span>
+<span class="g g-Whitespace">   </span><span class="mi">5651</span> <span class="n">ax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_axis</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">5652</span> <span class="n">new_index</span><span class="p">,</span> <span class="n">indexer</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5653</span>     <span class="n">labels</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span>
+<span class="g g-Whitespace">   </span><span class="mi">5654</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5656</span> <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_axis_number</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5657</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">_reindex_with_indexers</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5658</span>     <span class="p">{</span><span class="n">axis</span><span class="p">:</span> <span class="p">[</span><span class="n">new_index</span><span class="p">,</span> <span class="n">indexer</span><span class="p">]},</span>
+<span class="g g-Whitespace">   </span><span class="mi">5659</span>     <span class="n">fill_value</span><span class="o">=</span><span class="n">fill_value</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5660</span>     <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5661</span>     <span class="n">allow_dups</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5662</span> <span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/indexes/base.py:4436,</span> in <span class="ni">Index.reindex</span><span class="nt">(self, target, method, level, limit, tolerance)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4433</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"cannot handle a non-unique multi-index!"</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4434</span> <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_unique</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4435</span>     <span class="c1"># GH#42568</span>
+<span class="ne">-&gt; </span><span class="mi">4436</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"cannot reindex on an axis with duplicate labels"</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4437</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4438</span>     <span class="n">indexer</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indexer_non_unique</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: cannot reindex on an axis with duplicate labels
+</pre></div>
+</div>
+<p>其他方法，如索引，可能会给出非常令人惊讶的结果。通常，使用标量进行索引会 <em>降低维度</em>。使用标量对 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 进行切片将返回一个 <code class="docutils literal notranslate"><span class="pre">Series</span></code>。使用标量对 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 进行切片将返回一个标量。但存在重复项时，情况并非如此。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+
+<span class="gp">In [6]: </span><span class="n">df1</span>
+<span class="gh">Out[6]: </span>
+<span class="go">   A  A  B</span>
+<span class="go">0  0  1  2</span>
+<span class="go">1  3  4  5</span>
+</pre></div>
+</div>
+<p>列中存在重复项。如果我们对 <code class="docutils literal notranslate"><span class="pre">'B'</span></code> 进行切片，我们会得到一个 <code class="docutils literal notranslate"><span class="pre">Series</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">df1</span><span class="p">[</span><span class="s2">"B"</span><span class="p">]</span>  <span class="c1"># a series</span>
+<span class="gh">Out[7]: </span>
+<span class="go">0    2</span>
+<span class="go">1    5</span>
+<span class="go">Name: B, dtype: int64</span>
+</pre></div>
+</div>
+<p>但对 <code class="docutils literal notranslate"><span class="pre">'A'</span></code> 进行切片会返回一个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">df1</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>  <span class="c1"># a DataFrame</span>
+<span class="gh">Out[8]: </span>
+<span class="go">   A  A</span>
+<span class="go">0  0  1</span>
+<span class="go">1  3  4</span>
+</pre></div>
+</div>
+<p>这同样适用于行标签。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"A"</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span>
+
+<span class="gp">In [10]: </span><span class="n">df2</span>
+<span class="gh">Out[10]: </span>
+<span class="go">   A</span>
+<span class="go">a  0</span>
+<span class="go">a  1</span>
+<span class="go">b  2</span>
+
+<span class="gp">In [11]: </span><span class="n">df2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"b"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]</span>  <span class="c1"># a scalar</span>
+<span class="gh">Out[11]: </span><span class="go">2</span>
+
+<span class="gp">In [12]: </span><span class="n">df2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">]</span>  <span class="c1"># a Series</span>
+<span class="gh">Out[12]: </span>
+<span class="go">a    0</span>
+<span class="go">a    1</span>
+<span class="go">Name: A, dtype: int64</span>
+</pre></div>
+</div>
+</section>
+<section id="duplicate-label-detection">
+<h2>重复标签检测<a class="headerlink" href="duplicates.html#duplicate-label-detection" title="Link to this heading">#</a></h2>
+<p>您可以使用 <code class="xref py py-attr docutils literal notranslate"><span class="pre">Index.is_unique</span></code> 检查 <code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code>（存储行或列标签）是否唯一。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">df2</span>
+<span class="gh">Out[13]: </span>
+<span class="go">   A</span>
+<span class="go">a  0</span>
+<span class="go">a  1</span>
+<span class="go">b  2</span>
+
+<span class="gp">In [14]: </span><span class="n">df2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">is_unique</span>
+<span class="gh">Out[14]: </span><span class="go">False</span>
+
+<span class="gp">In [15]: </span><span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">is_unique</span>
+<span class="gh">Out[15]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>对于大型数据集，检查索引是否唯一会消耗一定的资源。pandas 会缓存此结果，因此在同一索引上重新检查会非常快。</p>
+</div>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Index.duplicated()</span></code> 将返回一个布尔 ndarray，指示标签是否重复。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">df2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span>
+<span class="gh">Out[16]: </span><span class="go">array([False,  True, False])</span>
+</pre></div>
+</div>
+<p>这可以作为布尔过滤器来删除重复行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">df2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">df2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(),</span> <span class="p">:]</span>
+<span class="gh">Out[17]: </span>
+<span class="go">   A</span>
+<span class="go">a  0</span>
+<span class="go">b  2</span>
+</pre></div>
+</div>
+<p>如果您需要额外的逻辑来处理重复标签，而不仅仅是删除重复项，那么在索引上使用 <code class="xref py py-meth docutils literal notransrate"><span class="pre">groupby()</span></code> 是一个常用技巧。例如，我们将通过取所有具有相同标签的行的平均值来解决重复问题。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[18]: </span>
+<span class="go">     A</span>
+<span class="go">a  0.5</span>
+<span class="go">b  2.0</span>
+</pre></div>
+</div>
+</section>
+<section id="disallowing-duplicate-labels">
+<span id="duplicates-disallow"></span><h2>禁止重复标签<a class="headerlink" href="duplicates.html#disallowing-duplicate-labels" title="Link to this heading">#</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">1.2.0 版本新增。</span></p>
+</div>
+<p>如上所述，在读取原始数据时，处理重复项是一项重要功能。话虽如此，您可能希望避免在数据处理管道中（例如来自 <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.concat()</span></code></a>、<code class="xref py py-meth docutils literal notranslate"><span class="pre">rename()</span></code> 等方法）引入重复项。<code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code> 和 <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> 都通过调用 <code class="docutils literal notranslate"><span class="pre">.set_flags(allows_duplicate_labels=False)</span></code> 来 <em>禁止</em> 重复标签。（默认是允许它们）。如果存在重复标签，将引发异常。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span><span class="o">.</span><span class="n">set_flags</span><span class="p">(</span><span class="n">allows_duplicate_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">DuplicateLabelError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span><span class="o">.</span><span class="n">set_flags</span><span class="p">(</span><span class="n">allows_duplicate_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/generic.py:508,</span> in <span class="ni">NDFrame.set_flags</span><span class="nt">(self, copy, allows_duplicate_labels)</span>
+<span class="g g-Whitespace">    </span><span class="mi">506</span> <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="n">copy</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">using_copy_on_write</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">507</span> <span class="k">if</span> <span class="n">allows_duplicate_labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">508</span>     <span class="n">df</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s2">"allows_duplicate_labels"</span><span class="p">]</span> <span class="o">=</span> <span class="n">allows_duplicate_labels</span>
+<span class="g g-Whitespace">    </span><span class="mi">509</span> <span class="k">return</span> <span class="n">df</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/flags.py:109,</span> in <span class="ni">Flags.__setitem__</span><span class="nt">(self, key, value)</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown flag </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">. Must be one of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">109</span> <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/flags.py:96,</span> in <span class="ni">Flags.allows_duplicate_labels</span><span class="nt">(self, value)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>         <span class="n">ax</span><span class="o">.</span><span class="n">_maybe_check_unique</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allows_duplicate_labels</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/indexes/base.py:716,</span> in <span class="ni">Index._maybe_check_unique</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">713</span> <span class="n">duplicates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_duplicate_message</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">714</span> <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">duplicates</span><span class="si">}</span><span class="s2">"</span>
+<span class="ne">--&gt; </span><span class="mi">716</span> <span class="k">raise</span> <span class="n">DuplicateLabelError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="ne">DuplicateLabelError</span>: Index has duplicates.
+      <span class="n">positions</span>
+<span class="n">label</span>          
+<span class="n">b</span>        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>这适用于 <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> 的行和列标签。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">],)</span><span class="o">.</span><span class="n">set_flags</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">allows_duplicate_labels</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[20]: </span>
+<span class="go">   A  B  C</span>
+<span class="go">0  0  1  2</span>
+<span class="go">1  3  4  5</span>
+</pre></div>
+</div>
+<p>此属性可以通过 <code class="xref py py-attr docutils literal notranslate"><span class="pre">allows_duplicate_labels</span></code> 进行检查或设置，它指示该对象是否可以有重复标签。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"A"</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"x"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">,</span> <span class="s2">"X"</span><span class="p">,</span> <span class="s2">"Y"</span><span class="p">])</span><span class="o">.</span><span class="n">set_flags</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">allows_duplicate_labels</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [22]: </span><span class="n">df</span>
+<span class="gh">Out[22]: </span>
+<span class="go">   A</span>
+<span class="go">x  0</span>
+<span class="go">y  1</span>
+<span class="go">X  2</span>
+<span class="go">Y  3</span>
+
+<span class="gp">In [23]: </span><span class="n">df</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span>
+<span class="gh">Out[23]: </span><span class="go">False</span>
+</pre></div>
+</div>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.set_flags()</span></code> 可用于返回一个新的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>，其 <code class="docutils literal notranslate"><span class="pre">allows_duplicate_labels</span></code> 等属性设置为某个值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_flags</span><span class="p">(</span><span class="n">allows_duplicate_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [25]: </span><span class="n">df2</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span>
+<span class="gh">Out[25]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<p>返回的新 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 是旧 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 相同数据的视图。或者该属性可以直接在同一个对象上设置。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">df2</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="gp">In [27]: </span><span class="n">df2</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span>
+<span class="gh">Out[27]: </span><span class="go">False</span>
+</pre></div>
+</div>
+<p>在处理原始的、杂乱的数据时，您可能会首先读取这些杂乱数据（其中可能包含重复标签），然后去重，并在后续操作中禁止重复，以确保您的数据管道不会引入重复项。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"..."</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deduplicated</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>  <span class="c1"># remove duplicates</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deduplicated</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># disallow going forward</span>
+</pre></div>
+</div>
+<p>在包含重复标签的 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 上设置 <code class="docutils literal notranslate"><span class="pre">allows_duplicate_labels=False</span></code>，或在禁止重复标签的 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 上执行引入重复标签的操作，将引发 <code class="xref py py-class docutils literal notranslate"><span class="pre">errors.DuplicateLabelError</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">DuplicateLabelError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/frame.py:5774,</span> in <span class="ni">DataFrame.rename</span><span class="nt">(self, mapper, index, columns, axis, copy, inplace, level, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5643</span> <span class="k">def</span><span class="w"> </span><span class="nf">rename</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5644</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5645</span>     <span class="n">mapper</span><span class="p">:</span> <span class="n">Renamer</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5653</span>     <span class="n">errors</span><span class="p">:</span> <span class="n">IgnoreRaise</span> <span class="o">=</span> <span class="s2">"ignore"</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5654</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">5655</span><span class="w">     </span><span class="sd">"""</span>
+<span class="g g-Whitespace">   </span><span class="mi">5656</span><span class="sd">     Rename columns or index labels.</span>
+<span class="g g-Whitespace">   </span><span class="mi">5657</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5772</span><span class="sd">     4  3  6</span>
+<span class="g g-Whitespace">   </span><span class="mi">5773</span><span class="sd">     """</span>
+<span class="ne">-&gt; </span><span class="mi">5774</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_rename</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5775</span>         <span class="n">mapper</span><span class="o">=</span><span class="n">mapper</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5776</span>         <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5777</span>         <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5778</span>         <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5779</span>         <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5780</span>         <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5781</span>         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5782</span>         <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5783</span>     <span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/generic.py:1140,</span> in <span class="ni">NDFrame._rename</span><span class="nt">(self, mapper, index, columns, axis, copy, inplace, level, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1138</span>     <span class="k">return</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1139</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1140</span>     <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rename"</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/generic.py:6281,</span> in <span class="ni">NDFrame.__finalize__</span><span class="nt">(self, other, method, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6274</span> <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6275</span>     <span class="c1"># We want attrs propagation to have minimal performance</span>
+<span class="g g-Whitespace">   </span><span class="mi">6276</span>     <span class="c1"># impact if attrs are not used; i.e. attrs is an empty dict.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6277</span>     <span class="c1"># One could make the deepcopy unconditionally, but a deepcopy</span>
+<span class="g g-Whitespace">   </span><span class="mi">6278</span>     <span class="c1"># of an empty dict is 50x more expensive than the empty check.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6279</span>     <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">6281</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span>
+<span class="g g-Whitespace">   </span><span class="mi">6282</span> <span class="c1"># For subclasses using _metadata.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6283</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_metadata</span><span class="p">):</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/flags.py:96,</span> in <span class="ni">Flags.allows_duplicate_labels</span><span class="nt">(self, value)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>         <span class="n">ax</span><span class="o">.</span><span class="n">_maybe_check_unique</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allows_duplicate_labels</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/indexes/base.py:716,</span> in <span class="ni">Index._maybe_check_unique</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">713</span> <span class="n">duplicates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_duplicate_message</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">714</span> <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">duplicates</span><span class="si">}</span><span class="s2">"</span>
+<span class="ne">--&gt; </span><span class="mi">716</span> <span class="k">raise</span> <span class="n">DuplicateLabelError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="ne">DuplicateLabelError</span>: Index has duplicates.
+      <span class="n">positions</span>
+<span class="n">label</span>          
+<span class="n">X</span>        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">Y</span>        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>此错误消息包含重复的标签，以及 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中所有重复项（包括“原始项”）的数字位置。</p>
+<section id="duplicate-label-propagation">
+<h3>重复标签传播<a class="headerlink" href="duplicates.html#duplicate-label-propagation" title="Link to this heading">#</a></h3>
+<p>通常，禁止重复是“粘性的”。它在操作中会保留。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span><span class="o">.</span><span class="n">set_flags</span><span class="p">(</span><span class="n">allows_duplicate_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="gp">In [30]: </span><span class="n">s1</span>
+<span class="gh">Out[30]: </span>
+<span class="go">a    0</span>
+<span class="go">b    0</span>
+<span class="go">dtype: int64</span>
+
+<span class="gp">In [31]: </span><span class="n">s1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="s2">"b"</span><span class="p">})</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">DuplicateLabelError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">31</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">s1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="s2">"b"</span><span class="p">})</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/series.py:5101,</span> in <span class="ni">Series.rename</span><span class="nt">(self, index, axis, copy, inplace, level, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5094</span>     <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_axis_number</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5096</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_dict_like</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5097</span>     <span class="c1"># error: Argument 1 to "_rename" of "NDFrame" has incompatible</span>
+<span class="g g-Whitespace">   </span><span class="mi">5098</span>     <span class="c1"># type "Union[Union[Mapping[Any, Hashable], Callable[[Any],</span>
+<span class="g g-Whitespace">   </span><span class="mi">5099</span>     <span class="c1"># Hashable]], Hashable, None]"; expected "Union[Mapping[Any,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5100</span>     <span class="c1"># Hashable], Callable[[Any], Hashable], None]"</span>
+<span class="ne">-&gt; </span><span class="mi">5101</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_rename</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">5102</span>         <span class="n">index</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
+<span class="g g-Whitespace">   </span><span class="mi">5103</span>         <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5104</span>         <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5105</span>         <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5106</span>         <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">5107</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5108</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">5109</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_name</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/generic.py:1140,</span> in <span class="ni">NDFrame._rename</span><span class="nt">(self, mapper, index, columns, axis, copy, inplace, level, errors)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1138</span>     <span class="k">return</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1139</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1140</span>     <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">__finalize__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"rename"</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/generic.py:6281,</span> in <span class="ni">NDFrame.__finalize__</span><span class="nt">(self, other, method, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6274</span> <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6275</span>     <span class="c1"># We want attrs propagation to have minimal performance</span>
+<span class="g g-Whitespace">   </span><span class="mi">6276</span>     <span class="c1"># impact if attrs are not used; i.e. attrs is an empty dict.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6277</span>     <span class="c1"># One could make the deepcopy unconditionally, but a deepcopy</span>
+<span class="g g-Whitespace">   </span><span class="mi">6278</span>     <span class="c1"># of an empty dict is 50x more expensive than the empty check.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6279</span>     <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">6281</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">allows_duplicate_labels</span>
+<span class="g g-Whitespace">   </span><span class="mi">6282</span> <span class="c1"># For subclasses using _metadata.</span>
+<span class="g g-Whitespace">   </span><span class="mi">6283</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_metadata</span><span class="p">):</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/flags.py:96,</span> in <span class="ni">Flags.allows_duplicate_labels</span><span class="nt">(self, value)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>         <span class="n">ax</span><span class="o">.</span><span class="n">_maybe_check_unique</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allows_duplicate_labels</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/indexes/base.py:716,</span> in <span class="ni">Index._maybe_check_unique</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">713</span> <span class="n">duplicates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_duplicate_message</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">714</span> <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">duplicates</span><span class="si">}</span><span class="s2">"</span>
+<span class="ne">--&gt; </span><span class="mi">716</span> <span class="k">raise</span> <span class="n">DuplicateLabelError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="ne">DuplicateLabelError</span>: Index has duplicates.
+      <span class="n">positions</span>
+<span class="n">label</span>          
+<span class="n">b</span>        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>这是一个实验性功能。目前，许多方法未能传播 <code class="docutils literal notranslate"><span class="pre">allows_duplicate_labels</span></code> 值。在未来的版本中，预计每个接收或返回一个或多个 DataFrame 或 Series 对象的方法都将传播 <code class="docutils literal notranslate"><span class="pre">allows_duplicate_labels</span></code>。</p>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="missing_data.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一篇</p> <p class="prev-next-title">处理缺失数据</p> </div> </a> <a class="right-next" href="categorical.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一篇</p> <p class="prev-next-title">分类数据</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="duplicates.html#consequences-of-duplicate-labels">重复标签的后果</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="duplicates.html#duplicate-label-detection">重复标签检测</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="duplicates.html#disallowing-duplicate-labels">禁止重复标签</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="duplicates.html#duplicate-label-propagation">重复标签传播</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/duplicates.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">基于 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

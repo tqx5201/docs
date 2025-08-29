@@ -1,0 +1,883 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>快速入门 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="pandas documentation" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="index.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html#">快速入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html#">快速入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">包概览</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro_tutorials/index.html">快速入门教程</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/01_table_oriented.html">pandas 处理哪种类型的数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/05_add_columns.html">如何根据现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/06_calculate_statistics.html">如何计算汇总统计信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/07_reshape_table_layout.html">如何重塑表格布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/08_combine_dataframes.html">如何合并多个表格的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/10_text_data.html">如何处理文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="comparison/index.html">与其他工具的比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_r.html">与 R / R 库的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_sql.html">与 SQL 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_spreadsheets.html">与电子表格的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_sas.html">与 SAS 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_stata.html">与 Stata 的比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">快速入门</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="getting-started">
+<span id="id1"></span><h1>快速入门<a class="headerlink" href="index.html#getting-started" title="Link to this heading">#</a></h1>
+<section id="installation">
+<h2>安装<a class="headerlink" href="index.html#installation" title="Link to this heading">#</a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-6 sd-col-lg-6 sd-p-3 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm install-card docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">使用 conda？</div>
+<p class="sd-card-text">pandas 是 <a class="reference external" href="https://docs.continuum.io/anaconda/">Anaconda</a> 发行版的一部分，可以使用 Anaconda 或 Miniconda 安装</p>
+</div>
+<div class="sd-card-footer docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>pandas
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-6 sd-col-lg-6 sd-p-3 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm install-card docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">偏好 pip？</div>
+<p class="sd-card-text">pandas 可以通过 pip 从 <a class="reference external" href="https://pypi.ac.cn/project/pandas">PyPI</a> 安装。</p>
+</div>
+<div class="sd-card-footer docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pandas
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-12 sd-col-xs-12 sd-col-sm-12 sd-col-md-12 sd-col-lg-12 sd-p-3 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm install-card docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">需要深入说明？</div>
+<p class="sd-card-text">安装特定版本？从源码安装？请查看高级安装页面。</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="install.html#install"><span class="std std-ref">了解更多</span></a></span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="intro-to-pandas">
+<span id="gentle-intro"></span><h2>pandas 简介<a class="headerlink" href="index.html#intro-to-pandas" title="Link to this heading">#</a></h2>
+<div class="container">
+<div id="accordion" class="shadow tutorial-accordion">
+
+    <div class="card tutorial-card">
+        <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+            <div class="d-flex flex-row tutorial-card-header-1">
+                <div class="d-flex flex-row tutorial-card-header-2">
+                    <button class="btn btn-dark btn-sm"></button>pandas 处理哪种类型的数据？</div>
+                <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/01_table_oriented.html#min-tut-01-tableoriented"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseOne" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>当处理表格数据时，例如存储在电子表格或数据库中的数据，pandas 是适合您的工具。pandas 将帮助您探索、清洗和处理数据。在 pandas 中，数据表被称为 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>。</p>
+<img alt="../_images/01_table_dataframe.svg" class="align-center" src="../_images/01_table_dataframe.svg">
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/01_table_oriented.html#min-tut-01-tableoriented"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/dsintro.html#dsintro"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何读取和写入表格数据？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/02_read_write.html#min-tut-02-read-write"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseTwo" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>pandas 开箱即用地支持与多种文件格式或数据源（csv、excel、sql、json、parquet 等）的集成。从这些数据源导入数据由带有 <code class="docutils literal notranslate"><span class="pre">read_*</span></code> 前缀的函数提供。类似地，<code class="docutils literal notranslate"><span class="pre">to_*</span></code> 方法用于存储数据。</p>
+<img alt="../_images/02_io_readwrite.svg" class="align-center" src="../_images/02_io_readwrite.svg">
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/02_read_write.html#min-tut-02-read-write"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/io.html#io"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何选择表格的子集？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/03_subset_data.html#min-tut-03-subset"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseThree" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>选择或筛选特定行和/或列？根据条件筛选数据？pandas 中提供了切片、选择和提取所需数据的方法。</p>
+<img alt="../_images/03_subset_columns_rows.svg" class="align-center" src="../_images/03_subset_columns_rows.svg">
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/03_subset_data.html#min-tut-03-subset"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/indexing.html#indexing"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何在 pandas 中创建图表？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/04_plotting.html#min-tut-04-plotting"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseFour" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>pandas 利用 Matplotlib 的强大功能，开箱即用地提供数据绘图。您可以选择与您的数据相对应的图表类型（散点图、条形图、箱线图等）。</p>
+<img alt="../_images/04_plot_overview.svg" class="align-center" src="../_images/04_plot_overview.svg">
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/04_plotting.html#min-tut-04-plotting"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/visualization.html#visualization"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何根据现有列创建新列？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/05_add_columns.html#min-tut-05-columns"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseFive" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>无需遍历数据表的所有行来执行计算。对列的数据操作是逐元素进行的。基于其他列中的现有数据向 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 添加列是直接了当的。</p>
+<img alt="../_images/05_newcolumn_2.svg" class="align-center" src="../_images/05_newcolumn_2.svg">
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/05_add_columns.html#min-tut-05-columns"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/dsintro.html#basics-dataframe-sel-add-del"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseSix">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何计算汇总统计信息？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/06_calculate_statistics.html#min-tut-06-stats"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseSix" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>基本统计量（均值、中位数、最小值、最大值、计数等）易于计算。这些或自定义聚合可以应用于整个数据集、数据的滑动窗口，或按类别分组。后者也称为“分拆-应用-合并”方法。</p>
+<img alt="../_images/06_groupby.svg" class="align-center" src="../_images/06_groupby.svg">
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/06_calculate_statistics.html#min-tut-06-stats"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/groupby.html#groupby"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何重塑表格布局？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/07_reshape_table_layout.html#min-tut-07-reshape"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseSeven" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>以多种方式更改数据表的结构。您可以将数据表从宽格式 <a class="reference internal" href="../reference/api/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-func docutils literal notranslate"><span class="pre">melt()</span></code></a> 为长格式/整洁格式，或从长格式 <a class="reference internal" href="../reference/api/pandas.pivot.html#pandas.pivot" title="pandas.pivot"><code class="xref py py-func docutils literal notranslate"><span class="pre">pivot()</span></code></a> 为宽格式。内置聚合功能，可以通过一个命令创建数据透视表。</p>
+<img alt="../_images/07_melt.svg" class="align-center" src="../_images/07_melt.svg">
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/07_reshape_table_layout.html#min-tut-07-reshape"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/reshaping.html#reshaping"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseEight">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何合并多个表格的数据？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/08_combine_dataframes.html#min-tut-08-combine"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseEight" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>多个表可以按列和按行连接，因为提供了类似数据库的连接/合并操作来组合多个数据表。</p>
+<img alt="../_images/08_concat_row.svg" class="align-center" src="../_images/08_concat_row.svg">
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/08_combine_dataframes.html#min-tut-08-combine"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/merging.html#merging"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseNine">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何处理时间序列数据？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/09_timeseries.html#min-tut-09-timeseries"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseNine" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>pandas 对时间序列有很好的支持，并拥有一整套用于处理日期、时间以及时间索引数据的工具。</p>
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/09_timeseries.html#min-tut-09-timeseries"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/timeseries.html#timeseries"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card tutorial-card">
+    <div class="card-header collapsed card-link" data-bs-toggle="collapse" data-bs-target="#collapseTen">
+        <div class="d-flex flex-row tutorial-card-header-1">
+            <div class="d-flex flex-row tutorial-card-header-2">
+                <button class="btn btn-dark btn-sm"></button>如何处理文本数据？</div>
+            <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/10_text_data.html#min-tut-10-text"><span class="std std-ref">直接进入教程…</span></a></p>
+        </span>
+    </div>
+</div>
+<div id="collapseTen" class="collapse" data-parent="#accordion">
+    <div class="card-body"><p>数据集不仅包含数值数据。pandas 提供了广泛的功能来清洗文本数据并从中提取有用信息。</p>
+<div class="d-flex flex-row">
+    <span class="badge gs-badge-link"><p><a class="reference internal" href="intro_tutorials/10_text_data.html#min-tut-10-text"><span class="std std-ref">转到入门教程</span></a></p> </span> <span class="badge gs-badge-link"><p><a class="reference internal" href="../user_guide/text.html#text"><span class="std std-ref">转到用户指南</span></a></p> </span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div></section>
+<section id="coming-from">
+<span id="comingfrom"></span><h2>来自…<a class="headerlink" href="index.html#coming-from" title="Link to this heading">#</a></h2>
+<p>您熟悉其他用于处理表格数据的软件吗？了解与您已知软件相比，pandas 中等效的操作</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 sd-text-center sd-d-inline-flex docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-4 sd-g-xs-4 sd-g-sm-4 sd-g-md-4 sd-g-lg-4 docutils">
+<div class="sd-col sd-d-flex-row sd-col-12 sd-col-xs-12 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-md comparison-card docutils">
+<img alt="" class="sd-card-img-top" src="../_images/logo_r.svg">
+<div class="sd-card-body docutils">
+<p class="sd-card-text"><a class="reference external" href="https://r-project.cn/">R 编程语言</a>提供了 <code class="docutils literal notranslate"><span class="pre">data.frame</span></code> 数据结构，并且有多个包，例如 <a class="reference external" href="https://www.tidyverse.org">tidyverse</a> 使用和扩展 <code class="docutils literal notranslate"><span class="pre">data.frame</span></code> 以提供类似于 pandas 的便捷数据处理功能。</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="comparison/comparison_with_r.html#compare-with-r"><span class="std std-ref">了解更多</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-12 sd-col-xs-12 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-md comparison-card docutils">
+<img alt="" class="sd-card-img-top" src="../_images/logo_sql.svg">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">已经熟悉 <code class="docutils literal notranslate"><span class="pre">SELECT</span></code>、<code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code>、<code class="docutils literal notranslate"><span class="pre">JOIN</span></code> 等操作？这些 SQL 操作中的大多数在 pandas 中都有等效项。</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="comparison/comparison_with_sql.html#compare-with-sql"><span class="std std-ref">了解更多</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-12 sd-col-xs-12 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-md comparison-card docutils">
+<img alt="" class="sd-card-img-top" src="../_images/logo_stata.svg">
+<div class="sd-card-body docutils">
+<p class="sd-card-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Stata">STATA</a> 统计软件包中包含的 <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">set</span></code> 对应于 pandas 的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>。许多从 STATA 熟悉的操作在 pandas 中都有等效项。</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="comparison/comparison_with_stata.html#compare-with-stata"><span class="std std-ref">了解更多</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-12 sd-col-xs-12 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-md comparison-card docutils">
+<img alt="" class="sd-card-img-top" src="../_images/logo_excel.svg">
+<div class="sd-card-body docutils">
+<p class="sd-card-text"><a class="reference external" href="https://en.wikipedia.org/wiki/Microsoft_Excel">Excel</a> 或其他电子表格程序的用户会发现许多概念可以转移到 pandas 中。</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="comparison/comparison_with_spreadsheets.html#compare-with-spreadsheets"><span class="std std-ref">了解更多</span></a></span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-12 sd-col-xs-12 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-md comparison-card docutils">
+<img alt="" class="sd-card-img-top" src="../_images/logo_sas.svg">
+<div class="sd-card-body docutils">
+<p class="sd-card-text"><a class="reference external" href="https://en.wikipedia.org/wiki/SAS_(software)">SAS</a> 统计软件包也提供了与 pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 对应的 <code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">set</span></code>。此外，SAS 的向量化操作、筛选、字符串处理操作等在 pandas 中也有类似的功能。</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text"><span class="sd-d-grid"><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-secondary sd-stretched-link reference internal" href="comparison/comparison_with_sas.html#compare-with-sas"><span class="std std-ref">了解更多</span></a></span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="tutorials">
+<h2>教程<a class="headerlink" href="index.html#tutorials" title="Link to this heading">#</a></h2>
+<p>要快速了解 pandas 的功能，请参阅 <a class="reference internal" href="../user_guide/10min.html#min"><span class="std std-ref">pandas 10 分钟入门</span></a>。</p>
+<p>您还可以参考 pandas <a class="reference external" href="https://pandas.ac.cn/Pandas_Cheat_Sheet.pdf">备忘单</a>，获取使用 pandas 处理数据的简洁指南。</p>
+<p>社区提供了各种在线教程。部分资料收录在社区贡献的 <a class="reference internal" href="tutorials.html#communitytutorials"><span class="std std-ref">社区教程</span></a> 中。</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="../index.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">pandas 文档</p> </div> </a> <a class="right-next" href="install.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">安装</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="index.html#installation">安装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="index.html#intro-to-pandas">pandas 简介</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="index.html#coming-from">来自…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="index.html#tutorials">教程</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/getting_started/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源代码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 提供。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">基于 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

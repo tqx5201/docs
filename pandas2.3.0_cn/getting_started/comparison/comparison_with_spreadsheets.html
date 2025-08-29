@@ -1,0 +1,1502 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>与电子表格对比 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/comparison/comparison_with_spreadsheets';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Comparison with SAS" href="comparison_with_sas.html" />
+    <link rel="prev" title="Comparison with SQL" href="comparison_with_sql.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="comparison_with_spreadsheets.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包概览</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_tutorials/index.html">入门教程</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/01_table_oriented.html">pandas 处理哪种数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/05_add_columns.html">如何从现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/06_calculate_statistics.html">如何计算汇总统计数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/07_reshape_table_layout.html">如何重塑表格布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/08_combine_dataframes.html">如何组合来自多个表格的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/10_text_data.html">如何操作文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">与其他工具对比</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="comparison_with_r.html">与 R / R 库对比</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison_with_sql.html">与 SQL 对比</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="comparison_with_spreadsheets.html#">与电子表格对比</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison_with_sas.html">与 SAS 对比</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison_with_stata.html">与 Stata 对比</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">入门指南</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">与其他工具对比</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">对比...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="comparison-with-spreadsheets">
+<span id="compare-with-spreadsheets"></span><h1>与电子表格对比<a class="headerlink" href="comparison_with_spreadsheets.html#comparison-with-spreadsheets" title="Link to this heading">#</a></h1>
+<p>由于许多潜在的 pandas 用户对 <a class="reference external" href="https://support.microsoft.com/en-us/excel">Excel</a> 等电子表格程序有所了解，本页面旨在提供一些示例，说明如何使用 pandas 执行各种电子表格操作。本页面将使用 Excel 的术语并链接到其文档，但在 <a class="reference external" href="https://support.google.com/a/users/answer/9282959">Google Sheets</a>、<a class="reference external" href="https://help.libreoffice.org/latest/en-US/text/scalc/main0000.html?DbPAR=CALC">LibreOffice Calc</a>、<a class="reference external" href="https://www.apple.com/numbers/compatibility/">Apple Numbers</a> 以及其他与 Excel 兼容的电子表格软件中，许多操作都是相同或相似的。</p>
+<p>如果您是 pandas 的新手，建议您首先阅读 <a class="reference internal" href="../../user_guide/10min.html#min"><span class="std std-ref">pandas 十分钟教程</span></a>，以便熟悉该库。</p>
+<p>按照惯例，我们这样导入 pandas 和 NumPy</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="gp">In [2]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<section id="data-structures">
+<h2>数据结构<a class="headerlink" href="comparison_with_spreadsheets.html#data-structures" title="Link to this heading">#</a></h2>
+<section id="general-terminology-translation">
+<h3>通用术语对照<a class="headerlink" href="comparison_with_spreadsheets.html#general-terminology-translation" title="Link to this heading">#</a></h3>
+<table class="table">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>pandas</p></th>
+<th class="head"><p>Excel</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p></td>
+<td><p>工作表</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Series</span></code></p></td>
+<td><p>列</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Index</span></code></p></td>
+<td><p>行标题</p></td>
+</tr>
+<tr class="row-odd"><td><p>行</p></td>
+<td><p>行</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NaN</span></code></p></td>
+<td><p>空单元格</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dataframe">
+<h3><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code><a class="headerlink" href="comparison_with_spreadsheets.html#dataframe" title="Link to this heading">#</a></h3>
+<p>pandas 中的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 类似于 Excel 工作表。虽然 Excel 工作簿可以包含多个工作表，但 pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 是独立存在的。</p>
+</section>
+<section id="series">
+<h3><code class="docutils literal notranslate"><span class="pre">Series</span></code><a class="headerlink" href="comparison_with_spreadsheets.html#series" title="Link to this heading">#</a></h3>
+<p>一个 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 是表示 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中一列的数据结构。处理 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 类似于引用电子表格中的一列。</p>
+</section>
+<section id="index">
+<h3><code class="docutils literal notranslate"><span class="pre">Index</span></code><a class="headerlink" href="comparison_with_spreadsheets.html#index" title="Link to this heading">#</a></h3>
+<p>每个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 都有一个 <code class="docutils literal notranslate"><span class="pre">Index</span></code>，它们是数据的<em>行</em>标签。在 pandas 中，如果没有指定索引，则默认使用 <a class="reference internal" href="../../reference/api/pandas.RangeIndex.html#pandas.RangeIndex" title="pandas.RangeIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">RangeIndex</span></code></a>（第一行 = 0，第二行 = 1，依此类推），这类似于电子表格中的行标题/行号。</p>
+<p>在 pandas 中，索引可以设置为一个（或多个）唯一值，这类似于在工作表中有一个用作行标识符的列。与大多数电子表格不同，这些 <code class="docutils literal notranslate"><span class="pre">Index</span></code> 值实际上可以用于引用行。（请注意，<a class="reference external" href="https://support.microsoft.com/en-us/office/using-structured-references-with-excel-tables-f5ed2452-2337-4f71-bed3-c8ae6d2b276e">这可以在 Excel 中通过结构化引用实现</a>。）例如，在电子表格中，您会将第一行引用为 <code class="docutils literal notranslate"><span class="pre">A1:Z1</span></code>，而在 pandas 中，您可以使用 <code class="docutils literal notranslate"><span class="pre">populations.loc['Chicago']</span></code>。</p>
+<p>索引值也是持久的，因此如果您重新排序 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中的行，特定行的标签不会改变。</p>
+<p>有关如何有效使用 <code class="docutils literal notranslate"><span class="pre">Index</span></code> 的更多详细信息，请参阅 <a class="reference internal" href="../../user_guide/indexing.html#indexing"><span class="std std-ref">索引文档</span></a>。</p>
+</section>
+<section id="copies-vs-in-place-operations">
+<h3>副本与原地操作<a class="headerlink" href="comparison_with_spreadsheets.html#copies-vs-in-place-operations" title="Link to this heading">#</a></h3>
+<p>大多数 pandas 操作会返回 <code class="docutils literal notranslate"><span class="pre">Series</span></code>/<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的副本。为了让更改“生效”，您需要将其赋值给新变量</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"col1"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>或覆盖原始变量</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"col1"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>您会看到某些方法提供了 <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code> 或 <code class="docutils literal notranslate"><span class="pre">copy=False</span></code> 关键字参数</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>目前正在积极讨论弃用和移除大多数方法（例如 <code class="docutils literal notranslate"><span class="pre">dropna</span></code>）的 <code class="docutils literal notranslate"><span class="pre">inplace</span></code> 和 <code class="docutils literal notranslate"><span class="pre">copy</span></code> 关键字，但极少数方法（包括 <code class="docutils literal notranslate"><span class="pre">replace</span></code>）除外。在写时复制 (Copy-on-Write) 的上下文中，这两个关键字将不再必要。提案可以在 <a class="reference external" href="https://github.com/pandas-dev/pandas/pull/51466">此处</a> 找到。</p>
+</div>
+</section>
+</section>
+<section id="data-input-output">
+<h2>数据输入/输出<a class="headerlink" href="comparison_with_spreadsheets.html#data-input-output" title="Link to this heading">#</a></h2>
+<section id="constructing-a-dataframe-from-values">
+<h3>从值构建 DataFrame<a class="headerlink" href="comparison_with_spreadsheets.html#constructing-a-dataframe-from-values" title="Link to this heading">#</a></h3>
+<p>在电子表格中，<a class="reference external" href="https://support.microsoft.com/en-us/office/enter-data-manually-in-worksheet-cells-c798181d-d75a-41b1-92ad-6c0800f80038">可以直接在单元格中输入值</a>。</p>
+<p>pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 可以通过多种不同方式构建，但对于少量值，通常方便将其指定为 Python 字典，其中键是列名，值是数据。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"x"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="s2">"y"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [4]: </span><span class="n">df</span>
+<span class="gh">Out[4]: </span>
+<span class="go">   x  y</span>
+<span class="go">0  1  2</span>
+<span class="go">1  3  4</span>
+<span class="go">2  5  6</span>
+</pre></div>
+</div>
+</section>
+<section id="reading-external-data">
+<h3>读取外部数据<a class="headerlink" href="comparison_with_spreadsheets.html#reading-external-data" title="Link to this heading">#</a></h3>
+<p>无论是 <a class="reference external" href="https://support.microsoft.com/en-us/office/import-data-from-data-sources-power-query-be4330b3-5356-486c-a168-b68e9e616f5a">Excel</a> 还是 <a class="reference internal" href="../intro_tutorials/02_read_write.html#min-tut-02-read-write"><span class="std std-ref">pandas</span></a> 都可以从各种来源以各种格式导入数据。</p>
+<section id="csv">
+<h4>CSV<a class="headerlink" href="comparison_with_spreadsheets.html#csv" title="Link to this heading">#</a></h4>
+<p>我们来加载并显示 pandas 测试中的 <a class="reference external" href="https://github.com/pandas-dev/pandas/blob/main/pandas/tests/io/data/csv/tips.csv">tips</a> 数据集，它是一个 CSV 文件。在 Excel 中，您会下载然后 <a class="reference external" href="https://support.microsoft.com/en-us/office/import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba">打开 CSV 文件</a>。在 pandas 中，您将 CSV 文件的 URL 或本地路径传递给 <a class="reference internal" href="../../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_csv()</span></code></a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="s2">"https://raw.githubusercontent.com/pandas-dev"</span>
+<span class="gp">   ...: </span>    <span class="s2">"/pandas/main/pandas/tests/io/data/csv/tips.csv"</span>
+<span class="gp">   ...: </span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [6]: </span><span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="gp">In [7]: </span><span class="n">tips</span>
+<span class="gh">Out[7]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size</span>
+<span class="go">0         16.99  1.01  Female     No   Sun  Dinner     2</span>
+<span class="go">1         10.34  1.66    Male     No   Sun  Dinner     3</span>
+<span class="go">2         21.01  3.50    Male     No   Sun  Dinner     3</span>
+<span class="go">3         23.68  3.31    Male     No   Sun  Dinner     2</span>
+<span class="go">4         24.59  3.61  Female     No   Sun  Dinner     4</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...</span>
+<span class="go">239       29.03  5.92    Male     No   Sat  Dinner     3</span>
+<span class="go">240       27.18  2.00  Female    Yes   Sat  Dinner     2</span>
+<span class="go">241       22.67  2.00    Male    Yes   Sat  Dinner     2</span>
+<span class="go">242       17.82  1.75    Male     No   Sat  Dinner     2</span>
+<span class="go">243       18.78  3.00  Female     No  Thur  Dinner     2</span>
+
+<span class="go">[244 rows x 7 columns]</span>
+</pre></div>
+</div>
+<p>与 <a class="reference external" href="https://support.microsoft.com/en-us/office/text-import-wizard-c5b02af6-fda1-4440-899f-f78bafe41857">Excel 的文本导入向导</a> 类似，<code class="docutils literal notranslate"><span class="pre">read_csv</span></code> 可以接受多个参数来指定如何解析数据。例如，如果数据是制表符分隔的，并且没有列名，则 pandas 命令将是</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"tips.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># alternatively, read_table is an alias to read_csv with tab delimiter</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s2">"tips.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="excel-files">
+<h4>Excel 文件<a class="headerlink" href="comparison_with_spreadsheets.html#excel-files" title="Link to this heading">#</a></h4>
+<p>Excel 通过双击文件或使用 <a class="reference external" href="https://support.microsoft.com/en-us/office/open-files-from-the-file-menu-97f087d8-3136-4485-8e86-c5b12a8c4176">“打开”菜单</a> 来打开 <a class="reference external" href="https://support.microsoft.com/en-us/office/file-formats-that-are-supported-in-excel-0943ff2c-6014-4e8d-aaea-b83d51d46247">各种 Excel 文件格式</a>。在 pandas 中，您使用 <a class="reference internal" href="../../user_guide/io.html#io-excel"><span class="std std-ref">专门的方法来读写 Excel 文件</span></a>。</p>
+<p>我们首先根据上面示例中的 <code class="docutils literal notranslate"><span class="pre">tips</span></code> DataFrame <a class="reference internal" href="../../user_guide/io.html#io-excel-writer"><span class="std std-ref">创建一个新的 Excel 文件</span></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">"./tips.xlsx"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果您希望随后访问 <code class="docutils literal notranslate"><span class="pre">tips.xlsx</span></code> 文件中的数据，可以使用以下方法将其读入您的模块：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tips_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"./tips.xlsx"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>您刚刚使用 pandas 读取了一个 Excel 文件！</p>
+</section>
+</section>
+<section id="limiting-output">
+<h3>限制输出<a class="headerlink" href="comparison_with_spreadsheets.html#limiting-output" title="Link to this heading">#</a></h3>
+<p>电子表格程序一次只会显示一屏数据，然后允许您滚动，因此通常不需要限制输出。在 pandas 中，您需要花更多心思来控制您的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的显示方式。</p>
+<p>默认情况下，pandas 会截断大型 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的输出，以显示其第一行和最后一行。这可以通过 <a class="reference internal" href="../../user_guide/options.html#options"><span class="std std-ref">更改 pandas 选项</span></a>，或使用 <a class="reference internal" href="../../reference/api/pandas.DataFrame.head.html#pandas.DataFrame.head" title="pandas.DataFrame.head"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.head()</span></code></a> 或 <a class="reference internal" href="../../reference/api/pandas.DataFrame.tail.html#pandas.DataFrame.tail" title="pandas.DataFrame.tail"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.tail()</span></code></a> 来实现。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[8]: </span>
+<span class="go">   total_bill   tip     sex smoker  day    time  size</span>
+<span class="go">0       16.99  1.01  Female     No  Sun  Dinner     2</span>
+<span class="go">1       10.34  1.66    Male     No  Sun  Dinner     3</span>
+<span class="go">2       21.01  3.50    Male     No  Sun  Dinner     3</span>
+<span class="go">3       23.68  3.31    Male     No  Sun  Dinner     2</span>
+<span class="go">4       24.59  3.61  Female     No  Sun  Dinner     4</span>
+</pre></div>
+</div>
+</section>
+<section id="exporting-data">
+<h3>导出数据<a class="headerlink" href="comparison_with_spreadsheets.html#exporting-data" title="Link to this heading">#</a></h3>
+<p>默认情况下，桌面电子表格软件会保存为各自的文件格式（<code class="docutils literal notranslate"><span class="pre">.xlsx</span></code>、<code class="docutils literal notranslate"><span class="pre">.ods</span></code> 等）。但是，您可以 <a class="reference external" href="https://support.microsoft.com/en-us/office/save-a-workbook-in-another-file-format-6a16c862-4a36-48f9-a300-c2ca0065286e">保存为其他文件格式</a>。</p>
+<p><a class="reference internal" href="../../user_guide/io.html#io-excel-writer"><span class="std std-ref">pandas 可以创建 Excel 文件</span></a>、<a class="reference internal" href="../../user_guide/io.html#io-store-in-csv"><span class="std std-ref">CSV</span></a>，或 <a class="reference internal" href="../../user_guide/io.html#io"><span class="std std-ref">其他多种格式</span></a>。</p>
+</section>
+</section>
+<section id="data-operations">
+<h2>数据操作<a class="headerlink" href="comparison_with_spreadsheets.html#data-operations" title="Link to this heading">#</a></h2>
+<section id="operations-on-columns">
+<h3>列操作<a class="headerlink" href="comparison_with_spreadsheets.html#operations-on-columns" title="Link to this heading">#</a></h3>
+<p>在电子表格中，<a class="reference external" href="https://support.microsoft.com/en-us/office/overview-of-formulas-in-excel-ecfdc708-9162-49e8-b993-c311f47ca173">公式</a> 通常在单个单元格中创建，然后被 <a class="reference external" href="https://support.microsoft.com/en-us/office/copy-a-formula-by-dragging-the-fill-handle-in-excel-for-mac-dd928259-622b-473f-9a33-83aa1a63e218">拖动</a> 到其他单元格中，为其他列计算结果。在 pandas 中，您可以直接对整列进行操作。</p>
+<p>pandas 通过指定 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中的单个 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 来提供矢量化操作。新列也可以用相同的方式赋值。<a class="reference internal" href="../../reference/api/pandas.DataFrame.drop.html#pandas.DataFrame.drop" title="pandas.DataFrame.drop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.drop()</span></code></a> 方法从 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中删除一列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="gp">In [10]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"new_bill"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="gp">In [11]: </span><span class="n">tips</span>
+<span class="gh">Out[11]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size  new_bill</span>
+<span class="go">0         14.99  1.01  Female     No   Sun  Dinner     2     7.495</span>
+<span class="go">1          8.34  1.66    Male     No   Sun  Dinner     3     4.170</span>
+<span class="go">2         19.01  3.50    Male     No   Sun  Dinner     3     9.505</span>
+<span class="go">3         21.68  3.31    Male     No   Sun  Dinner     2    10.840</span>
+<span class="go">4         22.59  3.61  Female     No   Sun  Dinner     4    11.295</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...       ...</span>
+<span class="go">239       27.03  5.92    Male     No   Sat  Dinner     3    13.515</span>
+<span class="go">240       25.18  2.00  Female    Yes   Sat  Dinner     2    12.590</span>
+<span class="go">241       20.67  2.00    Male    Yes   Sat  Dinner     2    10.335</span>
+<span class="go">242       15.82  1.75    Male     No   Sat  Dinner     2     7.910</span>
+<span class="go">243       16.78  3.00  Female     No  Thur  Dinner     2     8.390</span>
+
+<span class="go">[244 rows x 8 columns]</span>
+
+<span class="gp">In [12]: </span><span class="n">tips</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"new_bill"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>请注意，我们无需逐个单元格地进行减法操作 — pandas 会为我们处理好这些。请参阅 <a class="reference internal" href="../intro_tutorials/05_add_columns.html#min-tut-05-columns"><span class="std std-ref">如何从现有列创建新列</span></a>。</p>
+</section>
+<section id="filtering">
+<h3>筛选<a class="headerlink" href="comparison_with_spreadsheets.html#filtering" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://support.microsoft.com/en-us/office/filter-data-in-a-range-or-table-01832226-31b5-4568-8806-38c37dcc180e">在 Excel 中，筛选通过图形菜单完成。</a></p>
+<img alt="Screenshot showing filtering of the total_bill column to values greater than 10" class="align-center" src="../../_images/filter.png">
+<p>DataFrame 可以通过多种方式进行筛选；其中最直观的方式是使用 <a class="reference internal" href="../../user_guide/indexing.html#indexing-boolean"><span class="std std-ref">布尔索引</span></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gh">Out[13]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size</span>
+<span class="go">0         14.99  1.01  Female     No   Sun  Dinner     2</span>
+<span class="go">2         19.01  3.50    Male     No   Sun  Dinner     3</span>
+<span class="go">3         21.68  3.31    Male     No   Sun  Dinner     2</span>
+<span class="go">4         22.59  3.61  Female     No   Sun  Dinner     4</span>
+<span class="go">5         23.29  4.71    Male     No   Sun  Dinner     4</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...</span>
+<span class="go">239       27.03  5.92    Male     No   Sat  Dinner     3</span>
+<span class="go">240       25.18  2.00  Female    Yes   Sat  Dinner     2</span>
+<span class="go">241       20.67  2.00    Male    Yes   Sat  Dinner     2</span>
+<span class="go">242       15.82  1.75    Male     No   Sat  Dinner     2</span>
+<span class="go">243       16.78  3.00  Female     No  Thur  Dinner     2</span>
+
+<span class="go">[204 rows x 7 columns]</span>
+</pre></div>
+</div>
+<p>上述语句只是将一个由 <code class="docutils literal notranslate"><span class="pre">True</span></code> / <code class="docutils literal notranslate"><span class="pre">False</span></code> 对象组成的 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 传递给 DataFrame，返回所有为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 的行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">is_dinner</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Dinner"</span>
+
+<span class="gp">In [15]: </span><span class="n">is_dinner</span>
+<span class="gh">Out[15]: </span>
+<span class="go">0      True</span>
+<span class="go">1      True</span>
+<span class="go">2      True</span>
+<span class="go">3      True</span>
+<span class="go">4      True</span>
+<span class="go">       ... </span>
+<span class="go">239    True</span>
+<span class="go">240    True</span>
+<span class="go">241    True</span>
+<span class="go">242    True</span>
+<span class="go">243    True</span>
+<span class="go">Name: time, Length: 244, dtype: bool</span>
+
+<span class="gp">In [16]: </span><span class="n">is_dinner</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="gh">Out[16]: </span>
+<span class="go">time</span>
+<span class="go">True     176</span>
+<span class="go">False     68</span>
+<span class="go">Name: count, dtype: int64</span>
+
+<span class="gp">In [17]: </span><span class="n">tips</span><span class="p">[</span><span class="n">is_dinner</span><span class="p">]</span>
+<span class="gh">Out[17]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size</span>
+<span class="go">0         14.99  1.01  Female     No   Sun  Dinner     2</span>
+<span class="go">1          8.34  1.66    Male     No   Sun  Dinner     3</span>
+<span class="go">2         19.01  3.50    Male     No   Sun  Dinner     3</span>
+<span class="go">3         21.68  3.31    Male     No   Sun  Dinner     2</span>
+<span class="go">4         22.59  3.61  Female     No   Sun  Dinner     4</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...</span>
+<span class="go">239       27.03  5.92    Male     No   Sat  Dinner     3</span>
+<span class="go">240       25.18  2.00  Female    Yes   Sat  Dinner     2</span>
+<span class="go">241       20.67  2.00    Male    Yes   Sat  Dinner     2</span>
+<span class="go">242       15.82  1.75    Male     No   Sat  Dinner     2</span>
+<span class="go">243       16.78  3.00  Female     No  Thur  Dinner     2</span>
+
+<span class="go">[176 rows x 7 columns]</span>
+</pre></div>
+</div>
+</section>
+<section id="if-then-logic">
+<h3>条件逻辑<a class="headerlink" href="comparison_with_spreadsheets.html#if-then-logic" title="Link to this heading">#</a></h3>
+<p>假设我们想创建一个名为 <code class="docutils literal notranslate"><span class="pre">bucket</span></code> 的列，其值为 <code class="docutils literal notranslate"><span class="pre">low</span></code> 和 <code class="docutils literal notranslate"><span class="pre">high</span></code>，判断依据是 <code class="docutils literal notranslate"><span class="pre">total_bill</span></code> 是否小于或大于 $10。</p>
+<p>在电子表格中，逻辑比较可以使用 <a class="reference external" href="https://support.microsoft.com/en-us/office/create-conditional-formulas-ca916c57-abd8-4b44-997c-c309b7307831">条件公式</a> 来完成。我们会使用公式 <code class="docutils literal notranslate"><span class="pre">=IF(A2</span> <span class="pre">&lt;</span> <span class="pre">10,</span> <span class="pre">"low",</span> <span class="pre">"high")</span></code>，并将其拖动到新 <code class="docutils literal notranslate"><span class="pre">bucket</span></code> 列的所有单元格中。</p>
+<img alt="Screenshot showing the formula from above in a bucket column of the tips spreadsheet" class="align-center" src="../../_images/conditional.png">
+<p>在 pandas 中，可以使用 <code class="docutils literal notranslate"><span class="pre">where</span></code> 方法和 <code class="docutils literal notranslate"><span class="pre">numpy</span></code> 来完成相同的操作。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"bucket"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"low"</span><span class="p">,</span> <span class="s2">"high"</span><span class="p">)</span>
+
+<span class="gp">In [19]: </span><span class="n">tips</span>
+<span class="gh">Out[19]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size bucket</span>
+<span class="go">0         14.99  1.01  Female     No   Sun  Dinner     2   high</span>
+<span class="go">1          8.34  1.66    Male     No   Sun  Dinner     3    low</span>
+<span class="go">2         19.01  3.50    Male     No   Sun  Dinner     3   high</span>
+<span class="go">3         21.68  3.31    Male     No   Sun  Dinner     2   high</span>
+<span class="go">4         22.59  3.61  Female     No   Sun  Dinner     4   high</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...    ...</span>
+<span class="go">239       27.03  5.92    Male     No   Sat  Dinner     3   high</span>
+<span class="go">240       25.18  2.00  Female    Yes   Sat  Dinner     2   high</span>
+<span class="go">241       20.67  2.00    Male    Yes   Sat  Dinner     2   high</span>
+<span class="go">242       15.82  1.75    Male     No   Sat  Dinner     2   high</span>
+<span class="go">243       16.78  3.00  Female     No  Thur  Dinner     2   high</span>
+
+<span class="go">[244 rows x 8 columns]</span>
+</pre></div>
+</div>
+</section>
+<section id="date-functionality">
+<h3>日期功能<a class="headerlink" href="comparison_with_spreadsheets.html#date-functionality" title="Link to this heading">#</a></h3>
+<p><em>本节将提及“日期”，但时间戳的处理方式类似。</em></p>
+<p>日期功能可以分为两部分：解析和输出。在电子表格中，日期值通常会自动解析，尽管如果需要，也有 <a class="reference external" href="https://support.microsoft.com/en-us/office/datevalue-function-df8b07d4-7761-4a93-bc33-b7471bbff252">DATEVALUE</a> 函数可用。在 pandas 中，您需要显式地将纯文本转换为 datetime 对象，无论是在 <a class="reference internal" href="../../user_guide/io.html#io-read-csv-table-datetime"><span class="std std-ref">从 CSV 读取时</span></a> 还是 <a class="reference internal" href="../intro_tutorials/09_timeseries.html#min-tut-09-timeseries-properties"><span class="std std-ref">在 DataFrame 中</span></a>。</p>
+<p>解析后，电子表格会以默认格式显示日期，尽管 <a class="reference external" href="https://support.microsoft.com/en-us/office/format-a-date-the-way-you-want-8e10019e-d5d8-47a1-ba95-db95123d273e">格式可以更改</a>。在 pandas 中，您通常会希望在进行计算时将日期保留为 <code class="docutils literal notranslate"><span class="pre">datetime</span></code> 对象。输出日期的<em>部分</em>（例如年份）是通过电子表格中的 <a class="reference external" href="https://support.microsoft.com/en-us/office/date-and-time-functions-reference-fd1b5961-c1ae-4677-be58-074152f97b81">日期函数</a> 实现的，在 pandas 中则是通过 <a class="reference internal" href="../intro_tutorials/09_timeseries.html#min-tut-09-timeseries-properties"><span class="std std-ref">datetime 属性</span></a> 实现的。</p>
+<p>给定电子表格中 <code class="docutils literal notranslate"><span class="pre">date1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">date2</span></code> 在 <code class="docutils literal notranslate"><span class="pre">A</span></code> 和 <code class="docutils literal notranslate"><span class="pre">B</span></code> 列中，您可能会有这些公式：</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>列</p></th>
+<th class="head"><p>公式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">date1_year</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">=YEAR(A2)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">date2_month</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">=MONTH(B2)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">date1_next</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">=DATE(YEAR(A2),MONTH(A2)+1,1)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">months_between</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">=DATEDIF(A2,B2,"M")</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>等效的 pandas 操作如下所示。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"date1"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2013-01-15"</span><span class="p">)</span>
+
+<span class="gp">In [21]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"date2"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2015-02-15"</span><span class="p">)</span>
+
+<span class="gp">In [22]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"date1_year"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"date1"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+
+<span class="gp">In [23]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"date2_month"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"date2"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+
+<span class="gp">In [24]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"date1_next"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"date1"</span><span class="p">]</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">MonthBegin</span><span class="p">()</span>
+
+<span class="gp">In [25]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"months_between"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"date2"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">"M"</span><span class="p">)</span> <span class="o">-</span> <span class="n">tips</span><span class="p">[</span>
+<span class="gp">   ....: </span>    <span class="s2">"date1"</span>
+<span class="gp">   ....: </span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s2">"M"</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [26]: </span><span class="n">tips</span><span class="p">[</span>
+<span class="gp">   ....: </span>    <span class="p">[</span><span class="s2">"date1"</span><span class="p">,</span> <span class="s2">"date2"</span><span class="p">,</span> <span class="s2">"date1_year"</span><span class="p">,</span> <span class="s2">"date2_month"</span><span class="p">,</span> <span class="s2">"date1_next"</span><span class="p">,</span> <span class="s2">"months_between"</span><span class="p">]</span>
+<span class="gp">   ....: </span><span class="p">]</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[26]: </span>
+<span class="go">         date1      date2  date1_year  date2_month date1_next    months_between</span>
+<span class="go">0   2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">1   2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">2   2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">3   2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">4   2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">..         ...        ...         ...          ...        ...               ...</span>
+<span class="go">239 2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">240 2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">241 2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">242 2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+<span class="go">243 2013-01-15 2015-02-15        2013            2 2013-02-01  &lt;25 * MonthEnds&gt;</span>
+
+<span class="go">[244 rows x 6 columns]</span>
+</pre></div>
+</div>
+<p>更多详情请参阅 <a class="reference internal" href="../../user_guide/timeseries.html#timeseries"><span class="std std-ref">时间序列 / 日期功能</span></a>。</p>
+</section>
+<section id="selection-of-columns">
+<h3>列选择<a class="headerlink" href="comparison_with_spreadsheets.html#selection-of-columns" title="Link to this heading">#</a></h3>
+<p>在电子表格中，您可以通过以下方式选择所需的列：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://support.microsoft.com/en-us/office/hide-or-show-rows-or-columns-659c2cad-802e-44ee-a614-dde8443579f8">隐藏列</a></p></li>
+<li><p><a class="reference external" href="https://support.microsoft.com/en-us/office/insert-or-delete-rows-and-columns-6f40e6e4-85af-45e0-b39d-65dd504a3246">删除列</a></p></li>
+<li><p>将一个工作表中的<a class="reference external" href="https://support.microsoft.com/en-us/office/create-or-change-a-cell-reference-c7b8b95d-c594-4488-947e-c835903cebaa">范围引用</a>到另一个工作表</p></li>
+</ul>
+<p>由于电子表格列通常在 <a class="reference external" href="https://support.microsoft.com/en-us/office/turn-excel-table-headers-on-or-off-c91d1742-312c-4480-820f-cf4b534c8b3b">标题行中命名</a>，因此重命名列只是更改第一个单元格中的文本。</p>
+<p>相同的操作在 pandas 中表示如下。</p>
+<section id="keep-certain-columns">
+<h4>保留特定列<a class="headerlink" href="comparison_with_spreadsheets.html#keep-certain-columns" title="Link to this heading">#</a></h4>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">tips</span><span class="p">[[</span><span class="s2">"sex"</span><span class="p">,</span> <span class="s2">"total_bill"</span><span class="p">,</span> <span class="s2">"tip"</span><span class="p">]]</span>
+<span class="gh">Out[27]: </span>
+<span class="go">        sex  total_bill   tip</span>
+<span class="go">0    Female       14.99  1.01</span>
+<span class="go">1      Male        8.34  1.66</span>
+<span class="go">2      Male       19.01  3.50</span>
+<span class="go">3      Male       21.68  3.31</span>
+<span class="go">4    Female       22.59  3.61</span>
+<span class="go">..      ...         ...   ...</span>
+<span class="go">239    Male       27.03  5.92</span>
+<span class="go">240  Female       25.18  2.00</span>
+<span class="go">241    Male       20.67  2.00</span>
+<span class="go">242    Male       15.82  1.75</span>
+<span class="go">243  Female       16.78  3.00</span>
+
+<span class="go">[244 rows x 3 columns]</span>
+</pre></div>
+</div>
+</section>
+<section id="drop-a-column">
+<h4>删除列<a class="headerlink" href="comparison_with_spreadsheets.html#drop-a-column" title="Link to this heading">#</a></h4>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">tips</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[28]: </span>
+<span class="go">     total_bill   tip smoker   day    time  size</span>
+<span class="go">0         14.99  1.01     No   Sun  Dinner     2</span>
+<span class="go">1          8.34  1.66     No   Sun  Dinner     3</span>
+<span class="go">2         19.01  3.50     No   Sun  Dinner     3</span>
+<span class="go">3         21.68  3.31     No   Sun  Dinner     2</span>
+<span class="go">4         22.59  3.61     No   Sun  Dinner     4</span>
+<span class="go">..          ...   ...    ...   ...     ...   ...</span>
+<span class="go">239       27.03  5.92     No   Sat  Dinner     3</span>
+<span class="go">240       25.18  2.00    Yes   Sat  Dinner     2</span>
+<span class="go">241       20.67  2.00    Yes   Sat  Dinner     2</span>
+<span class="go">242       15.82  1.75     No   Sat  Dinner     2</span>
+<span class="go">243       16.78  3.00     No  Thur  Dinner     2</span>
+
+<span class="go">[244 rows x 6 columns]</span>
+</pre></div>
+</div>
+</section>
+<section id="rename-a-column">
+<h4>重命名列<a class="headerlink" href="comparison_with_spreadsheets.html#rename-a-column" title="Link to this heading">#</a></h4>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">tips</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"total_bill"</span><span class="p">:</span> <span class="s2">"total_bill_2"</span><span class="p">})</span>
+<span class="gh">Out[29]: </span>
+<span class="go">     total_bill_2   tip     sex smoker   day    time  size</span>
+<span class="go">0           14.99  1.01  Female     No   Sun  Dinner     2</span>
+<span class="go">1            8.34  1.66    Male     No   Sun  Dinner     3</span>
+<span class="go">2           19.01  3.50    Male     No   Sun  Dinner     3</span>
+<span class="go">3           21.68  3.31    Male     No   Sun  Dinner     2</span>
+<span class="go">4           22.59  3.61  Female     No   Sun  Dinner     4</span>
+<span class="go">..            ...   ...     ...    ...   ...     ...   ...</span>
+<span class="go">239         27.03  5.92    Male     No   Sat  Dinner     3</span>
+<span class="go">240         25.18  2.00  Female    Yes   Sat  Dinner     2</span>
+<span class="go">241         20.67  2.00    Male    Yes   Sat  Dinner     2</span>
+<span class="go">242         15.82  1.75    Male     No   Sat  Dinner     2</span>
+<span class="go">243         16.78  3.00  Female     No  Thur  Dinner     2</span>
+
+<span class="go">[244 rows x 7 columns]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sorting-by-values">
+<h3>按值排序<a class="headerlink" href="comparison_with_spreadsheets.html#sorting-by-values" title="Link to this heading">#</a></h3>
+<p>电子表格中的排序通过 <a class="reference external" href="https://support.microsoft.com/en-us/office/sort-data-in-a-range-or-table-62d0b95d-2a90-4610-a6ae-2e545c4a4654">排序对话框</a> 来实现。</p>
+<img alt="Screenshot of dialog from Excel showing sorting by the sex then total_bill columns" class="align-center" src="../../_images/sort.png">
+<p>pandas 有一个 <a class="reference internal" href="../../reference/api/pandas.DataFrame.sort_values.html#pandas.DataFrame.sort_values" title="pandas.DataFrame.sort_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.sort_values()</span></code></a> 方法，它接受一个要排序的列列表。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">tips</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"sex"</span><span class="p">,</span> <span class="s2">"total_bill"</span><span class="p">])</span>
+
+<span class="gp">In [31]: </span><span class="n">tips</span>
+<span class="gh">Out[31]: </span>
+<span class="go">     total_bill    tip     sex smoker   day    time  size</span>
+<span class="go">67         1.07   1.00  Female    Yes   Sat  Dinner     1</span>
+<span class="go">92         3.75   1.00  Female    Yes   Fri  Dinner     2</span>
+<span class="go">111        5.25   1.00  Female     No   Sat  Dinner     1</span>
+<span class="go">145        6.35   1.50  Female     No  Thur   Lunch     2</span>
+<span class="go">135        6.51   1.25  Female     No  Thur   Lunch     2</span>
+<span class="go">..          ...    ...     ...    ...   ...     ...   ...</span>
+<span class="go">182       43.35   3.50    Male    Yes   Sun  Dinner     3</span>
+<span class="go">156       46.17   5.00    Male     No   Sun  Dinner     6</span>
+<span class="go">59        46.27   6.73    Male     No   Sat  Dinner     4</span>
+<span class="go">212       46.33   9.00    Male     No   Sat  Dinner     4</span>
+<span class="go">170       48.81  10.00    Male    Yes   Sat  Dinner     3</span>
+
+<span class="go">[244 rows x 7 columns]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="string-processing">
+<h2>字符串处理<a class="headerlink" href="comparison_with_spreadsheets.html#string-processing" title="Link to this heading">#</a></h2>
+<section id="finding-length-of-string">
+<h3>查找字符串长度<a class="headerlink" href="comparison_with_spreadsheets.html#finding-length-of-string" title="Link to this heading">#</a></h3>
+<p>在电子表格中，可以使用 <a class="reference external" href="https://support.microsoft.com/en-us/office/len-lenb-functions-29236f94-cedc-429d-affd-b5e33d2c67cb">LEN</a> 函数查找文本中的字符数。这可以与 <a class="reference external" href="https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9">TRIM</a> 函数一起使用以删除多余的空格。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=</span><span class="n">LEN</span><span class="p">(</span><span class="n">TRIM</span><span class="p">(</span><span class="n">A2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>您可以使用 <a class="reference internal" href="../../reference/api/pandas.Series.str.len.html#pandas.Series.str.len" title="pandas.Series.str.len"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.len()</span></code></a> 找到字符串的长度。在 Python 3 中，所有字符串都是 Unicode 字符串。<code class="docutils literal notranslate"><span class="pre">len</span></code> 包括尾随空格。使用 <code class="docutils literal notranslate"><span class="pre">len</span></code> 和 <code class="docutils literal notranslate"><span class="pre">rstrip</span></code> 来排除尾随空格。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="gh">Out[32]: </span>
+<span class="go">67     6</span>
+<span class="go">92     6</span>
+<span class="go">111    6</span>
+<span class="go">145    5</span>
+<span class="go">135    5</span>
+<span class="go">      ..</span>
+<span class="go">182    6</span>
+<span class="go">156    6</span>
+<span class="go">59     6</span>
+<span class="go">212    6</span>
+<span class="go">170    6</span>
+<span class="go">Name: time, Length: 244, dtype: int64</span>
+
+<span class="gp">In [33]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="gh">Out[33]: </span>
+<span class="go">67     6</span>
+<span class="go">92     6</span>
+<span class="go">111    6</span>
+<span class="go">145    5</span>
+<span class="go">135    5</span>
+<span class="go">      ..</span>
+<span class="go">182    6</span>
+<span class="go">156    6</span>
+<span class="go">59     6</span>
+<span class="go">212    6</span>
+<span class="go">170    6</span>
+<span class="go">Name: time, Length: 244, dtype: int64</span>
+</pre></div>
+</div>
+<p>请注意，这仍然会包括字符串中的多个空格，因此并非 100% 等效。</p>
+</section>
+<section id="finding-position-of-substring">
+<h3>查找子字符串位置<a class="headerlink" href="comparison_with_spreadsheets.html#finding-position-of-substring" title="Link to this heading">#</a></h3>
+<p>电子表格函数 <a class="reference external" href="https://support.microsoft.com/en-us/office/find-findb-functions-c7912941-af2a-4bdf-a553-d0d89b0a0628">FIND</a> 返回子字符串的位置，其中第一个字符为 <code class="docutils literal notranslate"><span class="pre">1</span></code>。</p>
+<img alt="Screenshot of FIND formula being used in Excel" class="align-center" src="../../_images/sort.png">
+<p>您可以使用 <a class="reference internal" href="../../reference/api/pandas.Series.str.find.html#pandas.Series.str.find" title="pandas.Series.str.find"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.find()</span></code></a> 方法在字符串列中查找字符的位置。<code class="docutils literal notranslate"><span class="pre">find</span></code> 搜索子字符串的第一个位置。如果找到子字符串，该方法返回其位置。如果未找到，则返回 <code class="docutils literal notranslate"><span class="pre">-1</span></code>。请记住，Python 索引是基于零的。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"sex"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"ale"</span><span class="p">)</span>
+<span class="gh">Out[34]: </span>
+<span class="go">67     3</span>
+<span class="go">92     3</span>
+<span class="go">111    3</span>
+<span class="go">145    3</span>
+<span class="go">135    3</span>
+<span class="go">      ..</span>
+<span class="go">182    1</span>
+<span class="go">156    1</span>
+<span class="go">59     1</span>
+<span class="go">212    1</span>
+<span class="go">170    1</span>
+<span class="go">Name: sex, Length: 244, dtype: int64</span>
+</pre></div>
+</div>
+</section>
+<section id="extracting-substring-by-position">
+<h3>按位置提取子字符串<a class="headerlink" href="comparison_with_spreadsheets.html#extracting-substring-by-position" title="Link to this heading">#</a></h3>
+<p>电子表格有一个 <a class="reference external" href="https://support.microsoft.com/en-us/office/mid-midb-functions-d5f9e25c-d7d6-472e-b568-4ecb12433028">MID</a> 公式，用于从给定位置提取子字符串。要获取第一个字符</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=</span><span class="n">MID</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>在 pandas 中，您可以使用 <code class="docutils literal notranslate"><span class="pre">[]</span></code> 表示法通过位置提取字符串的子字符串。请记住，Python 索引是基于零的。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"sex"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+<span class="gh">Out[35]: </span>
+<span class="go">67     F</span>
+<span class="go">92     F</span>
+<span class="go">111    F</span>
+<span class="go">145    F</span>
+<span class="go">135    F</span>
+<span class="go">      ..</span>
+<span class="go">182    M</span>
+<span class="go">156    M</span>
+<span class="go">59     M</span>
+<span class="go">212    M</span>
+<span class="go">170    M</span>
+<span class="go">Name: sex, Length: 244, dtype: object</span>
+</pre></div>
+</div>
+</section>
+<section id="extracting-nth-word">
+<h3>提取第 n 个单词<a class="headerlink" href="comparison_with_spreadsheets.html#extracting-nth-word" title="Link to this heading">#</a></h3>
+<p>在 Excel 中，您可以使用 <a class="reference external" href="https://support.microsoft.com/en-us/office/split-text-into-different-columns-with-the-convert-text-to-columns-wizard-30b14928-5550-41f5-97ca-7a3e9c363ed7">“文本到列”向导</a> 来分割文本并检索特定列。（请注意，<a class="reference external" href="https://exceljet.net/formula/extract-nth-word-from-text-string">也可以通过公式实现</a>。）</p>
+<p>在 pandas 中提取单词最简单的方法是按空格分割字符串，然后通过索引引用单词。请注意，如果您需要，还有更强大的方法。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">firstlast</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"String"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"John Smith"</span><span class="p">,</span> <span class="s2">"Jane Cook"</span><span class="p">]})</span>
+
+<span class="gp">In [37]: </span><span class="n">firstlast</span><span class="p">[</span><span class="s2">"First_Name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstlast</span><span class="p">[</span><span class="s2">"String"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="gp">In [38]: </span><span class="n">firstlast</span><span class="p">[</span><span class="s2">"Last_Name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstlast</span><span class="p">[</span><span class="s2">"String"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="gp">In [39]: </span><span class="n">firstlast</span>
+<span class="gh">Out[39]: </span>
+<span class="go">       String First_Name Last_Name</span>
+<span class="go">0  John Smith       John     Smith</span>
+<span class="go">1   Jane Cook       Jane      Cook</span>
+</pre></div>
+</div>
+</section>
+<section id="changing-case">
+<h3>更改大小写<a class="headerlink" href="comparison_with_spreadsheets.html#changing-case" title="Link to this heading">#</a></h3>
+<p>电子表格提供 <a class="reference external" href="https://support.microsoft.com/en-us/office/change-the-case-of-text-01481046-0fa7-4f3b-a693-496795a7a44d">UPPER、LOWER 和 PROPER 函数</a>，分别用于将文本转换为大写、小写和标题大小写。</p>
+<p>等效的 pandas 方法是 <a class="reference internal" href="../../reference/api/pandas.Series.str.upper.html#pandas.Series.str.upper" title="pandas.Series.str.upper"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.upper()</span></code></a>、<a class="reference internal" href="../../reference/api/pandas.Series.str.lower.html#pandas.Series.str.lower" title="pandas.Series.str.lower"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.lower()</span></code></a> 和 <a class="reference internal" href="../../reference/api/pandas.Series.str.title.html#pandas.Series.str.title" title="pandas.Series.str.title"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.title()</span></code></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">firstlast</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"string"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"John Smith"</span><span class="p">,</span> <span class="s2">"Jane Cook"</span><span class="p">]})</span>
+
+<span class="gp">In [41]: </span><span class="n">firstlast</span><span class="p">[</span><span class="s2">"upper"</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstlast</span><span class="p">[</span><span class="s2">"string"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+<span class="gp">In [42]: </span><span class="n">firstlast</span><span class="p">[</span><span class="s2">"lower"</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstlast</span><span class="p">[</span><span class="s2">"string"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="gp">In [43]: </span><span class="n">firstlast</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstlast</span><span class="p">[</span><span class="s2">"string"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+
+<span class="gp">In [44]: </span><span class="n">firstlast</span>
+<span class="gh">Out[44]: </span>
+<span class="go">       string       upper       lower       title</span>
+<span class="go">0  John Smith  JOHN SMITH  john smith  John Smith</span>
+<span class="go">1   Jane Cook   JANE COOK   jane cook   Jane Cook</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="merging">
+<h2>合并<a class="headerlink" href="comparison_with_spreadsheets.html#merging" title="Link to this heading">#</a></h2>
+<p>以下表格将用于合并示例</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">],</span> <span class="s2">"value"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+
+<span class="gp">In [46]: </span><span class="n">df1</span>
+<span class="gh">Out[46]: </span>
+<span class="go">  key     value</span>
+<span class="go">0   A  0.469112</span>
+<span class="go">1   B -0.282863</span>
+<span class="go">2   C -1.509059</span>
+<span class="go">3   D -1.135632</span>
+
+<span class="gp">In [47]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"B"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">],</span> <span class="s2">"value"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+
+<span class="gp">In [48]: </span><span class="n">df2</span>
+<span class="gh">Out[48]: </span>
+<span class="go">  key     value</span>
+<span class="go">0   B  1.212112</span>
+<span class="go">1   D -0.173215</span>
+<span class="go">2   D  0.119209</span>
+<span class="go">3   E -1.044236</span>
+</pre></div>
+</div>
+<p>在 Excel 中，<a class="reference external" href="https://support.microsoft.com/en-us/office/how-can-i-merge-two-or-more-tables-c80a9fce-c1ab-4425-bb96-497dd906d656">可以通过 VLOOKUP 合并表格</a>。</p>
+<img alt="Screenshot showing a VLOOKUP formula between two tables in Excel, with some values being filled in and others with &quot;#N/A&quot;" class="align-center" src="../../_images/vlookup.png">
+<p>pandas DataFrames 有一个 <a class="reference internal" href="../../reference/api/pandas.DataFrame.merge.html#pandas.DataFrame.merge" title="pandas.DataFrame.merge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">merge()</span></code></a> 方法，它提供了类似的功能。数据无需提前排序，并且可以通过 <code class="docutils literal notranslate"><span class="pre">how</span></code> 关键字实现不同的连接类型。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">inner_join</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"key"</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+
+<span class="gp">In [50]: </span><span class="n">inner_join</span>
+<span class="gh">Out[50]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   B -0.282863  1.212112</span>
+<span class="go">1   D -1.135632 -0.173215</span>
+<span class="go">2   D -1.135632  0.119209</span>
+
+<span class="gp">In [51]: </span><span class="n">left_join</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"key"</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+
+<span class="gp">In [52]: </span><span class="n">left_join</span>
+<span class="gh">Out[52]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   A  0.469112       NaN</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">2   C -1.509059       NaN</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+
+<span class="gp">In [53]: </span><span class="n">right_join</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"key"</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"right"</span><span class="p">)</span>
+
+<span class="gp">In [54]: </span><span class="n">right_join</span>
+<span class="gh">Out[54]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   B -0.282863  1.212112</span>
+<span class="go">1   D -1.135632 -0.173215</span>
+<span class="go">2   D -1.135632  0.119209</span>
+<span class="go">3   E       NaN -1.044236</span>
+
+<span class="gp">In [55]: </span><span class="n">outer_join</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"key"</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"outer"</span><span class="p">)</span>
+
+<span class="gp">In [56]: </span><span class="n">outer_join</span>
+<span class="gh">Out[56]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   A  0.469112       NaN</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">2   C -1.509059       NaN</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+<span class="go">5   E       NaN -1.044236</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">merge</span></code> 相对于 <code class="docutils literal notranslate"><span class="pre">VLOOKUP</span></code> 有以下几个优势：</p>
+<ul class="simple">
+<li><p>查找值无需是查找表的第一列</p></li>
+<li><p>如果匹配到多行，每匹配一项都会有一行结果，而不仅仅是第一个匹配项</p></li>
+<li><p>它将包含查找表中的所有列，而不仅仅是单个指定的列</p></li>
+<li><p>它支持 <a class="reference internal" href="../../user_guide/merging.html#merging-join"><span class="std std-ref">更复杂的连接操作</span></a></p></li>
+</ul>
+</section>
+<section id="other-considerations">
+<h2>其他考量<a class="headerlink" href="comparison_with_spreadsheets.html#other-considerations" title="Link to this heading">#</a></h2>
+<section id="fill-handle">
+<h3>填充柄<a class="headerlink" href="comparison_with_spreadsheets.html#fill-handle" title="Link to this heading">#</a></h3>
+<p>在一定数量的单元格中创建遵循特定模式的数字序列。在电子表格中，这可以通过在输入第一个数字后按住 Shift 键并拖动，或者输入前两三个值然后拖动来实现。</p>
+<p>这可以通过创建 Series 并将其赋值给所需的单元格来实现。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"AAA"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">"BBB"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">))})</span>
+
+<span class="gp">In [58]: </span><span class="n">df</span>
+<span class="gh">Out[58]: </span>
+<span class="go">   AAA  BBB</span>
+<span class="go">0    1    0</span>
+<span class="go">1    1    1</span>
+<span class="go">2    1    2</span>
+<span class="go">3    1    3</span>
+<span class="go">4    1    4</span>
+<span class="go">5    1    5</span>
+<span class="go">6    1    6</span>
+<span class="go">7    1    7</span>
+
+<span class="gp">In [59]: </span><span class="n">series</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="gp">In [60]: </span><span class="n">series</span>
+<span class="gh">Out[60]: </span><span class="go">[1, 2, 3, 4]</span>
+
+<span class="gp">In [61]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="s2">"AAA"</span><span class="p">]</span> <span class="o">=</span> <span class="n">series</span>
+
+<span class="gp">In [62]: </span><span class="n">df</span>
+<span class="gh">Out[62]: </span>
+<span class="go">   AAA  BBB</span>
+<span class="go">0    1    0</span>
+<span class="go">1    1    1</span>
+<span class="go">2    1    2</span>
+<span class="go">3    2    3</span>
+<span class="go">4    3    4</span>
+<span class="go">5    4    5</span>
+<span class="go">6    1    6</span>
+<span class="go">7    1    7</span>
+</pre></div>
+</div>
+</section>
+<section id="drop-duplicates">
+<h3>删除重复项<a class="headerlink" href="comparison_with_spreadsheets.html#drop-duplicates" title="Link to this heading">#</a></h3>
+<p>Excel 具有用于 <a class="reference external" href="https://support.microsoft.com/en-us/office/find-and-remove-duplicates-00e35bea-b46a-4d5d-b28e-66a552dc138d">删除重复值</a> 的内置功能。pandas 通过 <a class="reference internal" href="../../reference/api/pandas.DataFrame.drop_duplicates.html#pandas.DataFrame.drop_duplicates" title="pandas.DataFrame.drop_duplicates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_duplicates()</span></code></a> 来支持此功能。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span>
+<span class="gp">   ....: </span>        <span class="s2">"class"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">],</span>
+<span class="gp">   ....: </span>        <span class="s2">"student_count"</span><span class="p">:</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span>
+<span class="gp">   ....: </span>        <span class="s2">"all_pass"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Yes"</span><span class="p">,</span> <span class="s2">"Yes"</span><span class="p">,</span> <span class="s2">"Yes"</span><span class="p">,</span> <span class="s2">"No"</span><span class="p">,</span> <span class="s2">"No"</span><span class="p">,</span> <span class="s2">"Yes"</span><span class="p">],</span>
+<span class="gp">   ....: </span>    <span class="p">}</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [64]: </span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="gh">Out[64]: </span>
+<span class="go">  class  student_count all_pass</span>
+<span class="go">0     A             42      Yes</span>
+<span class="go">1     A             35      Yes</span>
+<span class="go">3     B             50       No</span>
+<span class="go">4     C             47       No</span>
+<span class="go">5     D             45      Yes</span>
+
+<span class="gp">In [65]: </span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s2">"class"</span><span class="p">,</span> <span class="s2">"student_count"</span><span class="p">])</span>
+<span class="gh">Out[65]: </span>
+<span class="go">  class  student_count all_pass</span>
+<span class="go">0     A             42      Yes</span>
+<span class="go">1     A             35      Yes</span>
+<span class="go">3     B             50       No</span>
+<span class="go">4     C             47       No</span>
+<span class="go">5     D             45      Yes</span>
+</pre></div>
+</div>
+</section>
+<section id="pivot-tables">
+<h3>数据透视表<a class="headerlink" href="comparison_with_spreadsheets.html#pivot-tables" title="Link to this heading">#</a></h3>
+<p>电子表格中的 <a class="reference external" href="https://support.microsoft.com/en-us/office/create-a-pivottable-to-analyze-worksheet-data-a9a84538-bfe9-40a9-a8e9-f99134456576">数据透视表</a> 可以通过 pandas 中的 <a class="reference internal" href="../../user_guide/reshaping.html#reshaping"><span class="std std-ref">重塑和数据透视表</span></a> 来实现。再次使用 <code class="docutils literal notranslate"><span class="pre">tips</span></code> 数据集，让我们按聚会规模和服务器性别查找平均小费。</p>
+<p>在 Excel 中，我们对数据透视表使用以下配置：</p>
+<img alt="Screenshot showing a PivotTable in Excel, using sex as the column, size as the rows, then average tip as the values" class="align-center" src="../../_images/pivot.png">
+<p>在 pandas 中的等效操作</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">tips</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"size"</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"sex"</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">average</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[66]: </span>
+<span class="go">sex     Female      Male</span>
+<span class="go">size                    </span>
+<span class="go">1     1.276667  1.920000</span>
+<span class="go">2     2.528448  2.614184</span>
+<span class="go">3     3.250000  3.476667</span>
+<span class="go">4     4.021111  4.172143</span>
+<span class="go">5     5.140000  3.750000</span>
+<span class="go">6     4.600000  5.850000</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-a-row">
+<h3>添加行<a class="headerlink" href="comparison_with_spreadsheets.html#adding-a-row" title="Link to this heading">#</a></h3>
+<p>假设我们正在使用一个 <a class="reference internal" href="../../reference/api/pandas.RangeIndex.html#pandas.RangeIndex" title="pandas.RangeIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">RangeIndex</span></code></a>（编号为 <code class="docutils literal notranslate"><span class="pre">0</span></code>、<code class="docutils literal notranslate"><span class="pre">1</span></code> 等），我们可以使用 <a class="reference internal" href="../../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> 将一行添加到 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的底部。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">df</span>
+<span class="gh">Out[67]: </span>
+<span class="go">  class  student_count all_pass</span>
+<span class="go">0     A             42      Yes</span>
+<span class="go">1     A             35      Yes</span>
+<span class="go">2     A             42      Yes</span>
+<span class="go">3     B             50       No</span>
+<span class="go">4     C             47       No</span>
+<span class="go">5     D             45      Yes</span>
+
+<span class="gp">In [68]: </span><span class="n">new_row</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s2">"E"</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="kc">True</span><span class="p">]],</span>
+<span class="gp">   ....: </span>                       <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"class"</span><span class="p">,</span> <span class="s2">"student_count"</span><span class="p">,</span> <span class="s2">"all_pass"</span><span class="p">])</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [69]: </span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">new_row</span><span class="p">])</span>
+<span class="gh">Out[69]: </span>
+<span class="go">  class  student_count all_pass</span>
+<span class="go">0     A             42      Yes</span>
+<span class="go">1     A             35      Yes</span>
+<span class="go">2     A             42      Yes</span>
+<span class="go">3     B             50       No</span>
+<span class="go">4     C             47       No</span>
+<span class="go">5     D             45      Yes</span>
+<span class="go">0     E             51     True</span>
+</pre></div>
+</div>
+</section>
+<section id="find-and-replace">
+<h3>查找和替换<a class="headerlink" href="comparison_with_spreadsheets.html#find-and-replace" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://support.microsoft.com/en-us/office/find-or-replace-text-and-numbers-on-a-worksheet-0e304ca5-ecef-4808-b90f-fdb42f892e90">Excel 的“查找”对话框</a> 会逐个带您找到匹配的单元格。在 pandas 中，此操作通常通过 <a class="reference internal" href="../intro_tutorials/03_subset_data.html#min-tut-03-subset-rows-and-columns"><span class="std std-ref">条件表达式</span></a> 对整个列或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 一次性完成。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">tips</span>
+<span class="gh">Out[70]: </span>
+<span class="go">     total_bill    tip     sex smoker   day    time  size</span>
+<span class="go">67         1.07   1.00  Female    Yes   Sat  Dinner     1</span>
+<span class="go">92         3.75   1.00  Female    Yes   Fri  Dinner     2</span>
+<span class="go">111        5.25   1.00  Female     No   Sat  Dinner     1</span>
+<span class="go">145        6.35   1.50  Female     No  Thur   Lunch     2</span>
+<span class="go">135        6.51   1.25  Female     No  Thur   Lunch     2</span>
+<span class="go">..          ...    ...     ...    ...   ...     ...   ...</span>
+<span class="go">182       43.35   3.50    Male    Yes   Sun  Dinner     3</span>
+<span class="go">156       46.17   5.00    Male     No   Sun  Dinner     6</span>
+<span class="go">59        46.27   6.73    Male     No   Sat  Dinner     4</span>
+<span class="go">212       46.33   9.00    Male     No   Sat  Dinner     4</span>
+<span class="go">170       48.81  10.00    Male    Yes   Sat  Dinner     3</span>
+
+<span class="go">[244 rows x 7 columns]</span>
+
+<span class="gp">In [71]: </span><span class="n">tips</span> <span class="o">==</span> <span class="s2">"Sun"</span>
+<span class="gh">Out[71]: </span>
+<span class="go">     total_bill    tip    sex  smoker    day   time   size</span>
+<span class="go">67        False  False  False   False  False  False  False</span>
+<span class="go">92        False  False  False   False  False  False  False</span>
+<span class="go">111       False  False  False   False  False  False  False</span>
+<span class="go">145       False  False  False   False  False  False  False</span>
+<span class="go">135       False  False  False   False  False  False  False</span>
+<span class="go">..          ...    ...    ...     ...    ...    ...    ...</span>
+<span class="go">182       False  False  False   False   True  False  False</span>
+<span class="go">156       False  False  False   False   True  False  False</span>
+<span class="go">59        False  False  False   False  False  False  False</span>
+<span class="go">212       False  False  False   False  False  False  False</span>
+<span class="go">170       False  False  False   False  False  False  False</span>
+
+<span class="go">[244 rows x 7 columns]</span>
+
+<span class="gp">In [72]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"day"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"S"</span><span class="p">)</span>
+<span class="gh">Out[72]: </span>
+<span class="go">67      True</span>
+<span class="go">92     False</span>
+<span class="go">111     True</span>
+<span class="go">145    False</span>
+<span class="go">135    False</span>
+<span class="go">       ...  </span>
+<span class="go">182     True</span>
+<span class="go">156     True</span>
+<span class="go">59      True</span>
+<span class="go">212     True</span>
+<span class="go">170     True</span>
+<span class="go">Name: day, Length: 244, dtype: bool</span>
+</pre></div>
+</div>
+<p>pandas 的 <a class="reference internal" href="../../reference/api/pandas.DataFrame.replace.html#pandas.DataFrame.replace" title="pandas.DataFrame.replace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">replace()</span></code></a> 可与 Excel 的 <code class="docutils literal notranslate"><span class="pre">Replace</span> <span class="pre">All</span></code> 相媲美。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">tips</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"Thu"</span><span class="p">,</span> <span class="s2">"Thursday"</span><span class="p">)</span>
+<span class="gh">Out[73]: </span>
+<span class="go">     total_bill    tip     sex smoker   day    time  size</span>
+<span class="go">67         1.07   1.00  Female    Yes   Sat  Dinner     1</span>
+<span class="go">92         3.75   1.00  Female    Yes   Fri  Dinner     2</span>
+<span class="go">111        5.25   1.00  Female     No   Sat  Dinner     1</span>
+<span class="go">145        6.35   1.50  Female     No  Thur   Lunch     2</span>
+<span class="go">135        6.51   1.25  Female     No  Thur   Lunch     2</span>
+<span class="go">..          ...    ...     ...    ...   ...     ...   ...</span>
+<span class="go">182       43.35   3.50    Male    Yes   Sun  Dinner     3</span>
+<span class="go">156       46.17   5.00    Male     No   Sun  Dinner     6</span>
+<span class="go">59        46.27   6.73    Male     No   Sat  Dinner     4</span>
+<span class="go">212       46.33   9.00    Male     No   Sat  Dinner     4</span>
+<span class="go">170       48.81  10.00    Male    Yes   Sat  Dinner     3</span>
+
+<span class="go">[244 rows x 7 columns]</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="comparison_with_sql.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">与 SQL 对比</p> </div> </a> <a class="right-next" href="comparison_with_sas.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">与 SAS 对比</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#data-structures">数据结构</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#general-terminology-translation">通用术语对照</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#dataframe"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#series"><code class="docutils literal notranslate"><span class="pre">Series</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#index"><code class="docutils literal notranslate"><span class="pre">Index</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#copies-vs-in-place-operations">副本与原地操作</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#data-input-output">数据输入/输出</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#constructing-a-dataframe-from-values">从值构建 DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#reading-external-data">读取外部数据</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#csv">CSV</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#excel-files">Excel 文件</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#limiting-output">限制输出</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#exporting-data">导出数据</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#data-operations">数据操作</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#operations-on-columns">列操作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#filtering">筛选</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#if-then-logic">条件逻辑</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#date-functionality">日期功能</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#selection-of-columns">列选择</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#keep-certain-columns">保留特定列</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#drop-a-column">删除列</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#rename-a-column">重命名列</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#sorting-by-values">按值排序</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#string-processing">字符串处理</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#finding-length-of-string">查找字符串长度</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#finding-position-of-substring">查找子字符串位置</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#extracting-substring-by-position">按位置提取子字符串</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#extracting-nth-word">提取第 n 个单词</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#changing-case">更改大小写</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#merging">合并</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#other-considerations">其他考量</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#fill-handle">填充柄</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#drop-duplicates">删除重复项</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#pivot-tables">数据透视表</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#adding-a-row">添加行</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_spreadsheets.html#find-and-replace">查找和替换</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/comparison/comparison_with_spreadsheets.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">基于 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx 主题</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>如何轻松处理时间序列数据 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/intro_tutorials/09_timeseries';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to manipulate textual data" href="10_text_data.html" />
+    <link rel="prev" title="How to combine data from multiple tables" href="08_combine_dataframes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="09_timeseries.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包总览</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">入门教程</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_table_oriented.html">pandas 处理哪种类型的数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_read_write.html">如何读写表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_add_columns.html">如何从现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_calculate_statistics.html">如何计算汇总统计信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_reshape_table_layout.html">如何重塑表格布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_combine_dataframes.html">如何合并多个表格的数据</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="09_timeseries.html#">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_text_data.html">如何处理文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../comparison/index.html">与其他工具比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_r.html">与 R / R 库比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sql.html">与 SQL 比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_spreadsheets.html">与电子表格比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sas.html">与 SAS 比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_stata.html">与 Stata 比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">入门</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">入门教程</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">如何...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="highlight-ipython notranslate" id="min-tut-09-timeseries"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="gp">In [2]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header gs-data-header">
+        <div class="gs-data-title">本教程使用的数据</div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item gs-data-list">
+            <div data-bs-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+                <span class="badge bg-secondary">空气质量数据</span>
+            </div>
+            <div class="collapse" id="collapsedata">
+                <div class="card-body">
+                    <p class="card-text"></p><p>本教程使用了关于 <span class="math notranslate nohighlight">\(NO_2\)</span> 和小于 2.5 微米的颗粒物的空气质量数据，这些数据由 <a class="reference external" href="https://openaq.org">OpenAQ</a> 提供，并通过 <a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> 包下载。<code class="docutils literal notranslate"><span class="pre">air_quality_no2_long.csv"</span></code> 数据集分别提供了巴黎、安特卫普和伦敦的测量站 <em>FR04014</em>、<em>BETR801</em> 和 <em>London Westminster</em> 的 <span class="math notranslate nohighlight">\(NO_2\)</span> 值。</p>
+            <p></p>
+        <a href="https://github.com/pandas-dev/pandas/tree/main/doc/data/air_quality_no2_long.csv" class="btn btn-dark btn-sm">原始数据</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/air_quality_no2_long.csv"</span><span class="p">)</span>
+
+<span class="gp">In [4]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"date.utc"</span><span class="p">:</span> <span class="s2">"datetime"</span><span class="p">})</span>
+
+<span class="gp">In [5]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[5]: </span>
+<span class="go">    city country                   datetime location parameter  value   unit</span>
+<span class="go">0  Paris      FR  2019-06-21 00:00:00+00:00  FR04014       no2   20.0  µg/m³</span>
+<span class="go">1  Paris      FR  2019-06-20 23:00:00+00:00  FR04014       no2   21.8  µg/m³</span>
+<span class="go">2  Paris      FR  2019-06-20 22:00:00+00:00  FR04014       no2   26.5  µg/m³</span>
+<span class="go">3  Paris      FR  2019-06-20 21:00:00+00:00  FR04014       no2   24.9  µg/m³</span>
+<span class="go">4  Paris      FR  2019-06-20 20:00:00+00:00  FR04014       no2   21.4  µg/m³</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">city</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="gh">Out[6]: </span><span class="go">array(['Paris', 'Antwerpen', 'London'], dtype=object)</span>
+</pre></div>
+</div>
+    </li>
+</ul>
+</div><section id="how-to-handle-time-series-data-with-ease">
+<h1>如何轻松处理时间序列数据<a class="headerlink" href="09_timeseries.html#how-to-handle-time-series-data-with-ease" title="Link to this heading">#</a></h1>
+<section id="using-pandas-datetime-properties">
+<span id="min-tut-09-timeseries-properties"></span><h2>使用 pandas 日期时间属性<a class="headerlink" href="09_timeseries.html#using-pandas-datetime-properties" title="Link to this heading">#</a></h2>
+<ul class="task-bullet">
+    <li><p>我想将 <code class="docutils literal notranslate"><span class="pre">datetime</span></code> 列中的日期作为日期时间对象而不是纯文本来处理</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">])</span>
+
+<span class="gp">In [8]: </span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span>
+<span class="gh">Out[8]: </span>
+<span class="go">0      2019-06-21 00:00:00+00:00</span>
+<span class="go">1      2019-06-20 23:00:00+00:00</span>
+<span class="go">2      2019-06-20 22:00:00+00:00</span>
+<span class="go">3      2019-06-20 21:00:00+00:00</span>
+<span class="go">4      2019-06-20 20:00:00+00:00</span>
+<span class="go">                  ...           </span>
+<span class="go">2063   2019-05-07 06:00:00+00:00</span>
+<span class="go">2064   2019-05-07 04:00:00+00:00</span>
+<span class="go">2065   2019-05-07 03:00:00+00:00</span>
+<span class="go">2066   2019-05-07 02:00:00+00:00</span>
+<span class="go">2067   2019-05-07 01:00:00+00:00</span>
+<span class="go">Name: datetime, Length: 2068, dtype: datetime64[ns, UTC]</span>
+</pre></div>
+</div>
+<p>最初，<code class="docutils literal notranslate"><span class="pre">datetime</span></code> 中的值是字符串，不提供任何日期时间操作（例如，提取年份、星期几等）。通过应用 <code class="docutils literal notranslate"><span class="pre">to_datetime</span></code> 函数，pandas 会解释这些字符串并将其转换为日期时间（即 <code class="docutils literal notranslate"><span class="pre">datetime64[ns,</span> <span class="pre">UTC]</span></code>）对象。在 pandas 中，我们将这些日期时间对象称为 <a class="reference internal" href="../../reference/api/pandas.Timestamp.html#pandas.Timestamp" title="pandas.Timestamp"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a>，类似于标准库中的 <code class="docutils literal notranslate"><span class="pre">datetime.datetime</span></code>。</p>
+    </li>
+</ul><div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>由于许多数据集的列中包含日期时间信息，pandas 的输入函数如 <a class="reference internal" href="../../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a> 和 <a class="reference internal" href="../../reference/api/pandas.read_json.html#pandas.read_json" title="pandas.read_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_json()</span></code></a> 可以在读取数据时，使用 <code class="docutils literal notranslate"><span class="pre">parse_dates</span></code> 参数（提供要作为 Timestamp 读取的列列表）来完成日期的转换。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/air_quality_no2_long.csv"</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>为什么这些 <a class="reference internal" href="../../reference/api/pandas.Timestamp.html#pandas.Timestamp" title="pandas.Timestamp"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a> 对象很有用？让我们通过一些示例来 H 说明其附加价值。</p>
+<blockquote>
+<div><p>我们正在处理的时间序列数据集的开始和结束日期是什么？</p>
+</div></blockquote>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="gh">Out[9]: </span>
+<span class="go">(Timestamp('2019-05-07 01:00:00+0000', tz='UTC'),</span>
+<span class="go"> Timestamp('2019-06-21 00:00:00+0000', tz='UTC'))</span>
+</pre></div>
+</div>
+<p>使用 <a class="reference internal" href="../../reference/api/pandas.Timestamp.html#pandas.Timestamp" title="pandas.Timestamp"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timestamp</span></code></a> 处理日期时间使我们能够使用日期信息进行计算并使其具有可比性。因此，我们可以用它来获取时间序列的长度</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="gh">Out[10]: </span><span class="go">Timedelta('44 days 23:00:00')</span>
+</pre></div>
+</div>
+<p>结果是一个 <a class="reference internal" href="../../reference/api/pandas.Timedelta.html#pandas.Timedelta" title="pandas.Timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Timedelta</span></code></a> 对象，类似于标准 Python 库中的 <code class="docutils literal notranslate"><span class="pre">datetime.timedelta</span></code>，它定义了一个时间持续期。</p>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>pandas 支持的各种时间概念在用户指南的 <a class="reference internal" href="../../user_guide/timeseries.html#timeseries-overview"><span class="std std-ref">时间相关概念</span></a> 部分进行了解释。</p>
+</div><ul class="task-bullet">
+    <li><p>我想向 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 添加一个新列，其中只包含测量月份</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"month"</span><span class="p">]</span> <span class="o">=</span> <span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+
+<span class="gp">In [12]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[12]: </span>
+<span class="go">    city country                  datetime  ... value   unit  month</span>
+<span class="go">0  Paris      FR 2019-06-21 00:00:00+00:00  ...  20.0  µg/m³      6</span>
+<span class="go">1  Paris      FR 2019-06-20 23:00:00+00:00  ...  21.8  µg/m³      6</span>
+<span class="go">2  Paris      FR 2019-06-20 22:00:00+00:00  ...  26.5  µg/m³      6</span>
+<span class="go">3  Paris      FR 2019-06-20 21:00:00+00:00  ...  24.9  µg/m³      6</span>
+<span class="go">4  Paris      FR 2019-06-20 20:00:00+00:00  ...  21.4  µg/m³      6</span>
+
+<span class="go">[5 rows x 8 columns]</span>
+</pre></div>
+</div>
+<p>通过对日期使用 <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> 对象，pandas 提供了许多时间相关属性。例如 <code class="docutils literal notranslate"><span class="pre">month</span></code>，还有 <code class="docutils literal notranslate"><span class="pre">year</span></code>、<code class="docutils literal notranslate"><span class="pre">quarter</span></code> 等。所有这些属性都可以通过 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 访问器访问。</p>
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>现有日期属性的概述在<a class="reference internal" href="../../user_guide/timeseries.html#timeseries-components"><span class="std std-ref">时间和日期组件概览表</span></a>中给出。关于 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 访问器返回日期时间类属性的更多详细信息在<a class="reference internal" href="../../user_guide/basics.html#basics-dt-accessors"><span class="std std-ref">dt 访问器</span></a>的专门章节中进行了解释。</p>
+</div><ul class="task-bullet">
+    <li><p>每个测量地点每周每一天的平均 <span class="math notranslate nohighlight">\(NO_2\)</span> 浓度是多少？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">[</span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span> <span class="s2">"location"</span><span class="p">])[</span><span class="s2">"value"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[13]: </span>
+<span class="go">datetime  location          </span>
+<span class="go">0         BETR801               27.875000</span>
+<span class="go">          FR04014               24.856250</span>
+<span class="go">          London Westminster    23.969697</span>
+<span class="go">1         BETR801               22.214286</span>
+<span class="go">          FR04014               30.999359</span>
+<span class="go">                                  ...    </span>
+<span class="go">5         FR04014               25.266154</span>
+<span class="go">          London Westminster    24.977612</span>
+<span class="go">6         BETR801               21.896552</span>
+<span class="go">          FR04014               23.274306</span>
+<span class="go">          London Westminster    24.859155</span>
+<span class="go">Name: value, Length: 21, dtype: float64</span>
+</pre></div>
+</div>
+<p>还记得<a class="reference internal" href="06_calculate_statistics.html#min-tut-06-stats"><span class="std std-ref">统计计算教程</span></a>中 <code class="docutils literal notranslate"><span class="pre">groupby</span></code> 提供的“拆分-应用-合并”模式吗？在这里，我们希望计算给定统计量（例如平均 <span class="math notranslate nohighlight">\(NO_2\)</span>）**对于每周的每一天**以及**对于每个测量地点**。为了按工作日分组，我们使用 pandas <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> 的日期时间属性 <code class="docutils literal notranslate"><span class="pre">weekday</span></code>（其中星期一=0，星期日=6），该属性也可以通过 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 访问器访问。对位置和工作日进行分组可以拆分这些组合的平均值计算。</p>
+<div class="admonition danger">
+<p class="admonition-title">警告</p>
+<p>由于这些示例中我们处理的是非常短的时间序列，因此分析结果不具有长期代表性！</p>
+</div>
+    </li>
+</ul><ul class="task-bullet">
+    <li><p>绘制我们时间序列中所有站点在一天内的典型 <span class="math notranslate nohighlight">\(NO_2\)</span> 模式。换句话说，一天中每个小时的平均值是多少？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="gp">In [15]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"datetime"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="p">)[</span><span class="s2">"value"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[15]: </span><span class="go">&lt;Axes: xlabel='datetime'&gt;</span>
+
+<span class="gp">In [16]: </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Hour of the day"</span><span class="p">);</span>  <span class="c1"># custom x label using Matplotlib</span>
+
+<span class="gp">In [17]: </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"$NO_2 (µg/m^3)$"</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../../_images/09_bar_chart.png" src="../../_images/09_bar_chart.png">
+<p>与上一个案例类似，我们希望计算给定统计量（例如平均 <span class="math notranslate nohighlight">\(NO_2\)</span>）**对于一天中的每个小时**，并且我们可以再次使用“拆分-应用-合并”方法。对于这种情况，我们使用 pandas <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> 的日期时间属性 <code class="docutils literal notranslate"><span class="pre">hour</span></code>，该属性也可以通过 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 访问器访问。</p>
+    </li>
+</ul></section>
+<section id="datetime-as-index">
+<h2>日期时间作为索引<a class="headerlink" href="09_timeseries.html#datetime-as-index" title="Link to this heading">#</a></h2>
+<p>在<a class="reference internal" href="07_reshape_table_layout.html#min-tut-07-reshape"><span class="std std-ref">重塑教程</span></a>中，介绍了 <a class="reference internal" href="../../reference/api/pandas.pivot.html#pandas.pivot" title="pandas.pivot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot()</span></code></a> 用于重塑数据表，将每个测量位置作为单独的列</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">no_2</span> <span class="o">=</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"datetime"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"location"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"value"</span><span class="p">)</span>
+
+<span class="gp">In [19]: </span><span class="n">no_2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[19]: </span>
+<span class="go">location                   BETR801  FR04014  London Westminster</span>
+<span class="go">datetime                                                       </span>
+<span class="go">2019-05-07 01:00:00+00:00     50.5     25.0                23.0</span>
+<span class="go">2019-05-07 02:00:00+00:00     45.0     27.7                19.0</span>
+<span class="go">2019-05-07 03:00:00+00:00      NaN     50.4                19.0</span>
+<span class="go">2019-05-07 04:00:00+00:00      NaN     61.9                16.0</span>
+<span class="go">2019-05-07 05:00:00+00:00      NaN     72.4                 NaN</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>通过透视数据，日期时间信息成为表格的索引。通常，通过 <code class="docutils literal notranslate"><span class="pre">set_index</span></code> 函数可以将列设置为索引。</p>
+</div>
+<p>使用日期时间索引（即 <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>）提供了强大的功能。例如，我们不需要 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 访问器来获取时间序列属性，而是可以直接在索引上使用这些属性</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">no_2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">no_2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">weekday</span>
+<span class="gh">Out[20]: </span>
+<span class="go">(Index([2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019,</span>
+<span class="go">        ...</span>
+<span class="go">        2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019, 2019],</span>
+<span class="go">       dtype='int32', name='datetime', length=1033),</span>
+<span class="go"> Index([1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="go">        ...</span>
+<span class="go">        3, 3, 3, 3, 3, 3, 3, 3, 3, 4],</span>
+<span class="go">       dtype='int32', name='datetime', length=1033))</span>
+</pre></div>
+</div>
+<p>其他一些优势包括方便的时间段子集选择或图表上调整的时间刻度。让我们将其应用于我们的数据。</p>
+<ul class="task-bullet">
+    <li><p>绘制从 5 月 20 日到 5 月 21 日末不同站点的 <span class="math notranslate nohighlight">\(NO_2\)</span> 值图表</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">no_2</span><span class="p">[</span><span class="s2">"2019-05-20"</span><span class="p">:</span><span class="s2">"2019-05-21"</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../../_images/09_time_section.png" src="../../_images/09_time_section.png">
+<p>通过提供一个**可解析为日期时间的字符串**，可以在 <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> 上选择数据的特定子集。</p>
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>关于 <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> 和使用字符串进行切片的更多信息，请参阅<a class="reference internal" href="../../user_guide/timeseries.html#timeseries-datetimeindex"><span class="std std-ref">时间序列索引</span></a>一节。</p>
+</div></section>
+<section id="resample-a-time-series-to-another-frequency">
+<h2>将时间序列重新采样到另一个频率<a class="headerlink" href="09_timeseries.html#resample-a-time-series-to-another-frequency" title="Link to this heading">#</a></h2>
+<ul class="task-bullet">
+    <li><p>将当前的每小时时间序列值聚合为每个站点的每月最大值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">monthly_max</span> <span class="o">=</span> <span class="n">no_2</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">"ME"</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="gp">In [23]: </span><span class="n">monthly_max</span>
+<span class="gh">Out[23]: </span>
+<span class="go">location                   BETR801  FR04014  London Westminster</span>
+<span class="go">datetime                                                       </span>
+<span class="go">2019-05-31 00:00:00+00:00     74.5     97.0                97.0</span>
+<span class="go">2019-06-30 00:00:00+00:00     52.5     84.7                52.0</span>
+</pre></div>
+</div>
+<p>对带有日期时间索引的时间序列数据来说，一个非常强大的方法是能够将时间序列<a class="reference internal" href="../../reference/api/pandas.Series.resample.html#pandas.Series.resample" title="pandas.Series.resample"><code class="xref py py-meth docutils literal notranslate"><span class="pre">resample()</span></code></a>到另一个频率（例如，将秒级数据转换为 5 分钟级数据）。</p>
+    </li>
+</ul><p><a class="reference internal" href="../../reference/api/pandas.Series.resample.html#pandas.Series.resample" title="pandas.Series.resample"><code class="xref py py-meth docutils literal notranslate"><span class="pre">resample()</span></code></a> 方法类似于 groupby 操作</p>
+<ul class="simple">
+<li><p>它通过使用定义目标频率的字符串（例如 <code class="docutils literal notranslate"><span class="pre">M</span></code>、<code class="docutils literal notranslate"><span class="pre">5H</span></code> 等）提供基于时间的聚合</p></li>
+<li><p>它需要一个聚合函数，例如 <code class="docutils literal notranslate"><span class="pre">mean</span></code>、<code class="docutils literal notranslate"><span class="pre">max</span></code> 等。</p></li>
+</ul>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>用于定义时间序列频率的别名概述在<a class="reference internal" href="../../user_guide/timeseries.html#timeseries-offset-aliases"><span class="std std-ref">偏移别名概览表</span></a>中给出。</p>
+</div><p>定义后，时间序列的频率由 <code class="docutils literal notranslate"><span class="pre">freq</span></code> 属性提供</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">monthly_max</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">freq</span>
+<span class="gh">Out[24]: </span><span class="go">&lt;MonthEnd&gt;</span>
+</pre></div>
+</div>
+<ul class="task-bullet">
+    <li><p>绘制每个站点的每日平均 <span class="math notranslate nohighlight">\(NO_2\)</span> 值图表。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">no_2</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">"D"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"-o"</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../../_images/09_resample_mean.png" src="../../_images/09_resample_mean.png">
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>关于时间序列 <code class="docutils literal notranslate"><span class="pre">resampling</span></code> 强大功能的更多详细信息在用户指南的<a class="reference internal" href="../../user_guide/timeseries.html#timeseries-resampling"><span class="std std-ref">重采样</span></a>部分提供。</p>
+</div><div class="shadow gs-callout gs-callout-remember">
+    <h4>记住</h4><ul class="simple">
+<li><p>有效的日期字符串可以使用 <code class="docutils literal notranslate"><span class="pre">to_datetime</span></code> 函数或作为读取函数的一部分转换为日期时间对象。</p></li>
+<li><p>pandas 中的日期时间对象支持计算、逻辑操作以及使用 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 访问器访问的便捷日期相关属性。</p></li>
+<li><p>一个 <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> 包含这些日期相关属性并支持便捷的切片。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Resample</span></code> 是一个强大的方法，用于改变时间序列的频率。</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>关于时间序列的完整概述，请参见<a class="reference internal" href="../../user_guide/timeseries.html#timeseries"><span class="std std-ref">时间序列和日期功能</span></a>页面。</p>
+</div></section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="08_combine_dataframes.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">如何合并多个表格的数据</p> </div> </a> <a class="right-next" href="10_text_data.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">如何处理文本数据</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 在本页</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="09_timeseries.html#using-pandas-datetime-properties">使用 pandas 日期时间属性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="09_timeseries.html#datetime-as-index">日期时间作为索引</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="09_timeseries.html#resample-a-time-series-to-another-frequency">将时间序列重新采样到另一个频率</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/intro_tutorials/09_timeseries.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 提供。托管方：<a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx 主题</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

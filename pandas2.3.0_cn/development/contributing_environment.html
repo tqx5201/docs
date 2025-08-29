@@ -1,0 +1,782 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>创建开发环境 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'development/contributing_environment';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using Gitpod for pandas development" href="contributing_gitpod.html" />
+    <link rel="prev" title="Contributing to pandas" href="contributing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="contributing_environment.html#main-content">跳到主内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">贡献给 pandas</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="contributing_environment.html#">创建开发环境</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_gitpod.html">使用 Gitpod 进行 pandas 开发</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_documentation.html">贡献给文档</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html">pandas 文档字符串指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_codebase.html">贡献给代码库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining.html">pandas 维护</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals.html">内部结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging_extensions.html">调试 C 扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">扩展 pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">开发者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">策略</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">贡献者社区</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">开发</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">创建...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="creating-a-development-environment">
+<span id="contributing-environment"></span><h1>创建开发环境<a class="headerlink" href="contributing_environment.html#creating-a-development-environment" title="Link to this heading">#</a></h1>
+<p>要测试代码更改，您需要从源代码构建 pandas，这需要 C/C++ 编译器和 Python 环境。如果您正在进行文档更改，则可以跳到 <a class="reference internal" href="contributing_documentation.html#contributing-documentation"><span class="std std-ref">贡献给文档</span></a>，但如果您跳过创建开发环境，则无法在推送更改之前在本地构建文档。建议同时安装 <a class="reference internal" href="contributing_codebase.html#contributing-pre-commit"><span class="std std-ref">pre-commit 钩子</span></a>。</p>
+<div class="toctree-wrapper compound">
+</div>
+<section id="step-1-install-a-c-compiler">
+<h2>步骤 1：安装 C 编译器<a class="headerlink" href="contributing_environment.html#step-1-install-a-c-compiler" title="Link to this heading">#</a></h2>
+<p>如何操作将取决于您的平台。如果您在下一步选择使用 <code class="docutils literal notranslate"><span class="pre">Docker</span></code> 或 <code class="docutils literal notranslate"><span class="pre">GitPod</span></code>，则可以跳过此步骤。</p>
+<p><strong>Windows</strong></p>
+<p>您将需要 <a class="reference external" href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022">Visual Studio 2022 的生成工具</a>。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>您不需要安装 Visual Studio 2022。您只需要“Visual Studio 2022 的生成工具”，该工具可以通过向下滚动到“所有下载”->“Visual Studio 工具”找到。在安装程序中，选择“使用 C++ 的桌面开发”工作负载。</p>
+</div>
+<p>或者，您可以使用 <a class="reference external" href="https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?source=recommendations&amp;view=vs-2022">vs_BuildTools.exe</a> 在命令行安装所需组件。</p>
+<p>或者，您可以使用 <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL</a> 并查阅下方的 <code class="docutils literal notranslate"><span class="pre">Linux</span></code> 说明。</p>
+<p><strong>macOS</strong></p>
+<p>要使用基于 <a class="reference internal" href="contributing_environment.html#contributing-mamba"><span class="std std-ref">mamba</span></a> 的编译器，您需要使用 <code class="docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">--install</span></code> 安装开发者工具。</p>
+<p>如果您倾向于使用不同的编译器，可以在此处找到一般信息：<a class="reference external" href="https://devguide.pythonlang.cn/setup/#macos">https://devguide.pythonlang.cn/setup/#macos</a></p>
+<p><strong>Linux</strong></p>
+<p>对于基于 Linux 的 <a class="reference internal" href="contributing_environment.html#contributing-mamba"><span class="std std-ref">mamba</span></a> 安装，您无需在 mamba 环境之外安装任何额外组件。以下说明仅在您的设置不基于 mamba 环境时才需要。</p>
+<p>一些 Linux 发行版会预装 C 编译器。要查明您的系统上安装了哪些编译器（和版本）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># for Debian/Ubuntu:</span>
+<span class="n">dpkg</span> <span class="o">--</span><span class="nb">list</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">compiler</span>
+<span class="c1"># for Red Hat/RHEL/CentOS/Fedora:</span>
+<span class="n">yum</span> <span class="nb">list</span> <span class="n">installed</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="o">--</span><span class="n">color</span> <span class="n">compiler</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://gcc.gnu.org/">GCC (GNU Compiler Collection)</a> 是一种广泛使用的编译器，支持 C 语言和许多其他语言。如果 GCC 已列为已安装的编译器，则无需其他操作。</p>
+<p>如果没有安装 C 编译器，或者您希望升级，或者您正在使用不同的 Linux 发行版，请查阅您常用的搜索引擎以获取编译器安装/更新说明。</p>
+<p>如果您遇到任何困难，请通过提出问题或在我们的贡献者社区 <a class="reference internal" href="community.html#community-slack"><span class="std std-ref">Slack</span></a> 上联系我们。</p>
+</section>
+<section id="step-2-create-an-isolated-environment">
+<h2>步骤 2：创建隔离环境<a class="headerlink" href="contributing_environment.html#step-2-create-an-isolated-environment" title="Link to this heading">#</a></h2>
+<p>在开始之前，请</p>
+<ul class="simple">
+<li><p>确保您已<a class="reference internal" href="contributing.html#contributing-forking"><span class="std std-ref">克隆仓库</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span></code> 到您刚刚通过克隆命令创建的 pandas 源代码目录</p></li>
+</ul>
+<section id="option-1-using-mamba-recommended">
+<span id="contributing-mamba"></span><h3>选项 1：使用 mamba（推荐）<a class="headerlink" href="contributing_environment.html#option-1-using-mamba-recommended" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>安装 miniforge 以获取 <a class="reference external" href="https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html">mamba</a></p></li>
+<li><p>确保您的 mamba 是最新版本（<code class="docutils literal notranslate"><span class="pre">mamba</span> <span class="pre">update</span> <span class="pre">mamba</span></code>）</p></li>
+<li><p>使用以下命令创建并激活 <code class="docutils literal notranslate"><span class="pre">pandas-dev</span></code> mamba 环境</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mamba env create --file environment.yml
+mamba activate pandas-dev
+</pre></div>
+</div>
+</section>
+<section id="option-2-using-pip">
+<span id="contributing-pip"></span><h3>选项 2：使用 pip<a class="headerlink" href="contributing_environment.html#option-2-using-pip" title="Link to this heading">#</a></h3>
+<p>您需要至少具备 pandas 支持的<a class="reference internal" href="../getting_started/install.html#install-version"><span class="std std-ref">最低 Python 版本</span></a>。您还需要安装 <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> 51.0.0 或更高版本才能构建 pandas。</p>
+<p><strong>Unix</strong>/**带 virtualenv 的 macOS**</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a virtual environment</span>
+<span class="c1"># Use an ENV_DIR of your choice. We'll use ~/virtualenvs/pandas-dev</span>
+<span class="c1"># Any parent directories should already exist</span>
+python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>~/virtualenvs/pandas-dev
+
+<span class="c1"># Activate the virtualenv</span>
+.<span class="w"> </span>~/virtualenvs/pandas-dev/bin/activate
+
+<span class="c1"># Install the build dependencies</span>
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+</pre></div>
+</div>
+<p><strong>Unix</strong>/**带 pyenv 的 macOS**</p>
+<p>请查阅<a class="reference external" href="https://github.com/pyenv/pyenv">此处</a>的文档以设置 pyenv。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a virtual environment</span>
+<span class="c1"># Use an ENV_DIR of your choice. We'll use ~/Users/&lt;yourname&gt;/.pyenv/versions/pandas-dev</span>
+pyenv<span class="w"> </span>virtualenv<span class="w"> </span>&lt;version&gt;<span class="w"> </span>&lt;name-to-give-it&gt;
+
+<span class="c1"># For instance:</span>
+pyenv<span class="w"> </span>virtualenv<span class="w"> </span><span class="m">3</span>.9.10<span class="w"> </span>pandas-dev
+
+<span class="c1"># Activate the virtualenv</span>
+pyenv<span class="w"> </span>activate<span class="w"> </span>pandas-dev
+
+<span class="c1"># Now install the build dependencies in the cloned pandas repo</span>
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+</pre></div>
+</div>
+<p><strong>Windows</strong></p>
+<p>以下是关于如何在 Windows 下使用 Powershell 设置虚拟环境的简要概述。有关详细信息，请参阅<a class="reference external" href="https://virtualenv.pypa.io/en/latest/user_guide.html#activators">virtualenv 官方用户指南</a>。</p>
+<p>使用您选择的 ENV_DIR。我们将使用 <code class="docutils literal notranslate"><span class="pre">~\\virtualenvs\\pandas-dev</span></code>，其中 <code class="docutils literal notranslate"><span class="pre">~</span></code> 是由 <code class="docutils literal notranslate"><span class="pre">$env:USERPROFILE</span></code> (Powershell) 或 <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%</span></code> (cmd.exe) 环境变量指向的文件夹。任何父目录都应该已经存在。</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># Create a virtual environment</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">venv</span> <span class="nv">$env:USERPROFILE</span><span class="p">\</span><span class="n">virtualenvs</span><span class="p">\</span><span class="n">pandas-dev</span>
+
+<span class="c"># Activate the virtualenv. Use activate.bat for cmd.exe</span>
+<span class="p">~\</span><span class="n">virtualenvs</span><span class="p">\</span><span class="n">pandas-dev</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span><span class="p">.</span><span class="n">ps1</span>
+
+<span class="c"># Install the build dependencies</span>
+<span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements-dev</span><span class="p">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</section>
+<section id="option-3-using-docker">
+<h3>选项 3：使用 Docker<a class="headerlink" href="contributing_environment.html#option-3-using-docker" title="Link to this heading">#</a></h3>
+<p>pandas 在根目录中提供了一个 <code class="docutils literal notranslate"><span class="pre">DockerFile</span></code>，用于构建包含完整 pandas 开发环境的 Docker 镜像。</p>
+<p><strong>Docker 命令</strong></p>
+<p>构建 Docker 镜像</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build the image</span>
+<span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">pandas</span><span class="o">-</span><span class="n">dev</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>运行容器</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Run a container and bind your local repo to the container
+# This command assumes you are running from your local repo
+# but if not alter ${PWD} to match your local repo path
+docker run -it --rm -v ${PWD}:/home/pandas pandas-dev
+</pre></div>
+</div>
+<p><em>更简单的是，您可以将 Docker 与以下 IDE 集成</em></p>
+<p><strong>Visual Studio Code</strong></p>
+<p>您可以使用 DockerFile 通过 <code class="docutils literal notranslate"><span class="pre">.devcontainer.json</span></code> 文件，与流行的免费 IDE Visual Studio Code 启动远程会话。详情请参阅 <a class="reference external" href="https://vscode.js.cn/docs/remote/containers">https://vscode.js.cn/docs/remote/containers</a>。</p>
+<p><strong>PyCharm (专业版)</strong></p>
+<p>启用 Docker 支持，并使用服务工具窗口构建和管理镜像，以及运行和与容器交互。详情请参阅 <a class="reference external" href="https://www.jetbrains.com/help/pycharm/docker.html">https://www.jetbrains.com/help/pycharm/docker.html</a>。</p>
+</section>
+<section id="option-4-using-gitpod">
+<h3>选项 4：使用 Gitpod<a class="headerlink" href="contributing_environment.html#option-4-using-gitpod" title="Link to this heading">#</a></h3>
+<p>Gitpod 是一个开源平台，它直接在您的浏览器中自动创建正确的开发环境，从而减少了安装本地开发环境和处理不兼容依赖的需求。</p>
+<p>如果您是 Windows 用户，不熟悉命令行或首次构建 pandas，使用 Gitpod 通常会更快。以下是<a class="reference internal" href="contributing_gitpod.html#contributing-gitpod"><span class="std std-ref">使用 GitPod 构建 pandas</span></a> 的详细说明。</p>
+</section>
+</section>
+<section id="step-3-build-and-install-pandas">
+<h2>步骤 3：构建并安装 pandas<a class="headerlink" href="contributing_environment.html#step-3-build-and-install-pandas" title="Link to this heading">#</a></h2>
+<p>目前有两种支持的构建 pandas 的方式：pip/meson 和 setuptools(setup.py)。历史上，pandas 仅支持使用 setuptools 构建。然而，这种方法需要在 setup.py 中编写大量复杂的代码，并且由于 setuptools 的限制，在并行编译 pandas 时也存在许多问题。</p>
+<p>较新的构建系统通过 pip（通过 <a class="reference external" href="https://peps.pythonlang.cn/pep-0517/">PEP 517</a> 构建）调用 meson 后端。它会自动使用 CPU 上所有可用的核心，并通过在导入 pandas 时自动重建（通过可编辑安装）来避免手动重建的需要。</p>
+<p>基于这些原因，您应该使用 meson 编译 pandas。由于 meson 构建系统较新，随着其成熟，您可能会发现一些错误/小问题。您可以在<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/49683">此处</a>报告这些错误。</p>
+<p>要使用 meson 编译 pandas，运行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build and install pandas</span>
+<span class="c1"># By default, this will print verbose output</span>
+<span class="c1"># showing the "rebuild" taking place on import (see section below for explanation)</span>
+<span class="c1"># If you do not want to see this, omit everything after --no-build-isolation</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">ve</span> <span class="o">.</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">build</span><span class="o">-</span><span class="n">isolation</span> <span class="o">--</span><span class="n">config</span><span class="o">-</span><span class="n">settings</span> <span class="n">editable</span><span class="o">-</span><span class="n">verbose</span><span class="o">=</span><span class="n">true</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>版本号是从最新的仓库标签中提取的。请务必在构建之前从上游获取最新的标签。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set the upstream repository, if not done already, and fetch the latest tags</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">upstream</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pandas</span><span class="o">-</span><span class="n">dev</span><span class="o">/</span><span class="n">pandas</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">fetch</span> <span class="n">upstream</span> <span class="o">--</span><span class="n">tags</span>
+</pre></div>
+</div>
+</div>
+<p><strong>构建选项</strong></p>
+<p>如果您想配置您的安装，可以将选项从 pip 前端传递给 meson 后端。有时，您会希望使用此功能来调整构建目录和/或切换调试/优化级别。</p>
+<p>您可以通过在 pip 命令后附加 <code class="docutils literal notranslate"><span class="pre">--config-settings</span> <span class="pre">builddir="your</span> <span class="pre">builddir</span> <span class="pre">here"</span></code> 来向 pandas 传递构建目录。此选项允许您配置 meson 存储构建的 C 扩展的位置，并允许快速重建。</p>
+<p>有时，在调试 C 扩展时，使用调试符号编译 pandas 可能很有用。附加 <code class="docutils literal notranslate"><span class="pre">--config-settings</span> <span class="pre">setup-args="-Ddebug=true"</span></code> 即可实现。</p>
+<p>使用 pip，可以链接多个配置设置（例如，同时指定构建目录和使用调试符号构建将看起来像 <code class="docutils literal notranslate"><span class="pre">--config-settings</span> <span class="pre">builddir="your</span> <span class="pre">builddir</span> <span class="pre">here"</span> <span class="pre">--config-settings=setup-args="-Dbuildtype=debug"</span></code>）。</p>
+<p><strong>使用 setup.py 编译 pandas</strong></p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>随着 meson 后端的成熟，这种编译 pandas 的方法将很快被弃用并移除。</p>
+</div>
+<p>要使用 setuptools 编译 pandas，运行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果 pandas 已经安装（通过 meson），您必须首先卸载它</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">uninstall</span> <span class="n">pandas</span>
+</pre></div>
+</div>
+</div>
+<p>这是因为 <code class="docutils literal notranslate"><span class="pre">python setup.py develop</span></code> 不会卸载 <code class="docutils literal notranslate"><span class="pre">meson-python</span></code> 用来从构建文件夹导入扩展的加载器脚本，这可能会导致诸如 <code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> 等错误。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>每次 C 扩展更改时，您都需要重复此步骤，例如，如果您修改了 <code class="docutils literal notranslate"><span class="pre">pandas/_libs</span></code> 中的任何文件，或者您从 <code class="docutils literal notranslate"><span class="pre">upstream/main</span></code> 进行了拉取和合并。</p>
+</div>
+<p><strong>检查构建</strong></p>
+<p>此时，您应该能够从本地构建的版本中导入 pandas</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python
+&gt;&gt;&gt; import pandas
+&gt;&gt;&gt; print(pandas.__version__)  # note: the exact output may differ
+2.0.0.dev0+880.g2b9e661fbb.dirty
+</pre></div>
+</div>
+<p>此时，您可能想尝试<a class="reference external" href="../dev/development/contributing_codebase.html#running-the-test-suite">运行测试套件</a>。</p>
+<p><strong>保持与最新构建同步</strong></p>
+<p>当使用 meson 构建 pandas 时，即使 C/Cython 文件被修改，导入 pandas 也会自动触发重建。默认情况下，此重建不会产生任何输出（导入只会花费更长时间）。如果您想在导入 pandas 时看到 meson 的输出，您可以设置环境变量 <code class="docutils literal notranslate"><span class="pre">MESONPY_EDTIABLE_VERBOSE</span></code>。例如，这将是</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># On Linux/macOS</span>
+<span class="n">MESONPY_EDITABLE_VERBOSE</span><span class="o">=</span><span class="mi">1</span> <span class="n">python</span>
+
+<span class="c1"># Windows</span>
+<span class="nb">set</span> <span class="n">MESONPY_EDITABLE_VERBOSE</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># Only need to set this once per session</span>
+<span class="n">python</span>
+</pre></div>
+</div>
+<p>如果您每次都想看到此详细输出，可以将 <code class="docutils literal notranslate"><span class="pre">editable-verbose</span></code> 配置设置设为 <code class="docutils literal notranslate"><span class="pre">true</span></code>，如下所示</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">ve</span> <span class="o">.</span> <span class="o">--</span><span class="n">config</span><span class="o">-</span><span class="n">settings</span> <span class="n">editable</span><span class="o">-</span><span class="n">verbose</span><span class="o">=</span><span class="n">true</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">提示</p>
+<p>如果您想知道您的 pandas 是使用 setuptools 还是 meson 构建的，可以检查 <code class="docutils literal notranslate"><span class="pre">pandas._built_with_meson</span></code> 的值，如果使用 meson 编译，则该值为 true。</p>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="contributing.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">贡献给 pandas</p> </div> </a> <a class="right-next" href="contributing_gitpod.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">使用 Gitpod 进行 pandas 开发</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_environment.html#step-1-install-a-c-compiler">步骤 1：安装 C 编译器</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_environment.html#step-2-create-an-isolated-environment">步骤 2：创建隔离环境</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_environment.html#option-1-using-mamba-recommended">选项 1：使用 mamba（推荐）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_environment.html#option-2-using-pip">选项 2：使用 pip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_environment.html#option-3-using-docker">选项 3：使用 Docker</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_environment.html#option-4-using-gitpod">选项 4：使用 Gitpod</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_environment.html#step-3-build-and-install-pandas">步骤 3：构建并安装 pandas</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/development/contributing_environment.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API 参考 — pandas 2.2.1 文档 - pandas 数据分析库</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+
+<link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+<link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=fa44fd50.css">
+<link rel="stylesheet" type="text/css" href="../_static/plot_directive.css">
+<link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css">
+<link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css%3Fv=0a3b3ea7.css">
+<link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css">
+<link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css">
+
+<link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd">
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/documentation_options.js%3Fv=166560180"></script>
+<script src="../_static/doctools.js%3Fv=888ff710"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=f281be69"></script>
+<script src="../_static/design-tabs.js%3Fv=36754332"></script>
+<script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'reference/index';</script>
+<script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+<link rel="icon" href="../_static/favicon.ico">
+<link rel="index" title="Index" href="../genindex.html">
+<link rel="search" title="Search" href="../search.html">
+<link rel="next" title="Input/output" href="io.html">
+<link rel="prev" title="Cookbook" href="../user_guide/cookbook.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="docsearch:language" content="en">
+</head>
+<body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+<a class="skip-link" href="index.html#main-content">跳至主要内容</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button type="button" class="btn rounded-pill" id="pst-back-to-top">
+<i class="fa-solid fa-arrow-up"></i> 返回顶部
+</button>
+<input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+<label class="overlay overlay-primary" for="__primary"></label>
+<input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+<i class="fa-solid fa-magnifying-glass"></i> <input type="search" class="form-control" name="q" id="search-input" placeholder="搜索文档..." aria-label="搜索文档..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+<label class="sidebar-toggle primary-toggle" for="__primary">
+<span class="fa-solid fa-bars"></span>
+</label>
+<div class=" navbar-header-items__start">
+<div class="navbar-item">
+<a class="navbar-brand logo" href="../index.html">
+<img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.2.1 documentation - Home">
+<script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.2.1 documentation - Home"/>`);</script>
+</a></div>
+</div>
+<div class=" navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
+<nav class="navbar-nav">
+<p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+网站导航
+</p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../getting_started/index.html">
+入门
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../user_guide/index.html">
+用户指南
+</a>
+</li>
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html#">
+API 参考
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../development/index.html">
+开发
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../whatsnew/index.html">
+发行说明
+</a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+</div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+<div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+<li class="nav-item">
+<a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+</li>
+<li class="nav-item">
+<a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+</li>
+<li class="nav-item">
+<a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+</div>
+<label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+<span class="fa-solid fa-outdent"></span>
+</label>
+</div>
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<nav class="navbar-nav">
+<p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+网站导航
+</p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../getting_started/index.html">
+入门
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../user_guide/index.html">
+用户指南
+</a>
+</li>
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html#">
+API 参考
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../development/index.html">
+开发
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../whatsnew/index.html">
+发行说明
+</a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+<div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+<li class="nav-item">
+<a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+</li>
+<li class="nav-item">
+<a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+</li>
+<li class="nav-item">
+<a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+<div class="bd-toc-item navbar-nav">
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="io.html">输入/输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general_functions.html">通用函数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="series.html">Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">pandas 数组、标量和数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="offset_frequency.html">日期偏移量</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">GroupBy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resampling.html">重采样</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">样式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_value.html">缺失值</a></li>
+</ul>
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main id="main-content" class="bd-main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item">
+<nav aria-label="Breadcrumb">
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a href="../index.html" class="nav-link" aria-label="Home">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item active" aria-current="page">API 参考</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id="searchbox"></div>
+<article class="bd-article" role="main">
+<section id="api-reference">
+<span id="api"></span><h1>API 参考<a class="headerlink" href="index.html#api-reference" title="Link to this heading">#</a></h1>
+<p>本页概述了所有公开的 pandas 对象、函数和方法。在 <code class="docutils literal notranslate"><span class="pre">pandas.*</span></code> 命名空间中公开的所有类和函数都是公开的。</p>
+<p>以下子包是公开的。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.errors</span></code>: 由 pandas 引发的自定义异常和警告类。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.plotting</span></code>: 绘图公开 API。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.testing</span></code>: 用于编写涉及 pandas 对象的测试的函数。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.api.extensions</span></code>: 用于扩展 pandas 对象的函数和类。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.api.indexers</span></code>: 用于滚动窗口索引器的函数和类。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.api.interchange</span></code>: DataFrame 交换协议。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.api.types</span></code>: 数据类型类和函数。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.api.typing</span></code>: 可能需要用于类型提示的类。这些类是作为中间结果遇到的，但用户不应该直接实例化它们。这些类不要与来自 <a class="reference external" href="https://github.com/pandas-dev/pandas-stubs">pandas-stubs</a> 包的类混淆，该包除了 pandas 中出现的类之外，还包含用于类型提示的类。</p></li>
+</ul>
+<p>此外，文档中提到了 <code class="docutils literal notranslate"><span class="pre">pandas.io</span></code> 和 <code class="docutils literal notranslate"><span class="pre">pandas.tseries</span></code> 子模块中的公共函数。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>顶级模块 <code class="docutils literal notranslate"><span class="pre">pandas.core</span></code>、<code class="docutils literal notranslate"><span class="pre">pandas.compat</span></code> 和 <code class="docutils literal notranslate"><span class="pre">pandas.util</span></code> 是私有的。这些模块中稳定的功能不受保证。</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="io.html">输入/输出</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io.html#pickling">序列化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#flat-file">平面文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#clipboard">剪贴板</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#excel">Excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#json">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#html">HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#xml">XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#latex">Latex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#hdfstore-pytables-hdf5">HDFStore: PyTables (HDF5)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#feather">Feather</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#parquet">Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#orc">ORC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#sas">SAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#spss">SPSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#sql">SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#google-bigquery">Google BigQuery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#stata">STATA</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="general_functions.html">通用函数</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#data-manipulations">数据操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#top-level-missing-data">顶级缺失数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#top-level-dealing-with-numeric-data">顶级处理数值数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#top-level-dealing-with-datetimelike-data">顶级处理日期时间数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#top-level-dealing-with-interval-data">顶级处理区间数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#top-level-evaluation">顶级评估</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#datetime-formats">日期时间格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#hashing">哈希</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_functions.html#importing-from-other-dataframe-libraries">从其他 DataFrame 库导入</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="series.html">Series</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="series.html#constructor">构造函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#attributes">属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#conversion">转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#indexing-iteration">索引，迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#binary-operator-functions">二元运算符函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#function-application-groupby-window">函数应用，GroupBy &amp; 窗口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#computations-descriptive-stats">计算/描述性统计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#reindexing-selection-label-manipulation">重新索引/选择/标签操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#missing-data-handling">缺失数据处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#reshaping-sorting">重塑，排序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#combining-comparing-joining-merging">组合/比较/连接/合并</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#time-series-related">与时间序列相关的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#accessors">访问器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#plotting">绘图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="series.html#serialization-io-conversion">序列化/IO/转换</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">DataFrame</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#constructor">构造函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#attributes-and-underlying-data">属性和底层数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#conversion">转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#indexing-iteration">索引，迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#binary-operator-functions">二元运算符函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#function-application-groupby-window">函数应用，GroupBy &amp; 窗口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#computations-descriptive-stats">计算/描述性统计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#reindexing-selection-label-manipulation">重新索引/选择/标签操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#missing-data-handling">缺失数据处理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#reshaping-sorting-transposing">重塑，排序，转置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#combining-comparing-joining-merging">组合/比较/连接/合并</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#time-series-related">与时间序列相关的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#flags">标志</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#metadata">元数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#plotting">绘图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#sparse-accessor">稀疏访问器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html#serialization-io-conversion">序列化/IO/转换</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">pandas 数组、标量和数据类型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html#objects">对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html#utilities">实用程序</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引对象</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#index">索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#numeric-index">数值索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#categoricalindex">分类索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#intervalindex">区间索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#multiindex">多级索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#datetimeindex">日期时间索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#timedeltaindex">时间增量索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#periodindex">周期索引</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="offset_frequency.html">日期偏移量</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#dateoffset">DateOffset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#businessday">BusinessDay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#businesshour">BusinessHour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#custombusinessday">CustomBusinessDay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#custombusinesshour">CustomBusinessHour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#monthend">MonthEnd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#monthbegin">MonthBegin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#businessmonthend">BusinessMonthEnd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#businessmonthbegin">BusinessMonthBegin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#custombusinessmonthend">CustomBusinessMonthEnd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#custombusinessmonthbegin">CustomBusinessMonthBegin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#semimonthend">SemiMonthEnd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#semimonthbegin">SemiMonthBegin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#week">Week</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#weekofmonth">WeekOfMonth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#lastweekofmonth">LastWeekOfMonth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#bquarterend">季度末</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#bquarterbegin">季度初</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#quarterend">季度末</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#quarterbegin">季度初</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#byearend">年度末</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#byearbegin">年度初</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#yearend">年度末</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#yearbegin">年度初</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#fy5253">财年5253</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#fy5253quarter">财年5253季度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#easter">复活节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#tick">刻度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#day">天</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#hour">小时</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#minute">分钟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#second">秒</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#milli">毫秒</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#micro">微秒</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset_frequency.html#nano">纳秒</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="offset_frequency.html#frequencies">频率</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.tseries.frequencies.to_offset.html">pandas.tseries.frequencies.to_offset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="window.html#rolling-window-functions">滚动窗口函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#weighted-window-functions">加权窗口函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#expanding-window-functions">扩展窗口函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#exponentially-weighted-window-functions">指数加权窗口函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#window-indexer">窗口索引器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">GroupBy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#indexing-iteration">索引，迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#function-application-helper">函数应用助手</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#function-application">函数应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#dataframegroupby-computations-descriptive-stats"><code class="docutils literal notranslate"><span class="pre">DataFrameGroupBy</span></code> 计算/描述性统计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#seriesgroupby-computations-descriptive-stats"><code class="docutils literal notranslate"><span class="pre">SeriesGroupBy</span></code> 计算/描述性统计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#plotting-and-visualization">绘图和可视化</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resampling.html">重采样</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resampling.html#indexing-iteration">索引，迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resampling.html#function-application">函数应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resampling.html#upsampling">上采样</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resampling.html#computations-descriptive-stats">计算/描述性统计</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">样式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="style.html#styler-constructor">Styler 构造函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#styler-properties">Styler 属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#style-application">样式应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#builtin-styles">内置样式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#style-export-and-import">样式导出和导入</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">绘图</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.andrews_curves.html">pandas.plotting.andrews_curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.autocorrelation_plot.html">pandas.plotting.autocorrelation_plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.bootstrap_plot.html">pandas.plotting.bootstrap_plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.boxplot.html">pandas.plotting.boxplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.deregister_matplotlib_converters.html">pandas.plotting.deregister_matplotlib_converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.lag_plot.html">pandas.plotting.lag_plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.parallel_coordinates.html">pandas.plotting.parallel_coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.plot_params.html">pandas.plotting.plot_params</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.radviz.html">pandas.plotting.radviz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.register_matplotlib_converters.html">pandas.plotting.register_matplotlib_converters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.scatter_matrix.html">pandas.plotting.scatter_matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.plotting.table.html">pandas.plotting.table</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="options.html#working-with-options">使用选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#numeric-formatting">数值格式化</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">扩展</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.api.extensions.register_extension_dtype.html">pandas.api.extensions.register_extension_dtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.api.extensions.register_dataframe_accessor.html">pandas.api.extensions.register_dataframe_accessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.api.extensions.register_series_accessor.html">pandas.api.extensions.register_series_accessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.api.extensions.register_index_accessor.html">pandas.api.extensions.register_index_accessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.api.extensions.ExtensionDtype.html">pandas.api.extensions.ExtensionDtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.api.extensions.ExtensionArray.html">pandas.api.extensions.ExtensionArray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.arrays.NumpyExtensionArray.html">pandas.arrays.NumpyExtensionArray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.api.indexers.check_array_indexer.html">pandas.api.indexers.check_array_indexer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">测试</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#assertion-functions">断言函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#exceptions-and-warnings">异常和警告</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#bug-report-function">错误报告函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-suite-runner">测试套件运行器</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="missing_value.html">缺失值</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.NA.html">pandas.NA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.NaT.html">pandas.NaT</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</article>
+<footer class="prev-next-footer">
+<div class="prev-next-area">
+<a class="left-prev" href="../user_guide/cookbook.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">previous</p> <p class="prev-next-title">Cookbook</p> </div> </a> <a class="right-next" href="io.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">next</p> <p class="prev-next-title">输入/输出</p> </div> <i class="fa-solid fa-angle-right"></i> </a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="tocsection sourcelink">
+<a href="../_sources/reference/index.rst.txt">
+<i class="fa-solid fa-file-lines"></i> 显示源代码
+</a>
+</div>
+</div>
+</div></div>
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+
+<script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+<footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+<div class="footer-items__start">
+<div class="footer-item"><p class="copyright">
+© 2024, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>.
+</p></div>
+<div class="footer-item">
+<p class="sphinx-version">
+使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 7.2.6 创建。
+<br>
+</p>
+</div>
+</div>
+<div class="footer-items__end">
+<div class="footer-item">
+<p class="theme-version">
+使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx 主题</a> 0.14.4 构建。
+</p></div>
+</div>
+</div>
+</footer>
+
+</body></html>

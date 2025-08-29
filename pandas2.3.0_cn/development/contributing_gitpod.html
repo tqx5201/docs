@@ -1,0 +1,763 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>使用 Gitpod 进行 pandas 开发 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'development/contributing_gitpod';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing to the documentation" href="contributing_documentation.html" />
+    <link rel="prev" title="Creating a development environment" href="contributing_environment.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="contributing_gitpod.html#main-content">跳至主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">为 pandas 贡献</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="contributing_environment.html">创建开发环境</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="contributing_gitpod.html#">使用 Gitpod 进行 pandas 开发</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_documentation.html">为文档贡献</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html">pandas docstring 指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_codebase.html">为代码库贡献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining.html">pandas 维护</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals.html">内部</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制（Copy on write）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging_extensions.html">调试 C 扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">扩展 pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">开发者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">政策</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">贡献者社区</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">开发</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="contributing_environment.html" class="nav-link">创建开发环境</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">使用...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="using-gitpod-for-pandas-development">
+<span id="contributing-gitpod"></span><h1>使用 Gitpod 进行 pandas 开发<a class="headerlink" href="contributing_gitpod.html#using-gitpod-for-pandas-development" title="Link to this heading">#</a></h1>
+<p>文档的本节将指导您</p>
+<ul class="simple">
+<li><p>使用 Gitpod 作为您的 pandas 开发环境</p></li>
+<li><p>在 GitHub 上创建 pandas 仓库的个人 fork</p></li>
+<li><p>快速了解 pandas 和 VSCode</p></li>
+<li><p>在 Gitpod 中处理 pandas 文档</p></li>
+</ul>
+<section id="gitpod">
+<h2>Gitpod<a class="headerlink" href="contributing_gitpod.html#gitpod" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.gitpod.io/">Gitpod</a> 是一个用于自动化和即时可用的开发环境的开源平台。它使开发人员能够将他们的开发环境描述为代码，并直接从浏览器中为每个新任务启动即时且全新的开发环境。这减少了安装本地开发环境和处理不兼容依赖项的需要。</p>
+</section>
+<section id="gitpod-github-integration">
+<h2>Gitpod GitHub 集成<a class="headerlink" href="contributing_gitpod.html#gitpod-github-integration" title="Link to this heading">#</a></h2>
+<p>为了能够使用 Gitpod，您需要在 GitHub 帐户上安装 Gitpod 应用程序，所以如果您还没有帐户，则需要先创建一个。</p>
+<p>要开始，只需登录 <a class="reference external" href="https://www.gitpod.io/">Gitpod</a>，并授予 GitHub 适当的权限。</p>
+<p>我们已构建了一个 Python 3.10 环境，所有开发依赖项将在环境启动时安装。</p>
+</section>
+<section id="forking-the-pandas-repository">
+<h2>Fork pandas 仓库<a class="headerlink" href="contributing_gitpod.html#forking-the-pandas-repository" title="Link to this heading">#</a></h2>
+<p>作为贡献者参与 pandas 项目的最佳方式是首先 fork 仓库。</p>
+<ol class="arabic simple">
+<li><p>浏览到 <a class="reference external" href="https://github.com/pandas-dev/pandas">GitHub 上的 pandas 仓库</a> 并<a class="reference external" href="https://help.github.com/en/articles/fork-a-repo">创建您自己的 fork</a>。</p></li>
+<li><p>浏览到您的 fork。您的 fork 的 URL 将类似于 <a class="github reference external" href="https://github.com/noatamir/pandas-dev">noatamir/pandas-dev</a>，只是其中的 <code class="docutils literal notranslate"><span class="pre">noatamir</span></code> 会替换为您的 GitHub 用户名。</p></li>
+</ol>
+</section>
+<section id="starting-gitpod">
+<h2>启动 Gitpod<a class="headerlink" href="contributing_gitpod.html#starting-gitpod" title="Link to this heading">#</a></h2>
+<p>通过 GitHub 认证 Gitpod 后，您可以安装 <a class="reference external" href="https://www.gitpod.io/docs/browser-extension">Gitpod Chromium 或 Firefox 浏览器扩展</a>，它将在仓库的 <strong>Code</strong> 按钮旁边添加一个 <strong>Gitpod</strong> 按钮。</p>
+<img alt="pandas repository with Gitpod button screenshot" src="../_images/pandas-github.png">
+<ol class="arabic">
+<li><p>如果您安装了扩展程序，可以点击 <strong>Gitpod</strong> 按钮启动新工作区。</p></li>
+<li><p>或者，如果您不想安装浏览器扩展，可以访问 <a class="reference external" href="https://gitpod.io/#https://github.com/USERNAME/pandas">https://gitpod.io/#https://github.com/USERNAME/pandas</a>，将 <code class="docutils literal notranslate"><span class="pre">USERNAME</span></code> 替换为您的 GitHub 用户名。</p></li>
+<li><p>在这两种情况下，这都将在您的网络浏览器中打开一个新标签页并开始构建您的开发环境。请注意，这可能需要几分钟。</p></li>
+<li><p>构建完成后，您将被引导到您的工作区，包括 VSCode 编辑器和您处理 pandas 所需的所有依赖项。第一次启动工作区时，您可能会注意到正在运行一些操作。这将确保您已安装 pandas 的开发版本。</p></li>
+<li><p>当您的工作区准备就绪时，您可以输入以下命令来<a class="reference internal" href="contributing_codebase.html#contributing-running-tests"><span class="std std-ref">测试构建</span></a>：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m pytest pandas
+</pre></div>
+</div>
+<p>请注意，此命令运行需要一段时间，因此一旦确认其正在运行，您可能希望使用 Ctrl-C 取消它。</p>
+</li>
+</ol>
+</section>
+<section id="quick-workspace-tour">
+<h2>工作区快速导览<a class="headerlink" href="contributing_gitpod.html#quick-workspace-tour" title="Link to this heading">#</a></h2>
+<p>Gitpod 使用 VSCode 作为编辑器。如果您以前没有使用过此编辑器，可以查看 Getting started <a class="reference external" href="https://vscode.js.cn/docs/getstarted/tips-and-tricks">VSCode 文档</a>以熟悉它。</p>
+<p>您的工作区将类似于下图</p>
+<img alt="Gitpod workspace screenshot" src="../_images/gitpod-workspace.png">
+<p>我们已在编辑器中标记了一些重要部分</p>
+<ol class="arabic simple">
+<li><p>您当前的 Python 解释器——默认情况下，它是 <code class="docutils literal notranslate"><span class="pre">pandas-dev</span></code>，应显示在状态栏和您的终端中。您无需激活 conda 环境，因为它将始终为您激活。</p></li>
+<li><p>您当前的分支始终显示在状态栏中。您也可以使用此按钮来更改或创建分支。</p></li>
+<li><p>GitHub Pull Requests 扩展——您可以使用此扩展程序从您的工作区处理拉取请求。</p></li>
+<li><p>市场扩展——我们为 pandas Gitpod 添加了一些必要的扩展。但是，您也可以为您的用户安装其他扩展或语法高亮主题，这些将为您保留。</p></li>
+<li><p>您的工作区目录——默认情况下是 <code class="docutils literal notranslate"><span class="pre">/workspace/pandas-dev</span></code>。<strong>请勿更改此目录</strong>，因为它是 Gitpod 中唯一保留的目录。</p></li>
+</ol>
+<p>我们还预装了一些工具和 VSCode 扩展，以帮助提升开发体验：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=lextudio.restructuredtext">VSCode rst 扩展</a></p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a></p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">VSCode Gitlens 扩展</a></p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph">VSCode Git Graph 扩展</a></p></li>
+</ul>
+</section>
+<section id="development-workflow-with-gitpod">
+<h2>Gitpod 开发工作流程<a class="headerlink" href="contributing_gitpod.html#development-workflow-with-gitpod" title="Link to this heading">#</a></h2>
+<p>本文档的<a class="reference internal" href="contributing.html#contributing"><span class="std std-ref">为 pandas 贡献</span></a>部分包含有关 pandas 开发工作流程的信息。在开始您的贡献之前，请务必查看此部分。</p>
+<p>使用 Gitpod 时，Git 已为您预先配置。</p>
+<ol class="arabic">
+<li><p>您无需配置您的 git 用户名和电子邮件，因为当您通过 GitHub 认证时，这应该已为您完成。除非您使用 GitHub 功能来保持电子邮件地址私密。您可以通过在终端中输入命令 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--list</span></code> 来检查 git 配置。使用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.email</span> <span class="pre">“your-secret-email@users.noreply.github.com”</span></code> 将您的电子邮件地址设置为您用于通过 GitHub 个人资料提交的电子邮件地址。</p></li>
+<li><p>由于您是从您自己的 pandas fork 启动工作区的，因此默认情况下，<code class="docutils literal notranslate"><span class="pre">upstream</span></code> 和 <code class="docutils literal notranslate"><span class="pre">origin</span></code> 都将作为远程添加。您可以通过在终端中键入 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span></code> 来验证，或者通过点击状态栏上的<strong>分支名称</strong>（参见下图）。</p>
+<img alt="Gitpod workspace branches plugin screenshot" src="../_images/pandas-gitpod-branches.png">
+</li>
+</ol>
+</section>
+<section id="rendering-the-pandas-documentation">
+<h2>渲染 pandas 文档<a class="headerlink" href="contributing_gitpod.html#rendering-the-pandas-documentation" title="Link to this heading">#</a></h2>
+<p>您可以在<a class="reference internal" href="contributing_documentation.html#contributing-howto-build-docs"><span class="std std-ref">如何构建 pandas 文档</span></a>部分找到有关如何使用 Sphinx 渲染文档的详细信息。要构建完整的文档，您需要在 <code class="docutils literal notranslate"><span class="pre">/doc</span></code> 目录中运行以下命令：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd doc
+$ python make.py html
+</pre></div>
+</div>
+<p>或者，您可以构建单个页面：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">single</span> <span class="n">development</span><span class="o">/</span><span class="n">contributing_gitpod</span><span class="o">.</span><span class="n">rst</span>
+</pre></div>
+</div>
+<p>您有两种主要选项可以在 Gitpod 中渲染文档。</p>
+<section id="option-1-using-liveserve">
+<h3>选项 1：使用 Liveserve<a class="headerlink" href="contributing_gitpod.html#option-1-using-liveserve" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">pandas/doc/build/html</span></code> 中查看文档。</p></li>
+<li><p>要查看页面的渲染版本，您可以右键点击 <code class="docutils literal notranslate"><span class="pre">.html</span></code> 文件并点击 <strong>Open with Live Serve</strong>。或者，您可以在编辑器中打开文件并点击状态栏上的 <strong>Go live</strong> 按钮。</p>
+<blockquote>
+<div><img alt="Gitpod workspace VSCode start live serve screenshot" src="../_images/vscode-statusbar.png">
+</div></blockquote>
+</li>
+<li><p>一个简单的浏览器将在编辑器的右侧打开。我们建议关闭它，然后点击弹出窗口中的 <strong>Open in browser</strong> 按钮。</p></li>
+<li><p>要停止服务器，请点击状态栏上的 <strong>Port: 5500</strong> 按钮。</p></li>
+</ol>
+</section>
+<section id="option-2-using-the-rst-extension">
+<h3>选项 2：使用 rst 扩展<a class="headerlink" href="contributing_gitpod.html#option-2-using-the-rst-extension" title="Link to this heading">#</a></h3>
+<p>在处理 <code class="docutils literal notranslate"><span class="pre">.rst</span></code> 文件时，一种快速简便的方法是使用 rst 扩展与 docutils 结合来实时查看更改。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>这将生成文档的简单实时预览，不包含 <code class="docutils literal notranslate"><span class="pre">html</span></code> 主题，并且一些反向链接可能未正确添加。但它是一种简单轻量级的方式，可以即时获取您工作的反馈，而无需构建 html 文件。</p>
+</div>
+<ol class="arabic">
+<li><p>在编辑器中打开 <code class="docutils literal notranslate"><span class="pre">doc/source</span></code> 中任何源文档文件。</p></li>
+<li><p>在 Mac 上使用 <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Cmd</kbd>-<kbd class="kbd docutils literal notranslate">Shift</kbd>-<kbd class="kbd docutils literal notranslate">P</kbd></kbd>，在 Linux 和 Windows 上使用 <kbd class="kbd compound docutils literal notranslate"><kbd class="kbd docutils literal notranslate">Ctrl</kbd>-<kbd class="kbd docutils literal notranslate">Shift</kbd>-<kbd class="kbd docutils literal notranslate">P</kbd></kbd> 打开 VSCode 命令面板。开始输入“restructured”并选择“Open preview”或“Open preview to the Side”。</p>
+<blockquote>
+<div><img alt="Gitpod workspace VSCode open rst screenshot" src="../_images/vscode-rst.png">
+</div></blockquote>
+</li>
+<li><p>在您编辑文档时，您将在编辑器中看到它的实时渲染。</p>
+<blockquote>
+<div><img alt="Gitpod workspace VSCode rst rendering screenshot" src="../_images/rst-rendering.png">
+</div></blockquote>
+</li>
+</ol>
+<p>如果您想查看包含 <code class="docutils literal notranslate"><span class="pre">html</span></code> 主题的最终输出，您需要使用 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> 重新构建文档，并按照选项 1 中所述使用 Live Serve。</p>
+</section>
+</section>
+<section id="faq-s-and-troubleshooting">
+<h2>常见问题与故障排除<a class="headerlink" href="contributing_gitpod.html#faq-s-and-troubleshooting" title="Link to this heading">#</a></h2>
+<section id="how-long-is-my-gitpod-workspace-kept-for">
+<h3>我的 Gitpod 工作区会保留多久？<a class="headerlink" href="contributing_gitpod.html#how-long-is-my-gitpod-workspace-kept-for" title="Link to this heading">#</a></h3>
+<p>您停止的工作区将保留 14 天，之后如果未使用将被删除。</p>
+</section>
+<section id="can-i-come-back-to-a-previous-workspace">
+<h3>我可以回到之前的工作区吗？<a class="headerlink" href="contributing_gitpod.html#can-i-come-back-to-a-previous-workspace" title="Link to this heading">#</a></h3>
+<p>是的，假设您离开了一段时间，并且想继续为 pandas 贡献。您需要访问 <a class="reference external" href="https://gitpod.io/workspaces">https://gitpod.io/workspaces</a> 并点击您想要重新启动的工作区。您的所有更改都将保留在您上次离开时的状态。</p>
+</section>
+<section id="can-i-install-additional-vscode-extensions">
+<h3>我可以安装额外的 VSCode 扩展吗？<a class="headerlink" href="contributing_gitpod.html#can-i-install-additional-vscode-extensions" title="Link to this heading">#</a></h3>
+<p>当然！您安装的任何扩展都将安装在您自己的工作区中并得以保留。</p>
+</section>
+<section id="i-registered-on-gitpod-but-i-still-cannot-see-a-gitpod-button-in-my-repositories">
+<h3>我已经在 Gitpod 上注册了，但我的仓库中仍然看不到 <code class="docutils literal notranslate"><span class="pre">Gitpod</span></code> 按钮。<a class="headerlink" href="contributing_gitpod.html#i-registered-on-gitpod-but-i-still-cannot-see-a-gitpod-button-in-my-repositories" title="Link to this heading">#</a></h3>
+<p>前往 <a class="reference external" href="https://gitpod.io/integrations">https://gitpod.io/integrations</a> 并确保您已登录。将鼠标悬停在 GitHub 上，然后点击右侧出现的三个按钮。点击编辑权限，并确保已勾选 <code class="docutils literal notranslate"><span class="pre">user:email</span></code>、<code class="docutils literal notranslate"><span class="pre">read:user</span></code> 和 <code class="docutils literal notranslate"><span class="pre">public_repo</span></code>。点击 <strong>Update Permissions</strong> 并在 GitHub 应用程序页面确认更改。</p>
+<img alt="Gitpod integrations - edit GH permissions screenshot" src="../_images/gitpod-edit-permissions-gh.png">
+</section>
+<section id="how-long-does-my-workspace-stay-active-if-i-m-not-using-it">
+<h3>如果我不使用工作区，它会保持活动状态多久？<a class="headerlink" href="contributing_gitpod.html#how-long-does-my-workspace-stay-active-if-i-m-not-using-it" title="Link to this heading">#</a></h3>
+<p>如果您的工作区在浏览器标签页中保持打开状态但不进行交互，它将在 30 分钟后关闭。如果您关闭浏览器标签页，它将在 3 分钟后关闭。</p>
+</section>
+<section id="my-terminal-is-blank-there-is-no-cursor-and-it-s-completely-unresponsive">
+<h3>我的终端一片空白——没有光标，也完全没有响应<a class="headerlink" href="contributing_gitpod.html#my-terminal-is-blank-there-is-no-cursor-and-it-s-completely-unresponsive" title="Link to this heading">#</a></h3>
+<p>不幸的是，这是 Gitpod 方面的一个已知问题。您可以通过两种方式解决此问题：</p>
+<ol class="arabic simple">
+<li><p>完全创建一个新的 Gitpod 工作区。</p></li>
+<li><p>前往您的 <a class="reference external" href="https://gitpod.io/workspaces">Gitpod 仪表板</a>并找到正在运行的工作区。将鼠标悬停在它上面，点击<strong>三点菜单</strong>，然后点击<strong>停止</strong>。当工作区完全停止后，您可以点击其名称再次重新启动它。</p></li>
+</ol>
+<img alt="Gitpod dashboard and workspace menu screenshot" src="../_images/gitpod-dashboard-stop.png">
+</section>
+<section id="i-authenticated-through-github-but-i-still-cannot-commit-to-the-repository-through-gitpod">
+<h3>我已通过 GitHub 认证，但仍然无法通过 Gitpod 提交到仓库。<a class="headerlink" href="contributing_gitpod.html#i-authenticated-through-github-but-i-still-cannot-commit-to-the-repository-through-gitpod" title="Link to this heading">#</a></h3>
+<p>前往 <a class="reference external" href="https://gitpod.io/integrations">https://gitpod.io/integrations</a> 并确保您已登录。将鼠标悬停在 GitHub 上，然后点击右侧出现的三个按钮。点击编辑权限，并确保已勾选 <code class="docutils literal notranslate"><span class="pre">public_repo</span></code>。点击 <strong>Update Permissions</strong> 并在 GitHub 应用程序页面确认更改。</p>
+<img alt="Gitpod integrations - edit GH repository permissions screenshot" src="../_images/gitpod-edit-permissions-repo.png">
+</section>
+</section>
+<section id="acknowledgments">
+<h2>致谢<a class="headerlink" href="contributing_gitpod.html#acknowledgments" title="Link to this heading">#</a></h2>
+<p>本页内容略微改编自 <a class="reference external" href="https://numpy.com.cn/">NumPy</a> 项目。</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="contributing_environment.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">创建开发环境</p> </div> </a> <a class="right-next" href="contributing_documentation.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">为文档贡献</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#gitpod">Gitpod</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#gitpod-github-integration">Gitpod GitHub 集成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#forking-the-pandas-repository">Fork pandas 仓库</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#starting-gitpod">启动 Gitpod</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#quick-workspace-tour">工作区快速导览</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#development-workflow-with-gitpod">Gitpod 开发工作流程</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#rendering-the-pandas-documentation">渲染 pandas 文档</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#option-1-using-liveserve">选项 1：使用 Liveserve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#option-2-using-the-rst-extension">选项 2：使用 rst 扩展</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#faq-s-and-troubleshooting">常见问题与故障排除</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#how-long-is-my-gitpod-workspace-kept-for">我的 Gitpod 工作区会保留多久？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#can-i-come-back-to-a-previous-workspace">我可以回到之前的工作区吗？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#can-i-install-additional-vscode-extensions">我可以安装额外的 VSCode 扩展吗？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#i-registered-on-gitpod-but-i-still-cannot-see-a-gitpod-button-in-my-repositories">我已经在 Gitpod 上注册了，但我的仓库中仍然看不到 <code class="docutils literal notranslate"><span class="pre">Gitpod</span></code> 按钮。</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#how-long-does-my-workspace-stay-active-if-i-m-not-using-it">如果我不使用工作区，它会保持活动状态多久？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#my-terminal-is-blank-there-is-no-cursor-and-it-s-completely-unresponsive">我的终端一片空白——没有光标，也完全没有响应</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#i-authenticated-through-github-but-i-still-cannot-commit-to-the-repository-through-gitpod">我已通过 GitHub 认证，但仍然无法通过 Gitpod 提交到仓库。</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_gitpod.html#acknowledgments">致谢</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/development/contributing_gitpod.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> 由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

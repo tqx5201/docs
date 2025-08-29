@@ -1,0 +1,1920 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>处理文本数据 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/text';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Working with missing data" href="missing_data.html" />
+    <link rel="prev" title="Reshaping and pivot tables" href="reshaping.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="text.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10min.html">10 分钟了解 pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本核心功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具（文本、CSV、HDF5 等）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引和数据选择</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">多级索引 / 高级索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、串联和比较</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">重塑和透视表</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="text.html#">处理文本数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">处理缺失数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">重复标签</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可空整数数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可空布尔数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">图表可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组：拆分-应用-组合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">性能优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">扩展到大型数据集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">操作指南</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">用户指南</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">处理...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="working-with-text-data">
+<span id="text"></span><h1>处理文本数据<a class="headerlink" href="text.html#working-with-text-data" title="Link to this heading">#</a></h1>
+<section id="text-data-types">
+<span id="text-types"></span><h2>文本数据类型<a class="headerlink" href="text.html#text-data-types" title="Link to this heading">#</a></h2>
+<p>在 pandas 中存储文本数据有两种方式</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">object</span></code> -dtype NumPy 数组。</p></li>
+<li><p><a class="reference internal" href="../reference/api/pandas.StringDtype.html#pandas.StringDtype" title="pandas.StringDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringDtype</span></code></a> 扩展类型。</p></li>
+</ol>
+<p>我们建议使用 <a class="reference internal" href="../reference/api/pandas.StringDtype.html#pandas.StringDtype" title="pandas.StringDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringDtype</span></code></a> 来存储文本数据。</p>
+<p>在 pandas 1.0 之前，<code class="docutils literal notranslate"><span class="pre">object</span></code> dtype 是唯一的选择。这在许多方面都是不理想的，原因如下：</p>
+<ol class="arabic simple">
+<li><p>你可能会不小心在 <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype 数组中存储字符串和非字符串的<em>混合数据</em>。最好有一个专用的 dtype。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">object</span></code> dtype 会破坏特定于 dtype 的操作，例如 <a class="reference internal" href="../reference/api/pandas.DataFrame.select_dtypes.html#pandas.DataFrame.select_dtypes" title="pandas.DataFrame.select_dtypes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.select_dtypes()</span></code></a>。没有明确的方法可以只选择文本数据，同时排除非文本但仍是 object-dtype 的列。</p></li>
+<li><p>阅读代码时，<code class="docutils literal notranslate"><span class="pre">object</span></code> dtype 数组的内容不如 <code class="docutils literal notranslate"><span class="pre">'string'</span></code> 清晰。</p></li>
+</ol>
+<p>目前，由字符串组成的 <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype 数组和 <a class="reference internal" href="../reference/api/pandas.arrays.StringArray.html#pandas.arrays.StringArray" title="pandas.arrays.StringArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.StringArray</span></code></a> 的性能大致相同。我们预计未来的改进将显著提高 <a class="reference internal" href="../reference/api/pandas.arrays.StringArray.html#pandas.arrays.StringArray" title="pandas.arrays.StringArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringArray</span></code></a> 的性能并降低其内存开销。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p><code class="docutils literal notranslate"><span class="pre">StringArray</span></code> 目前被认为是实验性的。其实现和部分 API 可能会在不通知的情况下更改。</p>
+</div>
+<p>为了向后兼容，当推断字符串列表的类型时，<code class="docutils literal notranslate"><span class="pre">object</span></code> dtype 仍是默认类型</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">])</span>
+<span class="gh">Out[1]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>要显式请求 <code class="docutils literal notranslate"><span class="pre">string</span></code> dtype，请指定 <code class="docutils literal notranslate"><span class="pre">dtype</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+<span class="gh">Out[2]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">StringDtype</span><span class="p">())</span>
+<span class="gh">Out[3]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>或者在 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 创建后使用 <code class="docutils literal notranslate"><span class="pre">astype</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">])</span>
+
+<span class="gp">In [5]: </span><span class="n">s</span>
+<span class="gh">Out[5]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">dtype: object</span>
+
+<span class="gp">In [6]: </span><span class="n">s</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"string"</span><span class="p">)</span>
+<span class="gh">Out[6]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>你也可以在非字符串数据上使用 <a class="reference internal" href="../reference/api/pandas.StringDtype.html#pandas.StringDtype" title="pandas.StringDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringDtype</span></code></a>/<code class="docutils literal notranslate"><span class="pre">"string"</span></code> 作为 dtype，它将被转换为 <code class="docutils literal notranslate"><span class="pre">string</span></code> dtype</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [8]: </span><span class="n">s</span>
+<span class="gh">Out[8]: </span>
+<span class="go">0       a</span>
+<span class="go">1       2</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [9]: </span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gh">Out[9]: </span><span class="go">str</span>
+</pre></div>
+</div>
+<p>或从现有 pandas 数据进行转换</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"Int64"</span><span class="p">)</span>
+
+<span class="gp">In [11]: </span><span class="n">s1</span>
+<span class="gh">Out[11]: </span>
+<span class="go">0       1</span>
+<span class="go">1       2</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">dtype: Int64</span>
+
+<span class="gp">In [12]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="n">s2</span>
+<span class="gh">Out[13]: </span>
+<span class="go">0       1</span>
+<span class="go">1       2</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [14]: </span><span class="nb">type</span><span class="p">(</span><span class="n">s2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gh">Out[14]: </span><span class="go">str</span>
+</pre></div>
+</div>
+<section id="behavior-differences">
+<span id="text-differences"></span><h3>行为差异<a class="headerlink" href="text.html#behavior-differences" title="Link to this heading">#</a></h3>
+<p>以下是 <code class="docutils literal notranslate"><span class="pre">StringDtype</span></code> 对象与 <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype 行为不同的地方</p>
+<ol class="loweralpha" start="12">
+<li><p>对于 <code class="docutils literal notranslate"><span class="pre">StringDtype</span></code>，返回<strong>数值型</strong>输出的<a class="reference internal" href="../reference/series.html#api-series-str"><span class="std std-ref">字符串访问器方法</span></a>将始终返回可空整数 dtype，而不是根据是否存在 NA 值而返回 int 或 float dtype。返回<strong>布尔型</strong>输出的方法将返回可空布尔 dtype。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [16]: </span><span class="n">s</span>
+<span class="gh">Out[16]: </span>
+<span class="go">0       a</span>
+<span class="go">1    &lt;NA&gt;</span>
+<span class="go">2       b</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [17]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+<span class="gh">Out[17]: </span>
+<span class="go">0       1</span>
+<span class="go">1    &lt;NA&gt;</span>
+<span class="go">2       0</span>
+<span class="go">dtype: Int64</span>
+
+<span class="gp">In [18]: </span><span class="n">s</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+<span class="gh">Out[18]: </span>
+<span class="go">0    1</span>
+<span class="go">2    0</span>
+<span class="go">dtype: Int64</span>
+</pre></div>
+</div>
+<p>这两个输出都是 <code class="docutils literal notranslate"><span class="pre">Int64</span></code> dtype。与 object-dtype 进行比较：</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"object"</span><span class="p">)</span>
+
+<span class="gp">In [20]: </span><span class="n">s2</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+<span class="gh">Out[20]: </span>
+<span class="go">0    1.0</span>
+<span class="go">1    NaN</span>
+<span class="go">2    0.0</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [21]: </span><span class="n">s2</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+<span class="gh">Out[21]: </span>
+<span class="go">0    1</span>
+<span class="go">2    0</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>当存在 NA 值时，输出 dtype 为 float64。返回布尔值的方法也类似。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>
+<span class="gh">Out[22]: </span>
+<span class="go">0    False</span>
+<span class="go">1     &lt;NA&gt;</span>
+<span class="go">2    False</span>
+<span class="go">dtype: boolean</span>
+
+<span class="gp">In [23]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+<span class="gh">Out[23]: </span>
+<span class="go">0     True</span>
+<span class="go">1     &lt;NA&gt;</span>
+<span class="go">2    False</span>
+<span class="go">dtype: boolean</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p>某些字符串方法，例如 <a class="reference internal" href="../reference/api/pandas.Series.str.decode.html#pandas.Series.str.decode" title="pandas.Series.str.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.decode()</span></code></a>，在 <code class="docutils literal notranslate"><span class="pre">StringArray</span></code> 上不可用，因为 <code class="docutils literal notranslate"><span class="pre">StringArray</span></code> 只保存字符串，而不保存字节。</p></li>
+<li><p>在比较操作中，<a class="reference internal" href="../reference/api/pandas.arrays.StringArray.html#pandas.arrays.StringArray" title="pandas.arrays.StringArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.StringArray</span></code></a> 和由 <code class="docutils literal notranslate"><span class="pre">StringArray</span></code> 支持的 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 将返回一个具有 <a class="reference internal" href="../reference/api/pandas.BooleanDtype.html#pandas.BooleanDtype" title="pandas.BooleanDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanDtype</span></code></a> 的对象，而不是 <code class="docutils literal notranslate"><span class="pre">bool</span></code> dtype 对象。与 <code class="xref py py-attr docutils literal notranslate"><span class="pre">numpy.nan</span></code> 始终比较不相等不同，<code class="docutils literal notranslate"><span class="pre">StringArray</span></code> 中的缺失值在比较操作中会传播。</p></li>
+</ol>
+<p>本文档其余部分的内容同样适用于 <code class="docutils literal notranslate"><span class="pre">string</span></code> 和 <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype。</p>
+</section>
+</section>
+<section id="string-methods">
+<span id="text-string-methods"></span><h2>字符串方法<a class="headerlink" href="text.html#string-methods" title="Link to this heading">#</a></h2>
+<p>Series 和 Index 都配备了一组字符串处理方法，使得对数组的每个元素进行操作变得容易。也许最重要的是，这些方法会自动排除缺失/NA 值。这些方法通过 <code class="docutils literal notranslate"><span class="pre">str</span></code> 属性访问，并且其名称通常与等效的（标量）内置字符串方法相匹配</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"Aaba"</span><span class="p">,</span> <span class="s2">"Baca"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"CABA"</span><span class="p">,</span> <span class="s2">"dog"</span><span class="p">,</span> <span class="s2">"cat"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [25]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gh">Out[25]: </span>
+<span class="go">0       a</span>
+<span class="go">1       b</span>
+<span class="go">2       c</span>
+<span class="go">3    aaba</span>
+<span class="go">4    baca</span>
+<span class="go">5    &lt;NA&gt;</span>
+<span class="go">6    caba</span>
+<span class="go">7     dog</span>
+<span class="go">8     cat</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [26]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="gh">Out[26]: </span>
+<span class="go">0       A</span>
+<span class="go">1       B</span>
+<span class="go">2       C</span>
+<span class="go">3    AABA</span>
+<span class="go">4    BACA</span>
+<span class="go">5    &lt;NA&gt;</span>
+<span class="go">6    CABA</span>
+<span class="go">7     DOG</span>
+<span class="go">8     CAT</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [27]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="gh">Out[27]: </span>
+<span class="go">0       1</span>
+<span class="go">1       1</span>
+<span class="go">2       1</span>
+<span class="go">3       4</span>
+<span class="go">4       4</span>
+<span class="go">5    &lt;NA&gt;</span>
+<span class="go">6       4</span>
+<span class="go">7       3</span>
+<span class="go">8       3</span>
+<span class="go">dtype: Int64</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s2">" jack"</span><span class="p">,</span> <span class="s2">"jill "</span><span class="p">,</span> <span class="s2">" jesse "</span><span class="p">,</span> <span class="s2">"frank"</span><span class="p">])</span>
+
+<span class="gp">In [29]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="gh">Out[29]: </span><span class="go">Index(['jack', 'jill', 'jesse', 'frank'], dtype='object')</span>
+
+<span class="gp">In [30]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
+<span class="gh">Out[30]: </span><span class="go">Index(['jack', 'jill ', 'jesse ', 'frank'], dtype='object')</span>
+
+<span class="gp">In [31]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+<span class="gh">Out[31]: </span><span class="go">Index([' jack', 'jill', ' jesse', 'frank'], dtype='object')</span>
+</pre></div>
+</div>
+<p>Index 上的字符串方法对于清理或转换 DataFrame 列特别有用。例如，你的列可能包含前导或尾随空格</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">" Column A "</span><span class="p">,</span> <span class="s2">" Column B "</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [33]: </span><span class="n">df</span>
+<span class="gh">Out[33]: </span>
+<span class="go">   Column A   Column B </span>
+<span class="go">0   0.469112  -0.282863</span>
+<span class="go">1  -1.509059  -1.135632</span>
+<span class="go">2   1.212112  -0.173215</span>
+</pre></div>
+</div>
+<p>由于 <code class="docutils literal notranslate"><span class="pre">df.columns</span></code> 是一个 Index 对象，我们可以使用 <code class="docutils literal notranslate"><span class="pre">.str</span></code> 访问器</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="gh">Out[34]: </span><span class="go">Index(['Column A', 'Column B'], dtype='object')</span>
+
+<span class="gp">In [35]: </span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gh">Out[35]: </span><span class="go">Index([' column a ', ' column b '], dtype='object')</span>
+</pre></div>
+</div>
+<p>然后，可以使用这些字符串方法根据需要清理列。这里我们移除前导和尾随空格，将所有名称转换为小写，并将任何剩余的空格替换为下划线</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">"_"</span><span class="p">)</span>
+
+<span class="gp">In [37]: </span><span class="n">df</span>
+<span class="gh">Out[37]: </span>
+<span class="go">   column_a  column_b</span>
+<span class="go">0  0.469112 -0.282863</span>
+<span class="go">1 -1.509059 -1.135632</span>
+<span class="go">2  1.212112 -0.173215</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果你的 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 中有许多重复元素（即 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 中唯一元素的数量远小于 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 的长度），则将原始 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 转换为 <code class="docutils literal notranslate"><span class="pre">category</span></code> 类型，然后对其使用 <code class="docutils literal notranslate"><span class="pre">.str.&lt;method&gt;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">.dt.&lt;property&gt;</span></code> 可能会更快。性能差异源于以下事实：对于 <code class="docutils literal notranslate"><span class="pre">category</span></code> 类型的 <code class="docutils literal notranslate"><span class="pre">Series</span></code>，字符串操作是在 <code class="docutils literal notranslate"><span class="pre">.categories</span></code> 上执行的，而不是在 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 的每个元素上执行的。</p>
+<p>请注意，与字符串类型的 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 相比，带有字符串 <code class="docutils literal notranslate"><span class="pre">.categories</span></code> 的 <code class="docutils literal notranslate"><span class="pre">category</span></code> 类型 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 存在一些限制（例如，你不能将字符串相互添加：如果 <code class="docutils literal notranslate"><span class="pre">s</span></code> 是 <code class="docutils literal notranslate"><span class="pre">category</span></code> 类型的 <code class="docutils literal notranslate"><span class="pre">Series</span></code>，则 <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">+</span> <span class="pre">"</span> <span class="pre">"</span> <span class="pre">+</span> <span class="pre">s</span></code> 将不起作用）。此外，对 <code class="docutils literal notranslate"><span class="pre">list</span></code> 类型元素操作的 <code class="docutils literal notranslate"><span class="pre">.str</span></code> 方法在此类 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 上不可用。</p>
+</div>
+<div class="admonition warning" id="text-warn-types">
+<p class="admonition-title">警告</p>
+<p>Series 的类型会被推断，并推断为允许的类型（即字符串）。</p>
+<p>一般来说，<code class="docutils literal notranslate"><span class="pre">.str</span></code> 访问器旨在仅对字符串起作用。除了极少数例外，其他用法均不受支持，并可能在以后禁用。</p>
+</div>
+</section>
+<section id="splitting-and-replacing-strings">
+<span id="text-split"></span><h2>拆分和替换字符串<a class="headerlink" href="text.html#splitting-and-replacing-strings" title="Link to this heading">#</a></h2>
+<p>像 <code class="docutils literal notranslate"><span class="pre">split</span></code> 这样的方法返回一个列表 Series</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a_b_c"</span><span class="p">,</span> <span class="s2">"c_d_e"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"f_g_h"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [39]: </span><span class="n">s2</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
+<span class="gh">Out[39]: </span>
+<span class="go">0    [a, b, c]</span>
+<span class="go">1    [c, d, e]</span>
+<span class="go">2         &lt;NA&gt;</span>
+<span class="go">3    [f, g, h]</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>拆分列表中的元素可以使用 <code class="docutils literal notranslate"><span class="pre">get</span></code> 或 <code class="docutils literal notranslate"><span class="pre">[]</span></code> 符号访问</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">s2</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[40]: </span>
+<span class="go">0       b</span>
+<span class="go">1       d</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">3       g</span>
+<span class="go">dtype: object</span>
+
+<span class="gp">In [41]: </span><span class="n">s2</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gh">Out[41]: </span>
+<span class="go">0       b</span>
+<span class="go">1       d</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">3       g</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">expand</span></code> 可以轻松地将其扩展为返回一个 DataFrame。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">s2</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[42]: </span>
+<span class="go">      0     1     2</span>
+<span class="go">0     a     b     c</span>
+<span class="go">1     c     d     e</span>
+<span class="go">2  &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;</span>
+<span class="go">3     f     g     h</span>
+</pre></div>
+</div>
+<p>当原始 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 具有 <a class="reference internal" href="../reference/api/pandas.StringDtype.html#pandas.StringDtype" title="pandas.StringDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringDtype</span></code></a> 时，输出列也将全部是 <a class="reference internal" href="../reference/api/pandas.StringDtype.html#pandas.StringDtype" title="pandas.StringDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringDtype</span></code></a>。</p>
+<p>也可以限制拆分的数量</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="n">s2</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[43]: </span>
+<span class="go">      0     1</span>
+<span class="go">0     a   b_c</span>
+<span class="go">1     c   d_e</span>
+<span class="go">2  &lt;NA&gt;  &lt;NA&gt;</span>
+<span class="go">3     f   g_h</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rsplit</span></code> 与 <code class="docutils literal notranslate"><span class="pre">split</span></code> 类似，但它从字符串的末尾向开头反向操作</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">s2</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[44]: </span>
+<span class="go">      0     1</span>
+<span class="go">0   a_b     c</span>
+<span class="go">1   c_d     e</span>
+<span class="go">2  &lt;NA&gt;  &lt;NA&gt;</span>
+<span class="go">3   f_g     h</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">replace</span></code> 可选地使用<a class="reference external" href="https://docs.pythonlang.cn/3/library/re.html">正则表达式</a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">s3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"Aaba"</span><span class="p">,</span> <span class="s2">"Baca"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"CABA"</span><span class="p">,</span> <span class="s2">"dog"</span><span class="p">,</span> <span class="s2">"cat"</span><span class="p">],</span>
+<span class="gp">   ....: </span>    <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">,</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [46]: </span><span class="n">s3</span>
+<span class="gh">Out[46]: </span>
+<span class="go">0       A</span>
+<span class="go">1       B</span>
+<span class="go">2       C</span>
+<span class="go">3    Aaba</span>
+<span class="go">4    Baca</span>
+<span class="go">5        </span>
+<span class="go">6    &lt;NA&gt;</span>
+<span class="go">7    CABA</span>
+<span class="go">8     dog</span>
+<span class="go">9     cat</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [47]: </span><span class="n">s3</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"^.a|dog"</span><span class="p">,</span> <span class="s2">"XX-XX "</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[47]: </span>
+<span class="go">0           A</span>
+<span class="go">1           B</span>
+<span class="go">2           C</span>
+<span class="go">3    XX-XX ba</span>
+<span class="go">4    XX-XX ca</span>
+<span class="go">5            </span>
+<span class="go">6        &lt;NA&gt;</span>
+<span class="go">7    XX-XX BA</span>
+<span class="go">8      XX-XX </span>
+<span class="go">9     XX-XX t</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">2.0 版本中的更改。</span></p>
+</div>
+<p>带有 <code class="docutils literal notranslate"><span class="pre">regex=True</span></code> 的单字符模式也将被视为正则表达式</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">s4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a.b"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">""</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [49]: </span><span class="n">s4</span>
+<span class="gh">Out[49]: </span>
+<span class="go">0     a.b</span>
+<span class="go">1       .</span>
+<span class="go">2       b</span>
+<span class="go">3    &lt;NA&gt;</span>
+<span class="go">4        </span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [50]: </span><span class="n">s4</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[50]: </span>
+<span class="go">0     aaa</span>
+<span class="go">1       a</span>
+<span class="go">2       a</span>
+<span class="go">3    &lt;NA&gt;</span>
+<span class="go">4        </span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>如果你想对字符串进行字面替换（等同于 <a class="reference external" href="https://docs.pythonlang.cn/3/library/stdtypes.html#str.replace" title="(in Python v3.13)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.replace()</span></code></a>），你可以将可选参数 <code class="docutils literal notranslate"><span class="pre">regex</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">False</span></code>，而不是转义每个字符。在这种情况下，<code class="docutils literal notranslate"><span class="pre">pat</span></code> 和 <code class="docutils literal notranslate"><span class="pre">repl</span></code> 都必须是字符串</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [51]: </span><span class="n">dollars</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"12"</span><span class="p">,</span> <span class="s2">"-$10"</span><span class="p">,</span> <span class="s2">"$10,000"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="go"># These lines are equivalent</span>
+<span class="gp">In [52]: </span><span class="n">dollars</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">"-\$"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[52]: </span>
+<span class="go">0         12</span>
+<span class="go">1        -10</span>
+<span class="go">2    $10,000</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [53]: </span><span class="n">dollars</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"-$"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gh">Out[53]: </span>
+<span class="go">0         12</span>
+<span class="go">1        -10</span>
+<span class="go">2    $10,000</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">replace</span></code> 方法也可以接受一个可调用对象作为替换。它会使用 <a class="reference external" href="https://docs.pythonlang.cn/3/library/re.html#re.sub" title="(in Python v3.13)"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.sub()</span></code></a> 对每个 <code class="docutils literal notranslate"><span class="pre">pat</span></code> 进行调用。该可调用对象应期望一个位置参数（一个正则表达式对象）并返回一个字符串。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Reverse every lowercase alphabetic word</span>
+<span class="gp">In [54]: </span><span class="n">pat</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"[a-z]+"</span>
+
+<span class="gp">In [55]: </span><span class="k">def</span><span class="w"> </span><span class="nf">repl</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [56]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"foo 123"</span><span class="p">,</span> <span class="s2">"bar baz"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">pat</span><span class="p">,</span> <span class="n">repl</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[56]: </span>
+<span class="go">0    oof 123</span>
+<span class="go">1    rab zab</span>
+<span class="go">2       &lt;NA&gt;</span>
+<span class="go">dtype: string</span>
+
+<span class="go"># Using regex groups</span>
+<span class="gp">In [57]: </span><span class="n">pat</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"(?P&lt;one&gt;\w+) (?P&lt;two&gt;\w+) (?P&lt;three&gt;\w+)"</span>
+
+<span class="gp">In [58]: </span><span class="k">def</span><span class="w"> </span><span class="nf">repl</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">"two"</span><span class="p">)</span><span class="o">.</span><span class="n">swapcase</span><span class="p">()</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [59]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"Foo Bar Baz"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">pat</span><span class="p">,</span> <span class="n">repl</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[59]: </span>
+<span class="go">0     bAR</span>
+<span class="go">1    &lt;NA&gt;</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">replace</span></code> 方法也接受来自 <a class="reference external" href="https://docs.pythonlang.cn/3/library/re.html#re.compile" title="(in Python v3.13)"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> 的已编译正则表达式对象作为模式。所有标志都应包含在已编译的正则表达式对象中。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="gp">In [61]: </span><span class="n">regex_pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^.a|dog"</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+
+<span class="gp">In [62]: </span><span class="n">s3</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regex_pat</span><span class="p">,</span> <span class="s2">"XX-XX "</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[62]: </span>
+<span class="go">0           A</span>
+<span class="go">1           B</span>
+<span class="go">2           C</span>
+<span class="go">3    XX-XX ba</span>
+<span class="go">4    XX-XX ca</span>
+<span class="go">5            </span>
+<span class="go">6        &lt;NA&gt;</span>
+<span class="go">7    XX-XX BA</span>
+<span class="go">8      XX-XX </span>
+<span class="go">9     XX-XX t</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>在使用已编译正则表达式对象调用 <code class="docutils literal notranslate"><span class="pre">replace</span></code> 时，如果包含 <code class="docutils literal notranslate"><span class="pre">flags</span></code> 参数，将引发 <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="n">s3</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regex_pat</span><span class="p">,</span> <span class="s1">'XX-XX '</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span>: case and flags cannot be set when pat is a compiled regex
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">removeprefix</span></code> 和 <code class="docutils literal notranslate"><span class="pre">removesuffix</span></code> 的效果与 Python 3.9 中添加的 <code class="docutils literal notranslate"><span class="pre">str.removeprefix</span></code> 和 <code class="docutils literal notranslate"><span class="pre">str.removesuffix</span></code> 相同 &lt;<a class="reference external" href="https://docs.pythonlang.cn/3/library/stdtypes.html#str.removeprefix">https://docs.pythonlang.cn/3/library/stdtypes.html#str.removeprefix</a>&gt;`__</p>
+<div class="versionadded">
+<p><span class="versionmodified added">1.4.0 版本新增。</span></p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [64]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"str_foo"</span><span class="p">,</span> <span class="s2">"str_bar"</span><span class="p">,</span> <span class="s2">"no_prefix"</span><span class="p">])</span>
+
+<span class="gp">In [65]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s2">"str_"</span><span class="p">)</span>
+<span class="gh">Out[65]: </span>
+<span class="go">0          foo</span>
+<span class="go">1          bar</span>
+<span class="go">2    no_prefix</span>
+<span class="go">dtype: object</span>
+
+<span class="gp">In [66]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"foo_str"</span><span class="p">,</span> <span class="s2">"bar_str"</span><span class="p">,</span> <span class="s2">"no_suffix"</span><span class="p">])</span>
+
+<span class="gp">In [67]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">"_str"</span><span class="p">)</span>
+<span class="gh">Out[67]: </span>
+<span class="go">0          foo</span>
+<span class="go">1          bar</span>
+<span class="go">2    no_suffix</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+</section>
+<section id="concatenation">
+<span id="text-concatenate"></span><h2>连接<a class="headerlink" href="text.html#concatenation" title="Link to this heading">#</a></h2>
+<p>有几种方法可以连接 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Index</span></code>，无论是与其自身还是与其他对象，所有这些都基于 <a class="reference internal" href="../reference/api/pandas.Series.str.cat.html#pandas.Series.str.cat" title="pandas.Series.str.cat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cat()</span></code></a> 或 <code class="docutils literal notranslate"><span class="pre">Index.str.cat</span></code>。</p>
+<section id="concatenating-a-single-series-into-a-string">
+<h3>将单个 Series 连接成字符串<a class="headerlink" href="text.html#concatenating-a-single-series-into-a-string" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Series</span></code>（或 <code class="docutils literal notranslate"><span class="pre">Index</span></code>）的内容可以被连接</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [68]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [69]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">","</span><span class="p">)</span>
+<span class="gh">Out[69]: </span><span class="go">'a,b,c,d'</span>
+</pre></div>
+</div>
+<p>如果未指定，分隔符关键字 <code class="docutils literal notranslate"><span class="pre">sep</span></code> 默认为空字符串，即 <code class="docutils literal notranslate"><span class="pre">sep=''</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">()</span>
+<span class="gh">Out[70]: </span><span class="go">'abcd'</span>
+</pre></div>
+</div>
+<p>默认情况下，缺失值会被忽略。使用 <code class="docutils literal notranslate"><span class="pre">na_rep</span></code>，可以为它们指定一个表示形式</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="n">t</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [72]: </span><span class="n">t</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">","</span><span class="p">)</span>
+<span class="gh">Out[72]: </span><span class="go">'a,b,d'</span>
+
+<span class="gp">In [73]: </span><span class="n">t</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">","</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s2">"-"</span><span class="p">)</span>
+<span class="gh">Out[73]: </span><span class="go">'a,b,-,d'</span>
+</pre></div>
+</div>
+</section>
+<section id="concatenating-a-series-and-something-list-like-into-a-series">
+<h3>将 Series 和列表状对象连接成 Series<a class="headerlink" href="text.html#concatenating-a-series-and-something-list-like-into-a-series" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.Series.str.cat.html#pandas.Series.str.cat" title="pandas.Series.str.cat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cat()</span></code></a> 的第一个参数可以是列表状对象，前提是其长度与调用 <code class="docutils literal notranslate"><span class="pre">Series</span></code>（或 <code class="docutils literal notranslate"><span class="pre">Index</span></code>）的长度匹配。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [74]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">])</span>
+<span class="gh">Out[74]: </span>
+<span class="go">0    aA</span>
+<span class="go">1    bB</span>
+<span class="go">2    cC</span>
+<span class="go">3    dD</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>任何一侧的缺失值都将导致结果中出现缺失值，<em>除非</em>指定了 <code class="docutils literal notranslate"><span class="pre">na_rep</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gh">Out[75]: </span>
+<span class="go">0      aa</span>
+<span class="go">1      bb</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">3      dd</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [76]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s2">"-"</span><span class="p">)</span>
+<span class="gh">Out[76]: </span>
+<span class="go">0    aa</span>
+<span class="go">1    bb</span>
+<span class="go">2    c-</span>
+<span class="go">3    dd</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+</section>
+<section id="concatenating-a-series-and-something-array-like-into-a-series">
+<h3>将 Series 和数组状对象连接成 Series<a class="headerlink" href="text.html#concatenating-a-series-and-something-array-like-into-a-series" title="Link to this heading">#</a></h3>
+<p>参数 <code class="docutils literal notranslate"><span class="pre">others</span></code> 也可以是二维的。在这种情况下，行数必须与调用 <code class="docutils literal notranslate"><span class="pre">Series</span></code>（或 <code class="docutils literal notranslate"><span class="pre">Index</span></code>）的长度匹配。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [78]: </span><span class="n">s</span>
+<span class="gh">Out[78]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">3    d</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [79]: </span><span class="n">d</span>
+<span class="gh">Out[79]: </span>
+<span class="go">      0  1</span>
+<span class="go">0     a  a</span>
+<span class="go">1     b  b</span>
+<span class="go">2  &lt;NA&gt;  c</span>
+<span class="go">3     d  d</span>
+
+<span class="gp">In [80]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s2">"-"</span><span class="p">)</span>
+<span class="gh">Out[80]: </span>
+<span class="go">0    aaa</span>
+<span class="go">1    bbb</span>
+<span class="go">2    c-c</span>
+<span class="go">3    ddd</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+</section>
+<section id="concatenating-a-series-and-an-indexed-object-into-a-series-with-alignment">
+<h3>将 Series 和带索引对象连接成 Series，并对齐<a class="headerlink" href="text.html#concatenating-a-series-and-an-indexed-object-into-a-series-with-alignment" title="Link to this heading">#</a></h3>
+<p>对于与 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的连接，可以通过设置 <code class="docutils literal notranslate"><span class="pre">join</span></code> 关键字在连接前对齐索引。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [81]: </span><span class="n">u</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"b"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [82]: </span><span class="n">s</span>
+<span class="gh">Out[82]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">3    d</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [83]: </span><span class="n">u</span>
+<span class="gh">Out[83]: </span>
+<span class="go">1    b</span>
+<span class="go">3    d</span>
+<span class="go">0    a</span>
+<span class="go">2    c</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [84]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="gh">Out[84]: </span>
+<span class="go">0    aa</span>
+<span class="go">1    bb</span>
+<span class="go">2    cc</span>
+<span class="go">3    dd</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [85]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="gh">Out[85]: </span>
+<span class="go">0    aa</span>
+<span class="go">1    bb</span>
+<span class="go">2    cc</span>
+<span class="go">3    dd</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">join</span></code> 的常用选项（<code class="docutils literal notranslate"><span class="pre">'left',</span> <span class="pre">'outer',</span> <span class="pre">'inner',</span> <span class="pre">'right'</span></code> 之一）均可用。特别是，对齐还意味着不同的长度不再需要一致。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [86]: </span><span class="n">v</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"z"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">,</span> <span class="s2">"e"</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [87]: </span><span class="n">s</span>
+<span class="gh">Out[87]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">3    d</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [88]: </span><span class="n">v</span>
+<span class="gh">Out[88]: </span>
+<span class="go">-1    z</span>
+<span class="go"> 0    a</span>
+<span class="go"> 1    b</span>
+<span class="go"> 3    d</span>
+<span class="go"> 4    e</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [89]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s2">"-"</span><span class="p">)</span>
+<span class="gh">Out[89]: </span>
+<span class="go">0    aa</span>
+<span class="go">1    bb</span>
+<span class="go">2    c-</span>
+<span class="go">3    dd</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [90]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s2">"outer"</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s2">"-"</span><span class="p">)</span>
+<span class="gh">Out[90]: </span>
+<span class="go">-1    -z</span>
+<span class="go"> 0    aa</span>
+<span class="go"> 1    bb</span>
+<span class="go"> 2    c-</span>
+<span class="go"> 3    dd</span>
+<span class="go"> 4    -e</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>当 <code class="docutils literal notranslate"><span class="pre">others</span></code> 是 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 时，也可以使用相同的对齐方式</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [91]: </span><span class="n">f</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">:]</span>
+
+<span class="gp">In [92]: </span><span class="n">s</span>
+<span class="gh">Out[92]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">3    d</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [93]: </span><span class="n">f</span>
+<span class="gh">Out[93]: </span>
+<span class="go">      0  1</span>
+<span class="go">3     d  d</span>
+<span class="go">2  &lt;NA&gt;  c</span>
+<span class="go">1     b  b</span>
+<span class="go">0     a  a</span>
+
+<span class="gp">In [94]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s2">"-"</span><span class="p">)</span>
+<span class="gh">Out[94]: </span>
+<span class="go">0    aaa</span>
+<span class="go">1    bbb</span>
+<span class="go">2    c-c</span>
+<span class="go">3    ddd</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+</section>
+<section id="concatenating-a-series-and-many-objects-into-a-series">
+<h3>将 Series 和多个对象连接成 Series<a class="headerlink" href="text.html#concatenating-a-series-and-many-objects-into-a-series" title="Link to this heading">#</a></h3>
+<p>多个数组状项（具体而言：<code class="docutils literal notranslate"><span class="pre">Series</span></code>、<code class="docutils literal notranslate"><span class="pre">Index</span></code> 以及 <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> 的一维变体）可以组合在一个列表状容器中（包括迭代器、<code class="docutils literal notranslate"><span class="pre">dict</span>-views</code class="docutils literal notranslate"><span class="pre">等）。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [95]: </span><span class="n">s</span>
+<span class="gh">Out[95]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="go">3    d</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [96]: </span><span class="n">u</span>
+<span class="gh">Out[96]: </span>
+<span class="go">1    b</span>
+<span class="go">3    d</span>
+<span class="go">0    a</span>
+<span class="go">2    c</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [97]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()],</span> <span class="n">join</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="gh">Out[97]: </span>
+<span class="go">0    aab</span>
+<span class="go">1    bbd</span>
+<span class="go">2    cca</span>
+<span class="go">3    ddc</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>传递的列表状容器中所有没有索引的元素（例如 <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>）的长度必须与调用 <code class="docutils literal notranslate"><span class="pre">Series</span></code>（或 <code class="docutils literal notranslate"><span class="pre">Index</span></code>）的长度匹配，但 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Index</span></code> 可以具有任意长度（只要不对齐方式禁用 <code class="docutils literal notranslate"><span class="pre">join=None</span></code>）</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [98]: </span><span class="n">v</span>
+<span class="gh">Out[98]: </span>
+<span class="go">-1    z</span>
+<span class="go"> 0    a</span>
+<span class="go"> 1    b</span>
+<span class="go"> 3    d</span>
+<span class="go"> 4    e</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [99]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()],</span> <span class="n">join</span><span class="o">=</span><span class="s2">"outer"</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s2">"-"</span><span class="p">)</span>
+<span class="gh">Out[99]: </span>
+<span class="go">-1    -z--</span>
+<span class="go">0     aaab</span>
+<span class="go">1     bbbd</span>
+<span class="go">2     c-ca</span>
+<span class="go">3     dddc</span>
+<span class="go">4     -e--</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>如果对包含不同索引的 <code class="docutils literal notranslate"><span class="pre">others</span></code> 列表状对象使用 <code class="docutils literal notranslate"><span class="pre">join='right'</span></code>，则这些索引的并集将用作最终连接的基础</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [100]: </span><span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="gh">Out[100]: </span>
+<span class="go">3    d</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [101]: </span><span class="n">v</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="gh">Out[101]: </span>
+<span class="go">-1    z</span>
+<span class="go"> 0    a</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [102]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">3</span><span class="p">]],</span> <span class="n">v</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]],</span> <span class="n">join</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s2">"-"</span><span class="p">)</span>
+<span class="gh">Out[102]: </span>
+<span class="go"> 3    dd-</span>
+<span class="go">-1    --z</span>
+<span class="go"> 0    a-a</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="indexing-with-str">
+<h2>使用 <code class="docutils literal notranslate"><span class="pre">.str</span></code> 进行索引<a class="headerlink" href="text.html#indexing-with-str" title="Link to this heading">#</a></h2>
+<p id="text-indexing">你可以使用 <code class="docutils literal notranslate"><span class="pre">[]</span></code> 符号直接按位置索引。如果索引超出了字符串的末尾，结果将是 <code class="docutils literal notranslate"><span class="pre">NaN</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [103]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"Aaba"</span><span class="p">,</span> <span class="s2">"Baca"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"CABA"</span><span class="p">,</span> <span class="s2">"dog"</span><span class="p">,</span> <span class="s2">"cat"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [104]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gh">Out[104]: </span>
+<span class="go">0       A</span>
+<span class="go">1       B</span>
+<span class="go">2       C</span>
+<span class="go">3       A</span>
+<span class="go">4       B</span>
+<span class="go">5    &lt;NA&gt;</span>
+<span class="go">6       C</span>
+<span class="go">7       d</span>
+<span class="go">8       c</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [105]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gh">Out[105]: </span>
+<span class="go">0    &lt;NA&gt;</span>
+<span class="go">1    &lt;NA&gt;</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">3       a</span>
+<span class="go">4       a</span>
+<span class="go">5    &lt;NA&gt;</span>
+<span class="go">6       A</span>
+<span class="go">7       o</span>
+<span class="go">8       a</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+</section>
+<section id="extracting-substrings">
+<h2>提取子字符串<a class="headerlink" href="text.html#extracting-substrings" title="Link to this heading">#</a></h2>
+<section id="extract-first-match-in-each-subject-extract">
+<span id="text-extract"></span><h3>提取每个主题中的第一个匹配项 (extract)<a class="headerlink" href="text.html#extract-first-match-in-each-subject-extract" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">extract</span></code> 方法接受包含至少一个捕获组的<a class="reference external" href="https://docs.pythonlang.cn/3/library/re.html">正则表达式</a>。</p>
+<p>提取具有多个组的正则表达式会返回一个 DataFrame，其中每个组对应一列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [106]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span><span class="s2">"a1"</span><span class="p">,</span> <span class="s2">"b2"</span><span class="p">,</span> <span class="s2">"c3"</span><span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">,</span>
+<span class="gp">   .....: </span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([ab])(\d)"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">   .....: </span>
+<span class="gh">Out[106]: </span>
+<span class="go">      0     1</span>
+<span class="go">0     a     1</span>
+<span class="go">1     b     2</span>
+<span class="go">2  &lt;NA&gt;  &lt;NA&gt;</span>
+</pre></div>
+</div>
+<p>不匹配的元素将返回一个填充有 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> 的行。因此，一个包含杂乱字符串的 Series 可以“转换”为具有相同索引的 Series 或 DataFrame，其中包含清理过或更有用的字符串，而无需使用 <code class="docutils literal notranslate"><span class="pre">get()</span></code> 访问元组或 <code class="docutils literal notranslate"><span class="pre">re.match</span></code> 对象。即使未找到匹配项且结果只包含 <code class="docutils literal notranslate"><span class="pre">NaN</span></code>，结果的 dtype 也始终是 object。</p>
+<p>命名组，例如</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [107]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a1"</span><span class="p">,</span> <span class="s2">"b2"</span><span class="p">,</span> <span class="s2">"c3"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="sa">r</span><span class="s2">"(?P&lt;letter&gt;[ab])(?P&lt;digit&gt;\d)"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+<span class="gh">Out[107]: </span>
+<span class="go">  letter digit</span>
+<span class="go">0      a     1</span>
+<span class="go">1      b     2</span>
+<span class="go">2   &lt;NA&gt;  &lt;NA&gt;</span>
+</pre></div>
+</div>
+<p>和可选组，例如</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [108]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span><span class="s2">"a1"</span><span class="p">,</span> <span class="s2">"b2"</span><span class="p">,</span> <span class="s2">"3"</span><span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">,</span>
+<span class="gp">   .....: </span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([ab])?(\d)"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">   .....: </span>
+<span class="gh">Out[108]: </span>
+<span class="go">      0  1</span>
+<span class="go">0     a  1</span>
+<span class="go">1     b  2</span>
+<span class="go">2  &lt;NA&gt;  3</span>
+</pre></div>
+</div>
+<p>也可以使用。请注意，正则表达式中的任何捕获组名称都将用作列名；否则将使用捕获组编号。</p>
+<p>如果 <code class="docutils literal notranslate"><span class="pre">expand=True</span></code>，提取具有一个组的正则表达式将返回一个具有一列的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [109]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a1"</span><span class="p">,</span> <span class="s2">"b2"</span><span class="p">,</span> <span class="s2">"c3"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[ab](\d)"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[109]: </span>
+<span class="go">      0</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2  &lt;NA&gt;</span>
+</pre></div>
+</div>
+<p>如果 <code class="docutils literal notranslate"><span class="pre">expand=False</span></code>，它将返回一个 Series。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a1"</span><span class="p">,</span> <span class="s2">"b2"</span><span class="p">,</span> <span class="s2">"c3"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[ab](\d)"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gh">Out[110]: </span>
+<span class="go">0       1</span>
+<span class="go">1       2</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>在 <code class="docutils literal notranslate"><span class="pre">Index</span></code> 上调用具有恰好一个捕获组的正则表达式，如果 <code class="docutils literal notranslate"><span class="pre">expand=True</span></code>，将返回一个具有一列的 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [111]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a1"</span><span class="p">,</span> <span class="s2">"b2"</span><span class="p">,</span> <span class="s2">"c3"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"A11"</span><span class="p">,</span> <span class="s2">"B22"</span><span class="p">,</span> <span class="s2">"C33"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [112]: </span><span class="n">s</span>
+<span class="gh">Out[112]: </span>
+<span class="go">A11    a1</span>
+<span class="go">B22    b2</span>
+<span class="go">C33    c3</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [113]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">"(?P&lt;letter&gt;[a-zA-Z])"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[113]: </span>
+<span class="go">  letter</span>
+<span class="go">0      A</span>
+<span class="go">1      B</span>
+<span class="go">2      C</span>
+</pre></div>
+</div>
+<p>如果 <code class="docutils literal notranslate"><span class="pre">expand=False</span></code>，它将返回一个 <code class="docutils literal notranslate"><span class="pre">Index</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [114]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">"(?P&lt;letter&gt;[a-zA-Z])"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gh">Out[114]: </span><span class="go">Index(['A', 'B', 'C'], dtype='object', name='letter')</span>
+</pre></div>
+</div>
+<p>在 <code class="docutils literal notranslate"><span class="pre">Index</span></code> 上调用具有多个捕获组的正则表达式，如果 <code class="docutils literal notranslate"><span class="pre">expand=True</span></code>，将返回一个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [115]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">"(?P&lt;letter&gt;[a-zA-Z])([0-9]+)"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[115]: </span>
+<span class="go">  letter   1</span>
+<span class="go">0      A  11</span>
+<span class="go">1      B  22</span>
+<span class="go">2      C  33</span>
+</pre></div>
+</div>
+<p>如果 <code class="docutils literal notranslate"><span class="pre">expand=False</span></code>，它将引发 <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [116]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">"(?P&lt;letter&gt;[a-zA-Z])([0-9]+)"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">116</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">"(?P&lt;letter&gt;[a-zA-Z])([0-9]+)"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/strings/accessor.py:140,</span> in <span class="ni">forbid_nonstring_types.&lt;locals&gt;._forbid_nonstring_types.&lt;locals&gt;.wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>     <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="sa">f</span><span class="s2">"Cannot use .str.</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2"> with values of "</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>         <span class="sa">f</span><span class="s2">"inferred dtype '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_inferred_dtype</span><span class="si">}</span><span class="s2">'."</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">140</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/core/strings/accessor.py:2771,</span> in <span class="ni">StringMethods.extract</span><span class="nt">(self, pat, flags, expand)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2768</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"pattern contains no capture groups"</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2770</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">expand</span> <span class="ow">and</span> <span class="n">regex</span><span class="o">.</span><span class="n">groups</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">,</span> <span class="n">ABCIndex</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">2771</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"only one regex group is supported with Index"</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2773</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+<span class="g g-Whitespace">   </span><span class="mi">2774</span> <span class="n">result_dtype</span> <span class="o">=</span> <span class="n">_result_dtype</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: only one regex group is supported with Index
+</pre></div>
+</div>
+<p>下表总结了 <code class="docutils literal notranslate"><span class="pre">extract(expand=False)</span></code> 的行为（输入主题在第一列，正则表达式中的组数在第一行）</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p>1 个组</p></td>
+<td><p>>1 个组</p></td>
+</tr>
+<tr class="row-even"><td><p>Index</p></td>
+<td><p>Index</p></td>
+<td><p>ValueError</p></td>
+</tr>
+<tr class="row-odd"><td><p>Series</p></td>
+<td><p>Series</p></td>
+<td><p>DataFrame</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="extract-all-matches-in-each-subject-extractall">
+<h3>提取每个主题中的所有匹配项 (extractall)<a class="headerlink" href="text.html#extract-all-matches-in-each-subject-extractall" title="Link to this heading">#</a></h3>
+<p id="text-extractall">与 <code class="docutils literal notranslate"><span class="pre">extract</span></code>（只返回第一个匹配项）不同，</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [117]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a1a2"</span><span class="p">,</span> <span class="s2">"b1"</span><span class="p">,</span> <span class="s2">"c1"</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [118]: </span><span class="n">s</span>
+<span class="gh">Out[118]: </span>
+<span class="go">A    a1a2</span>
+<span class="go">B      b1</span>
+<span class="go">C      c1</span>
+<span class="go">dtype: string</span>
+
+<span class="gp">In [119]: </span><span class="n">two_groups</span> <span class="o">=</span> <span class="s2">"(?P&lt;letter&gt;[a-z])(?P&lt;digit&gt;[0-9])"</span>
+
+<span class="gp">In [120]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">two_groups</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[120]: </span>
+<span class="go">  letter digit</span>
+<span class="go">A      a     1</span>
+<span class="go">B      b     1</span>
+<span class="go">C      c     1</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">extractall</span></code> 方法返回所有匹配项。<code class="docutils literal notranslate"><span class="pre">extractall</span></code> 的结果始终是一个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>，其行上带有 <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>。<code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> 的最后一级名为 <code class="docutils literal notranslate"><span class="pre">match</span></code>，表示在主题中的顺序。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [121]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">two_groups</span><span class="p">)</span>
+<span class="gh">Out[121]: </span>
+<span class="go">        letter digit</span>
+<span class="go">  match             </span>
+<span class="go">A 0          a     1</span>
+<span class="go">  1          a     2</span>
+<span class="go">B 0          b     1</span>
+<span class="go">C 0          c     1</span>
+</pre></div>
+</div>
+<p>当 Series 中的每个主题字符串恰好有一个匹配项时，</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [122]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a3"</span><span class="p">,</span> <span class="s2">"b3"</span><span class="p">,</span> <span class="s2">"c2"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [123]: </span><span class="n">s</span>
+<span class="gh">Out[123]: </span>
+<span class="go">0    a3</span>
+<span class="go">1    b3</span>
+<span class="go">2    c2</span>
+<span class="go">dtype: string</span>
+</pre></div>
+</div>
+<p>那么 <code class="docutils literal notranslate"><span class="pre">extractall(pat).xs(0,</span> <span class="pre">level='match')</span></code> 会得到与 <code class="docutils literal notranslate"><span class="pre">extract(pat)</span></code> 相同的结果。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [124]: </span><span class="n">extract_result</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">two_groups</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [125]: </span><span class="n">extract_result</span>
+<span class="gh">Out[125]: </span>
+<span class="go">  letter digit</span>
+<span class="go">0      a     3</span>
+<span class="go">1      b     3</span>
+<span class="go">2      c     2</span>
+
+<span class="gp">In [126]: </span><span class="n">extractall_result</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">two_groups</span><span class="p">)</span>
+
+<span class="gp">In [127]: </span><span class="n">extractall_result</span>
+<span class="gh">Out[127]: </span>
+<span class="go">        letter digit</span>
+<span class="go">  match             </span>
+<span class="go">0 0          a     3</span>
+<span class="go">1 0          b     3</span>
+<span class="go">2 0          c     2</span>
+
+<span class="gp">In [128]: </span><span class="n">extractall_result</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">"match"</span><span class="p">)</span>
+<span class="gh">Out[128]: </span>
+<span class="go">  letter digit</span>
+<span class="go">0      a     3</span>
+<span class="go">1      b     3</span>
+<span class="go">2      c     2</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Index</span></code> 也支持 <code class="docutils literal notranslate"><span class="pre">.str.extractall</span></code>。它返回一个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>，其结果与带有默认索引（从 0 开始）的 <code class="docutils literal notranslate"><span class="pre">Series.str.extractall</span></code> 相同。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [129]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s2">"a1a2"</span><span class="p">,</span> <span class="s2">"b1"</span><span class="p">,</span> <span class="s2">"c1"</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">two_groups</span><span class="p">)</span>
+<span class="gh">Out[129]: </span>
+<span class="go">        letter digit</span>
+<span class="go">  match             </span>
+<span class="go">0 0          a     1</span>
+<span class="go">  1          a     2</span>
+<span class="go">1 0          b     1</span>
+<span class="go">2 0          c     1</span>
+
+<span class="gp">In [130]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a1a2"</span><span class="p">,</span> <span class="s2">"b1"</span><span class="p">,</span> <span class="s2">"c1"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">two_groups</span><span class="p">)</span>
+<span class="gh">Out[130]: </span>
+<span class="go">        letter digit</span>
+<span class="go">  match             </span>
+<span class="go">0 0          a     1</span>
+<span class="go">  1          a     2</span>
+<span class="go">1 0          b     1</span>
+<span class="go">2 0          c     1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-for-strings-that-match-or-contain-a-pattern">
+<h2>测试匹配或包含模式的字符串<a class="headerlink" href="text.html#testing-for-strings-that-match-or-contain-a-pattern" title="Link to this heading">#</a></h2>
+<p>你可以检查元素是否包含某个模式</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [131]: </span><span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"[0-9][a-z]"</span>
+
+<span class="gp">In [132]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"3a"</span><span class="p">,</span> <span class="s2">"3b"</span><span class="p">,</span> <span class="s2">"03c"</span><span class="p">,</span> <span class="s2">"4dx"</span><span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">,</span>
+<span class="gp">   .....: </span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+<span class="gp">   .....: </span>
+<span class="gh">Out[132]: </span>
+<span class="go">0    False</span>
+<span class="go">1    False</span>
+<span class="go">2     True</span>
+<span class="go">3     True</span>
+<span class="go">4     True</span>
+<span class="go">5     True</span>
+<span class="go">dtype: boolean</span>
+</pre></div>
+</div>
+<p>或者元素是否匹配某个模式</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [133]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"3a"</span><span class="p">,</span> <span class="s2">"3b"</span><span class="p">,</span> <span class="s2">"03c"</span><span class="p">,</span> <span class="s2">"4dx"</span><span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">,</span>
+<span class="gp">   .....: </span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+<span class="gp">   .....: </span>
+<span class="gh">Out[133]: </span>
+<span class="go">0    False</span>
+<span class="go">1    False</span>
+<span class="go">2     True</span>
+<span class="go">3     True</span>
+<span class="go">4    False</span>
+<span class="go">5     True</span>
+<span class="go">dtype: boolean</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [134]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"3a"</span><span class="p">,</span> <span class="s2">"3b"</span><span class="p">,</span> <span class="s2">"03c"</span><span class="p">,</span> <span class="s2">"4dx"</span><span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">,</span>
+<span class="gp">   .....: </span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+<span class="gp">   .....: </span>
+<span class="gh">Out[134]: </span>
+<span class="go">0    False</span>
+<span class="go">1    False</span>
+<span class="go">2     True</span>
+<span class="go">3     True</span>
+<span class="go">4    False</span>
+<span class="go">5    False</span>
+<span class="go">dtype: boolean</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><code class="docutils literal notranslate"><span class="pre">match</span></code>、<code class="docutils literal notranslate"><span class="pre">fullmatch</span></code> 和 <code class="docutils literal notranslate"><span class="pre">contains</span></code> 之间的区别在于严格性：<code class="docutils literal notranslate"><span class="pre">fullmatch</span></code> 测试整个字符串是否与正则表达式匹配；<code class="docutils literal notranslate"><span class="pre">match</span></code> 测试正则表达式的匹配项是否从字符串的第一个字符开始；而 <code class="docutils literal notranslate"><span class="pre">contains</span></code> 测试字符串中任何位置是否存在正则表达式的匹配项。</p>
+<p>这三种匹配模式在 <code class="docutils literal notranslate"><span class="pre">re</span></code> 包中对应的函数分别是 <a class="reference external" href="https://docs.pythonlang.cn/3/library/re.html#re.fullmatch">re.fullmatch</a>、<a class="reference external" href="https://docs.pythonlang.cn/3/library/re.html#re.match">re.match</a> 和 <a class="reference external" href="https://docs.pythonlang.cn/3/library/re.html#re.search">re.search</a>。</p>
+</div>
+<p>像 <code class="docutils literal notranslate"><span class="pre">match</span></code>、<code class="docutils literal notranslate"><span class="pre">fullmatch</span></code>、<code class="docutils literal notranslate"><span class="pre">contains</span></code>、<code class="docutils literal notranslate"><span class="pre">startswith</span></code> 和 <code class="docutils literal notranslate"><span class="pre">endswith</span></code> 等方法接受额外的 <code class="docutils literal notranslate"><span class="pre">na</span></code> 参数，以便可以将缺失值视为 True 或 False</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [135]: </span><span class="n">s4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"Aaba"</span><span class="p">,</span> <span class="s2">"Baca"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"CABA"</span><span class="p">,</span> <span class="s2">"dog"</span><span class="p">,</span> <span class="s2">"cat"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [136]: </span><span class="n">s4</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gh">Out[136]: </span>
+<span class="go">0     True</span>
+<span class="go">1    False</span>
+<span class="go">2    False</span>
+<span class="go">3     True</span>
+<span class="go">4    False</span>
+<span class="go">5    False</span>
+<span class="go">6     True</span>
+<span class="go">7    False</span>
+<span class="go">8    False</span>
+<span class="go">dtype: boolean</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-indicator-variables">
+<span id="text-indicator"></span><h2>创建指示变量<a class="headerlink" href="text.html#creating-indicator-variables" title="Link to this heading">#</a></h2>
+<p>你可以从字符串列中提取哑变量。例如，如果它们由 <code class="docutils literal notranslate"><span class="pre">'|'</span></code> 分隔</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [137]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"a|b"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"a|c"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="gp">In [138]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">"|"</span><span class="p">)</span>
+<span class="gh">Out[138]: </span>
+<span class="go">   a  b  c</span>
+<span class="go">0  1  0  0</span>
+<span class="go">1  1  1  0</span>
+<span class="go">2  0  0  0</span>
+<span class="go">3  1  0  1</span>
+</pre></div>
+</div>
+<p>字符串 <code class="docutils literal notranslate"><span class="pre">Index</span></code> 也支持 <code class="docutils literal notranslate"><span class="pre">get_dummies</span></code>，它返回一个 <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [139]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"a|b"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"a|c"</span><span class="p">])</span>
+
+<span class="gp">In [140]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">"|"</span><span class="p">)</span>
+<span class="gh">Out[140]: </span>
+<span class="go">MultiIndex([(1, 0, 0),</span>
+<span class="go">            (1, 1, 0),</span>
+<span class="go">            (0, 0, 0),</span>
+<span class="go">            (1, 0, 1)],</span>
+<span class="go">           names=['a', 'b', 'c'])</span>
+</pre></div>
+</div>
+<p>另请参阅 <a class="reference internal" href="../reference/api/pandas.get_dummies.html#pandas.get_dummies" title="pandas.get_dummies"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_dummies()</span></code></a>。</p>
+</section>
+<section id="method-summary">
+<h2>方法摘要<a class="headerlink" href="text.html#method-summary" title="Link to this heading">#</a></h2>
+<table class="table" id="text-summary">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>方法</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.cat.html#pandas.Series.str.cat" title="pandas.Series.str.cat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cat()</span></code></a></p></td>
+<td><p>连接字符串</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.split.html#pandas.Series.str.split" title="pandas.Series.str.split"><code class="xref py py-meth docutils literal notranslate"><span class="pre">split()</span></code></a></p></td>
+<td><p>按分隔符拆分字符串</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.rsplit.html#pandas.Series.str.rsplit" title="pandas.Series.str.rsplit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rsplit()</span></code></a></p></td>
+<td><p>从字符串末尾开始按分隔符拆分字符串</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.get.html#pandas.Series.str.get" title="pandas.Series.str.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a></p></td>
+<td><p>索引每个元素（检索第 i 个元素）</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.join.html#pandas.Series.str.join" title="pandas.Series.str.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a></p></td>
+<td><p>使用传入的分隔符连接 Series 中每个元素的字符串</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.get_dummies.html#pandas.Series.str.get_dummies" title="pandas.Series.str.get_dummies"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_dummies()</span></code></a></p></td>
+<td><p>按分隔符拆分字符串，返回哑变量的 DataFrame</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.contains.html#pandas.Series.str.contains" title="pandas.Series.str.contains"><code class="xref py py-meth docutils literal notranslate"><span class="pre">contains()</span></code></a></p></td>
+<td><p>如果每个字符串包含模式/正则表达式，则返回布尔数组</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.replace.html#pandas.Series.str.replace" title="pandas.Series.str.replace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">replace()</span></code></a></p></td>
+<td><p>用其他字符串或给定匹配项的可调用对象的返回值替换模式/正则表达式/字符串的出现</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.removeprefix.html#pandas.Series.str.removeprefix" title="pandas.Series.str.removeprefix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">removeprefix()</span></code></a></p></td>
+<td><p>从字符串中移除前缀，即只有当字符串以前缀开头时才移除。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.removesuffix.html#pandas.Series.str.removesuffix" title="pandas.Series.str.removesuffix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">removesuffix()</span></code></a></p></td>
+<td><p>从字符串中移除后缀，即只有当字符串以后缀结尾时才移除。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.repeat.html#pandas.Series.str.repeat" title="pandas.Series.str.repeat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">repeat()</span></code></a></p></td>
+<td><p>复制值（<code class="docutils literal notranslate"><span class="pre">s.str.repeat(3)</span></code> 等同于 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">3</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.pad.html#pandas.Series.str.pad" title="pandas.Series.str.pad"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pad()</span></code></a></p></td>
+<td><p>在字符串两侧添加空格</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.center.html#pandas.Series.str.center" title="pandas.Series.str.center"><code class="xref py py-meth docutils literal notranslate"><span class="pre">center()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.center</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.ljust.html#pandas.Series.str.ljust" title="pandas.Series.str.ljust"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ljust()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.ljust</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.rjust.html#pandas.Series.str.rjust" title="pandas.Series.str.rjust"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rjust()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.rjust</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.zfill.html#pandas.Series.str.zfill" title="pandas.Series.str.zfill"><code class="xref py py-meth docutils literal notranslate"><span class="pre">zfill()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.zfill</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.wrap.html#pandas.Series.str.wrap" title="pandas.Series.str.wrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wrap()</span></code></a></p></td>
+<td><p>将长字符串拆分为长度小于给定宽度的行</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.slice.html#pandas.Series.str.slice" title="pandas.Series.str.slice"><code class="xref py py-meth docutils literal notranslate"><span class="pre">slice()</span></code></a></p></td>
+<td><p>切片 Series 中的每个字符串</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.slice_replace.html#pandas.Series.str.slice_replace" title="pandas.Series.str.slice_replace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">slice_replace()</span></code></a></p></td>
+<td><p>用传入的值替换每个字符串中的切片</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.count.html#pandas.Series.str.count" title="pandas.Series.str.count"><code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code></a></p></td>
+<td><p>计算模式的出现次数</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.startswith.html#pandas.Series.str.startswith" title="pandas.Series.str.startswith"><code class="xref py py-meth docutils literal notranslate"><span class="pre">startswith()</span></code></a></p></td>
+<td><p>对于每个元素，等同于 <code class="docutils literal notranslate"><span class="pre">str.startswith(pat)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.endswith.html#pandas.Series.str.endswith" title="pandas.Series.str.endswith"><code class="xref py py-meth docutils literal notranslate"><span class="pre">endswith()</span></code></a></p></td>
+<td><p>对于每个元素，等同于 <code class="docutils literal notranslate"><span class="pre">str.endswith(pat)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.findall.html#pandas.Series.str.findall" title="pandas.Series.str.findall"><code class="xref py py-meth docutils literal notranslate"><span class="pre">findall()</span></code></a></p></td>
+<td><p>计算每个字符串中模式/正则表达式的所有出现列表</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.match.html#pandas.Series.str.match" title="pandas.Series.str.match"><code class="xref py py-meth docutils literal notranslate"><span class="pre">match()</span></code></a></p></td>
+<td><p>对每个元素调用 <code class="docutils literal notranslate"><span class="pre">re.match</span></code>，将匹配的组作为列表返回</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.extract.html#pandas.Series.str.extract" title="pandas.Series.str.extract"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract()</span></code></a></p></td>
+<td><p>对每个元素调用 <code class="docutils literal notranslate"><span class="pre">re.search</span></code>，返回一个 DataFrame，其中每行对应一个元素，每列对应一个正则表达式捕获组</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.extractall.html#pandas.Series.str.extractall" title="pandas.Series.str.extractall"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extractall()</span></code></a></p></td>
+<td><p>对每个元素调用 <code class="docutils literal notranslate"><span class="pre">re.findall</span></code>，返回一个 DataFrame，其中每行对应一个匹配项，每列对应一个正则表达式捕获组</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.len.html#pandas.Series.str.len" title="pandas.Series.str.len"><code class="xref py py-meth docutils literal notranslate"><span class="pre">len()</span></code></a></p></td>
+<td><p>计算字符串长度</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.strip.html#pandas.Series.str.strip" title="pandas.Series.str.strip"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.strip</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.rstrip.html#pandas.Series.str.rstrip" title="pandas.Series.str.rstrip"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rstrip()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.rstrip</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.lstrip.html#pandas.Series.str.lstrip" title="pandas.Series.str.lstrip"><code class="xref py py-meth docutils literal notranslate"><span class="pre">lstrip()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.lstrip</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.partition.html#pandas.Series.str.partition" title="pandas.Series.str.partition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">partition()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.partition</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.rpartition.html#pandas.Series.str.rpartition" title="pandas.Series.str.rpartition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rpartition()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.rpartition</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.lower.html#pandas.Series.str.lower" title="pandas.Series.str.lower"><code class="xref py py-meth docutils literal notranslate"><span class="pre">lower()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.lower</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.casefold.html#pandas.Series.str.casefold" title="pandas.Series.str.casefold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">casefold()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.casefold</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.upper.html#pandas.Series.str.upper" title="pandas.Series.str.upper"><code class="xref py py-meth docutils literal notranslate"><span class="pre">upper()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.upper</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.find.html#pandas.Series.str.find" title="pandas.Series.str.find"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.find</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.rfind.html#pandas.Series.str.rfind" title="pandas.Series.str.rfind"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rfind()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.rfind</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.index.html#pandas.Series.str.index" title="pandas.Series.str.index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">index()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.index</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.rindex.html#pandas.Series.str.rindex" title="pandas.Series.str.rindex"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rindex()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.rindex</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.capitalize.html#pandas.Series.str.capitalize" title="pandas.Series.str.capitalize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">capitalize()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.capitalize</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.swapcase.html#pandas.Series.str.swapcase" title="pandas.Series.str.swapcase"><code class="xref py py-meth docutils literal notranslate"><span class="pre">swapcase()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.swapcase</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.normalize.html#pandas.Series.str.normalize" title="pandas.Series.str.normalize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">normalize()</span></code></a></p></td>
+<td><p>返回 Unicode 规范化形式。等同于 <code class="docutils literal notranslate"><span class="pre">unicodedata.normalize</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.translate.html#pandas.Series.str.translate" title="pandas.Series.str.translate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">translate()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.translate</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.isalnum.html#pandas.Series.str.isalnum" title="pandas.Series.str.isalnum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isalnum()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.isalnum</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.isalpha.html#pandas.Series.str.isalpha" title="pandas.Series.str.isalpha"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isalpha()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.isalpha</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.isdigit.html#pandas.Series.str.isdigit" title="pandas.Series.str.isdigit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isdigit()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.isdigit</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.isspace.html#pandas.Series.str.isspace" title="pandas.Series.str.isspace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isspace()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.isspace</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.islower.html#pandas.Series.str.islower" title="pandas.Series.str.islower"><code class="xref py py-meth docutils literal notranslate"><span class="pre">islower()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.islower</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.isupper.html#pandas.Series.str.isupper" title="pandas.Series.str.isupper"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isupper()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.isupper</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.istitle.html#pandas.Series.str.istitle" title="pandas.Series.str.istitle"><code class="xref py py-meth docutils literal notranslate"><span class="pre">istitle()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.istitle</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.isnumeric.html#pandas.Series.str.isnumeric" title="pandas.Series.str.isnumeric"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isnumeric()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.isnumeric</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../reference/api/pandas.Series.str.isdecimal.html#pandas.Series.str.isdecimal" title="pandas.Series.str.isdecimal"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isdecimal()</span></code></a></p></td>
+<td><p>等同于 <code class="docutils literal notranslate"><span class="pre">str.isdecimal</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="reshaping.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">重塑和透视表</p> </div> </a> <a class="right-next" href="missing_data.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">处理缺失数据</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#text-data-types">文本数据类型</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#behavior-differences">行为差异</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#string-methods">字符串方法</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#splitting-and-replacing-strings">拆分和替换字符串</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#concatenation">连接</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#concatenating-a-single-series-into-a-string">将单个 Series 连接成字符串</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#concatenating-a-series-and-something-list-like-into-a-series">将 Series 和列表状对象连接成 Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#concatenating-a-series-and-something-array-like-into-a-series">将 Series 和数组状对象连接成 Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#concatenating-a-series-and-an-indexed-object-into-a-series-with-alignment">将 Series 和带索引对象连接成 Series，并对齐</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#concatenating-a-series-and-many-objects-into-a-series">将 Series 和多个对象连接成 Series</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#indexing-with-str">使用 <code class="docutils literal notranslate"><span class="pre">.str</span></code> 进行索引</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#extracting-substrings">提取子字符串</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#extract-first-match-in-each-subject-extract">提取每个主题中的第一个匹配项 (extract)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#extract-all-matches-in-each-subject-extractall">提取每个主题中的所有匹配项 (extractall)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#testing-for-strings-that-match-or-contain-a-pattern">测试匹配或包含模式的字符串</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#creating-indicator-variables">创建指示变量</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="text.html#method-summary">方法摘要</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/text.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源代码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas，通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

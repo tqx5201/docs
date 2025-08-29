@@ -1,0 +1,893 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>如何重塑表格布局 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/intro_tutorials/07_reshape_table_layout';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to combine data from multiple tables" href="08_combine_dataframes.html" />
+    <link rel="prev" title="How to calculate summary statistics" href="06_calculate_statistics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="07_reshape_table_layout.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 回到顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">开始入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">开始入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包概览</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">入门教程</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_table_oriented.html">pandas 能处理哪些类型的数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_add_columns.html">如何从现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_calculate_statistics.html">如何计算汇总统计信息</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="07_reshape_table_layout.html#">如何重塑表格布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_combine_dataframes.html">如何合并来自多个表格的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_text_data.html">如何处理文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../comparison/index.html">与其他工具的比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_r.html">与 R / R 库的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sql.html">与 SQL 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_spreadsheets.html">与电子表格的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sas.html">与 SAS 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_stata.html">与 Stata 的比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">开始入门</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">入门教程</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">如何...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="highlight-ipython notranslate" id="min-tut-07-reshape"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header gs-data-header">
+        <div class="gs-data-title">本教程使用的数据</div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item gs-data-list"><div data-bs-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+    <span class="badge bg-secondary">泰坦尼克号数据</span>
+</div>
+<div class="collapse" id="collapsedata">
+    <div class="card-body">
+        <p class="card-text"></p><p>本教程使用泰坦尼克号数据集，该数据集以 CSV 格式存储。数据包含以下数据列：</p>
+<ul class="simple">
+<li><p>PassengerId: 每位乘客的 ID。</p></li>
+<li><p>Survived: 表明乘客是否幸存。 <code class="docutils literal notranslate"><span class="pre">0</span></code> 表示是，<code class="docutils literal notranslate"><span class="pre">1</span></code> 表示否。</p></li>
+<li><p>Pclass: 3 种船票等级之一：<code class="docutils literal notranslate"><span class="pre">1</span></code> 等舱，<code class="docutils literal notranslate"><span class="pre">2</span></code> 等舱和 <code class="docutils literal notranslate"><span class="pre">3</span></code> 等舱。</p></li>
+<li><p>Name: 乘客姓名。</p></li>
+<li><p>Sex: 乘客性别。</p></li>
+<li><p>Age: 乘客年龄（以年为单位）。</p></li>
+<li><p>SibSp: 船上兄弟姐妹或配偶的数量。</p></li>
+<li><p>Parch: 船上父母或子女的数量。</p></li>
+<li><p>Ticket: 乘客票号。</p></li>
+<li><p>Fare: 票价。</p></li>
+<li><p>Cabin: 乘客客舱号。</p></li>
+<li><p>Embarked: 登船港口。</p></li>
+</ul>
+        <p></p>
+        <a href="https://github.com/pandas-dev/pandas/raw/main/doc/data/titanic.csv" class="btn btn-dark btn-sm">前往原始数据</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/titanic.csv"</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[3]: </span>
+<span class="go">   PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked</span>
+<span class="go">0            1         0       3  ...   7.2500   NaN         S</span>
+<span class="go">1            2         1       1  ...  71.2833   C85         C</span>
+<span class="go">2            3         1       3  ...   7.9250   NaN         S</span>
+<span class="go">3            4         1       1  ...  53.1000  C123         S</span>
+<span class="go">4            5         0       3  ...   8.0500   NaN         S</span>
+
+<span class="go">[5 rows x 12 columns]</span>
+</pre></div>
+</div>
+</li>
+<li class="list-group-item gs-data-list">
+    <div data-bs-toggle="collapse" href="#collapsedata2" role="button" aria-expanded="false" aria-controls="collapsedata2">
+        <span class="badge bg-secondary">空气质量数据</span>
+    </div>
+    <div class="collapse" id="collapsedata2">
+        <div class="card-body">
+            <p class="card-text"></p><p>本教程使用关于 <span class="math notranslate nohighlight">\(NO_2\)</span> 和小于 2.5 微米颗粒物的空气质量数据，这些数据由 <a class="reference external" href="https://openaq.org">OpenAQ</a> 提供并使用 <a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> 包。 <code class="docutils literal notranslate"><span class="pre">air_quality_long.csv</span></code> 数据集分别提供了巴黎、安特卫普和伦敦测量站 <em>FR04014</em>、<em>BETR801</em> 和 <em>London Westminster</em> 的 <span class="math notranslate nohighlight">\(NO_2\)</span> 和 <span class="math notranslate nohighlight">\(PM_{25}\)</span> 值。</p>
+<p>空气质量数据集包含以下列：</p>
+<ul class="simple">
+<li><p>city: 传感器所在的城市，可以是巴黎、安特卫普或伦敦</p></li>
+<li><p>country: 传感器所在的国家，可以是法国 (FR)、比利时 (BE) 或英国 (GB)</p></li>
+<li><p>location: 传感器的 ID，可以是 <em>FR04014</em>、<em>BETR801</em> 或 <em>London Westminster</em></p></li>
+<li><p>parameter: 传感器测量的参数，可以是 <span class="math notranslate nohighlight">\(NO_2\)</span> 或颗粒物</p></li>
+<li><p>value: 测量值</p></li>
+<li><p>unit: 测量参数的单位，本例中为“µg/m³”</p></li>
+</ul>
+<p>并且 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的索引是 <code class="docutils literal notranslate"><span class="pre">datetime</span></code>，即测量的日期时间。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>空气质量数据以所谓的<em>长格式</em>数据表示形式提供，其中每个观测值占据一个单独的行，每个变量占据数据表的一个单独的列。长/窄格式也称为<a class="reference external" href="https://www.jstatsoft.org/article/view/v059i10">整洁数据格式</a>。</p>
+</div>
+            <p></p>
+        <a href="https://github.com/pandas-dev/pandas/tree/main/doc/data/air_quality_long.csv" class="btn btn-dark btn-sm">前往原始数据</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="s2">"data/air_quality_long.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">"date.utc"</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">   ...: </span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [5]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[5]: </span>
+<span class="go">                                city country location parameter  value   unit</span>
+<span class="go">date.utc                                                                     </span>
+<span class="go">2019-06-18 06:00:00+00:00  Antwerpen      BE  BETR801      pm25   18.0  µg/m³</span>
+<span class="go">2019-06-17 08:00:00+00:00  Antwerpen      BE  BETR801      pm25    6.5  µg/m³</span>
+<span class="go">2019-06-17 07:00:00+00:00  Antwerpen      BE  BETR801      pm25   18.5  µg/m³</span>
+<span class="go">2019-06-17 06:00:00+00:00  Antwerpen      BE  BETR801      pm25   16.0  µg/m³</span>
+<span class="go">2019-06-17 05:00:00+00:00  Antwerpen      BE  BETR801      pm25    7.5  µg/m³</span>
+</pre></div>
+</div>
+        </li>
+    </ul>
+</div><section id="how-to-reshape-the-layout-of-tables">
+<h1>如何重塑表格布局<a class="headerlink" href="07_reshape_table_layout.html#how-to-reshape-the-layout-of-tables" title="Link to this heading">#</a></h1>
+<section id="sort-table-rows">
+<h2>排序表格行<a class="headerlink" href="07_reshape_table_layout.html#sort-table-rows" title="Link to this heading">#</a></h2>
+<ul class="task-bullet">
+    <li><p>我想根据乘客的年龄对泰坦尼克号数据进行排序。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"Age"</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[6]: </span>
+<span class="go">     PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked</span>
+<span class="go">803          804         1       3  ...   8.5167   NaN         C</span>
+<span class="go">755          756         1       2  ...  14.5000   NaN         S</span>
+<span class="go">644          645         1       3  ...  19.2583   NaN         C</span>
+<span class="go">469          470         1       3  ...  19.2583   NaN         C</span>
+<span class="go">78            79         1       2  ...  29.0000   NaN         S</span>
+
+<span class="go">[5 rows x 12 columns]</span>
+</pre></div>
+</div>
+    </li>
+</ul><ul class="task-bullet">
+    <li><p>我想根据客舱等级和年龄以降序排列泰坦尼克号数据。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">'Pclass'</span><span class="p">,</span> <span class="s1">'Age'</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[7]: </span>
+<span class="go">     PassengerId  Survived  Pclass  ...    Fare Cabin  Embarked</span>
+<span class="go">851          852         0       3  ...  7.7750   NaN         S</span>
+<span class="go">116          117         0       3  ...  7.7500   NaN         Q</span>
+<span class="go">280          281         0       3  ...  7.7500   NaN         Q</span>
+<span class="go">483          484         1       3  ...  9.5875   NaN         S</span>
+<span class="go">326          327         0       3  ...  6.2375   NaN         S</span>
+
+<span class="go">[5 rows x 12 columns]</span>
+</pre></div>
+</div>
+<p>使用 <a class="reference internal" href="../../reference/api/pandas.DataFrame.sort_values.html#pandas.DataFrame.sort_values" title="pandas.DataFrame.sort_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.sort_values()</span></code></a>，表格中的行会根据定义的列进行排序。索引将跟随行的顺序。</p>
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">前往用户指南</span><p>有关表格排序的更多详细信息，请参阅用户指南的<a class="reference internal" href="../../user_guide/basics.html#basics-sorting"><span class="std std-ref">数据排序</span></a>部分。</p>
+</div></section>
+<section id="long-to-wide-table-format">
+<h2>长格式到宽格式表<a class="headerlink" href="07_reshape_table_layout.html#long-to-wide-table-format" title="Link to this heading">#</a></h2>
+<p>让我们使用空气质量数据集的一个小 F子集。我们关注 <span class="math notranslate nohighlight">\(NO_2\)</span> 数据，并且只使用每个位置的前两次测量（即每个组的头部）。这个数据子集将被称为 <code class="docutils literal notranslate"><span class="pre">no2_subset</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># filter for no2 data only</span>
+<span class="gp">In [8]: </span><span class="n">no2</span> <span class="o">=</span> <span class="n">air_quality</span><span class="p">[</span><span class="n">air_quality</span><span class="p">[</span><span class="s2">"parameter"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"no2"</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># use 2 measurements (head) for each location (groupby)</span>
+<span class="gp">In [9]: </span><span class="n">no2_subset</span> <span class="o">=</span> <span class="n">no2</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"location"</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [10]: </span><span class="n">no2_subset</span>
+<span class="gh">Out[10]: </span>
+<span class="go">                                city country  ... value   unit</span>
+<span class="go">date.utc                                      ...             </span>
+<span class="go">2019-04-09 01:00:00+00:00  Antwerpen      BE  ...  22.5  µg/m³</span>
+<span class="go">2019-04-09 01:00:00+00:00      Paris      FR  ...  24.4  µg/m³</span>
+<span class="go">2019-04-09 02:00:00+00:00     London      GB  ...  67.0  µg/m³</span>
+<span class="go">2019-04-09 02:00:00+00:00  Antwerpen      BE  ...  53.5  µg/m³</span>
+<span class="go">2019-04-09 02:00:00+00:00      Paris      FR  ...  27.4  µg/m³</span>
+<span class="go">2019-04-09 03:00:00+00:00     London      GB  ...  67.0  µg/m³</span>
+
+<span class="go">[6 rows x 6 columns]</span>
+</pre></div>
+</div>
+<img alt="../../_images/07_pivot.svg" class="align-center" src="../../_images/07_pivot.svg">
+<ul class="task-bullet">
+    <li><p>我希望将三个测量站的值作为单独的列并排显示。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">no2_subset</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"location"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"value"</span><span class="p">)</span>
+<span class="gh">Out[11]: </span>
+<span class="go">location                   BETR801  FR04014  London Westminster</span>
+<span class="go">date.utc                                                       </span>
+<span class="go">2019-04-09 01:00:00+00:00     22.5     24.4                 NaN</span>
+<span class="go">2019-04-09 02:00:00+00:00     53.5     27.4                67.0</span>
+<span class="go">2019-04-09 03:00:00+00:00      NaN      NaN                67.0</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../reference/api/pandas.pivot.html#pandas.pivot" title="pandas.pivot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot()</span></code></a> 函数纯粹是对数据进行重塑：每个索引/列组合都需要一个单一的值。</p>
+    </li>
+</ul><p>由于 pandas 原生支持多列绘图（参见<a class="reference internal" href="04_plotting.html#min-tut-04-plotting"><span class="std std-ref">绘图教程</span></a>），因此从<em>长格式</em>到<em>宽格式</em>的表格转换使得可以同时绘制不同的时间序列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">no2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[12]: </span>
+<span class="go">                            city country location parameter  value   unit</span>
+<span class="go">date.utc                                                                 </span>
+<span class="go">2019-06-21 00:00:00+00:00  Paris      FR  FR04014       no2   20.0  µg/m³</span>
+<span class="go">2019-06-20 23:00:00+00:00  Paris      FR  FR04014       no2   21.8  µg/m³</span>
+<span class="go">2019-06-20 22:00:00+00:00  Paris      FR  FR04014       no2   26.5  µg/m³</span>
+<span class="go">2019-06-20 21:00:00+00:00  Paris      FR  FR04014       no2   24.9  µg/m³</span>
+<span class="go">2019-06-20 20:00:00+00:00  Paris      FR  FR04014       no2   21.4  µg/m³</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">no2</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"location"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="gh">Out[13]: </span><span class="go">&lt;Axes: xlabel='date.utc'&gt;</span>
+</pre></div>
+</div>
+<img alt="../../_images/7_reshape_columns.png" src="../../_images/7_reshape_columns.png">
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果未定义 <code class="docutils literal notranslate"><span class="pre">index</span></code> 参数，则使用现有索引（行标签）。</p>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">前往用户指南</span><p>有关 <a class="reference internal" href="../../reference/api/pandas.DataFrame.pivot.html#pandas.DataFrame.pivot" title="pandas.DataFrame.pivot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot()</span></code></a> 的更多信息，请参阅用户指南中关于<a class="reference internal" href="../../user_guide/reshaping.html#reshaping-reshaping"><span class="std std-ref">透视 DataFrame 对象</span></a>的部分。</p>
+</div></section>
+<section id="pivot-table">
+<h2>数据透视表<a class="headerlink" href="07_reshape_table_layout.html#pivot-table" title="Link to this heading">#</a></h2>
+<img alt="../../_images/07_pivot_table.svg" class="align-center" src="../../_images/07_pivot_table.svg">
+<ul class="task-bullet">
+    <li><p>我希望以表格形式显示每个测量站的 <span class="math notranslate nohighlight">\(NO_2\)</span> 和 <span class="math notranslate nohighlight">\(PM_{2.5}\)</span> 平均浓度。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">values</span><span class="o">=</span><span class="s2">"value"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">"location"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"parameter"</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">"mean"</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[14]: </span>
+<span class="go">parameter                 no2       pm25</span>
+<span class="go">location                                </span>
+<span class="go">BETR801             26.950920  23.169492</span>
+<span class="go">FR04014             29.374284        NaN</span>
+<span class="go">London Westminster  29.740050  13.443568</span>
+</pre></div>
+</div>
+<p>对于 <a class="reference internal" href="../../reference/api/pandas.DataFrame.pivot.html#pandas.DataFrame.pivot" title="pandas.DataFrame.pivot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot()</span></code></a>，数据只是被重新排列。当需要聚合多个值时（在本例中，是不同时间步长的值），可以使用 <a class="reference internal" href="../../reference/api/pandas.DataFrame.pivot_table.html#pandas.DataFrame.pivot_table" title="pandas.DataFrame.pivot_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot_table()</span></code></a>，它提供一个聚合函数（例如平均值）来组合这些值。</p>
+    </li>
+</ul><p>数据透视表是电子表格软件中一个众所周知的概念。当您对每个变量的行/列边距（小计）感兴趣时，请将 <code class="docutils literal notranslate"><span class="pre">margins</span></code> 参数设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">values</span><span class="o">=</span><span class="s2">"value"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="n">index</span><span class="o">=</span><span class="s2">"location"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="n">columns</span><span class="o">=</span><span class="s2">"parameter"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="n">aggfunc</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[15]: </span>
+<span class="go">parameter                 no2       pm25        All</span>
+<span class="go">location                                           </span>
+<span class="go">BETR801             26.950920  23.169492  24.982353</span>
+<span class="go">FR04014             29.374284        NaN  29.374284</span>
+<span class="go">London Westminster  29.740050  13.443568  21.491708</span>
+<span class="go">All                 29.430316  14.386849  24.222743</span>
+</pre></div>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">前往用户指南</span><p>有关 <a class="reference internal" href="../../reference/api/pandas.DataFrame.pivot_table.html#pandas.DataFrame.pivot_table" title="pandas.DataFrame.pivot_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot_table()</span></code></a> 的更多信息，请参阅用户指南中关于<a class="reference internal" href="../../user_guide/reshaping.html#reshaping-pivot"><span class="std std-ref">数据透视表</span></a>的部分。</p>
+</div><div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果您想知道，<a class="reference internal" href="../../reference/api/pandas.DataFrame.pivot_table.html#pandas.DataFrame.pivot_table" title="pandas.DataFrame.pivot_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot_table()</span></code></a> 确实与 <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> 直接相关。通过同时对 <code class="docutils literal notranslate"><span class="pre">parameter</span></code> 和 <code class="docutils literal notranslate"><span class="pre">location</span></code> 进行分组，可以得到相同的结果。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">air_quality</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"parameter"</span><span class="p">,</span> <span class="s2">"location"</span><span class="p">])[[</span><span class="s2">"value"</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">前往用户指南</span></div></section>
+<section id="wide-to-long-format">
+<h2>宽格式到长格式<a class="headerlink" href="07_reshape_table_layout.html#wide-to-long-format" title="Link to this heading">#</a></h2>
+<p>从上一节创建的宽格式表开始，我们使用 <a class="reference internal" href="../../reference/api/pandas.DataFrame.reset_index.html#pandas.DataFrame.reset_index" title="pandas.DataFrame.reset_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset_index()</span></code></a> 为 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 添加一个新的索引。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">no2_pivoted</span> <span class="o">=</span> <span class="n">no2</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">"location"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="gp">In [17]: </span><span class="n">no2_pivoted</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[17]: </span>
+<span class="go">location                  date.utc  BETR801  FR04014  London Westminster</span>
+<span class="go">0        2019-04-09 01:00:00+00:00     22.5     24.4                 NaN</span>
+<span class="go">1        2019-04-09 02:00:00+00:00     53.5     27.4                67.0</span>
+<span class="go">2        2019-04-09 03:00:00+00:00     54.5     34.2                67.0</span>
+<span class="go">3        2019-04-09 04:00:00+00:00     34.5     48.5                41.0</span>
+<span class="go">4        2019-04-09 05:00:00+00:00     46.5     59.5                41.0</span>
+</pre></div>
+</div>
+<img alt="../../_images/07_melt.svg" class="align-center" src="../../_images/07_melt.svg">
+<ul class="task-bullet">
+    <li><p>我想将所有空气质量 <span class="math notranslate nohighlight">\(NO_2\)</span> 测量值收集到一个单独的列中（长格式）。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">no_2</span> <span class="o">=</span> <span class="n">no2_pivoted</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s2">"date.utc"</span><span class="p">)</span>
+
+<span class="gp">In [19]: </span><span class="n">no_2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[19]: </span>
+<span class="go">                   date.utc location  value</span>
+<span class="go">0 2019-04-09 01:00:00+00:00  BETR801   22.5</span>
+<span class="go">1 2019-04-09 02:00:00+00:00  BETR801   53.5</span>
+<span class="go">2 2019-04-09 03:00:00+00:00  BETR801   54.5</span>
+<span class="go">3 2019-04-09 04:00:00+00:00  BETR801   34.5</span>
+<span class="go">4 2019-04-09 05:00:00+00:00  BETR801   46.5</span>
+</pre></div>
+</div>
+<p>在 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 上使用 <a class="reference internal" href="../../reference/api/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.melt()</span></code></a> 方法可以将数据表从宽格式转换为长格式。列标题会成为新创建列中的变量名。</p>
+    </li>
+</ul><p>这个解决方案是应用 <a class="reference internal" href="../../reference/api/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.melt()</span></code></a> 的简短版本。该方法将把所有未在 <code class="docutils literal notranslate"><span class="pre">id_vars</span></code> 中提及的列“熔化”成两列：一列包含列标题名称，另一列包含值本身。后一列默认名为 <code class="docutils literal notranslate"><span class="pre">value</span></code>。</p>
+<p>传递给 <a class="reference internal" href="../../reference/api/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.melt()</span></code></a> 的参数可以更详细地定义：</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">no_2</span> <span class="o">=</span> <span class="n">no2_pivoted</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">id_vars</span><span class="o">=</span><span class="s2">"date.utc"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">"BETR801"</span><span class="p">,</span> <span class="s2">"FR04014"</span><span class="p">,</span> <span class="s2">"London Westminster"</span><span class="p">],</span>
+<span class="gp">   ....: </span>    <span class="n">value_name</span><span class="o">=</span><span class="s2">"NO_2"</span><span class="p">,</span>
+<span class="gp">   ....: </span>    <span class="n">var_name</span><span class="o">=</span><span class="s2">"id_location"</span><span class="p">,</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [21]: </span><span class="n">no_2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[21]: </span>
+<span class="go">                   date.utc id_location  NO_2</span>
+<span class="go">0 2019-04-09 01:00:00+00:00     BETR801  22.5</span>
+<span class="go">1 2019-04-09 02:00:00+00:00     BETR801  53.5</span>
+<span class="go">2 2019-04-09 03:00:00+00:00     BETR801  54.5</span>
+<span class="go">3 2019-04-09 04:00:00+00:00     BETR801  34.5</span>
+<span class="go">4 2019-04-09 05:00:00+00:00     BETR801  46.5</span>
+</pre></div>
+</div>
+<p>附加参数具有以下效果：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">value_vars</span></code> 定义要一起<em>熔化</em>的列</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value_name</span></code> 为值列提供自定义列名，而不是默认列名 <code class="docutils literal notranslate"><span class="pre">value</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">var_name</span></code> 为收集列标题名称的列提供自定义列名。否则，它将采用索引名称或默认的 <code class="docutils literal notranslate"><span class="pre">variable</span></code>。</p></li>
+</ul>
+<p>因此，参数 <code class="docutils literal notranslate"><span class="pre">value_name</span></code> 和 <code class="docutils literal notranslate"><span class="pre">var_name</span></code> 只是为生成的两列提供的用户定义名称。要熔化的列由 <code class="docutils literal notranslate"><span class="pre">id_vars</span></code> 和 <code class="docutils literal notranslate"><span class="pre">value_vars</span></code> 定义。</p>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">前往用户指南</span><p>使用 <a class="reference internal" href="../../reference/api/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.melt()</span></code></a> 从宽格式到长格式的转换在用户指南的<a class="reference internal" href="../../user_guide/reshaping.html#reshaping-melt"><span class="std std-ref">通过 melt 重塑</span></a>部分中进行了说明。</p>
+</div><div class="shadow gs-callout gs-callout-remember">
+    <h4>请记住</h4><ul class="simple">
+<li><p>通过 <code class="docutils literal notranslate"><span class="pre">sort_values</span></code> 支持按一列或多列排序。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pivot</span></code> 函数纯粹是对数据进行重构，而 <code class="docutils literal notranslate"><span class="pre">pivot_table</span></code> 支持聚合。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pivot</span></code>（长格式到宽格式）的反向操作是 <code class="docutils literal notranslate"><span class="pre">melt</span></code>（宽格式到长格式）。</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">前往用户指南</span><p>完整的概述可在用户指南的<a class="reference internal" href="../../user_guide/reshaping.html#reshaping"><span class="std std-ref">重塑与透视</span></a>页面中找到。</p>
+</div></section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="06_calculate_statistics.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">如何计算汇总统计信息</p> </div> </a> <a class="right-next" href="08_combine_dataframes.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">如何合并来自多个表格的数据</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="07_reshape_table_layout.html#sort-table-rows">排序表格行</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="07_reshape_table_layout.html#long-to-wide-table-format">长格式到宽格式表</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="07_reshape_table_layout.html#pivot-table">数据透视表</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="07_reshape_table_layout.html#wide-to-long-format">宽格式到长格式</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/intro_tutorials/07_reshape_table_layout.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025，pandas 通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">基于 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

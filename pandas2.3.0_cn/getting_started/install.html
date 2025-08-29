@@ -1,0 +1,1148 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>安装 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/install';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Package overview" href="overview.html" />
+    <link rel="prev" title="Getting started" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="install.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 回到顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="install.html#">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">包概览</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro_tutorials/index.html">入门教程</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/01_table_oriented.html">pandas 处理哪种类型的数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/05_add_columns.html">如何从现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/06_calculate_statistics.html">如何计算汇总统计量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/07_reshape_table_layout.html">如何重塑表的布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/08_combine_dataframes.html">如何合并多个表的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro_tutorials/10_text_data.html">如何操作文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="comparison/index.html">与其他工具的比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_r.html">与 R / R 库的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_sql.html">与 SQL 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_spreadsheets.html">与电子表格的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_sas.html">与 SAS 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison/comparison_with_stata.html">与 Stata 的比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">开始使用</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">安装</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="installation">
+<span id="install"></span><h1>安装<a class="headerlink" href="install.html#installation" title="Link to this heading">#</a></h1>
+<p>安装 pandas 最简单的方法是将其作为 <a class="reference external" href="https://docs.continuum.io/free/anaconda/">Anaconda</a> 发行版的一部分进行安装，这是一个用于数据分析和科学计算的跨平台发行版。<a class="reference external" href="https://docs.conda.org.cn/en/latest/">Conda</a> 包管理器是大多数用户推荐的安装方法。</p>
+<p>还提供了从 <a class="reference internal" href="install.html#install-source"><span class="std std-ref">源代码</span></a>、<a class="reference internal" href="install.html#install-pypi"><span class="std std-ref">PyPI</span></a> 或 <a class="reference internal" href="install.html#install-dev"><span class="std std-ref">开发版本</span></a> 安装的说明。</p>
+<section id="python-version-support">
+<span id="install-version"></span><h2>Python 版本支持<a class="headerlink" href="install.html#python-version-support" title="Link to this heading">#</a></h2>
+<p>官方支持 Python 3.9、3.10、3.11 和 3.12。</p>
+</section>
+<section id="installing-pandas">
+<h2>安装 pandas<a class="headerlink" href="install.html#installing-pandas" title="Link to this heading">#</a></h2>
+<section id="installing-with-anaconda">
+<span id="install-anaconda"></span><h3>使用 Anaconda 安装<a class="headerlink" href="install.html#installing-with-anaconda" title="Link to this heading">#</a></h3>
+<p>对于 Python 新手，安装 Python、pandas 以及组成 <a class="reference external" href="https://pydata.org/">PyData</a> 技术栈（<a class="reference external" href="https://scipy.org.cn/">SciPy</a>、<a class="reference external" href="https://numpy.com.cn/">NumPy</a>、<a class="reference external" href="https://matplotlib.net.cn/">Matplotlib</a> <a class="reference external" href="https://docs.continuum.io/free/anaconda/reference/packages/pkg-docs/">及更多</a>）最简单的方法是使用 <a class="reference external" href="https://docs.continuum.io/free/anaconda/">Anaconda</a>，这是一个用于数据分析和科学计算的跨平台（Linux、macOS、Windows）Python 发行版。Anaconda 的安装说明<a class="reference external" href="https://docs.continuum.io/free/anaconda/install/">可以在这里找到</a>。</p>
+</section>
+<section id="installing-with-miniconda">
+<span id="install-miniconda"></span><h3>使用 Miniconda 安装<a class="headerlink" href="install.html#installing-with-miniconda" title="Link to this heading">#</a></h3>
+<p>对于有 Python 使用经验的用户，推荐使用 <a class="reference external" href="https://docs.conda.org.cn/en/latest/miniconda.html">Miniconda</a> 安装 pandas。Miniconda 允许您创建比 Anaconda 更小、自包含的 Python 安装，并使用 <a class="reference external" href="https://docs.conda.org.cn/en/latest/">Conda</a> 包管理器来安装额外的包并为您的安装创建虚拟环境。Miniconda 的安装说明<a class="reference external" href="https://docs.conda.org.cn/en/latest/miniconda.html">可以在这里找到</a>。</p>
+<p>下一步是创建一个新的 conda 环境。conda 环境类似于 virtualenv，它允许您指定特定版本的 Python 和一组库。在终端窗口运行以下命令。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>-n<span class="w"> </span>name_of_my_env<span class="w"> </span>python<span class="w"> </span>pandas
+</pre></div>
+</div>
+<p>这将创建一个只安装了 Python 和 pandas 的最小环境。要进入此环境，请运行。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>name_of_my_env
+<span class="c1"># On Windows</span>
+activate<span class="w"> </span>name_of_my_env
+</pre></div>
+</div>
+</section>
+<section id="installing-from-pypi">
+<span id="install-pypi"></span><h3>从 PyPI 安装<a class="headerlink" href="install.html#installing-from-pypi" title="Link to this heading">#</a></h3>
+<p>可以通过 pip 从 <a class="reference external" href="https://pypi.ac.cn/project/pandas">PyPI</a> 安装 pandas。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pandas
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>您必须安装 <code class="docutils literal notranslate"><span class="pre">pip&gt;=19.3</span></code> 才能从 PyPI 安装。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>建议从虚拟环境安装和运行 pandas，例如使用 Python 标准库的 <a class="reference external" href="https://docs.pythonlang.cn/3/library/venv.html">venv</a></p>
+</div>
+<p>pandas 也可以安装带有可选依赖项的集合，以启用某些功能。例如，安装 pandas 时可以包含读取 Excel 文件的可选依赖项。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"pandas[excel]"</span>
+</pre></div>
+</div>
+<p>可以安装的完整额外功能列表可以在<a class="reference internal" href="install.html#install-optional-dependencies"><span class="std std-ref">依赖项部分</span></a>找到。</p>
+</section>
+<section id="handling-importerrors">
+<h3>处理 ImportError<a class="headerlink" href="install.html#handling-importerrors" title="Link to this heading">#</a></h3>
+<p>如果您遇到 <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>，这通常意味着 Python 无法在可用库列表中找到 pandas。Python 内部有一个搜索包的目录列表。您可以通过以下方式获取这些目录。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</pre></div>
+</div>
+<p>您遇到此错误的一种情况是，您的系统上有多个 Python 安装，而您当前使用的 Python 安装中没有安装 pandas。在 Linux/Mac 中，您可以在终端运行 <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">python</span></code>，它会告诉您正在使用哪个 Python 安装。如果它类似于“/usr/bin/python”，则表示您正在使用系统自带的 Python，这是不推荐的。</p>
+<p>强烈建议使用 <code class="docutils literal notranslate"><span class="pre">conda</span></code>，以便快速安装以及更新包和依赖项。您可以在<a class="reference internal" href="install.html#install-miniconda"><span class="std std-ref">此文档</span></a>中找到 pandas 的简单安装说明。</p>
+</section>
+<section id="installing-from-source">
+<span id="install-source"></span><h3>从源代码安装<a class="headerlink" href="install.html#installing-from-source" title="Link to this heading">#</a></h3>
+<p>有关从 git 源代码树构建的完整说明，请参阅<a class="reference internal" href="../development/contributing.html#contributing"><span class="std std-ref">贡献指南</span></a>。此外，如果您希望创建 pandas 开发环境，请参阅<a class="reference internal" href="../development/contributing_environment.html#contributing-environment"><span class="std std-ref">创建开发环境</span></a>。</p>
+</section>
+<section id="installing-the-development-version-of-pandas">
+<span id="install-dev"></span><h3>安装 pandas 开发版本<a class="headerlink" href="install.html#installing-the-development-version-of-pandas" title="Link to this heading">#</a></h3>
+<p>安装开发版本是以下最快捷的方式：</p>
+<ul class="simple">
+<li><p>试用将在下一版本中发布的新功能（即，最近合并到主分支的拉取请求中的功能）。</p></li>
+<li><p>检查自上次发布以来您遇到的错误是否已修复。</p></li>
+</ul>
+<p>开发版本通常每天从 anaconda.org 的 PyPI 注册表上传到 scientific-python-nightly-wheels 索引。您可以通过运行以下命令进行安装。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span>--extra-index<span class="w"> </span>https://pypi.anaconda.org/scientific-python-nightly-wheels/simple<span class="w"> </span>pandas
+</pre></div>
+</div>
+<p>请注意，您可能需要卸载现有版本的 pandas 才能安装开发版本。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>uninstall<span class="w"> </span>pandas<span class="w"> </span>-y
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-the-test-suite">
+<h2>运行测试套件<a class="headerlink" href="install.html#running-the-test-suite" title="Link to this heading">#</a></h2>
+<p>pandas 配备了一套详尽的单元测试。运行测试所需的包可以通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[test]"</span></code> 进行安装。要在 Python 终端运行测试。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+<span class="go">running: pytest -m "not slow and not network and not db" /home/user/anaconda3/lib/python3.9/site-packages/pandas</span>
+
+<span class="go">============================= test session starts ==============================</span>
+<span class="go">platform linux -- Python 3.9.7, pytest-6.2.5, py-1.11.0, pluggy-1.0.0</span>
+<span class="go">rootdir: /home/user</span>
+<span class="go">plugins: dash-1.19.0, anyio-3.5.0, hypothesis-6.29.3</span>
+<span class="go">collected 154975 items / 4 skipped / 154971 selected</span>
+<span class="go">........................................................................ [  0%]</span>
+<span class="go">........................................................................ [ 99%]</span>
+<span class="go">.......................................                                  [100%]</span>
+
+<span class="go">==================================== ERRORS ====================================</span>
+
+<span class="go">=================================== FAILURES ===================================</span>
+
+<span class="go">=============================== warnings summary ===============================</span>
+
+<span class="go">=========================== short test summary info ============================</span>
+
+<span class="go">= 1 failed, 146194 passed, 7402 skipped, 1367 xfailed, 5 xpassed, 197 warnings, 10 errors in 1090.16s (0:18:10) =</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>这只是显示信息的一个示例。测试失败不一定表明 pandas 安装损坏。</p>
+</div>
+</section>
+<section id="dependencies">
+<span id="install-dependencies"></span><h2>依赖项<a class="headerlink" href="install.html#dependencies" title="Link to this heading">#</a></h2>
+<section id="required-dependencies">
+<span id="install-required-dependencies"></span><h3>必需依赖项<a class="headerlink" href="install.html#required-dependencies" title="Link to this heading">#</a></h3>
+<p>pandas 需要以下依赖项。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>包</p></th>
+<th class="head"><p>最低支持版本</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://numpy.com.cn">NumPy</a></p></td>
+<td><p>1.22.4</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://dateutil.readthedocs.io/en/stable/">python-dateutil</a></p></td>
+<td><p>2.8.2</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://pypi.ac.cn/project/pytz/">pytz</a></p></td>
+<td><p>2020.1</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://pypi.ac.cn/project/tzdata/">tzdata</a></p></td>
+<td><p>2022.7</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="optional-dependencies">
+<span id="install-optional-dependencies"></span><h3>可选依赖项<a class="headerlink" href="install.html#optional-dependencies" title="Link to this heading">#</a></h3>
+<p>pandas 有许多可选依赖项，它们仅用于特定的方法。例如，<a class="reference internal" href="../reference/api/pandas.read_hdf.html#pandas.read_hdf" title="pandas.read_hdf"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_hdf()</span></code></a> 需要 <code class="docutils literal notranslate"><span class="pre">pytables</span></code> 包，而 <a class="reference internal" href="../reference/api/pandas.DataFrame.to_markdown.html#pandas.DataFrame.to_markdown" title="pandas.DataFrame.to_markdown"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_markdown()</span></code></a> 需要 <code class="docutils literal notranslate"><span class="pre">tabulate</span></code> 包。如果未安装可选依赖项，则在调用需要该依赖项的方法时，pandas 将引发 <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>。</p>
+<p>如果使用 pip，可以将可选的 pandas 依赖项作为可选附加项（例如 <code class="docutils literal notranslate"><span class="pre">pandas[performance,</span> <span class="pre">aws]</span></code>）安装或在文件中（例如 requirements.txt 或 pyproject.toml）进行管理。所有可选依赖项都可以通过 <code class="docutils literal notranslate"><span class="pre">pandas[all]</span></code> 进行安装，特定的依赖项集合列在以下部分中。</p>
+<section id="performance-dependencies-recommended">
+<span id="install-recommended-dependencies"></span><h4>性能依赖项（推荐）<a class="headerlink" href="install.html#performance-dependencies-recommended" title="Link to this heading">#</a></h4>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>强烈建议您安装这些库，因为它们能提供速度改进，尤其是在处理大型数据集时。</p>
+</div>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[performance]"</span></code> 安装</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/pydata/numexpr">numexpr</a></p></td>
+<td><p>2.8.4</p></td>
+<td><p>performance</p></td>
+<td><p>通过使用多核以及智能分块和缓存来加速某些数值运算，从而实现大幅提速</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/pydata/bottleneck">bottleneck</a></p></td>
+<td><p>1.3.6</p></td>
+<td><p>performance</p></td>
+<td><p>通过使用专门的 Cython 例程加速某些类型的 <code class="docutils literal notranslate"><span class="pre">nan</span></code>，从而实现大幅提速。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/numba/numba">numba</a></p></td>
+<td><p>0.56.4</p></td>
+<td><p>performance</p></td>
+<td><p>对于接受 <code class="docutils literal notranslate"><span class="pre">engine="numba"</span></code> 的操作，使用一个 JIT 编译器，该编译器通过 LLVM 编译器将 Python 函数转换为优化的机器代码，从而提供另一种执行引擎。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="visualization">
+<h4>可视化<a class="headerlink" href="install.html#visualization" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[plot,</span> <span class="pre">output-formatting]"</span></code> 安装。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>matplotlib</p></td>
+<td><p>3.6.3</p></td>
+<td><p>plot</p></td>
+<td><p>绘图库</p></td>
+</tr>
+<tr class="row-odd"><td><p>Jinja2</p></td>
+<td><p>3.1.2</p></td>
+<td><p>output-formatting</p></td>
+<td><p>使用 DataFrame.style 进行条件格式化</p></td>
+</tr>
+<tr class="row-even"><td><p>tabulate</p></td>
+<td><p>0.9.0</p></td>
+<td><p>output-formatting</p></td>
+<td><p>以 Markdown 友好格式打印（参见 <a class="reference external" href="https://github.com/astanin/python-tabulate">tabulate</a>）</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="computation">
+<h4>计算<a class="headerlink" href="install.html#computation" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[computation]"</span></code> 安装。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SciPy</p></td>
+<td><p>1.10.0</p></td>
+<td><p>computation</p></td>
+<td><p>各种统计函数</p></td>
+</tr>
+<tr class="row-odd"><td><p>xarray</p></td>
+<td><p>2022.12.0</p></td>
+<td><p>computation</p></td>
+<td><p>用于 N 维数据的类似 pandas 的 API</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="excel-files">
+<h4>Excel 文件<a class="headerlink" href="install.html#excel-files" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[excel]"</span></code> 安装。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>xlrd</p></td>
+<td><p>2.0.1</p></td>
+<td><p>excel</p></td>
+<td><p>读取 Excel</p></td>
+</tr>
+<tr class="row-odd"><td><p>xlsxwriter</p></td>
+<td><p>3.0.5</p></td>
+<td><p>excel</p></td>
+<td><p>写入 Excel</p></td>
+</tr>
+<tr class="row-even"><td><p>openpyxl</p></td>
+<td><p>3.1.0</p></td>
+<td><p>excel</p></td>
+<td><p>读取/写入 xlsx 文件</p></td>
+</tr>
+<tr class="row-odd"><td><p>pyxlsb</p></td>
+<td><p>1.0.10</p></td>
+<td><p>excel</p></td>
+<td><p>读取 xlsb 文件</p></td>
+</tr>
+<tr class="row-even"><td><p>python-calamine</p></td>
+<td><p>0.1.7</p></td>
+<td><p>excel</p></td>
+<td><p>读取 xls/xlsx/xlsb/ods 文件</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="html">
+<h4>HTML<a class="headerlink" href="install.html#html" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[html]"</span></code> 安装。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BeautifulSoup4</p></td>
+<td><p>4.11.2</p></td>
+<td><p>html</p></td>
+<td><p>用于 read_html 的 HTML 解析器</p></td>
+</tr>
+<tr class="row-odd"><td><p>html5lib</p></td>
+<td><p>1.1</p></td>
+<td><p>html</p></td>
+<td><p>用于 read_html 的 HTML 解析器</p></td>
+</tr>
+<tr class="row-even"><td><p>lxml</p></td>
+<td><p>4.9.2</p></td>
+<td><p>html</p></td>
+<td><p>用于 read_html 的 HTML 解析器</p></td>
+</tr>
+</tbody>
+</table>
+<p>要使用顶层函数 <a class="reference internal" href="../reference/api/pandas.read_html.html#pandas.read_html" title="pandas.read_html"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_html()</span></code></a>，需要以下库组合之一：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> 和 <a class="reference external" href="https://github.com/html5lib/html5lib-python">html5lib</a></p></li>
+<li><p><a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> 和 <a class="reference external" href="https://lxml.de">lxml</a></p></li>
+<li><p><a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> 和 <a class="reference external" href="https://github.com/html5lib/html5lib-python">html5lib</a> 和 <a class="reference external" href="https://lxml.de">lxml</a></p></li>
+<li><p>只有 <a class="reference external" href="https://lxml.de">lxml</a>，但请参阅<a class="reference internal" href="../user_guide/io.html#io-html-gotchas"><span class="std std-ref">HTML 表格解析注意事项</span></a>了解为何您可能<strong>不</strong>应采用此方法的原因。</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<ul class="simple">
+<li><p>如果您安装 <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a>，则必须安装 <a class="reference external" href="https://lxml.de">lxml</a> 或 <a class="reference external" href="https://github.com/html5lib/html5lib-python">html5lib</a>，或两者都安装。<a class="reference internal" href="../reference/api/pandas.read_html.html#pandas.read_html" title="pandas.read_html"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_html()</span></code></a> 将在<em>仅</em>安装 <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> 时<strong>不</strong>起作用。</p></li>
+<li><p>强烈建议您阅读<a class="reference internal" href="../user_guide/io.html#io-html-gotchas"><span class="std std-ref">HTML 表格解析注意事项</span></a>。它解释了围绕上述三个库的安装和使用问题。</p></li>
+</ul>
+</div>
+</section>
+<section id="xml">
+<h4>XML<a class="headerlink" href="install.html#xml" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[xml]"</span></code> 安装。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>lxml</p></td>
+<td><p>4.9.2</p></td>
+<td><p>xml</p></td>
+<td><p>用于 read_xml 的 XML 解析器和用于 to_xml 的树构建器</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sql-databases">
+<h4>SQL 数据库<a class="headerlink" href="install.html#sql-databases" title="Link to this heading">#</a></h4>
+<p>传统驱动程序可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[postgresql,</span> <span class="pre">mysql,</span> <span class="pre">sql-other]"</span></code> 安装</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SQLAlchemy</p></td>
+<td><p>2.0.0</p></td>
+<td><p>postgresql, mysql, sql-other</p></td>
+<td><p>除 sqlite 外其他数据库的 SQL 支持</p></td>
+</tr>
+<tr class="row-odd"><td><p>psycopg2</p></td>
+<td><p>2.9.6</p></td>
+<td><p>postgresql</p></td>
+<td><p>用于 SQLAlchemy 的 PostgreSQL 引擎</p></td>
+</tr>
+<tr class="row-even"><td><p>pymysql</p></td>
+<td><p>1.0.2</p></td>
+<td><p>mysql</p></td>
+<td><p>用于 SQLAlchemy 的 MySQL 引擎</p></td>
+</tr>
+<tr class="row-odd"><td><p>adbc-driver-postgresql</p></td>
+<td><p>0.8.0</p></td>
+<td><p>postgresql</p></td>
+<td><p>用于 PostgreSQL 的 ADBC 驱动程序</p></td>
+</tr>
+<tr class="row-even"><td><p>adbc-driver-sqlite</p></td>
+<td><p>0.8.0</p></td>
+<td><p>sql-other</p></td>
+<td><p>用于 SQLite 的 ADBC 驱动程序</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="other-data-sources">
+<h4>其他数据源<a class="headerlink" href="install.html#other-data-sources" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[hdf5,</span> <span class="pre">parquet,</span> <span class="pre">feather,</span> <span class="pre">spss,</span> <span class="pre">excel]"</span></code> 安装</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PyTables</p></td>
+<td><p>3.8.0</p></td>
+<td><p>hdf5</p></td>
+<td><p>基于 HDF5 的读取/写入</p></td>
+</tr>
+<tr class="row-odd"><td><p>blosc</p></td>
+<td><p>1.21.3</p></td>
+<td><p>hdf5</p></td>
+<td><p>HDF5 压缩；仅在 <code class="docutils literal notranslate"><span class="pre">conda</span></code> 可用</p></td>
+</tr>
+<tr class="row-even"><td><p>zlib</p></td>
+<td></td>
+<td><p>hdf5</p></td>
+<td><p>HDF5 压缩</p></td>
+</tr>
+<tr class="row-odd"><td><p>fastparquet</p></td>
+<td><p>2022.12.0</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Parquet 读取/写入（pyarrow 是默认设置）</p></td>
+</tr>
+<tr class="row-even"><td><p>pyarrow</p></td>
+<td><p>10.0.1</p></td>
+<td><p>parquet, feather</p></td>
+<td><p>Parquet、ORC 和 feather 读取/写入</p></td>
+</tr>
+<tr class="row-odd"><td><p>pyreadstat</p></td>
+<td><p>1.2.0</p></td>
+<td><p>spss</p></td>
+<td><p>SPSS 文件 (.sav) 读取</p></td>
+</tr>
+<tr class="row-even"><td><p>odfpy</p></td>
+<td><p>1.4.1</p></td>
+<td><p>excel</p></td>
+<td><p>开放文档格式 (.odf, .ods, .odt) 读取/写入</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning" id="install-warn-orc">
+<p class="admonition-title">警告</p>
+<ul class="simple">
+<li><p>如果您想使用 <a class="reference internal" href="../reference/api/pandas.read_orc.html#pandas.read_orc" title="pandas.read_orc"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_orc()</span></code></a>，强烈建议使用 conda 安装 pyarrow。<a class="reference internal" href="../reference/api/pandas.read_orc.html#pandas.read_orc" title="pandas.read_orc"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_orc()</span></code></a> 如果 pyarrow 是从 pypi 安装的，可能会失败，并且 <a class="reference internal" href="../reference/api/pandas.read_orc.html#pandas.read_orc" title="pandas.read_orc"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_orc()</span></code></a> 与 Windows 操作系统不兼容。</p></li>
+</ul>
+</div>
+</section>
+<section id="access-data-in-the-cloud">
+<h4>访问云端数据<a class="headerlink" href="install.html#access-data-in-the-cloud" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[fss,</span> <span class="pre">aws,</span> <span class="pre">gcp]"</span></code> 安装</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>fsspec</p></td>
+<td><p>2022.11.0</p></td>
+<td><p>fss, gcp, aws</p></td>
+<td><p>处理除简单本地文件和 HTTP 文件之外的文件（s3fs、gcsfs 的必需依赖项）。</p></td>
+</tr>
+<tr class="row-odd"><td><p>gcsfs</p></td>
+<td><p>2022.11.0</p></td>
+<td><p>gcp</p></td>
+<td><p>Google Cloud Storage 访问</p></td>
+</tr>
+<tr class="row-even"><td><p>pandas-gbq</p></td>
+<td><p>0.19.0</p></td>
+<td><p>gcp</p></td>
+<td><p>Google Big Query 访问</p></td>
+</tr>
+<tr class="row-odd"><td><p>s3fs</p></td>
+<td><p>2022.11.0</p></td>
+<td><p>aws</p></td>
+<td><p>Amazon S3 访问</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clipboard">
+<h4>剪贴板<a class="headerlink" href="install.html#clipboard" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[clipboard]"</span></code> 安装。</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PyQt4/PyQt5</p></td>
+<td><p>5.15.9</p></td>
+<td><p>clipboard</p></td>
+<td><p>剪贴板 I/O</p></td>
+</tr>
+<tr class="row-odd"><td><p>qtpy</p></td>
+<td><p>2.3.0</p></td>
+<td><p>clipboard</p></td>
+<td><p>剪贴板 I/O</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>根据操作系统的不同，可能需要安装系统级包。为了使剪贴板在 Linux 上运行，您的系统上必须安装 CLI 工具 <code class="docutils literal notranslate"><span class="pre">xclip</span></code> 或 <code class="docutils literal notranslate"><span class="pre">xsel</span></code> 中的一个。</p>
+</div>
+</section>
+<section id="compression">
+<h4>压缩<a class="headerlink" href="install.html#compression" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[compression]"</span></code> 安装</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zstandard</p></td>
+<td><p>0.19.0</p></td>
+<td><p>compression</p></td>
+<td><p>Zstandard 压缩</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="consortium-standard">
+<h4>联盟标准<a class="headerlink" href="install.html#consortium-standard" title="Link to this heading">#</a></h4>
+<p>可通过 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[consortium-standard]"</span></code> 安装</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>依赖项</p></th>
+<th class="head"><p>最低版本</p></th>
+<th class="head"><p>pip extra</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dataframe-api-compat</p></td>
+<td><p>0.1.7</p></td>
+<td><p>consortium-standard</p></td>
+<td><p>基于 pandas 的联盟标准兼容实现</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="index.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一篇</p> <p class="prev-next-title">开始使用</p> </div> </a> <a class="right-next" href="overview.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一篇</p> <p class="prev-next-title">包概览</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#python-version-support">Python 版本支持</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#installing-pandas">安装 pandas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#installing-with-anaconda">使用 Anaconda 安装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#installing-with-miniconda">使用 Miniconda 安装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#installing-from-pypi">从 PyPI 安装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#handling-importerrors">处理 ImportError</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#installing-from-source">从源代码安装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#installing-the-development-version-of-pandas">安装 pandas 开发版本</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#running-the-test-suite">运行测试套件</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#dependencies">依赖项</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#required-dependencies">必需依赖项</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#optional-dependencies">可选依赖项</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#performance-dependencies-recommended">性能依赖项（推荐）</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#visualization">可视化</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#computation">计算</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#excel-files">Excel 文件</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#html">HTML</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#xml">XML</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#sql-databases">SQL 数据库</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#other-data-sources">其他数据源</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#access-data-in-the-cloud">访问云端数据</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#clipboard">剪贴板</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#compression">压缩</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="install.html#consortium-standard">联盟标准</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/getting_started/install.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

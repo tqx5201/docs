@@ -1,0 +1,954 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>用户指南 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="10 minutes to pandas" href="10min.html" />
+    <link rel="prev" title="Community tutorials" href="../getting_started/tutorials.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="index.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html#">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html#">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10min.html">pandas 十分钟入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本核心功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具（文本、CSV、HDF5 等）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引和数据选择</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">多重索引 / 高级索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、串联和比较</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">重塑和透视表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">处理文本数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">处理缺失数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">重复标签</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可空整型数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可空布尔型数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">图表可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组：拆分-应用-合并</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">提升性能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">扩展至大型数据集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">操作指南</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">用户指南</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="user-guide">
+<span id="id1"></span><h1>用户指南<a class="headerlink" href="index.html#user-guide" title="Link to this heading">#</a></h1>
+<p>本用户指南按主题区域涵盖了 pandas 的所有内容。每个小节都介绍了一个主题（例如“处理缺失数据”），并讨论了 pandas 如何解决该问题，其中包含许多示例。</p>
+<p>pandas 新用户应从 <a class="reference internal" href="10min.html#min"><span class="std std-ref">pandas 十分钟入门</span></a> 开始。</p>
+<p>有关 pandas 基础知识的概括性总结，请参阅 <a class="reference internal" href="dsintro.html#dsintro"><span class="std std-ref">数据结构介绍</span></a> 和 <a class="reference internal" href="basics.html#basics"><span class="std std-ref">基本核心功能</span></a>。</p>
+<p>有关任何特定方法的更多信息，请参阅 <a class="reference internal" href="../reference/index.html#api"><span class="std std-ref">API 参考</span></a>。</p>
+<section id="how-to-read-these-guides">
+<h2>如何阅读这些指南<a class="headerlink" href="index.html#how-to-read-these-guides" title="Link to this heading">#</a></h2>
+<p>在这些指南中，您会看到代码块中的输入代码，例如</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'A'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]})</span>
+</pre></div>
+</div>
+<p>或</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="gp">In [2]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'A'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]})</span>
+<span class="gh">Out[2]: </span>
+<span class="go">   A</span>
+<span class="go">0  1</span>
+<span class="go">1  2</span>
+<span class="go">2  3</span>
+</pre></div>
+</div>
+<p>第一个代码块是标准的 Python 输入，而第二个代码块中的 <code class="docutils literal notranslate"><span class="pre">In</span> <span class="pre">[1]:</span></code> 表示输入位于 <a class="reference external" href="https://jupyter.org.cn">notebook</a> 中。在 Jupyter Notebook 中，最后一行会被打印出来，并且图表会内联显示。</p>
+<p>例如</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="gp">In [4]: </span><span class="n">a</span>
+<span class="gh">Out[4]: </span><span class="go">1</span>
+</pre></div>
+</div>
+<p>等效于</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="guides">
+<h2>指南<a class="headerlink" href="index.html#guides" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="10min.html">pandas 十分钟入门</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#basic-data-structures-in-pandas">pandas 中的基本数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#object-creation">对象创建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#viewing-data">查看数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#selection">选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#missing-data">缺失数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#operations">操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#merge">合并</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#grouping">分组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#reshaping">重塑</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#time-series">时间序列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#categoricals">分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#plotting">绘图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#importing-and-exporting-data">导入和导出数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10min.html#gotchas">常见陷阱</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dsintro.html#series">Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dsintro.html#dataframe">DataFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本核心功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#head-and-tail">头部和尾部</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#attributes-and-underlying-data">属性和底层数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#accelerated-operations">加速操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#flexible-binary-operations">灵活的二元操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#descriptive-statistics">描述性统计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#function-application">函数应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#reindexing-and-altering-labels">重新索引和修改标签</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#iteration">迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#dt-accessor">.dt 访问器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#vectorized-string-methods">矢量化字符串方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#sorting">排序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#copying">复制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#dtypes">dtypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#selecting-columns-based-on-dtype">根据 <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 选择列</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具（文本、CSV、HDF5 等）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io.html#csv-text-files">CSV 与文本文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#json">JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#html">HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#latex">LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#xml">XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#excel-files">Excel 文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#opendocument-spreadsheets">OpenDocument 电子表格</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#binary-excel-xlsb-files">二进制 Excel (.xlsb) 文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#calamine-excel-and-ods-files">Calamine（Excel 和 ODS 文件）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#clipboard">剪贴板</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#pickling">序列化 (Pickling)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#msgpack">msgpack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#hdf5-pytables">HDF5 (PyTables)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#feather">Feather</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#parquet">Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#orc">ORC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#sql-queries">SQL 查询</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#google-bigquery">Google BigQuery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#stata-format">Stata 格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#sas-formats">SAS 格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#spss-formats">SPSS 格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#other-file-formats">其他文件格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html#performance-considerations">性能考量</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyarrow.html#data-structure-integration">数据结构集成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyarrow.html#operations">操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyarrow.html#i-o-reading">I/O 读取</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引和数据选择</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#different-choices-for-indexing">索引的不同选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#basics">基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#attribute-access">属性访问</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#slicing-ranges">切片范围</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#selection-by-label">按标签选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#selection-by-position">按位置选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#selection-by-callable">按可调用对象选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#combining-positional-and-label-based-indexing">结合位置和标签索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#selecting-random-samples">选择随机样本</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#setting-with-enlargement">扩展式设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#fast-scalar-value-getting-and-setting">快速获取和设置标量值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#boolean-indexing">布尔索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#indexing-with-isin">使用 isin 进行索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#the-where-method-and-masking"><code class="xref py py-meth docutils literal notranslate"><span class="pre">where()</span></code> 方法和掩码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#setting-with-enlargement-conditionally-using-numpy">使用 <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy()</span></code> 进行条件性扩展式设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#the-query-method"><code class="xref py py-meth docutils literal notranslate"><span class="pre">query()</span></code> 方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#duplicate-data">重复数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#dictionary-like-get-method">类似字典的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code> 方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#looking-up-values-by-index-column-labels">按索引/列标签查找值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#index-objects">索引对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#set-reset-index">设置 / 重置索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html#returning-a-view-versus-a-copy">返回视图与返回副本</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">多重索引 / 高级索引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#hierarchical-indexing-multiindex">层次化索引 (MultiIndex)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#advanced-indexing-with-hierarchical-index">使用层次化索引进行高级索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#sorting-a-multiindex">排序 <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#take-methods">Take 方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#index-types">索引类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced.html#miscellaneous-indexing-faq">杂项索引常见问题</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="copy_on_write.html#previous-behavior">先前行为</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copy_on_write.html#migrating-to-copy-on-write">迁移到写时复制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copy_on_write.html#description">描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copy_on_write.html#chained-assignment">链式赋值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copy_on_write.html#read-only-numpy-arrays">只读 NumPy 数组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copy_on_write.html#patterns-to-avoid">应避免的模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copy_on_write.html#copy-on-write-optimizations">写时复制优化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="copy_on_write.html#how-to-enable-cow">如何启用 CoW</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、串联和比较</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="merging.html#concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="merging.html#merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="merging.html#dataframe-join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.join()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="merging.html#merge-ordered"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge_ordered()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="merging.html#merge-asof"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge_asof()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="merging.html#compare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compare()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">重塑和透视表</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reshaping.html#pivot-and-pivot-table"><code class="xref py py-func docutils literal notranslate"><span class="pre">pivot()</span></code> 和 <code class="xref py py-func docutils literal notranslate"><span class="pre">pivot_table()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reshaping.html#stack-and-unstack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stack()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">unstack()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reshaping.html#melt-and-wide-to-long"><code class="xref py py-func docutils literal notranslate"><span class="pre">melt()</span></code> 和 <code class="xref py py-func docutils literal notranslate"><span class="pre">wide_to_long()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reshaping.html#get-dummies-and-from-dummies"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_dummies()</span></code> 和 <code class="xref py py-func docutils literal notranslate"><span class="pre">from_dummies()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reshaping.html#explode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">explode()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reshaping.html#crosstab"><code class="xref py py-func docutils literal notranslate"><span class="pre">crosstab()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reshaping.html#cut"><code class="xref py py-func docutils literal notranslate"><span class="pre">cut()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reshaping.html#factorize"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">处理文本数据</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="text.html#text-data-types">文本数据类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html#string-methods">字符串方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html#splitting-and-replacing-strings">拆分和替换字符串</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html#concatenation">串联</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html#indexing-with-str">使用 <code class="docutils literal notranslate"><span class="pre">.str</span></code> 索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html#extracting-substrings">提取子字符串</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html#testing-for-strings-that-match-or-contain-a-pattern">测试字符串是否匹配或包含模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html#creating-indicator-variables">创建指示变量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text.html#method-summary">方法总结</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">处理缺失数据</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="missing_data.html#values-considered-missing">被视为“缺失”的值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing_data.html#na-semantics"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code> 语义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing_data.html#inserting-missing-data">插入缺失数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing_data.html#calculations-with-missing-data">缺失数据计算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing_data.html#dropping-missing-data">删除缺失数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="missing_data.html#filling-missing-data">填充缺失数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">重复标签</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="duplicates.html#consequences-of-duplicate-labels">重复标签的后果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="duplicates.html#duplicate-label-detection">重复标签检测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="duplicates.html#disallowing-duplicate-labels">禁止重复标签</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#object-creation">对象创建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#categoricaldtype">CategoricalDtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#description">描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#working-with-categories">处理分类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#sorting-and-order">排序和顺序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#comparisons">比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#operations">操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#data-munging">数据清洗</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#getting-data-in-out">数据输入/输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#missing-data">缺失数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#differences-to-r-s-factor">与 R 的 <code class="docutils literal notranslate"><span class="pre">factor</span></code> 的差异</a></li>
+<li class="toctree-l2"><a class="reference internal" href="categorical.html#gotchas">常见陷阱</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可空整型数据类型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integer_na.html#construction">构造</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_na.html#operations">操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integer_na.html#scalar-na-value">标量 NA 值</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可空布尔型数据类型</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boolean.html#indexing-with-na-values">使用 NA 值索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boolean.html#kleene-logical-operations">克莱尼逻辑运算</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">图表可视化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#basic-plotting-plot">基本绘图：<code class="docutils literal notranslate"><span class="pre">plot</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#other-plots">其他图表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#plotting-with-missing-data">缺失数据绘图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#plotting-tools">绘图工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#plot-formatting">图表格式化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#plotting-directly-with-matplotlib">直接使用 Matplotlib 绘图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#plotting-backends">绘图后端</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Styler-Object-and-Customising-the-Display">Styler 对象和自定义显示</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Formatting-the-Display">格式化显示</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Styler-Object-and-HTML">Styler 对象和 HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Methods-to-Add-Styles">添加样式的方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Table-Styles">表格样式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Setting-Classes-and-Linking-to-External-CSS">设置类和链接到外部 CSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Styler-Functions">Styler 函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Tooltips-and-Captions">工具提示和标题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Finer-Control-with-Slicing">使用切片进行更精细的控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Optimization">优化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Builtin-Styles">内置样式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Sharing-styles">共享样式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Limitations">限制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Other-Fun-and-Useful-Stuff">其他有趣且有用的内容</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Export-to-Excel">导出到 Excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Export-to-LaTeX">导出到 LaTeX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#More-About-CSS-and-HTML">更多关于 CSS 和 HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style.html#Extensibility">可扩展性</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组：拆分-应用-合并</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#splitting-an-object-into-groups">将对象拆分为组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#iterating-through-groups">遍历组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#selecting-a-group">选择组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#aggregation">聚合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#transformation">转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#filtration">过滤</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#flexible-apply">灵活的 <code class="docutils literal notranslate"><span class="pre">apply</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#numba-accelerated-routines">Numba 加速例程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#other-useful-features">其他有用功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="groupby.html#examples">示例</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="window.html#overview">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#rolling-window">滚动窗口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#weighted-window">加权窗口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#expanding-window">扩展窗口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="window.html#exponentially-weighted-window">指数加权窗口</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#overview">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#timestamps-vs-time-spans">时间戳与时间跨度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#converting-to-timestamps">转换为时间戳</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#generating-ranges-of-timestamps">生成时间戳范围</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#timestamp-limitations">时间戳限制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#indexing">索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#time-date-components">时间/日期组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#dateoffset-objects">DateOffset 对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#time-series-related-instance-methods">时间序列相关实例方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#resampling">重采样</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#time-span-representation">时间跨度表示</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#converting-between-representations">表示之间的转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#representing-out-of-bounds-spans">表示越界跨度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timeseries.html#time-zone-handling">时区处理</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="timedeltas.html#parsing">解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timedeltas.html#operations">操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timedeltas.html#reductions">归约</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timedeltas.html#frequency-conversion">频率转换</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timedeltas.html#attributes">属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timedeltas.html#timedeltaindex">TimedeltaIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timedeltas.html#resampling">重采样</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="options.html#overview">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#available-options">可用选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#getting-and-setting-options">获取和设置选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#setting-startup-options-in-python-ipython-environment">在 Python/IPython 环境中设置启动选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#frequently-used-options">常用选项</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#number-formatting">数字格式化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#unicode-formatting">Unicode 格式化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html#table-schema-display">表模式显示</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">提升性能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enhancingperf.html#cython-writing-c-extensions-for-pandas">Cython（为 pandas 编写 C 扩展）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancingperf.html#numba-jit-compilation">Numba（JIT 编译）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enhancingperf.html#expression-evaluation-via-eval">通过 <code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code> 进行表达式求值</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">扩展至大型数据集</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scale.html#load-less-data">加载更少数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scale.html#use-efficient-datatypes">使用高效数据类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scale.html#use-chunking">使用分块</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scale.html#use-other-libraries">使用其他库</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sparse.html#sparsearray">SparseArray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparse.html#sparsedtype">SparseDtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparse.html#sparse-accessor">稀疏访问器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparse.html#sparse-calculation">稀疏计算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sparse.html#interaction-with-scipy-sparse">与 <em>scipy.sparse</em> 的交互</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html#dataframe-memory-usage">DataFrame 内存使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html#using-if-truth-statements-with-pandas">在 pandas 中使用 if/truth 语句</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html#mutating-with-user-defined-function-udf-methods">使用用户定义函数 (UDF) 方法进行修改</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html#missing-value-representation-for-numpy-types">NumPy 类型缺失值表示</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html#differences-with-numpy">与 NumPy 的差异</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html#thread-safety">线程安全</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gotchas.html#byte-ordering-issues">字节序问题</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">操作指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#idioms">惯用法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#selection">选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#multiindexing">多重索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#missing-data">缺失数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#grouping">分组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#timeseries">时间序列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#merge">合并</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#plotting">绘图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#data-in-out">数据输入/输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#computation">计算</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#timedeltas">时间差</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#creating-example-data">创建示例数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookbook.html#constant-series">常量序列</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="../getting_started/tutorials.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">社区教程</p> </div> </a> <a class="right-next" href="10min.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">pandas 十分钟入门</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="index.html#how-to-read-these-guides">如何阅读这些指南</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="index.html#guides">指南</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源代码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 提供。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

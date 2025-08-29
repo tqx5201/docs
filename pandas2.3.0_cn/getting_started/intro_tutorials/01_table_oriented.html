@@ -1,0 +1,711 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandas 处理哪种数据？ — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/intro_tutorials/01_table_oriented';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How do I read and write tabular data?" href="02_read_write.html" />
+    <link rel="prev" title="Getting started tutorials" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="01_table_oriented.html#main-content">跳到主内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">站点导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">站点导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包概览</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">入门教程</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="01_table_oriented.html#">pandas 处理哪种数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_add_columns.html">如何从现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_calculate_statistics.html">如何计算汇总统计量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_reshape_table_layout.html">如何重塑表格布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_combine_dataframes.html">如何合并多个表格的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_text_data.html">如何操作文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../comparison/index.html">与其他工具比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_r.html">与 R / R 库比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sql.html">与 SQL 比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_spreadsheets.html">与电子表格比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sas.html">与 SAS 比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_stata.html">与 Stata 比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">入门</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">入门教程</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">哪种类型...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="what-kind-of-data-does-pandas-handle">
+<span id="min-tut-01-tableoriented"></span><h1>pandas 处理哪种数据？<a class="headerlink" href="01_table_oriented.html#what-kind-of-data-does-pandas-handle" title="Link to this heading">#</a></h1>
+<ul class="task-bullet">
+    <li><p>我想开始使用 pandas</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<p>要加载 pandas 包并开始使用它，请导入该包。社区约定 pandas 的别名为 <code class="docutils literal notranslate"><span class="pre">pd</span></code>，因此将 pandas 加载为 <code class="docutils literal notranslate"><span class="pre">pd</span></code> 被视为所有 pandas 文档的标准做法。</p>
+    </li>
+</ul><section id="pandas-data-table-representation">
+<h2>pandas 数据表表示<a class="headerlink" href="01_table_oriented.html#pandas-data-table-representation" title="Link to this heading">#</a></h2>
+<img alt="../../_images/01_table_dataframe.svg" class="align-center" src="../../_images/01_table_dataframe.svg">
+<ul class="task-bullet">
+    <li><p>我想存储泰坦尼克号的乘客数据。对于一部分乘客，我知道他们的姓名（字符）、年龄（整数）和性别（男/女）数据。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="p">{</span>
+<span class="gp">   ...: </span>        <span class="s2">"Name"</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">   ...: </span>            <span class="s2">"Braund, Mr. Owen Harris"</span><span class="p">,</span>
+<span class="gp">   ...: </span>            <span class="s2">"Allen, Mr. William Henry"</span><span class="p">,</span>
+<span class="gp">   ...: </span>            <span class="s2">"Bonnell, Miss. Elizabeth"</span><span class="p">,</span>
+<span class="gp">   ...: </span>        <span class="p">],</span>
+<span class="gp">   ...: </span>        <span class="s2">"Age"</span><span class="p">:</span> <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span>
+<span class="gp">   ...: </span>        <span class="s2">"Sex"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"male"</span><span class="p">,</span> <span class="s2">"male"</span><span class="p">,</span> <span class="s2">"female"</span><span class="p">],</span>
+<span class="gp">   ...: </span>    <span class="p">}</span>
+<span class="gp">   ...: </span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [3]: </span><span class="n">df</span>
+<span class="gh">Out[3]: </span>
+<span class="go">                       Name  Age     Sex</span>
+<span class="go">0   Braund, Mr. Owen Harris   22    male</span>
+<span class="go">1  Allen, Mr. William Henry   35    male</span>
+<span class="go">2  Bonnell, Miss. Elizabeth   58  female</span>
+</pre></div>
+</div>
+<p>要手动将数据存储在表中，请创建一个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>。当使用 Python 列表字典时，字典的键将用作列标题，每个列表中的值将用作 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的列。</p>
+    </li>
+</ul><p>一个 <a class="reference internal" href="../../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 是一个二维数据结构，可以在列中存储不同类型的数据（包括字符、整数、浮点值、分类数据等）。它类似于电子表格、SQL 表或 R 中的 <code class="docutils literal notranslate"><span class="pre">data.frame</span></code>。</p>
+<ul class="simple">
+<li><p>该表有 3 列，每列都有一个列标签。列标签分别为 <code class="docutils literal notranslate"><span class="pre">Name</span></code>、<code class="docutils literal notranslate"><span class="pre">Age</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Sex</span></code>。</p></li>
+<li><p>列 <code class="docutils literal notranslate"><span class="pre">Name</span></code> 由文本数据组成，每个值都是字符串；列 <code class="docutils literal notranslate"><span class="pre">Age</span></code> 是数字；列 <code class="docutils literal notranslate"><span class="pre">Sex</span></code> 是文本数据。</p></li>
+</ul>
+<p>在电子表格软件中，我们数据的表格表示会非常相似</p>
+<img alt="../../_images/01_table_spreadsheet.png" class="align-center" src="../../_images/01_table_spreadsheet.png">
+</section>
+<section id="each-column-in-a-dataframe-is-a-series">
+<h2><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中的每一列都是一个 <code class="docutils literal notranslate"><span class="pre">Series</span></code><a class="headerlink" href="01_table_oriented.html#each-column-in-a-dataframe-is-a-series" title="Link to this heading">#</a></h2>
+<img alt="../../_images/01_table_series.svg" class="align-center" src="../../_images/01_table_series.svg">
+<ul class="task-bullet">
+    <li><p>我只对处理列 <code class="docutils literal notranslate"><span class="pre">Age</span></code> 中的数据感兴趣</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span>
+<span class="gh">Out[4]: </span>
+<span class="go">0    22</span>
+<span class="go">1    35</span>
+<span class="go">2    58</span>
+<span class="go">Name: Age, dtype: int64</span>
+</pre></div>
+</div>
+<p>当选择 pandas <a class="reference internal" href="../../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的单个列时，结果是一个 pandas <a class="reference internal" href="../../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>。要选择列，请使用方括号 <code class="docutils literal notranslate"><span class="pre">[]</span></code> 中的列标签。</p>
+    </li>
+</ul><div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果您熟悉 Python <a class="reference external" href="https://docs.pythonlang.cn/3/tutorial/datastructures.html#tut-dictionaries" title="(in Python v3.13)"><span class="xref std std-ref">字典</span></a>，选择单个列与基于键选择字典值非常相似。</p>
+</div>
+<p>您也可以从头开始创建一个 <code class="docutils literal notranslate"><span class="pre">Series</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">ages</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">22</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">"Age"</span><span class="p">)</span>
+
+<span class="gp">In [6]: </span><span class="n">ages</span>
+<span class="gh">Out[6]: </span>
+<span class="go">0    22</span>
+<span class="go">1    35</span>
+<span class="go">2    58</span>
+<span class="go">Name: Age, dtype: int64</span>
+</pre></div>
+</div>
+<p>pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> 没有列标签，因为它只是 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的单个列。一个 Series 确实有行标签。</p>
+</section>
+<section id="do-something-with-a-dataframe-or-series">
+<h2>对 DataFrame 或 Series 执行操作<a class="headerlink" href="01_table_oriented.html#do-something-with-a-dataframe-or-series" title="Link to this heading">#</a></h2>
+<ul class="task-bullet">
+    <li><p>我想知道乘客的最大年龄</p>
+<p>我们可以通过选择 <code class="docutils literal notranslate"><span class="pre">Age</span></code> 列并应用 <code class="docutils literal notranslate"><span class="pre">max()</span></code> 来在 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 上执行此操作。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="gh">Out[7]: </span><span class="go">58</span>
+</pre></div>
+</div>
+<p>或者对 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 执行此操作。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">ages</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="gh">Out[8]: </span><span class="go">58</span>
+</pre></div>
+</div>
+    </li>
+</ul><p>正如 <code class="docutils literal notranslate"><span class="pre">max()</span></code> 方法所演示的，您可以对 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 执行 <em>操作</em>。pandas 提供了许多功能，每个功能都是您可以应用于 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 的一个 <em>方法</em>。由于方法是函数，请不要忘记使用括号 <code class="docutils literal notranslate"><span class="pre">()</span></code>。</p>
+<ul class="task-bullet">
+    <li><p>我对数据表的数值数据的基本统计信息感兴趣</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="gh">Out[9]: </span>
+<span class="go">             Age</span>
+<span class="go">count   3.000000</span>
+<span class="go">mean   38.333333</span>
+<span class="go">std    18.230012</span>
+<span class="go">min    22.000000</span>
+<span class="go">25%    28.500000</span>
+<span class="go">50%    35.000000</span>
+<span class="go">75%    46.500000</span>
+<span class="go">max    58.000000</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../reference/api/pandas.DataFrame.describe.html#pandas.DataFrame.describe" title="pandas.DataFrame.describe"><code class="xref py py-func docutils literal notranslate"><span class="pre">describe()</span></code></a> 方法提供了 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中数值数据的快速概览。由于 <code class="docutils literal notranslate"><span class="pre">Name</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Sex</span></code> 列是文本数据，它们默认不被 <a class="reference internal" href="../../reference/api/pandas.DataFrame.describe.html#pandas.DataFrame.describe" title="pandas.DataFrame.describe"><code class="xref py py-func docutils literal notranslate"><span class="pre">describe()</span></code></a> 方法考虑在内。</p>
+    </li>
+</ul><p>许多 pandas 操作返回一个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 或一个 <code class="docutils literal notranslate"><span class="pre">Series</span></code>。<a class="reference internal" href="../../reference/api/pandas.DataFrame.describe.html#pandas.DataFrame.describe" title="pandas.DataFrame.describe"><code class="xref py py-func docutils literal notranslate"><span class="pre">describe()</span></code></a> 方法是返回 pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的 pandas 操作的一个示例。</p>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">至用户指南</span><p>在用户指南的关于 <a class="reference internal" href="../../user_guide/basics.html#basics-describe"><span class="std std-ref">使用 describe 进行聚合</span></a> 的部分中查看有关 <code class="docutils literal notranslate"><span class="pre">describe</span></code> 的更多选项。</p>
+</div><div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>这只是一个起点。与电子表格软件类似，pandas 将数据表示为带有列和行的表格。除了数据表示，pandas 还支持您在电子表格软件中进行的数据操作和计算。请继续阅读后续教程以开始使用！</p>
+</div>
+<div class="shadow gs-callout gs-callout-remember">
+    <h4>记住</h4><ul class="simple">
+<li><p>导入包，即 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pandas</span> <span class="pre">as</span> <span class="pre">pd</span></code></p></li>
+<li><p>数据表存储为 pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中的每一列都是一个 <code class="docutils literal notranslate"><span class="pre">Series</span></code></p></li>
+<li><p>您可以通过将方法应用于 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 来执行操作</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">至用户指南</span><p>关于 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 的更详细解释可在<a class="reference internal" href="../../user_guide/dsintro.html#dsintro"><span class="std std-ref">数据结构介绍</span></a>中找到。</p>
+</div></section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="index.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">入门教程</p> </div> </a> <a class="right-next" href="02_read_write.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">如何读取和写入表格数据？</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="01_table_oriented.html#pandas-data-table-representation">pandas 数据表表示</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="01_table_oriented.html#each-column-in-a-dataframe-is-a-series"><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中的每一列都是一个 <code class="docutils literal notranslate"><span class="pre">Series</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="01_table_oriented.html#do-something-with-a-dataframe-or-series">对 DataFrame 或 Series 执行操作</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/intro_tutorials/01_table_oriented.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas，通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管者 <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">基于 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

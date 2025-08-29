@@ -1,0 +1,843 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>扩展到大型数据集 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/scale';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sparse data structures" href="sparse.html" />
+    <link rel="prev" title="Enhancing performance" href="enhancingperf.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="scale.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10min.html">pandas 十分钟入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本核心功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具（文本、CSV、HDF5 等）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引和数据选择</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">多重索引 / 高级索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、拼接和比较</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">重塑和透视表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">处理文本数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">处理缺失数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">重复标签</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可空整数数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可空布尔数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">图表可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组：拆分-应用-组合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">提升性能</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="scale.html#">扩展到大型数据集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">秘籍</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">用户指南</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">扩展到...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="scaling-to-large-datasets">
+<span id="scale"></span><h1>扩展到大型数据集<a class="headerlink" href="scale.html#scaling-to-large-datasets" title="Link to this heading">#</a></h1>
+<p>pandas 提供了用于内存内分析的数据结构，这使得使用 pandas 分析比内存大的数据集变得有些棘手。即使是内存中占相当大比例的数据集也会变得难以处理，因为某些 pandas 操作需要创建中间副本。</p>
+<p>本文档提供了一些将分析扩展到大型数据集的建议。它是对<a class="reference internal" href="enhancingperf.html#enhancingperf"><span class="std std-ref">提升性能</span></a>的补充，后者侧重于加速对内存中数据集的分析。</p>
+<section id="load-less-data">
+<h2>加载更少数据<a class="headerlink" href="scale.html#load-less-data" title="Link to this heading">#</a></h2>
+<p>假设我们磁盘上的原始数据集有许多列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="gp">In [2]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="gp">In [3]: </span><span class="k">def</span><span class="w"> </span><span class="nf">make_timeseries</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">"2000-01-01"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">"2000-12-31"</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"1D"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"timestamp"</span><span class="p">)</span>
+<span class="gp">   ...: </span>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="gp">   ...: </span>    <span class="n">state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="gp">   ...: </span>    <span class="n">columns</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">   ...: </span>        <span class="s2">"name"</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"Charlie"</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">),</span>
+<span class="gp">   ...: </span>        <span class="s2">"id"</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">),</span>
+<span class="gp">   ...: </span>        <span class="s2">"x"</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">   ...: </span>        <span class="s2">"y"</span><span class="p">:</span> <span class="n">state</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">   ...: </span>    <span class="p">}</span>
+<span class="gp">   ...: </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span>
+<span class="gp">   ...: </span>    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+<span class="gp">   ...: </span>        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">df</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [4]: </span><span class="n">timeseries</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">   ...: </span>    <span class="n">make_timeseries</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s2">"1min"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="gp">   ...: </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">   ...: </span><span class="p">]</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [5]: </span><span class="n">ts_wide</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">timeseries</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [6]: </span><span class="n">ts_wide</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[6]: </span>
+<span class="go">                     id_0 name_0       x_0  ...   name_9       x_9       y_9</span>
+<span class="go">timestamp                                   ...                             </span>
+<span class="go">2000-01-01 00:00:00   977  Alice -0.821225  ...  Charlie -0.957208 -0.757508</span>
+<span class="go">2000-01-01 00:01:00  1018    Bob -0.219182  ...    Alice -0.414445 -0.100298</span>
+<span class="go">2000-01-01 00:02:00   927  Alice  0.660908  ...  Charlie -0.325838  0.581859</span>
+<span class="go">2000-01-01 00:03:00   997    Bob -0.852458  ...      Bob  0.992033 -0.686692</span>
+<span class="go">2000-01-01 00:04:00   965    Bob  0.717283  ...  Charlie -0.924556 -0.184161</span>
+
+<span class="go">[5 rows x 40 columns]</span>
+
+<span class="gp">In [7]: </span><span class="n">ts_wide</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s2">"timeseries_wide.parquet"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>要加载我们想要的列，我们有两种选择。选项 1 是加载所有数据，然后筛选出我们需要的部分。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"id_0"</span><span class="p">,</span> <span class="s2">"name_0"</span><span class="p">,</span> <span class="s2">"x_0"</span><span class="p">,</span> <span class="s2">"y_0"</span><span class="p">]</span>
+
+<span class="gp">In [9]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"timeseries_wide.parquet"</span><span class="p">)[</span><span class="n">columns</span><span class="p">]</span>
+<span class="gh">Out[9]: </span>
+<span class="go">                     id_0 name_0       x_0       y_0</span>
+<span class="go">timestamp                                           </span>
+<span class="go">2000-01-01 00:00:00   977  Alice -0.821225  0.906222</span>
+<span class="go">2000-01-01 00:01:00  1018    Bob -0.219182  0.350855</span>
+<span class="go">2000-01-01 00:02:00   927  Alice  0.660908 -0.798511</span>
+<span class="go">2000-01-01 00:03:00   997    Bob -0.852458  0.735260</span>
+<span class="go">2000-01-01 00:04:00   965    Bob  0.717283  0.393391</span>
+<span class="go">...                   ...    ...       ...       ...</span>
+<span class="go">2000-12-30 23:56:00  1037    Bob -0.814321  0.612836</span>
+<span class="go">2000-12-30 23:57:00   980    Bob  0.232195 -0.618828</span>
+<span class="go">2000-12-30 23:58:00   965  Alice -0.231131  0.026310</span>
+<span class="go">2000-12-30 23:59:00   984  Alice  0.942819  0.853128</span>
+<span class="go">2000-12-31 00:00:00  1003  Alice  0.201125 -0.136655</span>
+
+<span class="go">[525601 rows x 4 columns]</span>
+</pre></div>
+</div>
+<p>选项 2 是只加载我们请求的列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"timeseries_wide.parquet"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="gh">Out[10]: </span>
+<span class="go">                     id_0 name_0       x_0       y_0</span>
+<span class="go">timestamp                                           </span>
+<span class="go">2000-01-01 00:00:00   977  Alice -0.821225  0.906222</span>
+<span class="go">2000-01-01 00:01:00  1018    Bob -0.219182  0.350855</span>
+<span class="go">2000-01-01 00:02:00   927  Alice  0.660908 -0.798511</span>
+<span class="go">2000-01-01 00:03:00   997    Bob -0.852458  0.735260</span>
+<span class="go">2000-01-01 00:04:00   965    Bob  0.717283  0.393391</span>
+<span class="go">...                   ...    ...       ...       ...</span>
+<span class="go">2000-12-30 23:56:00  1037    Bob -0.814321  0.612836</span>
+<span class="go">2000-12-30 23:57:00   980    Bob  0.232195 -0.618828</span>
+<span class="go">2000-12-30 23:58:00   965  Alice -0.231131  0.026310</span>
+<span class="go">2000-12-30 23:59:00   984  Alice  0.942819  0.853128</span>
+<span class="go">2000-12-31 00:00:00  1003  Alice  0.201125 -0.136655</span>
+
+<span class="go">[525601 rows x 4 columns]</span>
+</pre></div>
+</div>
+<p>如果我们测量这两个调用的内存使用量，我们会发现在本例中指定 <code class="docutils literal notranslate"><span class="pre">columns</span></code> 大约只使用了 1/10 的内存。</p>
+<p>使用 <a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>，你可以指定 <code class="docutils literal notranslate"><span class="pre">usecols</span></code> 来限制读取到内存中的列。并非所有 pandas 可读取的文件格式都提供读取列子集的选项。</p>
+</section>
+<section id="use-efficient-datatypes">
+<h2>使用高效数据类型<a class="headerlink" href="scale.html#use-efficient-datatypes" title="Link to this heading">#</a></h2>
+<p>默认的 pandas 数据类型并不是内存效率最高的。对于具有相对较少唯一值的文本数据列（通常称为“低基数”数据）尤其如此。通过使用更高效的数据类型，你可以在内存中存储更大的数据集。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">make_timeseries</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s2">"30s"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [12]: </span><span class="n">ts</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s2">"timeseries.parquet"</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"timeseries.parquet"</span><span class="p">)</span>
+
+<span class="gp">In [14]: </span><span class="n">ts</span>
+<span class="gh">Out[14]: </span>
+<span class="go">                       id     name         x         y</span>
+<span class="go">timestamp                                             </span>
+<span class="go">2000-01-01 00:00:00  1041    Alice  0.889987  0.281011</span>
+<span class="go">2000-01-01 00:00:30   988      Bob -0.455299  0.488153</span>
+<span class="go">2000-01-01 00:01:00  1018    Alice  0.096061  0.580473</span>
+<span class="go">2000-01-01 00:01:30   992      Bob  0.142482  0.041665</span>
+<span class="go">2000-01-01 00:02:00   960      Bob -0.036235  0.802159</span>
+<span class="go">...                   ...      ...       ...       ...</span>
+<span class="go">2000-12-30 23:58:00  1022    Alice  0.266191  0.875579</span>
+<span class="go">2000-12-30 23:58:30   974    Alice -0.009826  0.413686</span>
+<span class="go">2000-12-30 23:59:00  1028  Charlie  0.307108 -0.656789</span>
+<span class="go">2000-12-30 23:59:30  1002    Alice  0.202602  0.541335</span>
+<span class="go">2000-12-31 00:00:00   987    Alice  0.200832  0.615972</span>
+
+<span class="go">[1051201 rows x 4 columns]</span>
+</pre></div>
+</div>
+<p>现在，让我们检查数据类型和内存使用情况，看看我们应该把注意力集中在哪里。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">ts</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[15]: </span>
+<span class="go">id        int64</span>
+<span class="go">name     object</span>
+<span class="go">x       float64</span>
+<span class="go">y       float64</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">ts</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># memory usage in bytes</span>
+<span class="gh">Out[16]: </span>
+<span class="go">Index     8409608</span>
+<span class="go">id        8409608</span>
+<span class="go">name     65176434</span>
+<span class="go">x         8409608</span>
+<span class="go">y         8409608</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">name</span></code> 列占用的内存比其他任何列都多。它只有少量唯一值，因此很适合转换为 <a class="reference internal" href="../reference/api/pandas.Categorical.html#pandas.Categorical" title="pandas.Categorical"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Categorical</span></code></a>。使用 <a class="reference internal" href="../reference/api/pandas.Categorical.html#pandas.Categorical" title="pandas.Categorical"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Categorical</span></code></a>，我们只存储每个唯一名称一次，并使用节省空间的整数来表示每行中使用的具体名称。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">ts2</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="gp">In [18]: </span><span class="n">ts2</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts2</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span>
+
+<span class="gp">In [19]: </span><span class="n">ts2</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[19]: </span>
+<span class="go">Index    8409608</span>
+<span class="go">id       8409608</span>
+<span class="go">name     1051495</span>
+<span class="go">x        8409608</span>
+<span class="go">y        8409608</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>我们可以更进一步，使用 <a class="reference internal" href="../reference/api/pandas.to_numeric.html#pandas.to_numeric" title="pandas.to_numeric"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.to_numeric()</span></code></a> 将数值列向下转换为它们的最小类型。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">ts2</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">ts2</span><span class="p">[</span><span class="s2">"id"</span><span class="p">],</span> <span class="n">downcast</span><span class="o">=</span><span class="s2">"unsigned"</span><span class="p">)</span>
+
+<span class="gp">In [21]: </span><span class="n">ts2</span><span class="p">[[</span><span class="s2">"x"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ts2</span><span class="p">[[</span><span class="s2">"x"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">downcast</span><span class="o">=</span><span class="s2">"float"</span><span class="p">)</span>
+
+<span class="gp">In [22]: </span><span class="n">ts2</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[22]: </span>
+<span class="go">id        uint16</span>
+<span class="go">name    category</span>
+<span class="go">x        float32</span>
+<span class="go">y        float32</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">ts2</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[23]: </span>
+<span class="go">Index    8409608</span>
+<span class="go">id       2102402</span>
+<span class="go">name     1051495</span>
+<span class="go">x        4204804</span>
+<span class="go">y        4204804</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">reduction</span> <span class="o">=</span> <span class="n">ts2</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">ts</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="gp">In [25]: </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">reduction</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="go">0.20</span>
+</pre></div>
+</div>
+<p>总而言之，我们将这个数据集的内存占用量减少到了其原始大小的 1/5。</p>
+<p>有关 <a class="reference internal" href="../reference/api/pandas.Categorical.html#pandas.Categorical" title="pandas.Categorical"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Categorical</span></code></a> 的更多信息，请参阅 <a class="reference internal" href="categorical.html#categorical"><span class="std std-ref">分类数据</span></a>；有关所有 pandas dtypes 的概述，请参阅 <a class="reference internal" href="basics.html#basics-dtypes"><span class="std std-ref">dtypes</span></a>。</p>
+</section>
+<section id="use-chunking">
+<h2>使用分块<a class="headerlink" href="scale.html#use-chunking" title="Link to this heading">#</a></h2>
+<p>有些工作负载可以通过分块来实现，即将一个大问题拆分成许多小问题。例如，将单个 CSV 文件转换为 Parquet 文件，并对目录中的每个文件重复此操作。只要每个分块都能装入内存，你就可以处理比内存大得多的数据集。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>当你执行的操作需要零或最少的块间协调时，分块效果很好。对于更复杂的工作流程，你最好<a class="reference internal" href="scale.html#scale-other-libraries"><span class="std std-ref">使用其他库</span></a>。</p>
+</div>
+<p>假设我们磁盘上有一个更大的“逻辑数据集”，它是一个 Parquet 文件目录。目录中的每个文件代表整个数据集的不同年份。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+
+<span class="gp">In [27]: </span><span class="n">N</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="gp">In [28]: </span><span class="n">starts</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"20</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">&gt;02d</span><span class="si">}</span><span class="s2">-01-01"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="gp">In [29]: </span><span class="n">ends</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"20</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">&gt;02d</span><span class="si">}</span><span class="s2">-12-13"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+<span class="gp">In [30]: </span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">"data/timeseries"</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [31]: </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">starts</span><span class="p">,</span> <span class="n">ends</span><span class="p">)):</span>
+<span class="gp">   ....: </span>    <span class="n">ts</span> <span class="o">=</span> <span class="n">make_timeseries</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"1min"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="n">ts</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="sa">f</span><span class="s2">"data/timeseries/ts-</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">0&gt;2d</span><span class="si">}</span><span class="s2">.parquet"</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>data
+└── timeseries
+    ├── ts-00.parquet
+    ├── ts-01.parquet
+    ├── ts-02.parquet
+    ├── ts-03.parquet
+    ├── ts-04.parquet
+    ├── ts-05.parquet
+    ├── ts-06.parquet
+    ├── ts-07.parquet
+    ├── ts-08.parquet
+    ├── ts-09.parquet
+    ├── ts-10.parquet
+    └── ts-11.parquet
+</pre></div>
+</div>
+<p>现在我们将实现一个核外（out-of-core）的 <a class="reference internal" href="../reference/api/pandas.Series.value_counts.html#pandas.Series.value_counts" title="pandas.Series.value_counts"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.Series.value_counts()</span></code></a>。此工作流的峰值内存使用量是单个最大分块，加上一个存储到目前为止唯一值计数的少量系列。只要每个独立文件都能装入内存，这将适用于任意大小的数据集。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="o">%%time</span>
+<span class="gp">   ....: </span><span class="n">files</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">"data/timeseries/"</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"ts*.parquet"</span><span class="p">)</span>
+<span class="gp">   ....: </span><span class="n">counts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">   ....: </span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+<span class="gp">   ....: </span>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">   ....: </span><span class="n">counts</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="go">CPU times: user 1.01 s, sys: 37.3 ms, total: 1.04 s</span>
+<span class="go">Wall time: 1.03 s</span>
+<span class="gh">Out[32]: </span>
+<span class="go">name</span>
+<span class="go">Alice      1994645</span>
+<span class="go">Bob        1993692</span>
+<span class="go">Charlie    1994875</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>一些读取器，例如 <a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>，提供了参数来控制读取单个文件时的 <code class="docutils literal notranslate"><span class="pre">chunksize</span></code>。</p>
+<p>对于不需要过于复杂操作的工作流，手动分块是一个不错的选择。但某些操作，如 <a class="reference internal" href="../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.DataFrame.groupby()</span></code></a>，很难进行分块处理。在这种情况下，你最好切换到其他为你实现这些核外算法的库。</p>
+</section>
+<section id="use-other-libraries">
+<span id="scale-other-libraries"></span><h2>使用其他库<a class="headerlink" href="scale.html#use-other-libraries" title="Link to this heading">#</a></h2>
+<p>还有其他一些库提供了与 pandas 相似的 API，并能很好地与 pandas DataFrame 配合使用，它们可以通过并行运行时、分布式内存、集群等方式为你提供扩展大型数据集处理和分析的能力。你可以在<a class="reference external" href="https://pandas.ac.cn/community/ecosystem.html#out-of-core">生态系统页面</a>找到更多信息。</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="enhancingperf.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">提升性能</p> </div> </a> <a class="right-next" href="sparse.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">稀疏数据结构</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="scale.html#load-less-data">加载更少数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="scale.html#use-efficient-datatypes">使用高效数据类型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="scale.html#use-chunking">使用分块</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="scale.html#use-other-libraries">使用其他库</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/scale.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源代码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 提供。托管方： <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">基于 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>
