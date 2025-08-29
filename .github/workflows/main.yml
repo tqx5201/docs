@@ -6,11 +6,12 @@ on:
     #- cron: '0 19 * * *'   # 每晚 03:00 CST
   workflow_dispatch:
 
+#https://docs.jupyter.org.cn/en/latest/
 env:
-  TARGET_DIR:   pandas2.3.0_cn
+  TARGET_DIR:   jupyter
   MIRROR_PROTO: https
-  MIRROR_HOST:  pandas.ac.cn
-  MIRROR_PATH:  docs
+  MIRROR_HOST:  docs.jupyter.org.cn
+  MIRROR_PATH:  en/latest/
 
 jobs:
   mirror:
