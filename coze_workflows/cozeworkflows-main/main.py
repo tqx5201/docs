@@ -7,7 +7,8 @@ python batch_share2poor_robust.py
 import json, yaml, tempfile, zipfile, re, sys
 from pathlib import Path
 
-OUT_DIR = Path('穷人粘贴版')
+OUT_DIR0 = Path('穷人粘贴版')
+OUT_DIR = Path('coze_workflows/coze_workflows-main/穷人粘贴版')
 MAP_FILE = OUT_DIR / '文件名-desc对照表.txt'
 
 JSON_PAT = re.compile(rb'-draft\.json(.*)MANIFEST\.yml', re.DOTALL)
@@ -57,6 +58,7 @@ def convert_from_blob(blob: bytes) -> tuple[str, str]:
             "flowMode": manifest["main"].get("flowMode", 0),
         },
         "json": draft,
+        "bounds":{"x":0,"y":0,"width":4567,"height":1234}
     }
     return json.dumps(clipboard, ensure_ascii=False, separators=(",", ":")), manifest["main"]["desc"]
 
@@ -105,6 +107,8 @@ def main():
 if __name__ == '__main__':
         # 先删再建
         import shutil
+        if OUT_DIR0.exists():
+            shutil.rmtree(OUT_DIR0)
         if OUT_DIR.exists():
             shutil.rmtree(OUT_DIR)
         OUT_DIR.mkdir(parents=True, exist_ok=True)
