@@ -36,6 +36,15 @@ def convert_from_blob(blob: bytes) -> tuple[str, str]:
                 "height": 0
             }
         }
+    # 1. 删掉指定 id 的节点
+    draft["nodes"] = [n for n in draft["nodes"] if n.get("id") not in {"100001", "900001"}]
+
+    # 2. 再删掉与这些 id 相关的边
+    draft["edges"] = [
+        e for e in draft["edges"]
+        if e.get("sourceNodeID") not in {"100001", "900001"} and
+           e.get("targetNodeID") not in {"100001", "900001"}
+    ]
 
     manifest = yaml.safe_load(blob[blob.rfind(b'MANIFEST.yml'):].split(b'\n', 1)[1].decode('utf-8', errors='ignore'))
     clipboard = {
