@@ -103,4 +103,10 @@ def main():
         print(f'✅ 对照表已生成: {MAP_FILE}')
 
 if __name__ == '__main__':
-    main()
+        # 先删再建
+        import shutil
+        if OUT_DIR.exists():
+            shutil.rmtree(OUT_DIR)
+        OUT_DIR.mkdir(parents=True, exist_ok=True)
+        
+        main()
