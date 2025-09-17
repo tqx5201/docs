@@ -1,0 +1,1280 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>贡献代码库 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'development/contributing_codebase';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas maintenance" href="maintaining.html" />
+    <link rel="prev" title="pandas docstring guide" href="contributing_docstring.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="contributing_codebase.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">站点导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">站点导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">为 pandas 贡献</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_environment.html">创建开发环境</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_gitpod.html">使用 Gitpod 进行 pandas 开发</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_documentation.html">贡献文档</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html">pandas 文档字符串指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="contributing_codebase.html#">贡献代码库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining.html">pandas 维护</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals.html">内部机制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (Copy on write)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging_extensions.html">调试 C 扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">扩展 pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">开发者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">策略</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">贡献者社区</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">开发</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">贡献...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="contributing-to-the-code-base">
+<span id="contributing-codebase"></span><h1>贡献代码库<a class="headerlink" href="contributing_codebase.html#contributing-to-the-code-base" title="此标题的链接">#</a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="contributing_codebase.html#code-standards" id="id2">代码标准</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#pre-commit" id="id3">Pre-commit</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#optional-dependencies" id="id4">可选依赖</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#backwards-compatibility" id="id5">向后兼容性</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#type-hints" id="id6">类型提示</a></p>
+<ul>
+<li><p><a class="reference internal" href="contributing_codebase.html#style-guidelines" id="id7">风格指南</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#pandas-specific-types" id="id8">pandas 特定类型</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#validating-type-hints" id="id9">验证类型提示</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#testing-type-hints-in-code-using-pandas" id="id10">在使用 pandas 的代码中测试类型提示</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="contributing_codebase.html#testing-with-continuous-integration" id="id11">使用持续集成进行测试</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#test-driven-development" id="id12">测试驱动开发</a></p>
+<ul>
+<li><p><a class="reference internal" href="contributing_codebase.html#writing-tests" id="id13">编写测试</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#using-pytest" id="id14">使用 <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></p>
+<ul>
+<li><p><a class="reference internal" href="contributing_codebase.html#test-structure" id="id15">测试结构</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#preferred-pytest-idioms" id="id16">首选的 <code class="docutils literal notranslate"><span class="pre">pytest</span></code> 惯用法</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#testing-a-warning" id="id17">测试警告</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#testing-an-exception" id="id18">测试异常</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#testing-involving-files" id="id19">涉及文件的测试</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#testing-involving-network-connectivity" id="id20">涉及网络连接的测试</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#example" id="id21">示例</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="contributing_codebase.html#using-hypothesis" id="id22">使用 <code class="docutils literal notranslate"><span class="pre">hypothesis</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="contributing_codebase.html#running-the-test-suite" id="id23">运行测试套件</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#running-the-performance-test-suite" id="id24">运行性能测试套件</a></p></li>
+<li><p><a class="reference internal" href="contributing_codebase.html#documenting-your-code" id="id25">为代码编写文档</a></p></li>
+</ul>
+</nav>
+<section id="code-standards">
+<h2><a class="toc-backref" href="contributing_codebase.html#id2" role="doc-backlink">代码标准</a><a class="headerlink" href="contributing_codebase.html#code-standards" title="此标题的链接">#</a></h2>
+<p>编写良好的代码不仅关乎你写了什么。它还关乎你*如何*编写。在<a class="reference internal" href="contributing_codebase.html#contributing-ci"><span class="std std-ref">持续集成</span></a>测试期间，将运行多个工具来检查你的代码是否存在样式错误。产生任何警告都将导致测试失败。因此，良好的风格是向 pandas 提交代码的要求。</p>
+<p>pandas 中有几个工具可以帮助贡献者在向项目贡献之前验证其更改</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">./ci/code_checks.sh</span></code>: 一个脚本用于验证文档测试（doctests）、文档字符串格式和导入的模块。可以使用参数 <code class="docutils literal notranslate"><span class="pre">docstrings</span></code>、<code class="docutils literal notranslate"><span class="pre">code</span></code> 和 <code class="docutils literal notranslate"><span class="pre">doctests</span></code> 独立运行检查（例如 <code class="docutils literal notranslate"><span class="pre">./ci/code_checks.sh</span> <span class="pre">doctests</span></code>）；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pre-commit</span></code>，我们将在下一节详细介绍。</p></li>
+</ul>
+<p>此外，由于很多人使用我们的库，重要的是我们不要对代码进行突然更改，这可能导致大量用户代码中断，也就是说，我们需要它尽可能*向后兼容*，以避免大规模中断。</p>
+</section>
+<section id="pre-commit">
+<span id="contributing-pre-commit"></span><h2><a class="toc-backref" href="contributing_codebase.html#id3" role="doc-backlink">Pre-commit</a><a class="headerlink" href="contributing_codebase.html#pre-commit" title="此标题的链接">#</a></h2>
+<p>此外，<a class="reference internal" href="contributing_codebase.html#contributing-ci"><span class="std std-ref">持续集成</span></a>将使用 <a class="reference external" href="https://pre-commit.git-scm.cn/">pre-commit 钩子</a>运行代码格式检查，如 <code class="docutils literal notranslate"><span class="pre">black</span></code>、<code class="docutils literal notranslate"><span class="pre">ruff</span></code>、<code class="docutils literal notranslate"><span class="pre">isort</span></code> 和 <code class="docutils literal notranslate"><span class="pre">clang-format</span></code> 等。这些检查产生的任何警告都将导致<a class="reference internal" href="contributing_codebase.html#contributing-ci"><span class="std std-ref">持续集成</span></a>失败；因此，在提交代码之前自行运行检查会很有帮助。这可以通过安装 <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code>（如果你已按照<a class="reference internal" href="contributing_environment.html#contributing-environment"><span class="std std-ref">设置开发环境</span></a>中的说明操作，这应该已经完成）然后运行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>从 pandas 仓库的根目录。现在，每次提交更改时都会运行所有样式检查，而无需你手动运行每一个。此外，使用 <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> 还可以让你更容易地与我们不断变化的代码检查保持同步。</p>
+<p>请注意，如果需要，你可以使用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--no-verify</span></code> 跳过这些检查。</p>
+<p>如果你不想在工作流程中使用 <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code>，你仍然可以使用它来运行其检查，方法如下之一：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">run</span> <span class="o">--</span><span class="n">files</span> <span class="o">&lt;</span><span class="n">files</span> <span class="n">you</span> <span class="n">have</span> <span class="n">modified</span><span class="o">&gt;</span>
+<span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">run</span> <span class="o">--</span><span class="n">from</span><span class="o">-</span><span class="n">ref</span><span class="o">=</span><span class="n">upstream</span><span class="o">/</span><span class="n">main</span> <span class="o">--</span><span class="n">to</span><span class="o">-</span><span class="n">ref</span><span class="o">=</span><span class="n">HEAD</span> <span class="o">--</span><span class="nb">all</span><span class="o">-</span><span class="n">files</span>
+</pre></div>
+</div>
+<p>无需事先执行 <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">install</span></code>。</p>
+<p>最后，我们还有一些慢速的 pre-commit 检查，它们不会在每次提交时运行，但会在持续集成期间运行。你可以通过以下方式手动触发它们：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">run</span> <span class="o">--</span><span class="n">hook</span><span class="o">-</span><span class="n">stage</span> <span class="n">manual</span> <span class="o">--</span><span class="nb">all</span><span class="o">-</span><span class="n">files</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>你可能希望定期运行 <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">gc</span></code>，以清理不再使用的仓库。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果你的 <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> 安装冲突，则可能会出现错误——请参阅<a class="reference external" href="https://github.com/pypa/virtualenv/issues/1875">此处</a>。</p>
+<p>此外，由于<a class="reference external" href="https://github.com/pypa/virtualenv/issues/1986">virtualenv 中的一个 bug</a>，如果你使用 conda，可能会遇到问题。要解决此问题，你可以将 <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> 降级到版本 <code class="docutils literal notranslate"><span class="pre">20.0.33</span></code>。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果你最近从上游分支合并了 main，则 <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> 使用的一些依赖项可能已更改。请确保<a class="reference internal" href="contributing.html#contributing-update-dev"><span class="std std-ref">更新你的开发环境</span></a>。</p>
+</div>
+</section>
+<section id="optional-dependencies">
+<h2><a class="toc-backref" href="contributing_codebase.html#id4" role="doc-backlink">可选依赖</a><a class="headerlink" href="contributing_codebase.html#optional-dependencies" title="此标题的链接">#</a></h2>
+<p>可选依赖项（例如 matplotlib）应使用私有辅助函数 <code class="docutils literal notranslate"><span class="pre">pandas.compat._optional.import_optional_dependency</span></code> 导入。这确保了当依赖项未满足时，会有一致的错误消息。</p>
+<p>所有使用可选依赖项的方法都应包含一个测试，断言当找不到可选依赖项时会引发 <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>。如果该库存在，则应跳过此测试。</p>
+<p>所有可选依赖项都应在<a class="reference internal" href="../getting_started/install.html#install-optional-dependencies"><span class="std std-ref">可选依赖项</span></a>中进行文档化，并且最小所需版本应在 <code class="docutils literal notranslate"><span class="pre">pandas.compat._optional.VERSIONS</span></code> 字典中设置。</p>
+</section>
+<section id="backwards-compatibility">
+<h2><a class="toc-backref" href="contributing_codebase.html#id5" role="doc-backlink">向后兼容性</a><a class="headerlink" href="contributing_codebase.html#backwards-compatibility" title="此标题的链接">#</a></h2>
+<p>请尽量保持向后兼容性。pandas 有很多用户和大量的现有代码，所以如果可能，请不要破坏它们。如果你认为需要破坏，请在拉取请求中清楚说明原因。此外，更改方法签名时要小心，并在需要时添加弃用警告。同时，将 deprecated sphinx 指令添加到已弃用的函数或方法中。</p>
+<p>如果存在与被弃用函数具有相同参数的函数，你可以使用 <code class="docutils literal notranslate"><span class="pre">pandas.util._decorators.deprecate</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.util._decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">deprecate</span>
+
+<span class="n">deprecate</span><span class="p">(</span><span class="s1">'old_func'</span><span class="p">,</span> <span class="s1">'new_func'</span><span class="p">,</span> <span class="s1">'1.1.0'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>否则，你需要手动完成</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandas.util._exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_stack_level</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">old_func</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Summary of the function.</span>
+
+<span class="sd">    .. deprecated:: 1.1.0</span>
+<span class="sd">       Use new_func instead.</span>
+<span class="sd">    """</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s1">'Use new_func instead.'</span><span class="p">,</span>
+        <span class="ne">FutureWarning</span><span class="p">,</span>
+        <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="n">new_func</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">new_func</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>你还需要</p>
+<ol class="arabic simple">
+<li><p>编写一个新测试，断言在调用弃用参数时会发出警告</p></li>
+<li><p>更新所有 pandas 现有测试和代码以使用新参数</p></li>
+</ol>
+<p>更多信息请参阅<a class="reference internal" href="contributing_codebase.html#contributing-warnings"><span class="std std-ref">测试警告</span></a>。</p>
+</section>
+<section id="type-hints">
+<span id="contributing-type-hints"></span><h2><a class="toc-backref" href="contributing_codebase.html#id6" role="doc-backlink">类型提示</a><a class="headerlink" href="contributing_codebase.html#type-hints" title="此标题的链接">#</a></h2>
+<p>pandas 强烈鼓励使用<span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.pythonlang.cn/pep-0484/"><strong>PEP 484</strong></a> 风格的类型提示。新的开发应该包含类型提示，并且接受对现有代码进行标注的拉取请求！</p>
+<section id="style-guidelines">
+<h3><a class="toc-backref" href="contributing_codebase.html#id7" role="doc-backlink">风格指南</a><a class="headerlink" href="contributing_codebase.html#style-guidelines" title="此标题的链接">#</a></h3>
+<p>类型导入应遵循 <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">typing</span> <span class="pre">import</span> <span class="pre">...</span></code> 约定。你的代码可能会被 <a class="reference internal" href="contributing_codebase.html#contributing-pre-commit"><span class="std std-ref">pre-commit 检查</span></a>自动重写以使用一些现代结构（例如使用内置的 <code class="docutils literal notranslate"><span class="pre">list</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">typing.List</span></code>）。</p>
+<p>在代码库中，有些情况下类可能会定义遮蔽内置类型的类变量。这会导致 <a class="reference external" href="https://github.com/python/mypy/issues/1775#issuecomment-310969854">Mypy 1775</a> 中描述的问题。这里的防御性解决方案是创建内置类型的一个明确别名，并在你的注解中使用它。例如，如果你遇到以下定义：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeClass1</span><span class="p">:</span>
+    <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>正确的注解方式如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">str_type</span> <span class="o">=</span> <span class="nb">str</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SomeClass2</span><span class="p">:</span>
+    <span class="nb">str</span><span class="p">:</span> <span class="n">str_type</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>在某些情况下，当你知道分析器无法更好地理解时，你可能会倾向于使用 typing 模块中的 <code class="docutils literal notranslate"><span class="pre">cast</span></code>。这在使用自定义推理函数时尤其常见。例如：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">cast</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.dtypes.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_number</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cannot_infer_bad</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
+
+    <span class="k">if</span> <span class="n">is_number</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+        <span class="o">...</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Reasonably only str objects would reach this but...</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>  <span class="c1"># Mypy complains without this!</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>这里的限制是，虽然人类可以合理地理解 <code class="docutils literal notranslate"><span class="pre">is_number</span></code> 会捕获 <code class="docutils literal notranslate"><span class="pre">int</span></code> 和 <code class="docutils literal notranslate"><span class="pre">float</span></code> 类型，但 mypy 尚无法做出相同的推理（参见 <a class="reference external" href="https://github.com/python/mypy/issues/5206">mypy #5206</a>）。虽然上述方法有效，但**强烈不鼓励**使用 <code class="docutils literal notranslate"><span class="pre">cast</span></code>。在适用情况下，重构代码以适应静态分析是更可取的：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cannot_infer_good</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>对于自定义类型和推理，这并非总是可能，因此会做出例外，但应尽一切努力避免使用 <code class="docutils literal notranslate"><span class="pre">cast</span></code>。</p>
+</section>
+<section id="pandas-specific-types">
+<h3><a class="toc-backref" href="contributing_codebase.html#id8" role="doc-backlink">pandas 特定类型</a><a class="headerlink" href="contributing_codebase.html#pandas-specific-types" title="此标题的链接">#</a></h3>
+<p>pandas 特定的常用类型将出现在 <a class="reference external" href="https://github.com/pandas-dev/pandas/blob/main/pandas/_typing.py">pandas._typing</a> 中，你应该在适用情况下使用它们。此模块目前是私有的，但最终应将其公开给希望对 pandas 进行类型检查的第三方库。</p>
+<p>例如，pandas 中有相当多的函数接受 <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 参数。这可以表示为字符串，如 <code class="docutils literal notranslate"><span class="pre">"object"</span></code>，一个 <code class="docutils literal notranslate"><span class="pre">numpy.dtype</span></code>，如 <code class="docutils literal notranslate"><span class="pre">np.int64</span></code>，甚至是一个 pandas <code class="docutils literal notranslate"><span class="pre">ExtensionDtype</span></code>，如 <code class="docutils literal notranslate"><span class="pre">pd.CategoricalDtype</span></code>。与其让用户不得不持续标注所有这些选项，不如简单地从 pandas._typing 模块导入并重用它：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dtype</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">as_type</span><span class="p">(</span><span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">...</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>此模块最终将包含“路径类”、“数组类”、“数字”等重复使用的概念的类型……并且还可以保存常用参数（如 <code class="docutils literal notranslate"><span class="pre">axis</span></code>）的别名。此模块正在积极开发中，因此请务必参考源代码以获取最新可用的类型列表。</p>
+</section>
+<section id="validating-type-hints">
+<h3><a class="toc-backref" href="contributing_codebase.html#id9" role="doc-backlink">验证类型提示</a><a class="headerlink" href="contributing_codebase.html#validating-type-hints" title="此标题的链接">#</a></h3>
+<p>pandas 使用 <a class="reference external" href="http://mypy-lang.org">mypy</a> 和 <a class="reference external" href="https://github.com/microsoft/pyright">pyright</a> 对代码库和类型提示进行静态分析。在进行任何更改后，你可以通过运行以下命令来确保类型提示一致：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>--hook-stage<span class="w"> </span>manual<span class="w"> </span>--all-files<span class="w"> </span>mypy
+pre-commit<span class="w"> </span>run<span class="w"> </span>--hook-stage<span class="w"> </span>manual<span class="w"> </span>--all-files<span class="w"> </span>pyright
+pre-commit<span class="w"> </span>run<span class="w"> </span>--hook-stage<span class="w"> </span>manual<span class="w"> </span>--all-files<span class="w"> </span>pyright_reportGeneralTypeIssues
+<span class="c1"># the following might fail if the installed pandas version does not correspond to your local git version</span>
+pre-commit<span class="w"> </span>run<span class="w"> </span>--hook-stage<span class="w"> </span>manual<span class="w"> </span>--all-files<span class="w"> </span>stubtest
+</pre></div>
+</div>
+<p>在你的 python 环境中。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<ul class="simple">
+<li><p>请注意，上述命令将使用当前的 python 环境。如果你的 python 包比 pandas CI 安装的更旧/更新，上述命令可能会失败。这通常发生在 <code class="docutils literal notranslate"><span class="pre">mypy</span></code> 或 <code class="docutils literal notranslate"><span class="pre">numpy</span></code> 版本不匹配时。请参阅<a class="reference internal" href="contributing_environment.html#contributing-mamba"><span class="std std-ref">如何设置 python 环境</span></a>或选择一个<a class="reference external" href="https://github.com/pandas-dev/pandas/actions/workflows/code-checks.yml?query=branch%3Amain+is%3Asuccess">最近成功的流程</a>，选择“Docstring validation, typing, and other manual pre-commit hooks”任务，然后点击“Set up Conda”和“Environment info”以查看 pandas CI 安装了哪些版本。</p></li>
+</ul>
+</div>
+</section>
+<section id="testing-type-hints-in-code-using-pandas">
+<span id="contributing-ci"></span><h3><a class="toc-backref" href="contributing_codebase.html#id10" role="doc-backlink">在使用 pandas 的代码中测试类型提示</a><a class="headerlink" href="contributing_codebase.html#testing-type-hints-in-code-using-pandas" title="此标题的链接">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<ul class="simple">
+<li><p>Pandas 尚未成为 py.typed 库（<span class="target" id="index-1"></span><a class="pep reference external" href="https://peps.pythonlang.cn/pep-0561/"><strong>PEP 561</strong></a>）！在本地将 pandas 声明为 py.typed 库的主要目的是测试和改进 pandas 内置的类型注解。</p></li>
+</ul>
+</div>
+<p>在 pandas 成为 py.typed 库之前，可以通过在 pandas 安装文件夹中创建一个名为“py.typed”的空文件来轻松试用 pandas 附带的类型注解。</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -c "import pandas; import pathlib; (pathlib.Path(pandas.__path__[0]) / 'py.typed').touch()"
+</pre></div>
+</div>
+<p>py.typed 文件的存在向类型检查器发出信号，表明 pandas 已经是一个 py.typed 库。这使得类型检查器能够识别 pandas 附带的类型注解。</p>
+</section>
+</section>
+<section id="testing-with-continuous-integration">
+<h2><a class="toc-backref" href="contributing_codebase.html#id11" role="doc-backlink">使用持续集成进行测试</a><a class="headerlink" href="contributing_codebase.html#testing-with-continuous-integration" title="此标题的链接">#</a></h2>
+<p>一旦你的拉取请求提交，pandas 测试套件将自动在 <a class="reference external" href="https://github.com/features/actions/">GitHub Actions</a> 持续集成服务上运行。但是，如果你希望在提交拉取请求之前在分支上运行测试套件，则需要将持续集成服务连接到你的 GitHub 仓库。GitHub Actions 的说明<a class="reference external" href="https://githubdocs.cn/en/actions/">在此处</a>。</p>
+<p>当你的构建全部“绿色”时，拉取请求将被考虑合并。如果任何测试失败，你将看到一个红色的“X”，你可以点击查看单个失败的测试。这是一个绿色构建的示例。</p>
+<img alt="../_images/ci.png" src="../_images/ci.png">
+</section>
+<section id="test-driven-development">
+<span id="contributing-tdd"></span><h2><a class="toc-backref" href="contributing_codebase.html#id12" role="doc-backlink">测试驱动开发</a><a class="headerlink" href="contributing_codebase.html#test-driven-development" title="此标题的链接">#</a></h2>
+<p>pandas 非常重视测试，并强烈鼓励贡献者采纳<a class="reference external" href="https://en.wikipedia.org/wiki/Test-driven_development">测试驱动开发（TDD）</a>。这个开发过程“依赖于一个非常短的开发周期的重复：首先开发者编写一个（最初会失败的）自动化测试用例，定义所需的改进或新功能，然后生成最少的代码以通过该测试。”所以，在实际编写任何代码之前，你应该先编写测试。测试通常可以从原始的 GitHub Issue 中获取。但是，始终值得考虑额外的用例并编写相应的测试。</p>
+<p>在代码推送到 pandas 后，最常见的请求之一就是添加测试。因此，养成提前编写测试的习惯是很值得的，这样就永远不会成为问题。</p>
+<section id="writing-tests">
+<h3><a class="toc-backref" href="contributing_codebase.html#id13" role="doc-backlink">编写测试</a><a class="headerlink" href="contributing_codebase.html#writing-tests" title="此标题的链接">#</a></h3>
+<p>所有测试都应放在特定包的 <code class="docutils literal notranslate"><span class="pre">tests</span></code> 子目录中。此文件夹包含许多当前的测试示例，我们建议你参考这些示例以获取灵感。</p>
+<p>作为一般提示，你可以在集成开发环境（IDE）中使用搜索功能，或在终端中使用 git grep 命令来查找调用该方法的测试文件。如果你不确定放置测试的最佳位置，可以先猜测一下，但请注意，审阅者可能会要求你将测试移动到其他位置。</p>
+<p>要使用 git grep，你可以在终端中运行以下命令：</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">grep</span> <span class="pre">"function_name("</span></code></p>
+<p>这将在你的仓库中搜索文本 <code class="docutils literal notranslate"><span class="pre">function_name(</span></code> 的所有文件。这是一种快速定位代码库中函数并确定为其添加测试的最佳位置的有用方法。</p>
+<p>理想情况下，一个测试应该只有一个显而易见的位置。在达到这个理想之前，以下是一些关于测试应放在哪里的经验法则。</p>
+<ol class="arabic">
+<li><p>你的测试是否仅依赖于 <code class="docutils literal notranslate"><span class="pre">pd._libs.tslibs</span></code> 中的代码？此测试可能属于以下之一：</p>
+<ul>
+<li><p>tests.tslibs</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><code class="docutils literal notranslate"><span class="pre">tests.tslibs</span></code> 中的任何文件都不应从 <code class="docutils literal notranslate"><span class="pre">pd._libs.tslibs</span></code> 之外的任何 pandas 模块导入。</p>
+</div>
+</li>
+<li><p>tests.scalar</p></li>
+<li><p>tests.tseries.offsets</p></li>
+</ul>
+</li>
+<li><p>你的测试是否只依赖于 pd._libs 中的代码？这个测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.libs</p></li>
+<li><p>tests.groupby.test_libgroupby</p></li>
+</ul>
+</li>
+<li><p>你的测试是针对算术或比较方法吗？此测试可能属于以下之一：</p>
+<ul>
+<li><p>tests.arithmetic</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>这些旨在用于使用 <code class="docutils literal notranslate"><span class="pre">box_with_array</span></code> fixture 测试 DataFrame/Series/Index/ExtensionArray 行为的共享测试。</p>
+</div>
+</li>
+<li><p>tests.frame.test_arithmetic</p></li>
+<li><p>tests.series.test_arithmetic</p></li>
+</ul>
+</li>
+<li><p>你的测试是针对归约方法（min, max, sum, prod, …）吗？此测试可能属于以下之一：</p>
+<ul>
+<li><p>tests.reductions</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>这些旨在用于测试 DataFrame/Series/Index/ExtensionArray 行为的共享测试。</p>
+</div>
+</li>
+<li><p>tests.frame.test_reductions</p></li>
+<li><p>tests.series.test_reductions</p></li>
+<li><p>tests.test_nanops</p></li>
+</ul>
+</li>
+<li><p>你的测试是针对索引方法吗？这是决定测试归属位置最困难的情况，因为有许多这样的测试，并且其中许多测试不止一个方法（例如 <code class="docutils literal notranslate"><span class="pre">Series.__getitem__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Series.loc.__getitem__</span></code>）</p>
+<ol class="upperalpha">
+<li><p>此测试是否专门测试 Index 方法（例如 <code class="docutils literal notranslate"><span class="pre">Index.get_loc</span></code>, <code class="docutils literal notranslate"><span class="pre">Index.get_indexer</span></code>）？此测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.indexes.test_indexing</p></li>
+<li><p>tests.indexes.fooindex.test_indexing</p></li>
+</ul>
+<p>在这些文件内应有一个针对特定方法的测试类，例如 <code class="docutils literal notranslate"><span class="pre">TestGetLoc</span></code>。</p>
+<p>在大多数情况下，这些测试中不应需要 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 对象。</p>
+</li>
+<li><p>该测试是否针对 <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> 或 <code class="docutils literal notranslate"><span class="pre">__setitem__</span></code> 之外的 Series 或 DataFrame 索引方法，例如 <code class="docutils literal notranslate"><span class="pre">xs</span></code>、<code class="docutils literal notranslate"><span class="pre">where</span></code>、<code class="docutils literal notranslate"><span class="pre">take</span></code>、<code class="docutils literal notranslate"><span class="pre">mask</span></code>、<code class="docutils literal notranslate"><span class="pre">lookup</span></code> 或 <code class="docutils literal notranslate"><span class="pre">insert</span></code>？此测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.frame.indexing.test_methodname</p></li>
+<li><p>tests.series.indexing.test_methodname</p></li>
+</ul>
+</li>
+<li><p>此测试是否针对 <code class="docutils literal notranslate"><span class="pre">loc</span></code>、<code class="docutils literal notranslate"><span class="pre">iloc</span></code>、<code class="docutils literal notranslate"><span class="pre">at</span></code> 或 <code class="docutils literal notranslate"><span class="pre">iat</span></code> 中的任何一个？此测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.indexing.test_loc</p></li>
+<li><p>tests.indexing.test_iloc</p></li>
+<li><p>tests.indexing.test_at</p></li>
+<li><p>tests.indexing.test_iat</p></li>
+</ul>
+<p>在相应文件中，测试类对应于索引器类型（例如 <code class="docutils literal notranslate"><span class="pre">TestLocBooleanMask</span></code>）或主要用例（例如 <code class="docutils literal notranslate"><span class="pre">TestLocSetitemWithExpansion</span></code>）。</p>
+<p>有关测试多个索引方法的测试，请参阅 D) 部分中的注释。</p>
+</li>
+<li><p>该测试是否针对 <code class="docutils literal notranslate"><span class="pre">Series.__getitem__</span></code>、<code class="docutils literal notranslate"><span class="pre">Series.__setitem__</span></code>、<code class="docutils literal notranslate"><span class="pre">DataFrame.__getitem__</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame.__setitem__</span></code>？此测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.series.test_getitem</p></li>
+<li><p>tests.series.test_setitem</p></li>
+<li><p>tests.frame.test_getitem</p></li>
+<li><p>tests.frame.test_setitem</p></li>
+</ul>
+<p>在许多情况下，此类测试可能会测试多个相似的方法，例如</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas._testing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tm</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_getitem_listlike_of_ints</span><span class="p">():</span>
+    <span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">ser</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">tm</span><span class="o">.</span><span class="n">assert_series_equal</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+    <span class="n">tm</span><span class="o">.</span><span class="n">assert_series_equal</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<div><p>在这种情况下，测试位置应基于正在测试的*底层*方法。或者在错误修复测试的情况下，基于实际错误的发生位置。因此在此示例中，我们知道 <code class="docutils literal notranslate"><span class="pre">Series.__getitem__</span></code> 调用 <code class="docutils literal notranslate"><span class="pre">Series.loc.__getitem__</span></code>，所以这*实际上*是对 <code class="docutils literal notranslate"><span class="pre">loc.__getitem__</span></code> 的测试。因此此测试属于 <code class="docutils literal notranslate"><span class="pre">tests.indexing.test_loc</span></code>。</p>
+</div></blockquote>
+</li>
+<li><p>你的测试是针对 DataFrame 或 Series 方法吗？</p>
+<ol class="upperalpha">
+<li><p>该方法是绘图方法吗？此测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.plotting</p></li>
+</ul>
+</li>
+<li><p>该方法是 I/O 方法吗？此测试可能属于以下之一：</p>
+<ul>
+<li><p>tests.io</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>这包括 <code class="docutils literal notranslate"><span class="pre">to_string</span></code>，但不包括 <code class="docutils literal notranslate"><span class="pre">__repr__</span></code>，后者在 <code class="docutils literal notranslate"><span class="pre">tests.frame.test_repr</span></code> 和 <code class="docutils literal notranslate"><span class="pre">tests.series.test_repr</span></code> 中测试。其他类通常有 <code class="docutils literal notranslate"><span class="pre">test_formats</span></code> 文件。</p>
+</div>
+</li>
+</ul>
+</li>
+<li><p>否则，此测试可能属于以下之一：</p>
+<ul>
+<li><p>tests.series.methods.test_mymethod</p></li>
+<li><p>tests.frame.methods.test_mymethod</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果一个测试可以使用 <code class="docutils literal notranslate"><span class="pre">frame_or_series</span></code> fixture 在 DataFrame/Series 之间共享，按照惯例，它应放在 <code class="docutils literal notranslate"><span class="pre">tests.frame</span></code> 文件中。</p>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>你的测试是针对 Index 方法，不依赖于 Series/DataFrame 吗？此测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.indexes</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="8">
+<li><p>你的测试是否针对 pandas 提供的 ExtensionArrays（<code class="docutils literal notranslate"><span class="pre">Categorical</span></code>、<code class="docutils literal notranslate"><span class="pre">DatetimeArray</span></code>、<code class="docutils literal notranslate"><span class="pre">TimedeltaArray</span></code>、<code class="docutils literal notranslate"><span class="pre">PeriodArray</span></code>、<code class="docutils literal notranslate"><span class="pre">IntervalArray</span></code>、<code class="docutils literal notranslate"><span class="pre">NumpyExtensionArray</span></code>、<code class="docutils literal notranslate"><span class="pre">FloatArray</span></code>、<code class="docutils literal notranslate"><span class="pre">BoolArray</span></code>、<code class="docutils literal notranslate"><span class="pre">StringArray</span></code>）？此测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.arrays</p></li>
+</ul>
+</li>
+<li><p>你的测试是否针对*所有* ExtensionArray 子类（即“EA 接口”）？此测试可能属于以下之一：</p>
+<ul class="simple">
+<li><p>tests.extension</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="using-pytest">
+<h3><a class="toc-backref" href="contributing_codebase.html#id14" role="doc-backlink">使用 <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><a class="headerlink" href="contributing_codebase.html#using-pytest" title="此标题的链接">#</a></h3>
+<section id="test-structure">
+<h4><a class="toc-backref" href="contributing_codebase.html#id15" role="doc-backlink">测试结构</a><a class="headerlink" href="contributing_codebase.html#test-structure" title="此标题的链接">#</a></h4>
+<p>pandas 现有的测试结构*大多*是基于类的，这意味着你通常会发现测试被封装在一个类中。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestReallyCoolFeature</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_cool_feature_aspect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>我们更倾向于使用 <a class="reference external" href="https://pytest.cn/en/latest/">pytest</a> 框架的*函数式*风格，它提供了更丰富的测试框架，这将有助于测试和开发。因此，我们将编写测试函数，而不是编写测试类，如下所示：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_really_cool_feature</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="preferred-pytest-idioms">
+<h4><a class="toc-backref" href="contributing_codebase.html#id16" role="doc-backlink">首选的 <code class="docutils literal notranslate"><span class="pre">pytest</span></code> 惯用法</a><a class="headerlink" href="contributing_codebase.html#preferred-pytest-idioms" title="此标题的链接">#</a></h4>
+<ul class="simple">
+<li><p>函数式测试命名为 <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">test_*</span></code>，并且*只*接受 fixture 或参数作为参数。</p></li>
+<li><p>对于测试标量和真值测试，使用裸露的 <code class="docutils literal notranslate"><span class="pre">assert</span></code></p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">tm.assert_series_equal(result,</span> <span class="pre">expected)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">tm.assert_frame_equal(result,</span> <span class="pre">expected)</span></code> 分别比较 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的结果。</p></li>
+<li><p>测试多个用例时使用 <a class="reference external" href="https://pytest.cn/en/latest/how-to/parametrize.html">@pytest.mark.parametrize</a>。</p></li>
+<li><p>当测试用例预期会失败时，使用 <a class="reference external" href="https://pytest.cn/en/latest/reference/reference.html?#pytest.mark.xfail">pytest.mark.xfail</a>。</p></li>
+<li><p>当测试用例永远不会通过时，使用 <a class="reference external" href="https://pytest.cn/en/latest/reference/reference.html?#pytest.mark.skip">pytest.mark.skip</a>。</p></li>
+<li><p>当测试用例需要特定标记时，使用 <a class="reference external" href="https://pytest.cn/en/latest/reference/reference.html?#pytest-param">pytest.param</a>。</p></li>
+<li><p>如果多个测试可以共享一个设置对象，使用 <a class="reference external" href="https://pytest.cn/en/latest/reference/reference.html?#pytest-fixture">@pytest.fixture</a>。</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>不要使用 <code class="docutils literal notranslate"><span class="pre">pytest.xfail</span></code>（它与 <code class="docutils literal notranslate"><span class="pre">pytest.mark.xfail</span></code> 不同），因为它会立即停止测试，并且不检查测试是否会失败。如果你希望实现这种行为，请改用 <code class="docutils literal notranslate"><span class="pre">pytest.skip</span></code>。</p>
+</div>
+<p>如果已知测试会失败但失败方式不应被捕获，请使用 <code class="docutils literal notranslate"><span class="pre">pytest.mark.xfail</span></code>。通常用于测试表现出bug行为或未实现功能的情况。如果失败的测试具有不稳定的行为，请使用参数 <code class="docutils literal notranslate"><span class="pre">strict=False</span></code>。这将使 pytest 在测试意外通过时不会失败。使用 <code class="docutils literal notranslate"><span class="pre">strict=False</span></code> 非常不理想，请仅作为最后手段使用。</p>
+<p>优先使用装饰器 <code class="docutils literal notranslate"><span class="pre">@pytest.mark.xfail</span></code> 和参数 <code class="docutils literal notranslate"><span class="pre">pytest.param</span></code>，而不是在测试内部使用，以便在 pytest 的收集阶段正确标记测试。对于涉及多个参数、fixture 或这些组合的测试，只能在测试阶段进行 xfail。为此，请使用 <code class="docutils literal notranslate"><span class="pre">request</span></code> fixture：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_xfail</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">mark</span> <span class="o">=</span> <span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">raises</span><span class="o">=</span><span class="ne">TypeError</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">"Indicate why here"</span><span class="p">)</span>
+    <span class="n">request</span><span class="o">.</span><span class="n">applymarker</span><span class="p">(</span><span class="n">mark</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>xfail 不应用于涉及因无效用户参数而失败的测试。对于这些测试，我们需要使用 <code class="docutils literal notranslate"><span class="pre">pytest.raises</span></code> 验证是否抛出了正确的异常类型和错误消息。</p>
+</section>
+<section id="testing-a-warning">
+<span id="contributing-warnings"></span><h4><a class="toc-backref" href="contributing_codebase.html#id17" role="doc-backlink">测试警告</a><a class="headerlink" href="contributing_codebase.html#testing-a-warning" title="此标题的链接">#</a></h4>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">tm.assert_produces_warning</span></code> 作为上下文管理器，以检查代码块是否引发警告。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tm</span><span class="o">.</span><span class="n">assert_produces_warning</span><span class="p">(</span><span class="ne">DeprecationWarning</span><span class="p">):</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">deprecated_function</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>如果某个代码块中不应出现警告，请将 <code class="docutils literal notranslate"><span class="pre">False</span></code> 传递给上下文管理器。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tm</span><span class="o">.</span><span class="n">assert_produces_warning</span><span class="p">(</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">no_warning_function</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>如果你有一个会发出警告的测试，但你实际上并不是在测试警告本身（例如因为它将来会被移除，或者因为我们正在匹配第三方库的行为），那么请使用 <code class="docutils literal notranslate"><span class="pre">pytest.mark.filterwarnings</span></code> 来忽略该错误。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore:msg:category"</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_thing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-an-exception">
+<h4><a class="toc-backref" href="contributing_codebase.html#id18" role="doc-backlink">测试异常</a><a class="headerlink" href="contributing_codebase.html#testing-an-exception" title="此标题的链接">#</a></h4>
+<p>使用 <a class="reference external" href="https://pytest.cn/en/latest/reference/reference.html#pytest-raises">pytest.raises</a> 作为上下文管理器，指定具体的异常子类（即绝不使用 <a class="reference external" href="https://docs.pythonlang.cn/3/library/exceptions.html#Exception" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a>），并在 <code class="docutils literal notranslate"><span class="pre">match</span></code> 中指定异常消息。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">"an error"</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"an error"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-involving-files">
+<h4><a class="toc-backref" href="contributing_codebase.html#id19" role="doc-backlink">涉及文件的测试</a><a class="headerlink" href="contributing_codebase.html#testing-involving-files" title="此标题的链接">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">tm.ensure_clean</span></code> 上下文管理器创建一个用于测试的临时文件，带有生成的文件名（如果提供则使用你指定的文件名），当上下文块退出时会自动删除。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tm</span><span class="o">.</span><span class="n">ensure_clean</span><span class="p">(</span><span class="s1">'my_file_path'</span><span class="p">)</span> <span class="k">as</span> <span class="n">path</span><span class="p">:</span>
+    <span class="c1"># do something with the path</span>
+</pre></div>
+</div>
+</section>
+<section id="testing-involving-network-connectivity">
+<h4><a class="toc-backref" href="contributing_codebase.html#id20" role="doc-backlink">涉及网络连接的测试</a><a class="headerlink" href="contributing_codebase.html#testing-involving-network-connectivity" title="此标题的链接">#</a></h4>
+<p>单元测试不应通过互联网访问公共数据集，因为网络连接不稳定且无法拥有所连接的服务器。为了模拟这种交互，请使用 <a class="reference external" href="https://github.com/pytest-dev/pytest-localserver">pytest-localserver 插件</a>中的 <code class="docutils literal notranslate"><span class="pre">httpserver</span></code> fixture 配合合成数据。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">network</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">single_cpu</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_network</span><span class="p">(</span><span class="n">httpserver</span><span class="p">):</span>
+    <span class="n">httpserver</span><span class="o">.</span><span class="n">serve_content</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">"content"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">httpserver</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example">
+<h4><a class="toc-backref" href="contributing_codebase.html#id21" role="doc-backlink">示例</a><a class="headerlink" href="contributing_codebase.html#example" title="此标题的链接">#</a></h4>
+<p>这是一个自包含测试集在文件 <code class="docutils literal notranslate"><span class="pre">pandas/tests/test_cool_feature.py</span></code> 中的示例，它展示了我们喜欢使用的多个功能。请记住在新的测试中添加 GitHub Issue 编号作为注释。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">'dtype'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'int8'</span><span class="p">,</span> <span class="s1">'int16'</span><span class="p">,</span> <span class="s1">'int32'</span><span class="p">,</span> <span class="s1">'int64'</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dtypes</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">))</span> <span class="o">==</span> <span class="n">dtype</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span>
+    <span class="s1">'dtype'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'float32'</span><span class="p">,</span> <span class="n">pytest</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="s1">'int16'</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skip</span><span class="p">),</span>
+              <span class="n">pytest</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="s1">'int32'</span><span class="p">,</span> <span class="n">marks</span><span class="o">=</span><span class="n">pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span>
+                  <span class="n">reason</span><span class="o">=</span><span class="s1">'to show how it works'</span><span class="p">))])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_mark</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">))</span> <span class="o">==</span> <span class="s1">'float32'</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">series</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="s1">'int8'</span><span class="p">,</span> <span class="s1">'int16'</span><span class="p">,</span> <span class="s1">'int32'</span><span class="p">,</span> <span class="s1">'int64'</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dtype</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">param</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_series</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">dtype</span><span class="p">):</span>
+    <span class="c1"># GH &lt;issue_number&gt;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">dtype</span>
+
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">tm</span><span class="o">.</span><span class="n">assert_series_equal</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>运行此测试会产生</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">((</span>pandas<span class="o">)</span><span class="w"> </span>bash-3.2$<span class="w"> </span>pytest<span class="w">  </span>test_cool_feature.py<span class="w">  </span>-v
+<span class="o">===========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">===========================</span>
+platform<span class="w"> </span>darwin<span class="w"> </span>--<span class="w"> </span>Python<span class="w"> </span><span class="m">3</span>.6.2,<span class="w"> </span>pytest-3.6.0,<span class="w"> </span>py-1.4.31,<span class="w"> </span>pluggy-0.4.0
+collected<span class="w"> </span><span class="m">11</span><span class="w"> </span>items
+
+tester.py::test_dtypes<span class="o">[</span>int8<span class="o">]</span><span class="w"> </span>PASSED
+tester.py::test_dtypes<span class="o">[</span>int16<span class="o">]</span><span class="w"> </span>PASSED
+tester.py::test_dtypes<span class="o">[</span>int32<span class="o">]</span><span class="w"> </span>PASSED
+tester.py::test_dtypes<span class="o">[</span>int64<span class="o">]</span><span class="w"> </span>PASSED
+tester.py::test_mark<span class="o">[</span>float32<span class="o">]</span><span class="w"> </span>PASSED
+tester.py::test_mark<span class="o">[</span>int16<span class="o">]</span><span class="w"> </span>SKIPPED
+tester.py::test_mark<span class="o">[</span>int32<span class="o">]</span><span class="w"> </span>xfail
+tester.py::test_series<span class="o">[</span>int8<span class="o">]</span><span class="w"> </span>PASSED
+tester.py::test_series<span class="o">[</span>int16<span class="o">]</span><span class="w"> </span>PASSED
+tester.py::test_series<span class="o">[</span>int32<span class="o">]</span><span class="w"> </span>PASSED
+tester.py::test_series<span class="o">[</span>int64<span class="o">]</span><span class="w"> </span>PASSED
+</pre></div>
+</div>
+<p>我们已 <code class="docutils literal notranslate"><span class="pre">parametrized</span></code> 的测试现在可通过测试名称访问，例如，我们可以使用 <code class="docutils literal notranslate"><span class="pre">-k</span> <span class="pre">int8</span></code> 运行这些测试，以*仅*选择匹配 <code class="docutils literal notranslate"><span class="pre">int8</span></code> 的测试。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">((</span>pandas<span class="o">)</span><span class="w"> </span>bash-3.2$<span class="w"> </span>pytest<span class="w">  </span>test_cool_feature.py<span class="w">  </span>-v<span class="w"> </span>-k<span class="w"> </span><span class="nv">int8</span>
+<span class="o">===========================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">===========================</span>
+platform<span class="w"> </span>darwin<span class="w"> </span>--<span class="w"> </span>Python<span class="w"> </span><span class="m">3</span>.6.2,<span class="w"> </span>pytest-3.6.0,<span class="w"> </span>py-1.4.31,<span class="w"> </span>pluggy-0.4.0
+collected<span class="w"> </span><span class="m">11</span><span class="w"> </span>items
+
+test_cool_feature.py::test_dtypes<span class="o">[</span>int8<span class="o">]</span><span class="w"> </span>PASSED
+test_cool_feature.py::test_series<span class="o">[</span>int8<span class="o">]</span><span class="w"> </span>PASSED
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-hypothesis">
+<span id="id1"></span><h3><a class="toc-backref" href="contributing_codebase.html#id22" role="doc-backlink">使用 <code class="docutils literal notranslate"><span class="pre">hypothesis</span></code></a><a class="headerlink" href="contributing_codebase.html#using-hypothesis" title="此标题的链接">#</a></h3>
+<p>Hypothesis 是一个用于基于属性测试的库。你无需明确地参数化测试，而是可以描述*所有*有效的输入，然后让 Hypothesis 尝试找到失败的输入。更棒的是，无论它尝试了多少随机示例，Hypothesis 总是会报告一个单一的、最小的反例来验证你的断言——这通常是一个你从未想过要测试的例子。</p>
+<p>有关更多介绍，请参阅<a class="reference external" href="https://hypothesis.works/articles/getting-started-with-hypothesis/">Hypothesis 入门</a>，然后<a class="reference external" href="https://hypothesis.readthedocs.io/en/latest/index.html">参考 Hypothesis 文档了解详细信息</a>。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">hypothesis</span><span class="w"> </span><span class="kn">import</span> <span class="n">given</span><span class="p">,</span> <span class="n">strategies</span> <span class="k">as</span> <span class="n">st</span>
+
+<span class="n">any_json_value</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">deferred</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">st</span><span class="o">.</span><span class="n">one_of</span><span class="p">(</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">none</span><span class="p">(),</span> <span class="n">st</span><span class="o">.</span><span class="n">booleans</span><span class="p">(),</span> <span class="n">st</span><span class="o">.</span><span class="n">floats</span><span class="p">(</span><span class="n">allow_nan</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">lists</span><span class="p">(</span><span class="n">any_json_value</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">dictionaries</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="n">any_json_value</span><span class="p">)</span>
+<span class="p">))</span>
+
+
+<span class="nd">@given</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">any_json_value</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_json_roundtrip</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">value</span> <span class="o">==</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>这个测试展示了 Hypothesis 的几个有用功能，并演示了一个很好的用例：检查应该在大量或复杂输入域中成立的属性。</p>
+<p>为了保持 pandas 测试套件运行快速，如果输入或逻辑简单，则首选参数化测试，而 Hypothesis 测试则保留用于逻辑复杂或有太多选项组合或微妙交互需要测试（或考虑！）所有这些情况。</p>
+</section>
+</section>
+<section id="running-the-test-suite">
+<span id="contributing-running-tests"></span><h2><a class="toc-backref" href="contributing_codebase.html#id23" role="doc-backlink">运行测试套件</a><a class="headerlink" href="contributing_codebase.html#running-the-test-suite" title="此标题的链接">#</a></h2>
+<p>然后，你可以直接在 Git 克隆中运行测试（无需安装 pandas），方法是输入：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">pandas</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果少数测试未通过，这可能不是你的 pandas 安装问题。某些测试（例如某些 SQLAlchemy 测试）需要额外设置，其他测试可能因为非固定库发布新版本而开始失败，还有一些测试在并行运行时可能会不稳定。只要你能从本地构建的版本中导入 pandas，你的安装可能就没问题，你可以开始贡献了！</p>
+</div>
+<p>通常，在运行整个测试套件之前，只运行你更改周围的测试子集是值得的（提示：你可以使用<a class="reference external" href="https://pandas-coverage-12d2130077bc.herokuapp.com/">pandas-coverage 应用程序</a>）来找出哪些测试触及了你修改的代码行，然后只运行这些测试）。</p>
+<p>最简单的方法是</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">pandas</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">k</span> <span class="n">regex_matching_test_name</span>
+</pre></div>
+</div>
+<p>或者使用以下构造之一：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span> <span class="n">pandas</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="p">[</span><span class="n">test</span><span class="o">-</span><span class="n">module</span><span class="p">]</span><span class="o">.</span><span class="n">py</span>
+<span class="n">pytest</span> <span class="n">pandas</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="p">[</span><span class="n">test</span><span class="o">-</span><span class="n">module</span><span class="p">]</span><span class="o">.</span><span class="n">py</span><span class="p">::[</span><span class="n">TestClass</span><span class="p">]</span>
+<span class="n">pytest</span> <span class="n">pandas</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="p">[</span><span class="n">test</span><span class="o">-</span><span class="n">module</span><span class="p">]</span><span class="o">.</span><span class="n">py</span><span class="p">::[</span><span class="n">TestClass</span><span class="p">]::[</span><span class="n">test_method</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>使用 <a class="reference external" href="https://pypi.ac.cn/project/pytest-xdist">pytest-xdist</a>（包含在我们的 'pandas-dev' 环境中），可以加快多核机器上的本地测试速度。<code class="docutils literal notranslate"><span class="pre">-n</span></code> 数字标志可以在运行 pytest 时指定，以根据指定的核数或自动利用机器上所有可用核来并行化测试运行。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utilize 4 cores</span>
+pytest<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>pandas
+
+<span class="c1"># Utilizes all available cores</span>
+pytest<span class="w"> </span>-n<span class="w"> </span>auto<span class="w"> </span>pandas
+</pre></div>
+</div>
+<p>如果你想进一步加快速度，更高级的命令用法如下：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>pandas<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">"not slow and not network and not db and not single_cpu"</span><span class="w"> </span>-r<span class="w"> </span>sxX
+</pre></div>
+</div>
+<p>除了多线程性能提升外，它还通过使用 <code class="docutils literal notranslate"><span class="pre">-m</span></code> 标记跳过一些测试来提高测试速度：</p>
+<ul class="simple">
+<li><p>slow：任何耗时长的测试（以秒计而非毫秒）</p></li>
+<li><p>network：需要网络连接的测试</p></li>
+<li><p>db：需要数据库（mysql 或 postgres）的测试</p></li>
+<li><p>single_cpu：只能在单核 CPU 上运行的测试</p></li>
+</ul>
+<p>如果与你相关，你可能需要启用以下选项：</p>
+<ul class="simple">
+<li><p>arm_slow：在 arm64 架构上耗时长的测试</p></li>
+</ul>
+<p>这些标记在<a class="reference external" href="https://github.com/pandas-dev/pandas/blob/main/pyproject.toml">此 toml 文件</a>中定义，位于 <code class="docutils literal notranslate"><span class="pre">[tool.pytest.ini_options]</span></code> 下名为 <code class="docutils literal notranslate"><span class="pre">markers</span></code> 的列表中，以防你想要检查是否有新的、你感兴趣的标记。</p>
+<p><code class="docutils literal notranslate"><span class="pre">-r</span></code> 报告标志将显示简短摘要信息（参阅<a class="reference external" href="https://pytest.cn/en/4.6.x/usage.html#detailed-summary-report">pytest 文档</a>）。此处我们显示以下项的数量：</p>
+<ul class="simple">
+<li><p>s: 跳过的测试</p></li>
+<li><p>x: xfailed 测试</p></li>
+<li><p>X: xpassed 测试</p></li>
+</ul>
+<p>摘要是可选的，如果你不需要附加信息，可以将其删除。使用并行化选项可以显著减少在提交拉取请求之前本地运行测试所需的时间。</p>
+<p>如果结果需要帮助，这在过去曾发生过，请在运行命令并打开错误报告之前设置一个种子，这样我们就可以重现它。以下是在 Windows 上设置种子的示例：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="w"> </span><span class="nv">PYTHONHASHSEED</span><span class="o">=</span><span class="m">314159265</span>
+pytest<span class="w"> </span>pandas<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">"not slow and not network and not db and not single_cpu"</span><span class="w"> </span>-r<span class="w"> </span>sxX
+</pre></div>
+</div>
+<p>在 Unix 上使用：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONHASHSEED</span><span class="o">=</span><span class="m">314159265</span>
+pytest<span class="w"> </span>pandas<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>-m<span class="w"> </span><span class="s2">"not slow and not network and not db and not single_cpu"</span><span class="w"> </span>-r<span class="w"> </span>sxX
+</pre></div>
+</div>
+<p>更多信息请参阅 <a class="reference external" href="https://pytest.cn/en/latest/">pytest</a> 文档。</p>
+<p>此外，可以运行</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>导入 pandas 即可类似地运行测试。</p>
+</section>
+<section id="running-the-performance-test-suite">
+<h2><a class="toc-backref" href="contributing_codebase.html#id24" role="doc-backlink">运行性能测试套件</a><a class="headerlink" href="contributing_codebase.html#running-the-performance-test-suite" title="此标题的链接">#</a></h2>
+<p>性能至关重要，值得考虑你的代码是否引入了性能退步。pandas 正在迁移到 <a class="reference external" href="https://github.com/airspeed-velocity/asv">asv benchmarks</a>，以便轻松监控关键 pandas 操作的性能。这些基准测试都位于 <code class="docutils literal notranslate"><span class="pre">pandas/asv_bench</span></code> 目录中，测试结果可以在<a class="reference external" href="https://asv-runner.github.io/asv-collection/pandas">这里</a>找到。</p>
+<p>要使用 asv 的所有功能，你需要 <code class="docutils literal notranslate"><span class="pre">conda</span></code> 或 <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>。有关更多详细信息，请查看 <a class="reference external" href="https://asv.readthedocs.io/en/latest/installing.html">asv 安装网页</a>。</p>
+<p>安装 asv：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">airspeed</span><span class="o">-</span><span class="n">velocity</span><span class="o">/</span><span class="n">asv</span>
+</pre></div>
+</div>
+<p>如果你需要运行基准测试，请将目录更改为 <code class="docutils literal notranslate"><span class="pre">asv_bench/</span></code> 并运行：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asv</span> <span class="n">continuous</span> <span class="o">-</span><span class="n">f</span> <span class="mf">1.1</span> <span class="n">upstream</span><span class="o">/</span><span class="n">main</span> <span class="n">HEAD</span>
+</pre></div>
+</div>
+<p>你可以将 <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> 替换为你正在处理的分支的名称，并报告更改超过 10% 的基准测试。该命令默认使用 <code class="docutils literal notranslate"><span class="pre">conda</span></code> 创建基准测试环境。如果你想改用 virtualenv，请写：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asv</span> <span class="n">continuous</span> <span class="o">-</span><span class="n">f</span> <span class="mf">1.1</span> <span class="o">-</span><span class="n">E</span> <span class="n">virtualenv</span> <span class="n">upstream</span><span class="o">/</span><span class="n">main</span> <span class="n">HEAD</span>
+</pre></div>
+</div>
+<p>选项 <code class="docutils literal notranslate"><span class="pre">-E</span> <span class="pre">virtualenv</span></code> 应该添加到所有运行基准测试的 <code class="docutils literal notranslate"><span class="pre">asv</span></code> 命令中。默认值定义在 <code class="docutils literal notranslate"><span class="pre">asv.conf.json</span></code> 中。</p>
+<p>运行完整的基准测试套件可能是一个耗时一整天的过程，这取决于你的硬件及其资源利用率。然而，通常只需将部分结果粘贴到拉取请求中，以表明提交的更改不会导致意外的性能回归。你可以使用 <code class="docutils literal notranslate"><span class="pre">-b</span></code> 标志运行特定的基准测试，该标志接受正则表达式。例如，这只会运行 <code class="docutils literal notranslate"><span class="pre">pandas/asv_bench/benchmarks/groupby.py</span></code> 文件中的基准测试：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asv</span> <span class="n">continuous</span> <span class="o">-</span><span class="n">f</span> <span class="mf">1.1</span> <span class="n">upstream</span><span class="o">/</span><span class="n">main</span> <span class="n">HEAD</span> <span class="o">-</span><span class="n">b</span> <span class="o">^</span><span class="n">groupby</span>
+</pre></div>
+</div>
+<p>如果你只想运行文件中特定组的基准测试，可以使用 <code class="docutils literal notranslate"><span class="pre">.</span></code> 作为分隔符。例如：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asv</span> <span class="n">continuous</span> <span class="o">-</span><span class="n">f</span> <span class="mf">1.1</span> <span class="n">upstream</span><span class="o">/</span><span class="n">main</span> <span class="n">HEAD</span> <span class="o">-</span><span class="n">b</span> <span class="n">groupby</span><span class="o">.</span><span class="n">GroupByMethods</span>
+</pre></div>
+</div>
+<p>将只运行 <code class="docutils literal notranslate"><span class="pre">groupby.py</span></code> 中定义的 <code class="docutils literal notranslate"><span class="pre">GroupByMethods</span></code> 基准测试。</p>
+<p>你还可以使用当前 Python 环境中已安装的 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 版本运行基准测试。如果你没有 virtualenv 或 conda，或者正在使用上面讨论的 <code class="docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">develop</span></code> 方法，这会很有用；对于就地构建，你需要设置 <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code>，例如 <code class="docutils literal notranslate"><span class="pre">PYTHONPATH="$PWD/.."</span> <span class="pre">asv</span> <span class="pre">[remaining</span> <span class="pre">arguments]</span></code>。你可以通过以下方式运行基准测试：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asv</span> <span class="n">run</span> <span class="o">-</span><span class="n">e</span> <span class="o">-</span><span class="n">E</span> <span class="n">existing</span>
+</pre></div>
+</div>
+<p>或者，要使用特定的 Python 解释器：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asv</span> <span class="n">run</span> <span class="o">-</span><span class="n">e</span> <span class="o">-</span><span class="n">E</span> <span class="n">existing</span><span class="p">:</span><span class="n">python3</span><span class="mf">.6</span>
+</pre></div>
+</div>
+<p>这将显示基准测试的 stderr 输出，并使用你的 <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> 中本地的 <code class="docutils literal notranslate"><span class="pre">python</span></code>。</p>
+<p>有关如何编写基准测试以及如何使用 asv 的信息，请参阅 <a class="reference external" href="https://asv.readthedocs.io/en/latest/writing_benchmarks.html">asv 文档</a>。</p>
+</section>
+<section id="documenting-your-code">
+<h2><a class="toc-backref" href="contributing_codebase.html#id25" role="doc-backlink">为代码编写文档</a><a class="headerlink" href="contributing_codebase.html#documenting-your-code" title="此标题的链接">#</a></h2>
+<p>更改应反映在 <code class="docutils literal notranslate"><span class="pre">doc/source/whatsnew/vx.y.z.rst</span></code> 中的发布说明中。此文件包含每个版本的持续更改日志。在此文件中添加一个条目以记录你的修复、增强或（不可避免的）破坏性更改。添加条目时，请务必包含 GitHub issue 编号（使用 <code class="docutils literal notranslate"><span class="pre">:issue:`1234`</span></code>，其中 <code class="docutils literal notranslate"><span class="pre">1234</span></code> 是 issue/拉取请求编号）。你的条目应使用完整的句子和正确的语法编写。</p>
+<p>提及 API 部分时，请酌情使用 Sphinx 的 <code class="docutils literal notranslate"><span class="pre">:func:</span></code>、<code class="docutils literal notranslate"><span class="pre">:meth:</span></code> 或 <code class="docutils literal notranslate"><span class="pre">:class:</span></code> 指令。并非所有公共 API 函数和方法都有文档页面；理想情况下，只有在链接能解析时才添加。你通常可以通过查看先前版本的发布说明来找到类似的示例。</p>
+<p>如果你的代码是 bug 修复，请将你的条目添加到相关的 bug 修复部分。避免添加到 <code class="docutils literal notranslate"><span class="pre">Other</span></code> 部分；只有在极少数情况下才应将条目放在那里。尽可能简洁地描述 bug，应包括用户可能如何遇到它以及 bug 本身（例如“产生不正确的结果”或“错误地引发”）。可能还需要指出新的行为。</p>
+<p>如果你的代码是增强功能，则很可能需要在现有文档中添加用法示例。这可以按照<a class="reference internal" href="contributing_documentation.html#contributing-documentation"><span class="std std-ref">文档</span></a>部分进行。此外，为了让用户知道此功能何时添加，使用了 <code class="docutils literal notranslate"><span class="pre">versionadded</span></code> 指令。其 sphinx 语法是：</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">versionadded</span><span class="p">::</span> 2.1.0
+</pre></div>
+</div>
+<p>这将在你放置 Sphinx 指令的地方显示文本 *版本 2.1.0 中的新功能*。在添加新函数或方法（<a class="reference external" href="https://github.com/pandas-dev/pandas/blob/v0.20.2/pandas/core/frame.py#L1495">示例</a>）或新关键字参数（<a class="reference external" href="https://github.com/pandas-dev/pandas/blob/v0.20.2/pandas/core/generic.py#L568">示例</a>）时，这也应放在文档字符串中。</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="contributing_docstring.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">pandas 文档字符串指南</p> </div> </a> <a class="right-next" href="maintaining.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">pandas 维护</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页目录</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#code-standards">代码标准</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#pre-commit">Pre-commit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#optional-dependencies">可选依赖</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#backwards-compatibility">向后兼容性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#type-hints">类型提示</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#style-guidelines">风格指南</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#pandas-specific-types">pandas 特定类型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#validating-type-hints">验证类型提示</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#testing-type-hints-in-code-using-pandas">在使用 pandas 的代码中测试类型提示</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#testing-with-continuous-integration">使用持续集成进行测试</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#test-driven-development">测试驱动开发</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#writing-tests">编写测试</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#using-pytest">使用 <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#test-structure">测试结构</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#preferred-pytest-idioms">首选的 <code class="docutils literal notranslate"><span class="pre">pytest</span></code> 惯用法</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#testing-a-warning">测试警告</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#testing-an-exception">测试异常</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#testing-involving-files">涉及文件的测试</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#testing-involving-network-connectivity">涉及网络连接的测试</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#example">示例</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#using-hypothesis">使用 <code class="docutils literal notranslate"><span class="pre">hypothesis</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#running-the-test-suite">运行测试套件</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#running-the-performance-test-suite">运行性能测试套件</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_codebase.html#documenting-your-code">为代码编写文档</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/development/contributing_codebase.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

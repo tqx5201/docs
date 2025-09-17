@@ -1,0 +1,746 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>如何读取和写入表格数据？— pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/intro_tutorials/02_read_write';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How do I select a subset of a DataFrame?" href="03_subset_data.html" />
+    <link rel="prev" title="What kind of data does pandas handle?" href="01_table_oriented.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="02_read_write.html#main-content">跳到主内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发行说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包概览</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">入门教程</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_table_oriented.html">pandas 处理哪种类型的数据？</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="02_read_write.html#">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_add_columns.html">如何基于现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_calculate_statistics.html">如何计算汇总统计信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_reshape_table_layout.html">如何重塑表格布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_combine_dataframes.html">如何合并多个表格的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_text_data.html">如何操作文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../comparison/index.html">与其他工具的比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_r.html">与 R / R 库的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sql.html">与 SQL 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_spreadsheets.html">与电子表格的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sas.html">与 SAS 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_stata.html">与 Stata 的比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">入门</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">入门教程</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">我该如何...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="highlight-ipython notranslate" id="min-tut-02-read-write"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header gs-data-header">
+        <div class="gs-data-title">本教程使用的数据</div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item gs-data-list"><div data-bs-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+    <span class="badge bg-secondary">泰坦尼克号数据</span>
+</div>
+<div class="collapse" id="collapsedata">
+    <div class="card-body">
+        <p class="card-text"></p><p>本教程使用以 CSV 格式存储的泰坦尼克号数据集。该数据包含以下数据列</p>
+<ul class="simple">
+<li><p>PassengerId: 每位乘客的 ID。</p></li>
+<li><p>Survived: 表示乘客是否幸存。 <code class="docutils literal notranslate"><span class="pre">0</span></code> 表示是，<code class="docutils literal notranslate"><span class="pre">1</span></code> 表示否。</p></li>
+<li><p>Pclass: 三种票类之一：Class <code class="docutils literal notranslate"><span class="pre">1</span></code>, Class <code class="docutils literal notranslate"><span class="pre">2</span></code> 和 Class <code class="docutils literal notranslate"><span class="pre">3</span></code>。</p></li>
+<li><p>Name: 乘客姓名。</p></li>
+<li><p>Sex: 乘客性别。</p></li>
+<li><p>Age: 乘客年龄（岁）。</p></li>
+<li><p>SibSp: 船上的兄弟姐妹或配偶数量。</p></li>
+<li><p>Parch: 船上的父母或子女数量。</p></li>
+<li><p>Ticket: 乘客的票号。</p></li>
+<li><p>Fare: 表示票价。</p></li>
+<li><p>Cabin: 乘客的船舱号。</p></li>
+<li><p>Embarked: 登船港口。</p></li>
+</ul>
+        <p></p>
+        <a href="https://github.com/pandas-dev/pandas/raw/main/doc/data/titanic.csv" class="btn btn-dark btn-sm">到原始数据</a>
+    </div>
+</div>        </li>
+    </ul>
+</div><section id="how-do-i-read-and-write-tabular-data">
+<h1>如何读取和写入表格数据？<a class="headerlink" href="02_read_write.html#how-do-i-read-and-write-tabular-data" title="链接到此标题">#</a></h1>
+<img alt="../../_images/02_io_readwrite.svg" class="align-center" src="../../_images/02_io_readwrite.svg">
+<ul class="task-bullet">
+    <li><p>我希望分析泰坦尼克号乘客数据，该数据以 CSV 文件形式提供。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/titanic.csv"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>pandas 提供了 <a class="reference internal" href="../../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_csv()</span></code></a> 函数，用于将以 csv 文件形式存储的数据读取到 pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中。pandas 开箱即用地支持许多不同的文件格式或数据源（csv, excel, sql, json, parquet 等），每种都带有 <code class="docutils literal notranslate"><span class="pre">read_*</span></code> 前缀。</p>
+    </li>
+</ul><p>读取数据后，请务必检查数据。显示 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 时，默认会显示前 5 行和后 5 行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">titanic</span>
+<span class="gh">Out[3]: </span>
+<span class="go">     PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked</span>
+<span class="go">0              1         0       3  ...   7.2500   NaN         S</span>
+<span class="go">1              2         1       1  ...  71.2833   C85         C</span>
+<span class="go">2              3         1       3  ...   7.9250   NaN         S</span>
+<span class="go">3              4         1       1  ...  53.1000  C123         S</span>
+<span class="go">4              5         0       3  ...   8.0500   NaN         S</span>
+<span class="go">..           ...       ...     ...  ...      ...   ...       ...</span>
+<span class="go">886          887         0       2  ...  13.0000   NaN         S</span>
+<span class="go">887          888         1       1  ...  30.0000   B42         S</span>
+<span class="go">888          889         0       3  ...  23.4500   NaN         S</span>
+<span class="go">889          890         1       1  ...  30.0000  C148         C</span>
+<span class="go">890          891         0       3  ...   7.7500   NaN         Q</span>
+
+<span class="go">[891 rows x 12 columns]</span>
+</pre></div>
+</div>
+<ul class="task-bullet">
+    <li><p>我想查看 pandas DataFrame 的前 8 行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="gh">Out[4]: </span>
+<span class="go">   PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked</span>
+<span class="go">0            1         0       3  ...   7.2500   NaN         S</span>
+<span class="go">1            2         1       1  ...  71.2833   C85         C</span>
+<span class="go">2            3         1       3  ...   7.9250   NaN         S</span>
+<span class="go">3            4         1       1  ...  53.1000  C123         S</span>
+<span class="go">4            5         0       3  ...   8.0500   NaN         S</span>
+<span class="go">5            6         0       3  ...   8.4583   NaN         Q</span>
+<span class="go">6            7         0       1  ...  51.8625   E46         S</span>
+<span class="go">7            8         0       3  ...  21.0750   NaN         S</span>
+
+<span class="go">[8 rows x 12 columns]</span>
+</pre></div>
+</div>
+<p>要查看 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的前 N 行，请使用 <a class="reference internal" href="../../reference/api/pandas.DataFrame.head.html#pandas.DataFrame.head" title="pandas.DataFrame.head"><code class="xref py py-meth docutils literal notranslate"><span class="pre">head()</span></code></a> 方法，并将所需的行数（在此例中为 8）作为参数。</p>
+    </li>
+</ul><div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>想查看最后 N 行吗？pandas 也提供了 <a class="reference internal" href="../../reference/api/pandas.DataFrame.tail.html#pandas.DataFrame.tail" title="pandas.DataFrame.tail"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tail()</span></code></a> 方法。例如，<code class="docutils literal notranslate"><span class="pre">titanic.tail(10)</span></code> 将返回 DataFrame 的最后 10 行。</p>
+</div>
+<p>通过请求 pandas 的 <code class="docutils literal notranslate"><span class="pre">dtypes</span></code> 属性，可以检查 pandas 如何解释每个列的数据类型。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[5]: </span>
+<span class="go">PassengerId      int64</span>
+<span class="go">Survived         int64</span>
+<span class="go">Pclass           int64</span>
+<span class="go">Name            object</span>
+<span class="go">Sex             object</span>
+<span class="go">Age            float64</span>
+<span class="go">SibSp            int64</span>
+<span class="go">Parch            int64</span>
+<span class="go">Ticket          object</span>
+<span class="go">Fare           float64</span>
+<span class="go">Cabin           object</span>
+<span class="go">Embarked        object</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>对于每个列，都列出了所使用的数据类型。此 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中的数据类型包括整数（<code class="docutils literal notranslate"><span class="pre">int64</span></code>）、浮点数（<code class="docutils literal notranslate"><span class="pre">float64</span></code>）和字符串（<code class="docutils literal notranslate"><span class="pre">object</span></code>）。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>当请求 <code class="docutils literal notranslate"><span class="pre">dtypes</span></code> 时，不使用括号！<code class="docutils literal notranslate"><span class="pre">dtypes</span></code> 是 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 的一个属性。 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 的属性不需要括号。属性表示 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>/<code class="docutils literal notranslate"><span class="pre">Series</span></code> 的一个特征，而方法（需要括号）则对 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>/<code class="docutils literal notranslate"><span class="pre">Series</span></code> 执行操作，正如<a class="reference internal" href="01_table_oriented.html#min-tut-01-tableoriented"><span class="std std-ref">第一个教程</span></a>中介绍的那样。</p>
+</div>
+<ul class="task-bullet">
+    <li><p>我的同事要求将泰坦尼克号数据转换为电子表格。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">"titanic.xlsx"</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">"passengers"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>虽然 <code class="docutils literal notranslate"><span class="pre">read_*</span></code> 函数用于将数据读取到 pandas 中，但 <code class="docutils literal notranslate"><span class="pre">to_*</span></code> 方法用于存储数据。<a class="reference internal" href="../../reference/api/pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel" title="pandas.DataFrame.to_excel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_excel()</span></code></a> 方法将数据存储为 Excel 文件。在此示例中，<code class="docutils literal notranslate"><span class="pre">sheet_name</span></code> 被命名为 <em>passengers</em>，而不是默认的 <em>Sheet1</em>。通过设置 <code class="docutils literal notranslate"><span class="pre">index=False</span></code>，行索引标签不会保存到电子表格中。</p>
+    </li>
+</ul><p>相应的读取函数 <code class="xref py py-meth docutils literal notranslate"><span class="pre">read_excel()</span></code> 会将数据重新加载到 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 中。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"titanic.xlsx"</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">"passengers"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[8]: </span>
+<span class="go">   PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked</span>
+<span class="go">0            1         0       3  ...   7.2500   NaN         S</span>
+<span class="go">1            2         1       1  ...  71.2833   C85         C</span>
+<span class="go">2            3         1       3  ...   7.9250   NaN         S</span>
+<span class="go">3            4         1       1  ...  53.1000  C123         S</span>
+<span class="go">4            5         0       3  ...   8.0500   NaN         S</span>
+
+<span class="go">[5 rows x 12 columns]</span>
+</pre></div>
+</div>
+<ul class="task-bullet">
+    <li><p>我对 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的技术摘要感兴趣。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">&lt;class 'pandas.core.frame.DataFrame'&gt;</span>
+<span class="go">RangeIndex: 891 entries, 0 to 890</span>
+<span class="go">Data columns (total 12 columns):</span>
+<span class="go"> #   Column       Non-Null Count  Dtype  </span>
+<span class="go">---  ------       --------------  -----  </span>
+<span class="go"> 0   PassengerId  891 non-null    int64  </span>
+<span class="go"> 1   Survived     891 non-null    int64  </span>
+<span class="go"> 2   Pclass       891 non-null    int64  </span>
+<span class="go"> 3   Name         891 non-null    object </span>
+<span class="go"> 4   Sex          891 non-null    object </span>
+<span class="go"> 5   Age          714 non-null    float64</span>
+<span class="go"> 6   SibSp        891 non-null    int64  </span>
+<span class="go"> 7   Parch        891 non-null    int64  </span>
+<span class="go"> 8   Ticket       891 non-null    object </span>
+<span class="go"> 9   Fare         891 non-null    float64</span>
+<span class="go"> 10  Cabin        204 non-null    object </span>
+<span class="go"> 11  Embarked     889 non-null    object </span>
+<span class="go">dtypes: float64(2), int64(5), object(5)</span>
+<span class="go">memory usage: 83.7+ KB</span>
+</pre></div>
+</div>
+<p>方法 <a class="reference internal" href="../../reference/api/pandas.DataFrame.info.html#pandas.DataFrame.info" title="pandas.DataFrame.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> 提供了关于 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的技术信息，因此我们来更详细地解释一下输出。</p>
+<ul class="simple">
+<li><p>它确实是一个 <a class="reference internal" href="../../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>。</p></li>
+<li><p>共有 891 个条目，即 891 行。</p></li>
+<li><p>每行都有一个行标签（也称为 <code class="docutils literal notranslate"><span class="pre">index</span></code>），其值范围从 0 到 890。</p></li>
+<li><p>该表有 12 列。大多数列的每行都有一个值（所有 891 个值都是 <code class="docutils literal notranslate"><span class="pre">non-null</span></code>）。有些列确实有缺失值，且 <code class="docutils literal notranslate"><span class="pre">non-null</span></code> 值少于 891 个。</p></li>
+<li><p>列 <code class="docutils literal notranslate"><span class="pre">Name</span></code>、<code class="docutils literal notranslate"><span class="pre">Sex</span></code>、<code class="docutils literal notranslate"><span class="pre">Cabin</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Embarked</span></code> 包含文本数据（字符串，也称为 <code class="docutils literal notranslate"><span class="pre">object</span></code>）。其他列是数值数据，其中一些是整数（也称为 <code class="docutils literal notranslate"><span class="pre">integer</span></code>），另一些是实数（也称为 <code class="docutils literal notranslate"><span class="pre">float</span>）。</p></li>
+<li><p>不同列中的数据类型（字符、整数等）通过列出 <code class="docutils literal notranslate"><span class="pre">dtypes</span></code> 进行汇总。</p></li>
+<li><p>还提供了存储 DataFrame 所需的大致 RAM 量。</p></li>
+</ul>
+    </li>
+</ul><div class="shadow gs-callout gs-callout-remember">
+    <h4>记住</h4><ul class="simple">
+<li><p>通过 <code class="docutils literal notranslate"><span class="pre">read_*</span></code> 函数支持从多种不同文件格式或数据源将数据导入 pandas。</p></li>
+<li><p>通过不同的 <code class="docutils literal notranslate"><span class="pre">to_*</span></code> 方法提供将数据从 pandas 导出。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code>/<code class="docutils literal notranslate"><span class="pre">tail</span></code>/<code class="docutils literal notranslate"><span class="pre">info</span></code> 方法和 <code class="docutils literal notranslate"><span class="pre">dtypes</span></code> 属性方便进行首次检查。</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">到用户指南</span><p>有关 pandas 输入和输出功能的完整概述，请参阅用户指南中关于<a class="reference internal" href="../../user_guide/io.html#io"><span class="std std-ref">读取器和写入器函数</span></a>的部分。</p>
+</div></section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="01_table_oriented.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一条</p> <p class="prev-next-title">pandas 处理哪种类型的数据？</p> </div> </a> <a class="right-next" href="03_subset_data.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一条</p> <p class="prev-next-title">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/intro_tutorials/02_read_write.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

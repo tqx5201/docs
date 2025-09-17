@@ -1,0 +1,80 @@
+# .github/workflows/mirror-pandas-cn.yml
+name: Mirror & Export
+
+on:
+  #schedule:
+    #- cron: '0 19 * * *'   # 每晚 03:00 CST
+  workflow_dispatch:
+
+#https://docs.jupyter.org.cn/en/latest/
+env:
+  TARGET_DIR:   jupyter
+  MIRROR_PROTO: https
+  MIRROR_HOST:  docs.jupyter.org.cn
+  MIRROR_PATH:  en/latest
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Install deps
+        run: sudo apt-get update && sudo apt-get install -y wget zip
+
+      - name: Mirror site
+        run: |
+          rm -rf "${TARGET_DIR}"
+          mkdir -p "${TARGET_DIR}"
+          cd "${TARGET_DIR}"
+          wget \
+            --mirror \
+            --convert-links \
+            --adjust-extension \
+            --page-requisites \
+            --no-parent \
+            -e robots=off \
+            "${MIRROR_PROTO}://${MIRROR_HOST}/${MIRROR_PATH}/"
+          mv "${MIRROR_HOST}/${MIRROR_PATH}"/* .
+          rmdir -p "${MIRROR_HOST}/${MIRROR_PATH}" 2>/dev/null || true
+
+      - name: Export zip
+        run: |
+          EXPORT_NAME="${TARGET_DIR}.zip"
+          zip -r "$EXPORT_NAME" "${TARGET_DIR}"
+          echo "EXPORT_NAME=$EXPORT_NAME" >> $GITHUB_ENV
+
+      - name: Upload artifact (Actions 内直接下载)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.EXPORT_NAME }}
+          path: ${{ env.EXPORT_NAME }}
+          retention-days: 30          # 保留 30 天，可按需调整
+
+      - name: Update README link (only once)
+        run: |
+          BASE_URL="https://${{ github.repository_owner }}.github.io/docs"
+          FULL_URL="${BASE_URL}/${TARGET_DIR}"
+          [ -f README.md ] || touch README.md
+          grep -qF "${FULL_URL}" README.md || echo "- [${TARGET_DIR}](${FULL_URL})" >> README.md
+
+      - name: Generate index.html from README.md
+        run: |
+          sudo apt-get install -y pandoc
+          [ -f README.md ] || touch README.md
+          pandoc README.md -f markdown -t html5 -s -o index.html \
+            --metadata title="Docs Index"
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add "${TARGET_DIR}" "${TARGET_DIR}.zip" README.md index.html
+          git diff --cached --quiet || (git commit -m "sync $(date -u +%F' '%T)" && git push)

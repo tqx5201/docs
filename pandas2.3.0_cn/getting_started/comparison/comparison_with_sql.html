@@ -1,0 +1,1308 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>与 SQL 的比较 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/comparison/comparison_with_sql';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Comparison with spreadsheets" href="comparison_with_spreadsheets.html" />
+    <link rel="prev" title="Comparison with R / R libraries" href="comparison_with_r.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="comparison_with_sql.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包概览</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_tutorials/index.html">入门教程</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/01_table_oriented.html">pandas 能处理哪些类型的数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/05_add_columns.html">如何从现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/06_calculate_statistics.html">如何计算汇总统计信息</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/07_reshape_table_layout.html">如何重塑表格布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/08_combine_dataframes.html">如何合并多个表的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro_tutorials/10_text_data.html">如何操作文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">与其他工具的比较</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="comparison_with_r.html">与 R / R 库的比较</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="comparison_with_sql.html#">与 SQL 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison_with_spreadsheets.html">与电子表格的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison_with_sas.html">与 SAS 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison_with_stata.html">与 Stata 的比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">开始使用</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">与其他工具的比较</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">与 SQL 的比较</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="comparison-with-sql">
+<span id="compare-with-sql"></span><h1>与 SQL 的比较<a class="headerlink" href="comparison_with_sql.html#comparison-with-sql" title="Link to this heading">#</a></h1>
+<p>鉴于许多潜在的 pandas 用户对 <a class="reference external" href="https://en.wikipedia.org/wiki/SQL">SQL</a> 有一定的熟悉度，本页面旨在提供一些示例，说明如何使用 pandas 执行各种 SQL 操作。</p>
+<p>如果您是 pandas 的新手，您可能希望首先阅读 <a class="reference internal" href="../../user_guide/10min.html#min"><span class="std std-ref">pandas 十分种入门</span></a>，以熟悉该库。</p>
+<p>按照惯例，我们导入 pandas 和 NumPy 如下</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="gp">In [2]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<p>大多数示例将使用 pandas 测试中包含的 <code class="docutils literal notranslate"><span class="pre">tips</span></code> 数据集。我们将把数据读取到名为 <code class="docutils literal notranslate"><span class="pre">tips</span></code> 的 DataFrame 中，并假设我们有一个同名同结构的数据库表。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="s2">"https://raw.githubusercontent.com/pandas-dev"</span>
+<span class="gp">   ...: </span>    <span class="s2">"/pandas/main/pandas/tests/io/data/csv/tips.csv"</span>
+<span class="gp">   ...: </span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [4]: </span><span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="gp">In [5]: </span><span class="n">tips</span>
+<span class="gh">Out[5]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size</span>
+<span class="go">0         16.99  1.01  Female     No   Sun  Dinner     2</span>
+<span class="go">1         10.34  1.66    Male     No   Sun  Dinner     3</span>
+<span class="go">2         21.01  3.50    Male     No   Sun  Dinner     3</span>
+<span class="go">3         23.68  3.31    Male     No   Sun  Dinner     2</span>
+<span class="go">4         24.59  3.61  Female     No   Sun  Dinner     4</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...</span>
+<span class="go">239       29.03  5.92    Male     No   Sat  Dinner     3</span>
+<span class="go">240       27.18  2.00  Female    Yes   Sat  Dinner     2</span>
+<span class="go">241       22.67  2.00    Male    Yes   Sat  Dinner     2</span>
+<span class="go">242       17.82  1.75    Male     No   Sat  Dinner     2</span>
+<span class="go">243       18.78  3.00  Female     No  Thur  Dinner     2</span>
+
+<span class="go">[244 rows x 7 columns]</span>
+</pre></div>
+</div>
+<section id="copies-vs-in-place-operations">
+<h2>副本与就地操作<a class="headerlink" href="comparison_with_sql.html#copies-vs-in-place-operations" title="Link to this heading">#</a></h2>
+<p>大多数 pandas 操作返回 <code class="docutils literal notranslate"><span class="pre">Series</span></code>/<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的副本。要使更改“生效”，您需要将其赋值给一个新变量</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"col1"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>或覆盖原始变量</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"col1"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>您会看到某些方法提供了 <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code> 或 <code class="docutils literal notranslate"><span class="pre">copy=False</span></code> 关键字参数</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>目前正在积极讨论弃用并移除大多数方法（例如 <code class="docutils literal notranslate"><span class="pre">dropna</span></code>）中的 <code class="docutils literal notranslate"><span class="pre">inplace</span></code> 和 <code class="docutils literal notranslate"><span class="pre">copy</span></code> 参数，但少数方法（包括 <code class="docutils literal notranslate"><span class="pre">replace</span></code>）除外。在写时复制 (Copy-on-Write) 的背景下，这两个关键字将不再是必需的。该提案可在<a class="reference external" href="https://github.com/pandas-dev/pandas/pull/51466">此处</a>找到。</p>
+</div>
+</section>
+<section id="select">
+<h2>SELECT<a class="headerlink" href="comparison_with_sql.html#select" title="Link to this heading">#</a></h2>
+<p>在 SQL 中，选择是通过逗号分隔的列列表（或使用 <code class="docutils literal notranslate"><span class="pre">*</span></code> 选择所有列）来完成的</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">total_bill</span><span class="p">,</span><span class="w"> </span><span class="n">tip</span><span class="p">,</span><span class="w"> </span><span class="n">smoker</span><span class="p">,</span><span class="w"> </span><span class="k">time</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tips</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>在 pandas 中，列选择是通过将列名列表传递给 DataFrame 来完成的</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">tips</span><span class="p">[[</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="s2">"tip"</span><span class="p">,</span> <span class="s2">"smoker"</span><span class="p">,</span> <span class="s2">"time"</span><span class="p">]]</span>
+<span class="gh">Out[6]: </span>
+<span class="go">     total_bill   tip smoker    time</span>
+<span class="go">0         16.99  1.01     No  Dinner</span>
+<span class="go">1         10.34  1.66     No  Dinner</span>
+<span class="go">2         21.01  3.50     No  Dinner</span>
+<span class="go">3         23.68  3.31     No  Dinner</span>
+<span class="go">4         24.59  3.61     No  Dinner</span>
+<span class="go">..          ...   ...    ...     ...</span>
+<span class="go">239       29.03  5.92     No  Dinner</span>
+<span class="go">240       27.18  2.00    Yes  Dinner</span>
+<span class="go">241       22.67  2.00    Yes  Dinner</span>
+<span class="go">242       17.82  1.75     No  Dinner</span>
+<span class="go">243       18.78  3.00     No  Dinner</span>
+
+<span class="go">[244 rows x 4 columns]</span>
+</pre></div>
+</div>
+<p>不带列名列表地调用 DataFrame 将显示所有列（类似于 SQL 的 <code class="docutils literal notranslate"><span class="pre">*</span></code>）。</p>
+<p>在 SQL 中，您可以添加计算列</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">tip</span><span class="o">/</span><span class="n">total_bill</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">tip_rate</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tips</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>在 pandas 中，您可以使用 DataFrame 的 <a class="reference internal" href="../../reference/api/pandas.DataFrame.assign.html#pandas.DataFrame.assign" title="pandas.DataFrame.assign"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.assign()</span></code></a> 方法来追加新列</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">tips</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tip_rate</span><span class="o">=</span><span class="n">tips</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">]</span> <span class="o">/</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">])</span>
+<span class="gh">Out[7]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size  tip_rate</span>
+<span class="go">0         16.99  1.01  Female     No   Sun  Dinner     2  0.059447</span>
+<span class="go">1         10.34  1.66    Male     No   Sun  Dinner     3  0.160542</span>
+<span class="go">2         21.01  3.50    Male     No   Sun  Dinner     3  0.166587</span>
+<span class="go">3         23.68  3.31    Male     No   Sun  Dinner     2  0.139780</span>
+<span class="go">4         24.59  3.61  Female     No   Sun  Dinner     4  0.146808</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...       ...</span>
+<span class="go">239       29.03  5.92    Male     No   Sat  Dinner     3  0.203927</span>
+<span class="go">240       27.18  2.00  Female    Yes   Sat  Dinner     2  0.073584</span>
+<span class="go">241       22.67  2.00    Male    Yes   Sat  Dinner     2  0.088222</span>
+<span class="go">242       17.82  1.75    Male     No   Sat  Dinner     2  0.098204</span>
+<span class="go">243       18.78  3.00  Female     No  Thur  Dinner     2  0.159744</span>
+
+<span class="go">[244 rows x 8 columns]</span>
+</pre></div>
+</div>
+</section>
+<section id="where">
+<h2>WHERE<a class="headerlink" href="comparison_with_sql.html#where" title="Link to this heading">#</a></h2>
+<p>SQL 中的筛选通过 WHERE 子句完成。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Dinner'</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>DataFrames 可以通过多种方式进行筛选；其中最直观的方式是使用<a class="reference internal" href="../../user_guide/indexing.html#indexing-boolean"><span class="std std-ref">布尔索引</span></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gh">Out[8]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size</span>
+<span class="go">0         16.99  1.01  Female     No   Sun  Dinner     2</span>
+<span class="go">1         10.34  1.66    Male     No   Sun  Dinner     3</span>
+<span class="go">2         21.01  3.50    Male     No   Sun  Dinner     3</span>
+<span class="go">3         23.68  3.31    Male     No   Sun  Dinner     2</span>
+<span class="go">4         24.59  3.61  Female     No   Sun  Dinner     4</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...</span>
+<span class="go">239       29.03  5.92    Male     No   Sat  Dinner     3</span>
+<span class="go">240       27.18  2.00  Female    Yes   Sat  Dinner     2</span>
+<span class="go">241       22.67  2.00    Male    Yes   Sat  Dinner     2</span>
+<span class="go">242       17.82  1.75    Male     No   Sat  Dinner     2</span>
+<span class="go">243       18.78  3.00  Female     No  Thur  Dinner     2</span>
+
+<span class="go">[227 rows x 7 columns]</span>
+</pre></div>
+</div>
+<p>上述语句只是简单地将一个由 <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code> 对象组成的 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 传递给 DataFrame，返回所有值为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 的行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">is_dinner</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Dinner"</span>
+
+<span class="gp">In [10]: </span><span class="n">is_dinner</span>
+<span class="gh">Out[10]: </span>
+<span class="go">0      True</span>
+<span class="go">1      True</span>
+<span class="go">2      True</span>
+<span class="go">3      True</span>
+<span class="go">4      True</span>
+<span class="go">       ... </span>
+<span class="go">239    True</span>
+<span class="go">240    True</span>
+<span class="go">241    True</span>
+<span class="go">242    True</span>
+<span class="go">243    True</span>
+<span class="go">Name: time, Length: 244, dtype: bool</span>
+
+<span class="gp">In [11]: </span><span class="n">is_dinner</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="gh">Out[11]: </span>
+<span class="go">time</span>
+<span class="go">True     176</span>
+<span class="go">False     68</span>
+<span class="go">Name: count, dtype: int64</span>
+
+<span class="gp">In [12]: </span><span class="n">tips</span><span class="p">[</span><span class="n">is_dinner</span><span class="p">]</span>
+<span class="gh">Out[12]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size</span>
+<span class="go">0         16.99  1.01  Female     No   Sun  Dinner     2</span>
+<span class="go">1         10.34  1.66    Male     No   Sun  Dinner     3</span>
+<span class="go">2         21.01  3.50    Male     No   Sun  Dinner     3</span>
+<span class="go">3         23.68  3.31    Male     No   Sun  Dinner     2</span>
+<span class="go">4         24.59  3.61  Female     No   Sun  Dinner     4</span>
+<span class="go">..          ...   ...     ...    ...   ...     ...   ...</span>
+<span class="go">239       29.03  5.92    Male     No   Sat  Dinner     3</span>
+<span class="go">240       27.18  2.00  Female    Yes   Sat  Dinner     2</span>
+<span class="go">241       22.67  2.00    Male    Yes   Sat  Dinner     2</span>
+<span class="go">242       17.82  1.75    Male     No   Sat  Dinner     2</span>
+<span class="go">243       18.78  3.00  Female     No  Thur  Dinner     2</span>
+
+<span class="go">[176 rows x 7 columns]</span>
+</pre></div>
+</div>
+<p>就像 SQL 的 <code class="docutils literal notranslate"><span class="pre">OR</span></code> 和 <code class="docutils literal notranslate"><span class="pre">AND</span></code> 一样，可以使用 <code class="docutils literal notranslate"><span class="pre">|</span></code> (<code class="docutils literal notranslate"><span class="pre">OR</span></code>) 和 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> (<code class="docutils literal notranslate"><span class="pre">AND</span></code>) 将多个条件传递给 DataFrame。</p>
+<p>晚餐小费超过 $5 的记录</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Dinner'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">tip</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="mi">00</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">tips</span><span class="p">[(</span><span class="n">tips</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Dinner"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">5.00</span><span class="p">)]</span>
+<span class="gh">Out[13]: </span>
+<span class="go">     total_bill    tip     sex smoker  day    time  size</span>
+<span class="go">23        39.42   7.58    Male     No  Sat  Dinner     4</span>
+<span class="go">44        30.40   5.60    Male     No  Sun  Dinner     4</span>
+<span class="go">47        32.40   6.00    Male     No  Sun  Dinner     4</span>
+<span class="go">52        34.81   5.20  Female     No  Sun  Dinner     4</span>
+<span class="go">59        48.27   6.73    Male     No  Sat  Dinner     4</span>
+<span class="go">116       29.93   5.07    Male     No  Sun  Dinner     4</span>
+<span class="go">155       29.85   5.14  Female     No  Sun  Dinner     5</span>
+<span class="go">170       50.81  10.00    Male    Yes  Sat  Dinner     3</span>
+<span class="go">172        7.25   5.15    Male    Yes  Sun  Dinner     2</span>
+<span class="go">181       23.33   5.65    Male    Yes  Sun  Dinner     2</span>
+<span class="go">183       23.17   6.50    Male    Yes  Sun  Dinner     4</span>
+<span class="go">211       25.89   5.16    Male    Yes  Sat  Dinner     4</span>
+<span class="go">212       48.33   9.00    Male     No  Sat  Dinner     4</span>
+<span class="go">214       28.17   6.50  Female    Yes  Sat  Dinner     3</span>
+<span class="go">239       29.03   5.92    Male     No  Sat  Dinner     3</span>
+</pre></div>
+</div>
+<p>至少 5 位用餐者的小费 OR 账单总额超过 $45</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">size</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">total_bill</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">45</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">tips</span><span class="p">[(</span><span class="n">tips</span><span class="p">[</span><span class="s2">"size"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">45</span><span class="p">)]</span>
+<span class="gh">Out[14]: </span>
+<span class="go">     total_bill    tip     sex smoker   day    time  size</span>
+<span class="go">59        48.27   6.73    Male     No   Sat  Dinner     4</span>
+<span class="go">125       29.80   4.20  Female     No  Thur   Lunch     6</span>
+<span class="go">141       34.30   6.70    Male     No  Thur   Lunch     6</span>
+<span class="go">142       41.19   5.00    Male     No  Thur   Lunch     5</span>
+<span class="go">143       27.05   5.00  Female     No  Thur   Lunch     6</span>
+<span class="go">155       29.85   5.14  Female     No   Sun  Dinner     5</span>
+<span class="go">156       48.17   5.00    Male     No   Sun  Dinner     6</span>
+<span class="go">170       50.81  10.00    Male    Yes   Sat  Dinner     3</span>
+<span class="go">182       45.35   3.50    Male    Yes   Sun  Dinner     3</span>
+<span class="go">185       20.69   5.00    Male     No   Sun  Dinner     5</span>
+<span class="go">187       30.46   2.00    Male    Yes   Sun  Dinner     5</span>
+<span class="go">212       48.33   9.00    Male     No   Sat  Dinner     4</span>
+<span class="go">216       28.15   3.00    Male    Yes   Sat  Dinner     5</span>
+</pre></div>
+</div>
+<p>NULL 检查使用 <a class="reference internal" href="../../reference/api/pandas.Series.notna.html#pandas.Series.notna" title="pandas.Series.notna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">notna()</span></code></a> 和 <a class="reference internal" href="../../reference/api/pandas.Series.isna.html#pandas.Series.isna" title="pandas.Series.isna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isna()</span></code></a> 方法完成。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span><span class="s2">"col1"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">],</span> <span class="s2">"col2"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"F"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">,</span> <span class="s2">"I"</span><span class="p">]}</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [16]: </span><span class="n">frame</span>
+<span class="gh">Out[16]: </span>
+<span class="go">  col1 col2</span>
+<span class="go">0    A    F</span>
+<span class="go">1    B  NaN</span>
+<span class="go">2  NaN    G</span>
+<span class="go">3    C    H</span>
+<span class="go">4    D    I</span>
+</pre></div>
+</div>
+<p>假设我们有一个与上面 DataFrame 结构相同的表。我们可以通过以下查询只查看 <code class="docutils literal notranslate"><span class="pre">col2</span></code> 为 NULL 的记录</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">frame</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">col2</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s2">"col2"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+<span class="gh">Out[17]: </span>
+<span class="go">  col1 col2</span>
+<span class="go">1    B  NaN</span>
+</pre></div>
+</div>
+<p>获取 <code class="docutils literal notranslate"><span class="pre">col1</span></code> 不为 NULL 的项可以使用 <a class="reference internal" href="../../reference/api/pandas.Series.notna.html#pandas.Series.notna" title="pandas.Series.notna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">notna()</span></code></a> 完成。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">frame</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">col1</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s2">"col1"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="gh">Out[18]: </span>
+<span class="go">  col1 col2</span>
+<span class="go">0    A    F</span>
+<span class="go">1    B  NaN</span>
+<span class="go">3    C    H</span>
+<span class="go">4    D    I</span>
+</pre></div>
+</div>
+</section>
+<section id="group-by">
+<h2>GROUP BY<a class="headerlink" href="comparison_with_sql.html#group-by" title="Link to this heading">#</a></h2>
+<p>在 pandas 中，SQL 的 <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> 操作使用名称相似的 <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> 方法执行。<a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> 通常指将数据集分成多个组，应用某些函数（通常是聚合），然后将这些组组合在一起的过程。</p>
+<p>一个常见的 SQL 操作是获取数据集中每个组的记录计数。例如，一个查询可以获取按性别分类的小费数量</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">Female     87</span>
+<span class="cm">Male      157</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p>pandas 中的等效操作为</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="gh">Out[19]: </span>
+<span class="go">sex</span>
+<span class="go">Female     87</span>
+<span class="go">Male      157</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>请注意，在 pandas 代码中我们使用了 <a class="reference internal" href="../../reference/api/pandas.core.groupby.DataFrameGroupBy.size.html#pandas.core.groupby.DataFrameGroupBy.size" title="pandas.core.groupby.DataFrameGroupBy.size"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrameGroupBy.size()</span></code></a> 而不是 <a class="reference internal" href="../../reference/api/pandas.core.groupby.DataFrameGroupBy.count.html#pandas.core.groupby.DataFrameGroupBy.count" title="pandas.core.groupby.DataFrameGroupBy.count"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrameGroupBy.count()</span></code></a>。这是因为 <a class="reference internal" href="../../reference/api/pandas.core.groupby.DataFrameGroupBy.count.html#pandas.core.groupby.DataFrameGroupBy.count" title="pandas.core.groupby.DataFrameGroupBy.count"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrameGroupBy.count()</span></code></a> 会将函数应用于每一列，返回每一列中 <code class="docutils literal notranslate"><span class="pre">NOT</span> <span class="pre">NULL</span></code> 记录的数量。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="gh">Out[20]: </span>
+<span class="go">        total_bill  tip  smoker  day  time  size</span>
+<span class="go">sex                                             </span>
+<span class="go">Female          87   87      87   87    87    87</span>
+<span class="go">Male           157  157     157  157   157   157</span>
+</pre></div>
+</div>
+<p>或者，我们可以将 <a class="reference internal" href="../../reference/api/pandas.core.groupby.DataFrameGroupBy.count.html#pandas.core.groupby.DataFrameGroupBy.count" title="pandas.core.groupby.DataFrameGroupBy.count"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrameGroupBy.count()</span></code></a> 方法应用于单个列</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">)[</span><span class="s2">"total_bill"</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="gh">Out[21]: </span>
+<span class="go">sex</span>
+<span class="go">Female     87</span>
+<span class="go">Male      157</span>
+<span class="go">Name: total_bill, dtype: int64</span>
+</pre></div>
+</div>
+<p>也可以一次应用多个函数。例如，假设我们想看看小费金额在不同日期有何不同 - <a class="reference internal" href="../../reference/api/pandas.core.groupby.DataFrameGroupBy.agg.html#pandas.core.groupby.DataFrameGroupBy.agg" title="pandas.core.groupby.DataFrameGroupBy.agg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrameGroupBy.agg()</span></code></a> 允许您将字典传递给分组的 DataFrame，指定要应用于特定列的函数。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">day</span><span class="p">,</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">tip</span><span class="p">),</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">day</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">Fri   2.734737   19</span>
+<span class="cm">Sat   2.993103   87</span>
+<span class="cm">Sun   3.255132   76</span>
+<span class="cm">Thu  2.771452   62</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"day"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">"tip"</span><span class="p">:</span> <span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"day"</span><span class="p">:</span> <span class="s2">"size"</span><span class="p">})</span>
+<span class="gh">Out[22]: </span>
+<span class="go">           tip  day</span>
+<span class="go">day                </span>
+<span class="go">Fri   2.734737   19</span>
+<span class="go">Sat   2.993103   87</span>
+<span class="go">Sun   3.255132   76</span>
+<span class="go">Thur  2.771452   62</span>
+</pre></div>
+</div>
+<p>通过向 <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> 方法传递一个列列表来完成按多列分组。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">smoker</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">tip</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">smoker</span><span class="p">,</span><span class="w"> </span><span class="k">day</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">smoker day</span>
+<span class="cm">No     Fri      4  2.812500</span>
+<span class="cm">       Sat     45  3.102889</span>
+<span class="cm">       Sun     57  3.167895</span>
+<span class="cm">       Thu    45  2.673778</span>
+<span class="cm">Yes    Fri     15  2.714000</span>
+<span class="cm">       Sat     42  2.875476</span>
+<span class="cm">       Sun     19  3.516842</span>
+<span class="cm">       Thu    17  3.030000</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="s2">"day"</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">"tip"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"size"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">]})</span>
+<span class="gh">Out[23]: </span>
+<span class="go">             tip          </span>
+<span class="go">            size      mean</span>
+<span class="go">smoker day                </span>
+<span class="go">No     Fri     4  2.812500</span>
+<span class="go">       Sat    45  3.102889</span>
+<span class="go">       Sun    57  3.167895</span>
+<span class="go">       Thur   45  2.673778</span>
+<span class="go">Yes    Fri    15  2.714000</span>
+<span class="go">       Sat    42  2.875476</span>
+<span class="go">       Sun    19  3.516842</span>
+<span class="go">       Thur   17  3.030000</span>
+</pre></div>
+</div>
+</section>
+<section id="join">
+<span id="compare-with-sql-join"></span><h2>JOIN<a class="headerlink" href="comparison_with_sql.html#join" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">JOIN</span></code> 操作可以通过 <a class="reference internal" href="../../reference/api/pandas.DataFrame.join.html#pandas.DataFrame.join" title="pandas.DataFrame.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> 或 <a class="reference internal" href="../../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">merge()</span></code></a> 执行。默认情况下，<a class="reference internal" href="../../reference/api/pandas.DataFrame.join.html#pandas.DataFrame.join" title="pandas.DataFrame.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> 会根据 DataFrame 的索引进行连接。每种方法都有参数允许您指定要执行的连接类型（<code class="docutils literal notranslate"><span class="pre">LEFT</span></code>、<code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>、<code class="docutils literal notranslate"><span class="pre">INNER</span></code>、<code class="docutils literal notranslate"><span class="pre">FULL</span></code>）或要连接的列（列名或索引）。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>如果两个键列都包含键为空值的行，则这些行将相互匹配。这与通常的 SQL 连接行为不同，可能导致意想不到的结果。</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">],</span> <span class="s2">"value"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+
+<span class="gp">In [25]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"B"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">],</span> <span class="s2">"value"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+</pre></div>
+</div>
+<p>假设我们有两个与 DataFrame 具有相同名称和结构的数据库表。</p>
+<p>现在让我们回顾一下各种类型的 <code class="docutils literal notranslate"><span class="pre">JOIN</span></code>。</p>
+<section id="inner-join">
+<h3>INNER JOIN<a class="headerlink" href="comparison_with_sql.html#inner-join" title="Link to this heading">#</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">df1</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">df2</span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">df1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># merge performs an INNER JOIN by default</span>
+<span class="gp">In [26]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"key"</span><span class="p">)</span>
+<span class="gh">Out[26]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   B -0.282863  1.212112</span>
+<span class="go">1   D -1.135632 -0.173215</span>
+<span class="go">2   D -1.135632  0.119209</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">merge()</span></code></a> 还提供了参数，用于将一个 DataFrame 的列与另一个 DataFrame 的索引连接的情况。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">indexed_df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"key"</span><span class="p">)</span>
+
+<span class="gp">In [28]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">indexed_df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s2">"key"</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[28]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">3   D -1.135632  0.119209</span>
+</pre></div>
+</div>
+</section>
+<section id="left-outer-join">
+<h3>LEFT OUTER JOIN<a class="headerlink" href="comparison_with_sql.html#left-outer-join" title="Link to this heading">#</a></h3>
+<p>显示 <code class="docutils literal notranslate"><span class="pre">df1</span></code> 中的所有记录。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">df1</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">df2</span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">df1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"key"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<span class="gh">Out[29]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   A  0.469112       NaN</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">2   C -1.509059       NaN</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+</pre></div>
+</div>
+</section>
+<section id="right-join">
+<h3>RIGHT JOIN<a class="headerlink" href="comparison_with_sql.html#right-join" title="Link to this heading">#</a></h3>
+<p>显示 <code class="docutils literal notranslate"><span class="pre">df2</span></code> 中的所有记录。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">df1</span>
+<span class="k">RIGHT</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">df2</span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">df1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"key"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"right"</span><span class="p">)</span>
+<span class="gh">Out[30]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   B -0.282863  1.212112</span>
+<span class="go">1   D -1.135632 -0.173215</span>
+<span class="go">2   D -1.135632  0.119209</span>
+<span class="go">3   E       NaN -1.044236</span>
+</pre></div>
+</div>
+</section>
+<section id="full-join">
+<h3>FULL JOIN<a class="headerlink" href="comparison_with_sql.html#full-join" title="Link to this heading">#</a></h3>
+<p>pandas 也支持 <code class="docutils literal notranslate"><span class="pre">FULL</span> <span class="pre">JOIN</span></code>，它会显示数据集的两侧，无论连接的列是否找到匹配项。截至撰写本文时，并非所有 RDBMS（例如 MySQL）都支持 <code class="docutils literal notranslate"><span class="pre">FULL</span> <span class="pre">JOIN</span></code>。</p>
+<p>显示两个表中的所有记录。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">df1</span>
+<span class="k">FULL</span><span class="w"> </span><span class="k">OUTER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">df2</span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">df1</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"key"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"outer"</span><span class="p">)</span>
+<span class="gh">Out[31]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   A  0.469112       NaN</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">2   C -1.509059       NaN</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+<span class="go">5   E       NaN -1.044236</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="union">
+<h2>UNION<a class="headerlink" href="comparison_with_sql.html#union" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">UNION</span> <span class="pre">ALL</span></code> 可以使用 <a class="reference internal" href="../../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">concat()</span></code></a> 执行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span><span class="s2">"city"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Chicago"</span><span class="p">,</span> <span class="s2">"San Francisco"</span><span class="p">,</span> <span class="s2">"New York City"</span><span class="p">],</span> <span class="s2">"rank"</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)}</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [33]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span><span class="s2">"city"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Chicago"</span><span class="p">,</span> <span class="s2">"Boston"</span><span class="p">,</span> <span class="s2">"Los Angeles"</span><span class="p">],</span> <span class="s2">"rank"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]}</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">rank</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">df1</span>
+<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">rank</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">df2</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">         city  rank</span>
+<span class="cm">      Chicago     1</span>
+<span class="cm">San Francisco     2</span>
+<span class="cm">New York City     3</span>
+<span class="cm">      Chicago     1</span>
+<span class="cm">       Boston     4</span>
+<span class="cm">  Los Angeles     5</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">])</span>
+<span class="gh">Out[34]: </span>
+<span class="go">            city  rank</span>
+<span class="go">0        Chicago     1</span>
+<span class="go">1  San Francisco     2</span>
+<span class="go">2  New York City     3</span>
+<span class="go">0        Chicago     1</span>
+<span class="go">1         Boston     4</span>
+<span class="go">2    Los Angeles     5</span>
+</pre></div>
+</div>
+<p>SQL 的 <code class="docutils literal notranslate"><span class="pre">UNION</span></code> 类似于 <code class="docutils literal notranslate"><span class="pre">UNION</span> <span class="pre">ALL</span></code>，但 <code class="docutils literal notranslate"><span class="pre">UNION</span></code> 会移除重复行。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">rank</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">df1</span>
+<span class="k">UNION</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">rank</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">df2</span><span class="p">;</span>
+<span class="c1">-- notice that there is only one Chicago record this time</span>
+<span class="cm">/*</span>
+<span class="cm">         city  rank</span>
+<span class="cm">      Chicago     1</span>
+<span class="cm">San Francisco     2</span>
+<span class="cm">New York City     3</span>
+<span class="cm">       Boston     4</span>
+<span class="cm">  Los Angeles     5</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p>在 pandas 中，您可以将 <a class="reference internal" href="../../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">concat()</span></code></a> 与 <a class="reference internal" href="../../reference/api/pandas.DataFrame.drop_duplicates.html#pandas.DataFrame.drop_duplicates" title="pandas.DataFrame.drop_duplicates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_duplicates()</span></code></a> 结合使用。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">])</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="gh">Out[35]: </span>
+<span class="go">            city  rank</span>
+<span class="go">0        Chicago     1</span>
+<span class="go">1  San Francisco     2</span>
+<span class="go">2  New York City     3</span>
+<span class="go">1         Boston     4</span>
+<span class="go">2    Los Angeles     5</span>
+</pre></div>
+</div>
+</section>
+<section id="limit">
+<h2>LIMIT<a class="headerlink" href="comparison_with_sql.html#limit" title="Link to this heading">#</a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gh">Out[36]: </span>
+<span class="go">   total_bill   tip     sex smoker  day    time  size</span>
+<span class="go">0       16.99  1.01  Female     No  Sun  Dinner     2</span>
+<span class="go">1       10.34  1.66    Male     No  Sun  Dinner     3</span>
+<span class="go">2       21.01  3.50    Male     No  Sun  Dinner     3</span>
+<span class="go">3       23.68  3.31    Male     No  Sun  Dinner     2</span>
+<span class="go">4       24.59  3.61  Female     No  Sun  Dinner     4</span>
+<span class="go">5       25.29  4.71    Male     No  Sun  Dinner     4</span>
+<span class="go">6        8.77  2.00    Male     No  Sun  Dinner     2</span>
+<span class="go">7       26.88  3.12    Male     No  Sun  Dinner     4</span>
+<span class="go">8       15.04  1.96    Male     No  Sun  Dinner     2</span>
+<span class="go">9       14.78  3.23    Male     No  Sun  Dinner     2</span>
+</pre></div>
+</div>
+</section>
+<section id="pandas-equivalents-for-some-sql-analytic-and-aggregate-functions">
+<h2>一些 SQL 分析和聚合函数在 pandas 中的等效项<a class="headerlink" href="comparison_with_sql.html#pandas-equivalents-for-some-sql-analytic-and-aggregate-functions" title="Link to this heading">#</a></h2>
+<section id="top-n-rows-with-offset">
+<h3>带偏移量的 Top n 行<a class="headerlink" href="comparison_with_sql.html#top-n-rows-with-offset" title="Link to this heading">#</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- MySQL</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">tip</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">OFFSET</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">tips</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gh">Out[37]: </span>
+<span class="go">     total_bill   tip     sex smoker   day    time  size</span>
+<span class="go">183       23.17  6.50    Male    Yes   Sun  Dinner     4</span>
+<span class="go">214       28.17  6.50  Female    Yes   Sat  Dinner     3</span>
+<span class="go">47        32.40  6.00    Male     No   Sun  Dinner     4</span>
+<span class="go">239       29.03  5.92    Male     No   Sat  Dinner     3</span>
+<span class="go">88        24.71  5.85    Male     No  Thur   Lunch     2</span>
+<span class="go">181       23.33  5.65    Male    Yes   Sun  Dinner     2</span>
+<span class="go">44        30.40  5.60    Male     No   Sun  Dinner     4</span>
+<span class="go">52        34.81  5.20  Female     No   Sun  Dinner     4</span>
+<span class="go">85        34.83  5.17  Female     No  Thur   Lunch     4</span>
+<span class="go">211       25.89  5.16    Male    Yes   Sat  Dinner     4</span>
+</pre></div>
+</div>
+</section>
+<section id="top-n-rows-per-group">
+<h3>每组 Top n 行<a class="headerlink" href="comparison_with_sql.html#top-n-rows-per-group" title="Link to this heading">#</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Oracle's ROW_NUMBER() analytic function</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ROW_NUMBER</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">day</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">total_bill</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">rn</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">tips</span><span class="w"> </span><span class="n">t</span>
+<span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">day</span><span class="p">,</span><span class="w"> </span><span class="n">rn</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">tips</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+<span class="gp">   ....: </span>        <span class="n">rn</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"total_bill"</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">   ....: </span>        <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"day"</span><span class="p">])</span>
+<span class="gp">   ....: </span>        <span class="o">.</span><span class="n">cumcount</span><span class="p">()</span>
+<span class="gp">   ....: </span>        <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">   ....: </span>    <span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"rn &lt; 3"</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"day"</span><span class="p">,</span> <span class="s2">"rn"</span><span class="p">])</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[38]: </span>
+<span class="go">     total_bill    tip     sex smoker   day    time  size  rn</span>
+<span class="go">95        40.17   4.73    Male    Yes   Fri  Dinner     4   1</span>
+<span class="go">90        28.97   3.00    Male    Yes   Fri  Dinner     2   2</span>
+<span class="go">170       50.81  10.00    Male    Yes   Sat  Dinner     3   1</span>
+<span class="go">212       48.33   9.00    Male     No   Sat  Dinner     4   2</span>
+<span class="go">156       48.17   5.00    Male     No   Sun  Dinner     6   1</span>
+<span class="go">182       45.35   3.50    Male    Yes   Sun  Dinner     3   2</span>
+<span class="go">197       43.11   5.00  Female    Yes  Thur   Lunch     4   1</span>
+<span class="go">142       41.19   5.00    Male     No  Thur   Lunch     5   2</span>
+</pre></div>
+</div>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">rank(method='first')</span></code> 函数的相同操作</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">tips</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+<span class="gp">   ....: </span>        <span class="n">rnk</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"day"</span><span class="p">])[</span><span class="s2">"total_bill"</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span>
+<span class="gp">   ....: </span>            <span class="n">method</span><span class="o">=</span><span class="s2">"first"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">   ....: </span>        <span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"rnk &lt; 3"</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"day"</span><span class="p">,</span> <span class="s2">"rnk"</span><span class="p">])</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[39]: </span>
+<span class="go">     total_bill    tip     sex smoker   day    time  size  rnk</span>
+<span class="go">95        40.17   4.73    Male    Yes   Fri  Dinner     4  1.0</span>
+<span class="go">90        28.97   3.00    Male    Yes   Fri  Dinner     2  2.0</span>
+<span class="go">170       50.81  10.00    Male    Yes   Sat  Dinner     3  1.0</span>
+<span class="go">212       48.33   9.00    Male     No   Sat  Dinner     4  2.0</span>
+<span class="go">156       48.17   5.00    Male     No   Sun  Dinner     6  1.0</span>
+<span class="go">182       45.35   3.50    Male    Yes   Sun  Dinner     3  2.0</span>
+<span class="go">197       43.11   5.00  Female    Yes  Thur   Lunch     4  1.0</span>
+<span class="go">142       41.19   5.00    Male     No  Thur   Lunch     5  2.0</span>
+</pre></div>
+</div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Oracle's RANK() analytic function</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+<span class="w">    </span><span class="n">RANK</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">tip</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">rnk</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">tips</span><span class="w"> </span><span class="n">t</span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">tip</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span>
+<span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">rnk</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="n">rnk</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>让我们找出每性别组中 (rank < 3) 且 (tips < 2) 的小费。请注意，当使用 <code class="docutils literal notranslate"><span class="pre">rank(method='min')</span></code> 函数时，相同的 <code class="docutils literal notranslate"><span class="pre">tip</span></code> 值对应的 <code class="docutils literal notranslate"><span class="pre">rnk_min</span></code> 保持不变（与 Oracle 的 <code class="docutils literal notranslate"><span class="pre">RANK()</span></code> 函数类似）</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">rnk_min</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"sex"</span><span class="p">])[</span><span class="s2">"tip"</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"min"</span><span class="p">))</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"rnk_min &lt; 3"</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"sex"</span><span class="p">,</span> <span class="s2">"rnk_min"</span><span class="p">])</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[40]: </span>
+<span class="go">     total_bill   tip     sex smoker  day    time  size  rnk_min</span>
+<span class="go">67         3.07  1.00  Female    Yes  Sat  Dinner     1      1.0</span>
+<span class="go">92         5.75  1.00  Female    Yes  Fri  Dinner     2      1.0</span>
+<span class="go">111        7.25  1.00  Female     No  Sat  Dinner     1      1.0</span>
+<span class="go">236       12.60  1.00    Male    Yes  Sat  Dinner     2      1.0</span>
+<span class="go">237       32.83  1.17    Male    Yes  Sat  Dinner     2      2.0</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="update">
+<h2>UPDATE<a class="headerlink" href="comparison_with_sql.html#update" title="Link to this heading">#</a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">tip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tip</span><span class="o">*</span><span class="mi">2</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">tip</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">tips</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"tip"</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</section>
+<section id="delete">
+<h2>DELETE<a class="headerlink" href="comparison_with_sql.html#delete" title="Link to this heading">#</a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tips</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">tip</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>在 pandas 中，我们选择应该保留的行而不是删除它们</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">tips</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="comparison_with_r.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">与 R / R 库的比较</p> </div> </a> <a class="right-next" href="comparison_with_spreadsheets.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">与电子表格的比较</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#copies-vs-in-place-operations">副本与就地操作</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#select">SELECT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#where">WHERE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#group-by">GROUP BY</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#join">JOIN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#inner-join">INNER JOIN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#left-outer-join">LEFT OUTER JOIN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#right-join">RIGHT JOIN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#full-join">FULL JOIN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#union">UNION</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#limit">LIMIT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#pandas-equivalents-for-some-sql-analytic-and-aggregate-functions">一些 SQL 分析和聚合函数在 pandas 中的等效项</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#top-n-rows-with-offset">带偏移量的 Top n 行</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#top-n-rows-per-group">每组 Top n 行</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#update">UPDATE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="comparison_with_sql.html#delete">DELETE</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/comparison/comparison_with_sql.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> 由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

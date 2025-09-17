@@ -1,0 +1,936 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>扩展 pandas — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'development/extending';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developer" href="developer.html" />
+    <link rel="prev" title="Debugging C extensions" href="debugging_extensions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="extending.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">贡献给 pandas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_environment.html">创建开发环境</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_gitpod.html">使用 Gitpod 进行 pandas 开发</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_documentation.html">贡献文档</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html">pandas 文档字符串指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_codebase.html">贡献代码库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining.html">pandas 维护</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals.html">内部结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging_extensions.html">调试 C 扩展</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="extending.html#">扩展 pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">开发者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">政策</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">贡献者社区</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">开发</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">扩展 pandas</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="extending-pandas">
+<span id="extending"></span><h1>扩展 pandas<a class="headerlink" href="extending.html#extending-pandas" title="Link to this heading">#</a></h1>
+<p>虽然 pandas 提供了丰富的方法、容器和数据类型，但可能无法完全满足您的需求。pandas 提供了一些扩展选项。</p>
+<section id="registering-custom-accessors">
+<span id="extending-register-accessors"></span><h2>注册自定义访问器<a class="headerlink" href="extending.html#registering-custom-accessors" title="Link to this heading">#</a></h2>
+<p>库可以使用装饰器 <a class="reference internal" href="../reference/api/pandas.api.extensions.register_dataframe_accessor.html#pandas.api.extensions.register_dataframe_accessor" title="pandas.api.extensions.register_dataframe_accessor"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.api.extensions.register_dataframe_accessor()</span></code></a>、<a class="reference internal" href="../reference/api/pandas.api.extensions.register_series_accessor.html#pandas.api.extensions.register_series_accessor" title="pandas.api.extensions.register_series_accessor"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.api.extensions.register_series_accessor()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.api.extensions.register_index_accessor.html#pandas.api.extensions.register_index_accessor" title="pandas.api.extensions.register_index_accessor"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.api.extensions.register_index_accessor()</span></code></a>，为 pandas 对象添加额外的“命名空间”。所有这些都遵循类似的约定：您装饰一个类，提供要添加的属性名称。类的 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 方法获取被装饰的对象。例如</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pd</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">register_dataframe_accessor</span><span class="p">(</span><span class="s2">"geo"</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GeoAccessor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pandas_obj</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">pandas_obj</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span> <span class="o">=</span> <span class="n">pandas_obj</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+        <span class="c1"># verify there is a column latitude and a column longitude</span>
+        <span class="k">if</span> <span class="s2">"latitude"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="s2">"longitude"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"Must have 'latitude' and 'longitude'."</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># return the geographic center point of this DataFrame</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="o">.</span><span class="n">latitude</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_obj</span><span class="o">.</span><span class="n">longitude</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lon</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="nb">float</span><span class="p">(</span><span class="n">lat</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># plot this array's data on a map, e.g., using Cartopy</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>现在用户可以使用 <code class="docutils literal notranslate"><span class="pre">geo</span></code> 命名空间访问您的方法</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s2">"longitude"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s2">"latitude"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)}</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">center</span>
+<span class="go">(5.0, 10.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">geo</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="go"># plots data on a map</span>
+</pre></div>
+</div>
+<p>这是一种无需继承即可扩展 pandas 对象的便捷方法。如果您编写了自定义访问器，请提交拉取请求将其添加到我们的 <a class="reference external" href="https://pandas.ac.cn/community/ecosystem.html">生态系统</a>页面。</p>
+<p>我们强烈建议在您的访问器的 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 中验证数据。在我们的 <code class="docutils literal notranslate"><span class="pre">GeoAccessor</span></code> 中，我们验证数据是否包含预期的列，并在验证失败时引发 <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>。对于 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 访问器，如果访问器仅适用于某些 dtype，则应验证 <code class="docutils literal notranslate"><span class="pre">dtype</span></code>。</p>
+</section>
+<section id="extension-types">
+<span id="extending-extension-types"></span><h2>扩展类型<a class="headerlink" href="extending.html#extension-types" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>在 pandas 1.5 版本之前，<a class="reference internal" href="../reference/api/pandas.api.extensions.ExtensionDtype.html#pandas.api.extensions.ExtensionDtype" title="pandas.api.extensions.ExtensionDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.api.extensions.ExtensionDtype</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.api.extensions.ExtensionArray.html#pandas.api.extensions.ExtensionArray" title="pandas.api.extensions.ExtensionArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.api.extensions.ExtensionArray</span></code></a> API 处于实验阶段。从 1.5 版本开始，未来的更改将遵循 <a class="reference internal" href="policies.html#policies-version"><span class="std std-ref">pandas 弃用政策</span></a>。</p>
+</div>
+<p>pandas 定义了一个接口，用于实现<em>扩展</em> NumPy 类型系统的数据类型和数组。pandas 本身也使用扩展系统来实现 NumPy 中没有内置的一些类型（分类、周期、区间、带时区的日期时间）。</p>
+<p>库可以定义自定义数组和数据类型。当 pandas 遇到这些对象时，它们将被正确处理（即不会转换为对象 ndarray）。许多方法，例如 <a class="reference internal" href="../reference/api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.isna()</span></code></a>，将分派到扩展类型的实现。</p>
+<p>如果您正在构建实现该接口的库，请在<a class="reference external" href="https://pandas.ac.cn/community/ecosystem.html">生态系统页面</a>上进行宣传。</p>
+<p>该接口由两个类组成。</p>
+<section id="extensiondtype">
+<h3><a class="reference internal" href="../reference/api/pandas.api.extensions.ExtensionDtype.html#pandas.api.extensions.ExtensionDtype" title="pandas.api.extensions.ExtensionDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionDtype</span></code></a><a class="headerlink" href="extending.html#extensiondtype" title="Link to this heading">#</a></h3>
+<p>一个 <a class="reference internal" href="../reference/api/pandas.api.extensions.ExtensionDtype.html#pandas.api.extensions.ExtensionDtype" title="pandas.api.extensions.ExtensionDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.api.extensions.ExtensionDtype</span></code></a> 类似于一个 <code class="docutils literal notranslate"><span class="pre">numpy.dtype</span></code> 对象。它描述了数据类型。实现者需要负责一些独特的项，例如名称。</p>
+<p>一个特别重要的项是 <code class="docutils literal notranslate"><span class="pre">type</span></code> 属性。这应该是您数据的标量类型类。例如，如果您正在为 IP 地址数据编写扩展数组，这可能是 <code class="docutils literal notranslate"><span class="pre">ipaddress.IPv4Address</span></code>。</p>
+<p>有关接口定义，请参见<a class="reference external" href="https://github.com/pandas-dev/pandas/blob/main/pandas/core/dtypes/base.py">扩展 dtype 源码</a>。</p>
+<p><a class="reference internal" href="../reference/api/pandas.api.extensions.ExtensionDtype.html#pandas.api.extensions.ExtensionDtype" title="pandas.api.extensions.ExtensionDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.api.extensions.ExtensionDtype</span></code></a> 可以注册到 pandas，以允许通过字符串 dtype 名称创建。这允许使用注册的字符串名称实例化 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 和 <code class="docutils literal notranslate"><span class="pre">.astype()</span></code>，例如 <code class="docutils literal notranslate"><span class="pre">'category'</span></code> 是 <code class="docutils literal notranslate"><span class="pre">CategoricalDtype</span></code> 的注册字符串访问器。</p>
+<p>有关如何注册 dtype 的更多信息，请参见<a class="reference external" href="https://github.com/pandas-dev/pandas/blob/main/pandas/core/dtypes/dtypes.py">扩展 dtype dtypes</a>。</p>
+</section>
+<section id="extensionarray">
+<h3><a class="reference internal" href="../reference/api/pandas.api.extensions.ExtensionArray.html#pandas.api.extensions.ExtensionArray" title="pandas.api.extensions.ExtensionArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionArray</span></code></a><a class="headerlink" href="extending.html#extensionarray" title="Link to this heading">#</a></h3>
+<p>该类提供了所有类似数组的功能。ExtensionArrays 仅限于 1 维。ExtensionArray 通过 <code class="docutils literal notranslate"><span class="pre">dtype</span></code> 属性链接到 ExtensionDtype。</p>
+<p>pandas 对通过 <code class="docutils literal notranslate"><span class="pre">__new__</span></code> 或 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 创建扩展数组的方式没有限制，也没有限制您存储数据的方式。我们确实要求您的数组可以转换为 NumPy 数组，即使这相对昂贵（例如 <code class="docutils literal notranslate"><span class="pre">Categorical</span></code>）。</p>
+<p>它们可能由零个、一个或多个 NumPy 数组支持。例如，<a class="reference internal" href="../reference/api/pandas.Categorical.html#pandas.Categorical" title="pandas.Categorical"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Categorical</span></code></a> 是一个由两个数组支持的扩展数组，一个用于代码，一个用于类别。IPv6 地址数组可能由一个具有两个字段的 NumPy 结构化数组支持，一个用于低 64 位，一个用于高 64 位。或者它们可能由其他存储类型支持，例如 Python 列表。</p>
+<p>有关接口定义，请参见<a class="reference external" href="https://github.com/pandas-dev/pandas/blob/main/pandas/core/arrays/base.py">扩展数组源码</a>。文档字符串和注释包含正确实现接口的指导。</p>
+</section>
+<section id="extensionarray-operator-support">
+<span id="extending-extension-operator"></span><h3><a class="reference internal" href="../reference/api/pandas.api.extensions.ExtensionArray.html#pandas.api.extensions.ExtensionArray" title="pandas.api.extensions.ExtensionArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionArray</span></code></a> 运算符支持<a class="headerlink" href="extending.html#extensionarray-operator-support" title="Link to this heading">#</a></h3>
+<p>默认情况下，类 <a class="reference internal" href="../reference/api/pandas.api.extensions.ExtensionArray.html#pandas.api.extensions.ExtensionArray" title="pandas.api.extensions.ExtensionArray"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionArray</span></code></a> 没有定义运算符。为您的 ExtensionArray 提供运算符支持有两种方法：</p>
+<ol class="arabic simple">
+<li><p>在您的 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 子类上定义每个运算符。</p></li>
+<li><p>使用 pandas 中的运算符实现，该实现依赖于 ExtensionArray 的底层元素（标量）上已定义的运算符。</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>无论采用哪种方法，如果您希望在涉及与 NumPy 数组的二元操作时调用您的实现，您可能需要设置 <code class="docutils literal notranslate"><span class="pre">__array_priority__</span></code>。</p>
+</div>
+<p>对于第一种方法，您定义您希望 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 子类支持的选定运算符，例如 <code class="docutils literal notranslate"><span class="pre">__add__</span></code>、<code class="docutils literal notranslate"><span class="pre">__le__</span></code> 等。</p>
+<p>第二种方法假设 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 的底层元素（即标量类型）已经定义了各自的运算符。换句话说，如果您的名为 <code class="docutils literal notranslate"><span class="pre">MyExtensionArray</span></code> 的 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 实现为每个元素都是类 <code class="docutils literal notranslate"><span class="pre">MyExtensionElement</span></code> 的实例，那么如果为 <code class="docutils literal notranslate"><span class="pre">MyExtensionElement</span></code> 定义了运算符，则第二种方法将自动为 <code class="docutils literal notranslate"><span class="pre">MyExtensionArray</span></code> 定义运算符。</p>
+<p>混合类 <code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionScalarOpsMixin</span></code> 支持第二种方法。如果开发 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 子类，例如 <code class="docutils literal notranslate"><span class="pre">MyExtensionArray</span></code>，可以简单地将 <code class="docutils literal notranslate"><span class="pre">ExtensionScalarOpsMixin</span></code> 作为 <code class="docutils literal notranslate"><span class="pre">MyExtensionArray</span></code> 的父类，然后调用方法 <code class="xref py py-meth docutils literal notranslate"><span class="pre">_add_arithmetic_ops()</span></code> 和/或 <code class="xref py py-meth docutils literal notranslate"><span class="pre">_add_comparison_ops()</span></code> 将运算符挂钩到您的 <code class="docutils literal notranslate"><span class="pre">MyExtensionArray</span></code> 类中，如下所示</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.api.extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExtensionArray</span><span class="p">,</span> <span class="n">ExtensionScalarOpsMixin</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyExtensionArray</span><span class="p">(</span><span class="n">ExtensionArray</span><span class="p">,</span> <span class="n">ExtensionScalarOpsMixin</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="n">MyExtensionArray</span><span class="o">.</span><span class="n">_add_arithmetic_ops</span><span class="p">()</span>
+<span class="n">MyExtensionArray</span><span class="o">.</span><span class="n">_add_comparison_ops</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>由于 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 会自动逐个元素调用底层运算符，因此这可能不如直接在 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 上实现您自己的相关运算符版本那样高效。</p>
+</div>
+<p>对于算术操作，此实现将尝试使用逐元素操作的结果重新构造一个新的 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code>。这是否成功取决于操作是否返回对 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 有效的结果。如果无法重新构造 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code>，则返回包含标量的 ndarray。</p>
+<p>为了便于实现以及与 pandas 和 NumPy ndarray 之间操作的一致性，我们建议您<em>不要</em>在二元操作中处理 Series 和 Index。相反，您应该检测这些情况并返回 <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code>。当 pandas 遇到诸如 <code class="docutils literal notranslate"><span class="pre">op(Series,</span> <span class="pre">ExtensionArray)</span></code> 的操作时，pandas 将会：</p>
+<ol class="arabic simple">
+<li><p>从 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 中解包数组 (<code class="docutils literal notranslate"><span class="pre">Series.array</span></code>)</p></li>
+<li><p>调用 <code class="docutils literal notranslate"><span class="pre">result</span> <span class="pre">=</span> <span class="pre">op(values,</span> <span class="pre">ExtensionArray)</span></code></p></li>
+<li><p>将结果重新装入 <code class="docutils literal notranslate"><span class="pre">Series</span></code></p></li>
+</ol>
+</section>
+<section id="numpy-universal-functions">
+<span id="extending-extension-ufunc"></span><h3>NumPy 通用函数<a class="headerlink" href="extending.html#numpy-universal-functions" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 实现了 <code class="docutils literal notranslate"><span class="pre">__array_ufunc__</span></code>。作为实现的一部分，pandas 从 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 中解包 <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code>，应用 ufunc，并在必要时重新装箱。</p>
+<p>如果适用，我们强烈建议您在扩展数组中实现 <code class="docutils literal notranslate"><span class="pre">__array_ufunc__</span></code>，以避免强制转换为 ndarray。有关示例，请参见<a class="reference external" href="https://numpy.com.cn/doc/stable/reference/generated/numpy.lib.mixins.NDArrayOperatorsMixin.html">NumPy 文档</a>。</p>
+<p>作为您实现的一部分，我们要求您在 <code class="docutils literal notranslate"><span class="pre">inputs</span></code> 中检测到 pandas 容器（<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>、<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>、<a class="reference internal" href="../reference/api/pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a>）时，将处理权交给 pandas。如果存在其中任何一个，您应该返回 <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code>。pandas 将负责从容器中解包数组，并使用未包装的输入重新调用 ufunc。</p>
+</section>
+<section id="testing-extension-arrays">
+<span id="extending-extension-testing"></span><h3>测试扩展数组<a class="headerlink" href="extending.html#testing-extension-arrays" title="Link to this heading">#</a></h3>
+<p>我们提供了一个测试套件，用于确保您的扩展数组满足预期行为。要使用测试套件，您必须提供几个 pytest fixtures 并继承自基本测试类。所需的 fixtures 可以在 <a class="github reference external" href="https://github.com/pandas-dev/pandas/blob/main/pandas/tests/extension/conftest.py">pandas-dev/pandas</a> 中找到。</p>
+<p>要使用测试，请继承它</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pandas.tests.extension</span><span class="w"> </span><span class="kn">import</span> <span class="n">base</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestConstructors</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">BaseConstructorsTests</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>有关所有可用测试的列表，请参见<a class="github reference external" href="https://github.com/pandas-dev/pandas/blob/main/pandas/tests/extension/base/__init__.py">pandas-dev/pandas</a>。</p>
+</section>
+<section id="compatibility-with-apache-arrow">
+<span id="extending-extension-arrow"></span><h3>与 Apache Arrow 的兼容性<a class="headerlink" href="extending.html#compatibility-with-apache-arrow" title="Link to this heading">#</a></h3>
+<p>通过实现两个方法：<code class="docutils literal notranslate"><span class="pre">ExtensionArray.__arrow_array__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ExtensionDtype.__from_arrow__</span></code>，<code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 可以支持与 <code class="docutils literal notranslate"><span class="pre">pyarrow</span></code> 数组之间的转换（从而例如支持序列化为 Parquet 文件格式）。</p>
+<p><code class="docutils literal notranslate"><span class="pre">ExtensionArray.__arrow_array__</span></code> 确保 <code class="docutils literal notranslate"><span class="pre">pyarrow</span></code> 知道如何将特定的扩展数组转换为 <code class="docutils literal notranslate"><span class="pre">pyarrow.Array</span></code>（即使作为 pandas DataFrame 中的列也适用）</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyExtensionArray</span><span class="p">(</span><span class="n">ExtensionArray</span><span class="p">):</span>
+    <span class="o">...</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__arrow_array__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># convert the underlying array values to a pyarrow Array</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow</span>
+
+        <span class="k">return</span> <span class="n">pyarrow</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>然后 <code class="docutils literal notranslate"><span class="pre">ExtensionDtype.__from_arrow__</span></code> 方法控制从 pyarrow 到 pandas ExtensionArray 的转换。此方法接收一个 pyarrow <code class="docutils literal notranslate"><span class="pre">Array</span></code> 或 <code class="docutils literal notranslate"><span class="pre">ChunkedArray</span></code> 作为唯一参数，并期望返回此 dtype 和传递值对应的 pandas <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>class ExtensionDtype:
+    ...
+
+    def __from_arrow__(self, array: pyarrow.Array/ChunkedArray) -&gt; ExtensionArray:
+        ...
+</pre></div>
+</div>
+<p>更多信息请参见<a class="reference external" href="https://arrow.apache.ac.cn/docs/python/extending_types.html">Arrow 文档</a>。</p>
+<p>这些方法已在 pandas 中包含的可空整数和字符串扩展 dtype 中实现，并确保往返于 pyarrow 和 Parquet 文件格式。</p>
+</section>
+</section>
+<section id="subclassing-pandas-data-structures">
+<span id="extending-subclassing-pandas"></span><h2>继承 pandas 数据结构<a class="headerlink" href="extending.html#subclassing-pandas-data-structures" title="Link to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>在考虑继承 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 数据结构之前，有一些更简单的替代方案。</p>
+<ol class="arabic simple">
+<li><p>使用 <a class="reference internal" href="../user_guide/basics.html#basics-pipe"><span class="std std-ref">pipe</span></a> 的可扩展方法链</p></li>
+<li><p>使用<em>组合</em>。参见<a class="reference external" href="https://en.wikipedia.org/wiki/Composition_over_inheritance">此处</a>。</p></li>
+<li><p>通过<a class="reference internal" href="extending.html#extending-register-accessors"><span class="std std-ref">注册访问器</span></a>进行扩展</p></li>
+<li><p>通过<a class="reference internal" href="extending.html#extending-extension-types"><span class="std std-ref">扩展类型</span></a>进行扩展</p></li>
+</ol>
+</div>
+<p>本节描述如何继承 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 数据结构以满足更具体的需求。有两点需要注意：</p>
+<ol class="arabic simple">
+<li><p>覆盖构造函数属性。</p></li>
+<li><p>定义原始属性</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>您可以在 <a class="reference external" href="https://github.com/geopandas/geopandas">geopandas</a> 项目中找到一个很好的例子。</p>
+</div>
+<section id="override-constructor-properties">
+<h3>覆盖构造函数属性<a class="headerlink" href="extending.html#override-constructor-properties" title="Link to this heading">#</a></h3>
+<p>每个数据结构都有几个<em>构造函数属性</em>，用于在操作后返回一个新的数据结构。通过覆盖这些属性，您可以在 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 数据操作中保留子类。</p>
+<p>子类中可以定义 3 个构造函数属性：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame/Series._constructor</span></code>：当操作结果与原始数据具有相同维度时使用。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame._constructor_sliced</span></code>：当 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> (子)类操作结果应为 <code class="docutils literal notranslate"><span class="pre">Series</span></code> (子)类时使用。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Series._constructor_expanddim</span></code>：当 <code class="docutils literal notranslate"><span class="pre">Series</span></code> (子)类操作结果应为 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> (子)类时使用，例如 <code class="docutils literal notranslate"><span class="pre">Series.to_frame()</span></code>。</p></li>
+</ul>
+<p>以下示例展示了如何定义覆盖构造函数属性的 <code class="docutils literal notranslate"><span class="pre">SubclassedSeries</span></code> 和 <code class="docutils literal notranslate"><span class="pre">SubclassedDataFrame</span></code>。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SubclassedSeries</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SubclassedSeries</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_constructor_expanddim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SubclassedDataFrame</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SubclassedDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SubclassedDataFrame</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_constructor_sliced</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SubclassedSeries</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">SubclassedSeries</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">&lt;class '__main__.SubclassedSeries'&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_framed</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">to_framed</span><span class="p">)</span>
+<span class="go">&lt;class '__main__.SubclassedDataFrame'&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">SubclassedDataFrame</span><span class="p">({</span><span class="s2">"A"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"B"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s2">"C"</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   A  B  C</span>
+<span class="go">0  1  4  7</span>
+<span class="go">1  2  5  8</span>
+<span class="go">2  3  6  9</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">&lt;class '__main__.SubclassedDataFrame'&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sliced1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sliced1</span>
+<span class="go">   A  B</span>
+<span class="go">0  1  4</span>
+<span class="go">1  2  5</span>
+<span class="go">2  3  6</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sliced1</span><span class="p">)</span>
+<span class="go">&lt;class '__main__.SubclassedDataFrame'&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sliced2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sliced2</span>
+<span class="go">0    1</span>
+<span class="go">1    2</span>
+<span class="go">2    3</span>
+<span class="go">Name: A, dtype: int64</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sliced2</span><span class="p">)</span>
+<span class="go">&lt;class '__main__.SubclassedSeries'&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="define-original-properties">
+<h3>定义原始属性<a class="headerlink" href="extending.html#define-original-properties" title="Link to this heading">#</a></h3>
+<p>为了让原始数据结构拥有额外的属性，您应该让 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 知道添加了哪些属性。<code class="docutils literal notranslate"><span class="pre">pandas</span></code> 通过覆盖 <code class="docutils literal notranslate"><span class="pre">__getattribute__</span></code> 将未知属性映射到数据名称。定义原始属性可以通过以下两种方式之一完成：</p>
+<ol class="arabic simple">
+<li><p>定义 <code class="docutils literal notranslate"><span class="pre">_internal_names</span></code> 和 <code class="docutils literal notranslate"><span class="pre">_internal_names_set</span></code> 用于临时属性，这些属性将不会传递给操作结果。</p></li>
+<li><p>定义 <code class="docutils literal notranslate"><span class="pre">_metadata</span></code> 用于正常属性，这些属性将传递给操作结果。</p></li>
+</ol>
+<p>下面是一个定义两个原始属性的示例：“internal_cache”作为临时属性，“added_property”作为正常属性</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SubclassedDataFrame2</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+
+    <span class="c1"># temporary properties</span>
+    <span class="n">_internal_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">_internal_names</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"internal_cache"</span><span class="p">]</span>
+    <span class="n">_internal_names_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">_internal_names</span><span class="p">)</span>
+
+    <span class="c1"># normal properties</span>
+    <span class="n">_metadata</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"added_property"</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_constructor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SubclassedDataFrame2</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">SubclassedDataFrame2</span><span class="p">({</span><span class="s2">"A"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"B"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s2">"C"</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   A  B  C</span>
+<span class="go">0  1  4  7</span>
+<span class="go">1  2  5  8</span>
+<span class="go">2  3  6  9</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">internal_cache</span> <span class="o">=</span> <span class="s2">"cached"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">added_property</span> <span class="o">=</span> <span class="s2">"property"</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">internal_cache</span>
+<span class="go">cached</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">added_property</span>
+<span class="go">property</span>
+
+<span class="go"># properties defined in _internal_names is reset after manipulation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">[[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">]]</span><span class="o">.</span><span class="n">internal_cache</span>
+<span class="go">AttributeError: 'SubclassedDataFrame2' object has no attribute 'internal_cache'</span>
+
+<span class="go"># properties defined in _metadata are retained</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">[[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">]]</span><span class="o">.</span><span class="n">added_property</span>
+<span class="go">property</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="plotting-backends">
+<span id="extending-plotting-backends"></span><h2>绘图后端<a class="headerlink" href="extending.html#plotting-backends" title="Link to this heading">#</a></h2>
+<p>pandas 可以通过第三方绘图后端进行扩展。主要思想是让用户选择一个不同于基于 Matplotlib 提供的绘图后端。例如</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"plotting.backend"</span><span class="p">,</span> <span class="s2">"backend.module"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>这或多或少等同于</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">backend.module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">backend</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>后端模块随后可以使用其他可视化工具（Bokeh、Altair 等）来生成图表。</p>
+<p>实现绘图后端的库应该使用<a class="reference external" href="https://setuptools.pypa.io/en/latest/userguide/entry_point.html">入口点</a>来使它们的后端对 pandas 可发现。键是 <code class="docutils literal notranslate"><span class="pre">"pandas_plotting_backends"</span></code>。例如，pandas 注册默认的“matplotlib”后端如下。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># in setup.py</span>
+<span class="n">setup</span><span class="p">(</span>  <span class="c1"># noqa: F821</span>
+    <span class="o">...</span><span class="p">,</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"pandas_plotting_backends"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"matplotlib = pandas:plotting._matplotlib"</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>有关如何实现第三方绘图后端的更多信息，请参见<a class="github reference external" href="https://github.com/pandas-dev/pandas/blob/main/pandas/plotting/__init__.py#L1">pandas-dev/pandas</a>。</p>
+</section>
+<section id="arithmetic-with-3rd-party-types">
+<span id="extending-pandas-priority"></span><h2>与第三方类型的算术运算<a class="headerlink" href="extending.html#arithmetic-with-3rd-party-types" title="Link to this heading">#</a></h2>
+<p>为了控制自定义类型与 pandas 类型之间的算术运算方式，请实现 <code class="docutils literal notranslate"><span class="pre">__pandas_priority__</span></code>。类似于 numpy 的 <code class="docutils literal notranslate"><span class="pre">__array_priority__</span></code> 语义，<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>、<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a> 对象上的算术方法将委托给 <code class="docutils literal notranslate"><span class="pre">other</span></code>，如果它具有较高值的 <code class="docutils literal notranslate"><span class="pre">__pandas_priority__</span></code> 属性。</p>
+<p>默认情况下，pandas 对象会尝试与其他对象进行操作，即使它们不是 pandas 已知的类型</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="go">0    11</span>
+<span class="go">1    22</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>在上面的示例中，如果 <code class="docutils literal notranslate"><span class="pre">[10,</span> <span class="pre">20]</span></code> 是一个可以理解为列表的自定义类型，pandas 对象仍然会以相同的方式对其进行操作。</p>
+<p>在某些情况下，将操作委托给其他类型会很有用。例如，假设我实现了一个自定义列表对象，并且我希望将我的自定义列表与 pandas <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 相加的结果是我的列表实例，而不是像前一个示例中看到的 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>。现在可以通过定义自定义列表的 <code class="docutils literal notranslate"><span class="pre">__pandas_priority__</span></code> 属性，并将其设置为高于我希望与之操作的 pandas 对象的优先级来做到这一点。</p>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>、<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a> 的 <code class="docutils literal notranslate"><span class="pre">__pandas_priority__</span></code> 分别是 <code class="docutils literal notranslate"><span class="pre">4000</span></code>、<code class="docutils literal notranslate"><span class="pre">3000</span></code> 和 <code class="docutils literal notranslate"><span class="pre">2000</span></code>。基础 <code class="docutils literal notranslate"><span class="pre">ExtensionArray.__pandas_priority__</span></code> 是 <code class="docutils literal notranslate"><span class="pre">1000</span></code>。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">CustomList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="n">__pandas_priority__</span> <span class="o">=</span> <span class="mi">5000</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="c1"># return `self` and not the addition for simplicity</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+<span class="n">custom</span> <span class="o">=</span> <span class="n">CustomList</span><span class="p">()</span>
+<span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># Series refuses to add custom, since it's an unknown type with higher priority</span>
+<span class="k">assert</span> <span class="n">series</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="n">custom</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">NotImplemented</span>
+
+<span class="c1"># This will cause the custom class `__radd__` being used instead</span>
+<span class="k">assert</span> <span class="n">series</span> <span class="o">+</span> <span class="n">custom</span> <span class="ow">is</span> <span class="n">custom</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="debugging_extensions.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">调试 C 扩展</p> </div> </a> <a class="right-next" href="developer.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">开发者</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#registering-custom-accessors">注册自定义访问器</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#extension-types">扩展类型</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#extensiondtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionDtype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#extensionarray"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionArray</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#extensionarray-operator-support"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionArray</span></code> 运算符支持</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#numpy-universal-functions">NumPy 通用函数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#testing-extension-arrays">测试扩展数组</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#compatibility-with-apache-arrow">与 Apache Arrow 的兼容性</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#subclassing-pandas-data-structures">继承 pandas 数据结构</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#override-constructor-properties">覆盖构造函数属性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#define-original-properties">定义原始属性</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#plotting-backends">绘图后端</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="extending.html#arithmetic-with-3rd-party-types">与第三方类型的算术运算</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/development/extending.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 通过 <a href="https://numfocus.org">NumFOCUS 公司</a>托管。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 提供。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

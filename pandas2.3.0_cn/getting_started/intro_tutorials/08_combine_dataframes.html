@@ -1,0 +1,824 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>如何组合来自多个表的数据 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/intro_tutorials/08_combine_dataframes';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to handle time series data with ease" href="09_timeseries.html" />
+    <link rel="prev" title="How to reshape the layout of tables" href="07_reshape_table_layout.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="08_combine_dataframes.html#main-content">跳到主内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包概览</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">入门教程</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_table_oriented.html">pandas 处理哪种数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_add_columns.html">如何根据现有列创建新列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_calculate_statistics.html">如何计算汇总统计量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_reshape_table_layout.html">如何重塑表格布局</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="08_combine_dataframes.html#">如何组合来自多个表的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_text_data.html">如何操作文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../comparison/index.html">与其他工具的比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_r.html">与 R / R 库的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sql.html">与 SQL 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_spreadsheets.html">与电子表格的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sas.html">与 SAS 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_stata.html">与 Stata 的比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">入门</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">入门教程</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">如何...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="highlight-ipython notranslate" id="min-tut-08-combine"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header gs-data-header">
+        <div class="gs-data-title">本教程使用的数据</div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item gs-data-list">
+            <div data-bs-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+                <span class="badge bg-secondary">空气质量硝酸盐数据</span>
+            </div>
+            <div class="collapse" id="collapsedata">
+                <div class="card-body">
+                    <p class="card-text"></p><p>本教程使用 <span class="math notranslate nohighlight">\(NO_2\)</span> 空气质量数据，该数据由 <a class="reference external" href="https://openaq.org">OpenAQ</a> 提供，并使用 <a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> 包下载。</p>
+<p>数据集 <code class="docutils literal notranslate"><span class="pre">air_quality_no2_long.csv</span></code> 提供了巴黎、安特卫普和伦敦的测量站 <em>FR04014</em>、<em>BETR801</em> 和 <em>London Westminster</em> 的 <span class="math notranslate nohighlight">\(NO_2\)</span> 值。</p>
+            <p></p>
+        <a href="https://github.com/pandas-dev/pandas/tree/main/doc/data/air_quality_no2_long.csv" class="btn btn-dark btn-sm">原始数据</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">air_quality_no2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/air_quality_no2_long.csv"</span><span class="p">,</span>
+<span class="gp">   ...: </span>                              <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [3]: </span><span class="n">air_quality_no2</span> <span class="o">=</span> <span class="n">air_quality_no2</span><span class="p">[[</span><span class="s2">"date.utc"</span><span class="p">,</span> <span class="s2">"location"</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                   <span class="s2">"parameter"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">]]</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [4]: </span><span class="n">air_quality_no2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[4]: </span>
+<span class="go">                    date.utc location parameter  value</span>
+<span class="go">0  2019-06-21 00:00:00+00:00  FR04014       no2   20.0</span>
+<span class="go">1  2019-06-20 23:00:00+00:00  FR04014       no2   21.8</span>
+<span class="go">2  2019-06-20 22:00:00+00:00  FR04014       no2   26.5</span>
+<span class="go">3  2019-06-20 21:00:00+00:00  FR04014       no2   24.9</span>
+<span class="go">4  2019-06-20 20:00:00+00:00  FR04014       no2   21.4</span>
+</pre></div>
+</div>
+</li>
+<li class="list-group-item gs-data-list">
+    <div data-bs-toggle="collapse" href="#collapsedata2" role="button" aria-expanded="false" aria-controls="collapsedata2">
+        <span class="badge bg-secondary">空气质量颗粒物数据</span>
+    </div>
+    <div class="collapse" id="collapsedata2">
+        <div class="card-body">
+            <p class="card-text"></p><p>本教程使用颗粒物小于 2.5 微米的空气质量数据，该数据由 <a class="reference external" href="https://openaq.org">OpenAQ</a> 提供，并使用 <a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> 包下载。</p>
+<p>数据集 <code class="docutils literal notranslate"><span class="pre">air_quality_pm25_long.csv</span></code> 提供了巴黎、安特卫普和伦敦的测量站 <em>FR04014</em>、<em>BETR801</em> 和 <em>London Westminster</em> 的 <span class="math notranslate nohighlight">\(PM_{25}\)</span> 值。</p>
+            <p></p>
+        <a href="https://github.com/pandas-dev/pandas/tree/main/doc/data/air_quality_pm25_long.csv" class="btn btn-dark btn-sm">原始数据</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">air_quality_pm25</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/air_quality_pm25_long.csv"</span><span class="p">,</span>
+<span class="gp">   ...: </span>                               <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [6]: </span><span class="n">air_quality_pm25</span> <span class="o">=</span> <span class="n">air_quality_pm25</span><span class="p">[[</span><span class="s2">"date.utc"</span><span class="p">,</span> <span class="s2">"location"</span><span class="p">,</span>
+<span class="gp">   ...: </span>                                     <span class="s2">"parameter"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">]]</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [7]: </span><span class="n">air_quality_pm25</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[7]: </span>
+<span class="go">                    date.utc location parameter  value</span>
+<span class="go">0  2019-06-18 06:00:00+00:00  BETR801      pm25   18.0</span>
+<span class="go">1  2019-06-17 08:00:00+00:00  BETR801      pm25    6.5</span>
+<span class="go">2  2019-06-17 07:00:00+00:00  BETR801      pm25   18.5</span>
+<span class="go">3  2019-06-17 06:00:00+00:00  BETR801      pm25   16.0</span>
+<span class="go">4  2019-06-17 05:00:00+00:00  BETR801      pm25    7.5</span>
+</pre></div>
+</div>
+    </li>
+</ul>
+</div><section id="how-to-combine-data-from-multiple-tables">
+<h1>如何组合来自多个表的数据<a class="headerlink" href="08_combine_dataframes.html#how-to-combine-data-from-multiple-tables" title="Link to this heading">#</a></h1>
+<section id="concatenating-objects">
+<h2>连接对象<a class="headerlink" href="08_combine_dataframes.html#concatenating-objects" title="Link to this heading">#</a></h2>
+<img alt="../../_images/08_concat_row.svg" class="align-center" src="../../_images/08_concat_row.svg">
+<ul class="task-bullet">
+    <li><p>我希望将 <span class="math notranslate nohighlight">\(NO_2\)</span> 和 <span class="math notranslate nohighlight">\(PM_{25}\)</span> 的测量数据合并到一个表中，这两个表具有相似的结构。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">air_quality_pm25</span><span class="p">,</span> <span class="n">air_quality_no2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="gp">In [9]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[9]: </span>
+<span class="go">                    date.utc location parameter  value</span>
+<span class="go">0  2019-06-18 06:00:00+00:00  BETR801      pm25   18.0</span>
+<span class="go">1  2019-06-17 08:00:00+00:00  BETR801      pm25    6.5</span>
+<span class="go">2  2019-06-17 07:00:00+00:00  BETR801      pm25   18.5</span>
+<span class="go">3  2019-06-17 06:00:00+00:00  BETR801      pm25   16.0</span>
+<span class="go">4  2019-06-17 05:00:00+00:00  BETR801      pm25    7.5</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> 函数沿着一个轴（按行或按列）执行多个表的连接操作。</p>
+    </li>
+</ul><p>默认情况下，连接是沿着轴 0 进行的，因此结果表合并了输入表的行。让我们检查原始表和连接后的表的形状以验证操作</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="nb">print</span><span class="p">(</span><span class="s1">'Shape of the ``air_quality_pm25`` table: '</span><span class="p">,</span> <span class="n">air_quality_pm25</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">Shape of the ``air_quality_pm25`` table:  (1110, 4)</span>
+
+<span class="gp">In [11]: </span><span class="nb">print</span><span class="p">(</span><span class="s1">'Shape of the ``air_quality_no2`` table: '</span><span class="p">,</span> <span class="n">air_quality_no2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">Shape of the ``air_quality_no2`` table:  (2068, 4)</span>
+
+<span class="gp">In [12]: </span><span class="nb">print</span><span class="p">(</span><span class="s1">'Shape of the resulting ``air_quality`` table: '</span><span class="p">,</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">Shape of the resulting ``air_quality`` table:  (3178, 4)</span>
+</pre></div>
+</div>
+<p>因此，结果表有 3178 = 1110 + 2068 行。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><strong>axis</strong> 参数将出现在许多 pandas 方法中，这些方法可以<strong>沿着一个轴</strong>应用。一个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 有两个对应的轴：第一个垂直向下穿过行（轴 0），第二个水平穿过列（轴 1）。大多数操作，如连接或汇总统计，默认是按行（轴 0）进行的，但也可以按列应用。</p>
+</div>
+<p>根据日期时间信息对表进行排序也说明了两个表的组合，其中 <code class="docutils literal notranslate"><span class="pre">parameter</span></code> 列定义了表的来源（来自表 <code class="docutils literal notranslate"><span class="pre">air_quality_no2</span></code> 的 <code class="docutils literal notranslate"><span class="pre">no2</span></code> 或来自表 <code class="docutils literal notranslate"><span class="pre">air_quality_pm25</span></code> 的 <code class="docutils literal notranslate"><span class="pre">pm25</span></code>）。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">air_quality</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"date.utc"</span><span class="p">)</span>
+
+<span class="gp">In [14]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[14]: </span>
+<span class="go">                       date.utc            location parameter  value</span>
+<span class="go">2067  2019-05-07 01:00:00+00:00  London Westminster       no2   23.0</span>
+<span class="go">1003  2019-05-07 01:00:00+00:00             FR04014       no2   25.0</span>
+<span class="go">100   2019-05-07 01:00:00+00:00             BETR801      pm25   12.5</span>
+<span class="go">1098  2019-05-07 01:00:00+00:00             BETR801       no2   50.5</span>
+<span class="go">1109  2019-05-07 01:00:00+00:00  London Westminster      pm25    8.0</span>
+</pre></div>
+</div>
+<p>在这个特定示例中，数据提供的 <code class="docutils literal notranslate"><span class="pre">parameter</span></code> 列确保可以识别每个原始表。但并非总是如此。<code class="docutils literal notranslate"><span class="pre">concat</span></code> 函数提供了一个便捷的解决方案，即使用 <code class="docutils literal notranslate"><span class="pre">keys</span></code> 参数，添加一个额外的（分层）行索引。例如</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">air_quality_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">air_quality_pm25</span><span class="p">,</span> <span class="n">air_quality_no2</span><span class="p">],</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">"PM25"</span><span class="p">,</span> <span class="s2">"NO2"</span><span class="p">])</span>
+
+<span class="gp">In [16]: </span><span class="n">air_quality_</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[16]: </span>
+<span class="go">                         date.utc location parameter  value</span>
+<span class="go">PM25 0  2019-06-18 06:00:00+00:00  BETR801      pm25   18.0</span>
+<span class="go">     1  2019-06-17 08:00:00+00:00  BETR801      pm25    6.5</span>
+<span class="go">     2  2019-06-17 07:00:00+00:00  BETR801      pm25   18.5</span>
+<span class="go">     3  2019-06-17 06:00:00+00:00  BETR801      pm25   16.0</span>
+<span class="go">     4  2019-06-17 05:00:00+00:00  BETR801      pm25    7.5</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>这些教程中尚未提及同时存在多个行/列索引的情况。<em>分层索引</em>或 <em>MultiIndex</em> 是 pandas 中用于分析高维数据的高级而强大的功能。</p>
+<p>多重索引超出了本 pandas 介绍的范围。目前，请记住函数 <code class="docutils literal notranslate"><span class="pre">reset_index</span></code> 可用于将索引的任何级别转换为列，例如 <code class="docutils literal notranslate"><span class="pre">air_quality.reset_index(level=0)</span></code></p>
+<div class="d-flex flex-row  gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>欢迎在用户指南的 <a class="reference internal" href="../../user_guide/advanced.html#advanced"><span class="std std-ref">高级索引</span></a> 部分深入了解多重索引的世界。</p>
+</div></div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>有关表连接（按行和按列）的更多选项，以及如何使用 <code class="docutils literal notranslate"><span class="pre">concat</span></code> 定义其他轴上索引的逻辑（并集或交集），请参阅 <a class="reference internal" href="../../user_guide/merging.html#merging-concat"><span class="std std-ref">对象连接</span></a> 部分。</p>
+</div></section>
+<section id="join-tables-using-a-common-identifier">
+<h2>使用共同标识符连接表<a class="headerlink" href="08_combine_dataframes.html#join-tables-using-a-common-identifier" title="Link to this heading">#</a></h2>
+<img alt="../../_images/08_merge_left.svg" class="align-center" src="../../_images/08_merge_left.svg">
+<ul class="task-bullet">
+    <li><p>将由站点元数据表提供的站点坐标添加到测量表中的相应行。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>空气质量测量站坐标存储在数据文件 <code class="docutils literal notranslate"><span class="pre">air_quality_stations.csv</span></code> 中，该文件是使用 <a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> 包下载的。</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">stations_coord</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/air_quality_stations.csv"</span><span class="p">)</span>
+
+<span class="gp">In [18]: </span><span class="n">stations_coord</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[18]: </span>
+<span class="go">  location  coordinates.latitude  coordinates.longitude</span>
+<span class="go">0  BELAL01              51.23619                4.38522</span>
+<span class="go">1  BELHB23              51.17030                4.34100</span>
+<span class="go">2  BELLD01              51.10998                5.00486</span>
+<span class="go">3  BELLD02              51.12038                5.02155</span>
+<span class="go">4  BELR833              51.32766                4.36226</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>本示例中使用的站点（FR04014、BETR801 和 London Westminster）只是元数据表中列出的三个条目。我们只想将这三个站点的坐标添加到测量表中，每个坐标都对应于 <code class="docutils literal notranslate"><span class="pre">air_quality</span></code> 表中的行。</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[19]: </span>
+<span class="go">                       date.utc            location parameter  value</span>
+<span class="go">2067  2019-05-07 01:00:00+00:00  London Westminster       no2   23.0</span>
+<span class="go">1003  2019-05-07 01:00:00+00:00             FR04014       no2   25.0</span>
+<span class="go">100   2019-05-07 01:00:00+00:00             BETR801      pm25   12.5</span>
+<span class="go">1098  2019-05-07 01:00:00+00:00             BETR801       no2   50.5</span>
+<span class="go">1109  2019-05-07 01:00:00+00:00  London Westminster      pm25    8.0</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">air_quality</span><span class="p">,</span> <span class="n">stations_coord</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"location"</span><span class="p">)</span>
+
+<span class="gp">In [21]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[21]: </span>
+<span class="go">                    date.utc  ... coordinates.longitude</span>
+<span class="go">0  2019-05-07 01:00:00+00:00  ...              -0.13193</span>
+<span class="go">1  2019-05-07 01:00:00+00:00  ...               2.39390</span>
+<span class="go">2  2019-05-07 01:00:00+00:00  ...               2.39390</span>
+<span class="go">3  2019-05-07 01:00:00+00:00  ...               4.43182</span>
+<span class="go">4  2019-05-07 01:00:00+00:00  ...               4.43182</span>
+
+<span class="go">[5 rows x 6 columns]</span>
+</pre></div>
+</div>
+<p>使用 <a class="reference internal" href="../../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">merge()</span></code></a> 函数，对于 <code class="docutils literal notranslate"><span class="pre">air_quality</span></code> 表中的每一行，都会从 <code class="docutils literal notranslate"><span class="pre">air_quality_stations_coord</span></code> 表中添加相应的坐标。两个表都有共同的 <code class="docutils literal notranslate"><span class="pre">location</span></code> 列，该列用作组合信息的键。通过选择 <code class="docutils literal notranslate"><span class="pre">left</span></code> 连接，只有 <code class="docutils literal notranslate"><span class="pre">air_quality</span></code>（左侧）表中可用的位置，即 FR04014、BETR801 和 London Westminster，最终会出现在结果表中。<code class="docutils literal notranslate"><span class="pre">merge</span></code> 函数支持多种连接选项，类似于数据库式操作。</p>
+    </li>
+</ul><ul class="task-bullet">
+    <li><p>将参数元数据表提供的参数完整描述和名称添加到测量表。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>空气质量参数元数据存储在数据文件 <code class="docutils literal notranslate"><span class="pre">air_quality_parameters.csv</span></code> 中，该文件是使用 <a class="reference external" href="http://dhhagan.github.io/py-openaq/index.html">py-openaq</a> 包下载的。</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">air_quality_parameters</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/air_quality_parameters.csv"</span><span class="p">)</span>
+
+<span class="gp">In [23]: </span><span class="n">air_quality_parameters</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[23]: </span>
+<span class="go">     id                                        description  name</span>
+<span class="go">0    bc                                       Black Carbon    BC</span>
+<span class="go">1    co                                    Carbon Monoxide    CO</span>
+<span class="go">2   no2                                   Nitrogen Dioxide   NO2</span>
+<span class="go">3    o3                                              Ozone    O3</span>
+<span class="go">4  pm10  Particulate matter less than 10 micrometers in...  PM10</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">air_quality</span><span class="p">,</span> <span class="n">air_quality_parameters</span><span class="p">,</span>
+<span class="gp">   ....: </span>                       <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">'parameter'</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">'id'</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [25]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[25]: </span>
+<span class="go">                    date.utc  ...   name</span>
+<span class="go">0  2019-05-07 01:00:00+00:00  ...    NO2</span>
+<span class="go">1  2019-05-07 01:00:00+00:00  ...    NO2</span>
+<span class="go">2  2019-05-07 01:00:00+00:00  ...    NO2</span>
+<span class="go">3  2019-05-07 01:00:00+00:00  ...  PM2.5</span>
+<span class="go">4  2019-05-07 01:00:00+00:00  ...    NO2</span>
+
+<span class="go">[5 rows x 9 columns]</span>
+</pre></div>
+</div>
+<p>与之前的示例相比，没有共同的列名。但是，<code class="docutils literal notranslate"><span class="pre">air_quality</span></code> 表中的 <code class="docutils literal notranslate"><span class="pre">parameter</span></code> 列和 <code class="docutils literal notranslate"><span class="pre">air_quality_parameters_name</span></code> 表中的 <code class="docutils literal notranslate"><span class="pre">id</span></code> 列都以通用格式提供了测量变量。这里使用 <code class="docutils literal notranslate"><span class="pre">left_on</span></code> 和 <code class="docutils literal notranslate"><span class="pre">right_on</span></code> 参数（而不是仅仅使用 <code class="docutils literal notranslate"><span class="pre">on</span></code>）来建立两个表之间的链接。</p>
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>pandas 也支持内连接、外连接和右连接。有关表的连接/合并的更多信息，请参阅用户指南中关于 <a class="reference internal" href="../../user_guide/merging.html#merging-join"><span class="std std-ref">数据库样式表合并</span></a> 的部分。或者查看 <a class="reference internal" href="../comparison/comparison_with_sql.html#compare-with-sql-join"><span class="std std-ref">与 SQL 的比较</span></a> 页面。</p>
+</div><div class="shadow gs-callout gs-callout-remember">
+    <h4>记住</h4><ul class="simple">
+<li><p>可以使用 <code class="docutils literal notranslate"><span class="pre">concat</span></code> 函数按列或按行连接多个表。</p></li>
+<li><p>对于类似数据库的表合并/连接，请使用 <code class="docutils literal notranslate"><span class="pre">merge</span></code> 函数。</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">用户指南</span><p>有关各种 <a class="reference internal" href="../../user_guide/merging.html#merging"><span class="std std-ref">组合数据表的功能</span></a> 的完整说明，请参阅用户指南。</p>
+</div></section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="07_reshape_table_layout.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">如何重塑表格布局</p> </div> </a> <a class="right-next" href="09_timeseries.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">如何轻松处理时间序列数据</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="08_combine_dataframes.html#concatenating-objects">连接对象</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="08_combine_dataframes.html#join-tables-using-a-common-identifier">使用共同标识符连接表</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/intro_tutorials/08_combine_dataframes.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 提供。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

@@ -1,0 +1,1828 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandas 快速入门 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/10min';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Intro to data structures" href="dsintro.html" />
+    <link rel="prev" title="User Guide" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="10min.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始使用</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="10min.html#">pandas 快速入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本核心功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具 (文本, CSV, HDF5, …)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引与选择数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">MultiIndex / 高级索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、拼接和比较</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">重塑与透视表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">处理文本数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">处理缺失数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">重复标签</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可空整型数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可空布尔数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">图表可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组聚合：分拆-应用-组合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项与设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">性能优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">扩展到大型数据集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">实用代码片段</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">用户指南</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pandas 快速入门</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="minutes-to-pandas">
+<span id="min"></span><h1>pandas 快速入门<a class="headerlink" href="10min.html#minutes-to-pandas" title="Link to this heading">#</a></h1>
+<p>这是 pandas 的一个简短介绍，主要面向新用户。你可以在<a class="reference internal" href="cookbook.html#cookbook"><span class="std std-ref">实用代码片段</span></a>中查看更复杂的示例。</p>
+<p>通常，我们按如下方式导入</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="gp">In [2]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<section id="basic-data-structures-in-pandas">
+<h2>pandas 中的基本数据结构<a class="headerlink" href="10min.html#basic-data-structures-in-pandas" title="Link to this heading">#</a></h2>
+<p>Pandas 提供了两种用于处理数据的类</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>：一个一维的带标签数组，可容纳任何类型的数据</dt><dd><p>例如整数、字符串、Python 对象等。</p>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>：一个二维数据结构，像二维数组或带有行和列的表格一样容纳数据。</p></li>
+</ol>
+</section>
+<section id="object-creation">
+<h2>对象创建<a class="headerlink" href="10min.html#object-creation" title="Link to this heading">#</a></h2>
+<p>请参阅<a class="reference internal" href="dsintro.html#dsintro"><span class="std std-ref">数据结构简介</span></a>部分。</p>
+<p>通过传入值列表创建<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>，让 pandas 创建默认的<a class="reference internal" href="../reference/api/pandas.RangeIndex.html#pandas.RangeIndex" title="pandas.RangeIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">RangeIndex</span></code></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+
+<span class="gp">In [4]: </span><span class="n">s</span>
+<span class="gh">Out[4]: </span>
+<span class="go">0    1.0</span>
+<span class="go">1    3.0</span>
+<span class="go">2    5.0</span>
+<span class="go">3    NaN</span>
+<span class="go">4    6.0</span>
+<span class="go">5    8.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>通过传入 NumPy 数组，使用<a class="reference internal" href="../reference/api/pandas.date_range.html#pandas.date_range" title="pandas.date_range"><code class="xref py py-func docutils literal notranslate"><span class="pre">date_range()</span></code></a>创建带有日期时间索引和标签列的<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"20130101"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="gp">In [6]: </span><span class="n">dates</span>
+<span class="gh">Out[6]: </span>
+<span class="go">DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',</span>
+<span class="go">               '2013-01-05', '2013-01-06'],</span>
+<span class="go">              dtype='datetime64[ns]', freq='D')</span>
+
+<span class="gp">In [7]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">"ABCD"</span><span class="p">))</span>
+
+<span class="gp">In [8]: </span><span class="n">df</span>
+<span class="gh">Out[8]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span>
+<span class="go">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span>
+<span class="go">2013-01-06 -0.673690  0.113648 -1.478427  0.524988</span>
+</pre></div>
+</div>
+<p>通过传入一个对象字典创建<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>，其中键是列标签，值是列值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="p">{</span>
+<span class="gp">   ...: </span>        <span class="s2">"A"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="gp">   ...: </span>        <span class="s2">"B"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"20130102"</span><span class="p">),</span>
+<span class="gp">   ...: </span>        <span class="s2">"C"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"float32"</span><span class="p">),</span>
+<span class="gp">   ...: </span>        <span class="s2">"D"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"int32"</span><span class="p">),</span>
+<span class="gp">   ...: </span>        <span class="s2">"E"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">"test"</span><span class="p">,</span> <span class="s2">"train"</span><span class="p">,</span> <span class="s2">"test"</span><span class="p">,</span> <span class="s2">"train"</span><span class="p">]),</span>
+<span class="gp">   ...: </span>        <span class="s2">"F"</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span>
+<span class="gp">   ...: </span>    <span class="p">}</span>
+<span class="gp">   ...: </span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [10]: </span><span class="n">df2</span>
+<span class="gh">Out[10]: </span>
+<span class="go">     A          B    C  D      E    F</span>
+<span class="go">0  1.0 2013-01-02  1.0  3   test  foo</span>
+<span class="go">1  1.0 2013-01-02  1.0  3  train  foo</span>
+<span class="go">2  1.0 2013-01-02  1.0  3   test  foo</span>
+<span class="go">3  1.0 2013-01-02  1.0  3  train  foo</span>
+</pre></div>
+</div>
+<p>生成的<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>的列具有不同的<a class="reference internal" href="basics.html#basics-dtypes"><span class="std std-ref">dtypes</span></a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">df2</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[11]: </span>
+<span class="go">A          float64</span>
+<span class="go">B    datetime64[s]</span>
+<span class="go">C          float32</span>
+<span class="go">D            int32</span>
+<span class="go">E         category</span>
+<span class="go">F           object</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>如果你使用 IPython，列名（以及公共属性）的 Tab 自动补全功能会自动启用。以下是部分将自动补全的属性：</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">df2</span><span class="o">.&lt;</span><span class="n">TAB</span><span class="o">&gt;</span>  <span class="c1"># noqa: E225, E999</span>
+<span class="go">df2.A                  df2.bool</span>
+<span class="go">df2.abs                df2.boxplot</span>
+<span class="go">df2.add                df2.C</span>
+<span class="go">df2.add_prefix         df2.clip</span>
+<span class="go">df2.add_suffix         df2.columns</span>
+<span class="go">df2.align              df2.copy</span>
+<span class="go">df2.all                df2.count</span>
+<span class="go">df2.any                df2.combine</span>
+<span class="go">df2.append             df2.D</span>
+<span class="go">df2.apply              df2.describe</span>
+<span class="go">df2.applymap           df2.diff</span>
+<span class="go">df2.B                  df2.duplicated</span>
+</pre></div>
+</div>
+<p>如你所见，列 <code class="docutils literal notranslate"><span class="pre">A</span></code>、<code class="docutils literal notranslate"><span class="pre">B</span></code>、<code class="docutils literal notranslate"><span class="pre">C</span></code> 和 <code class="docutils literal notranslate"><span class="pre">D</span></code> 会自动 Tab 补全。<code class="docutils literal notranslate"><span class="pre">E</span></code> 和 <code class="docutils literal notranslate"><span class="pre">F</span></code> 也在其中；其余属性为简洁起见已被截断。</p>
+</section>
+<section id="viewing-data">
+<h2>查看数据<a class="headerlink" href="10min.html#viewing-data" title="Link to this heading">#</a></h2>
+<p>请参阅<a class="reference internal" href="basics.html#basics"><span class="std std-ref">基本核心功能</span></a>部分。</p>
+<p>使用<a class="reference internal" href="../reference/api/pandas.DataFrame.head.html#pandas.DataFrame.head" title="pandas.DataFrame.head"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.head()</span></code></a>和<a class="reference internal" href="../reference/api/pandas.DataFrame.tail.html#pandas.DataFrame.tail" title="pandas.DataFrame.tail"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.tail()</span></code></a>分别查看框架的顶部和底部行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[13]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span>
+<span class="go">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span>
+
+<span class="gp">In [14]: </span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gh">Out[14]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span>
+<span class="go">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span>
+<span class="go">2013-01-06 -0.673690  0.113648 -1.478427  0.524988</span>
+</pre></div>
+</div>
+<p>显示<a class="reference internal" href="../reference/api/pandas.DataFrame.index.html#pandas.DataFrame.index" title="pandas.DataFrame.index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DataFrame.index</span></code></a>或<a class="reference internal" href="../reference/api/pandas.DataFrame.columns.html#pandas.DataFrame.columns" title="pandas.DataFrame.columns"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DataFrame.columns</span></code></a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+<span class="gh">Out[15]: </span>
+<span class="go">DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',</span>
+<span class="go">               '2013-01-05', '2013-01-06'],</span>
+<span class="go">              dtype='datetime64[ns]', freq='D')</span>
+
+<span class="gp">In [16]: </span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+<span class="gh">Out[16]: </span><span class="go">Index(['A', 'B', 'C', 'D'], dtype='object')</span>
+</pre></div>
+</div>
+<p>使用<a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a>返回底层数据的 NumPy 表示，不包含索引或列标签。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="gh">Out[17]: </span>
+<span class="go">array([[ 0.4691, -0.2829, -1.5091, -1.1356],</span>
+<span class="go">       [ 1.2121, -0.1732,  0.1192, -1.0442],</span>
+<span class="go">       [-0.8618, -2.1046, -0.4949,  1.0718],</span>
+<span class="go">       [ 0.7216, -0.7068, -1.0396,  0.2719],</span>
+<span class="go">       [-0.425 ,  0.567 ,  0.2762, -1.0874],</span>
+<span class="go">       [-0.6737,  0.1136, -1.4784,  0.525 ]])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><b>NumPy 数组的整个数组只有一个 dtype，而 pandas DataFrames 的每列有一个 dtype</b>。当你调用<a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a>时，pandas 会找到能够容纳 DataFrame 中 <b>所有</b> dtypes 的 NumPy dtype。如果共同的数据类型是 <code class="docutils literal notranslate"><span class="pre">object</span></code>，则<a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a>将需要复制数据。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df2</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[18]: </span>
+<span class="go">A          float64</span>
+<span class="go">B    datetime64[s]</span>
+<span class="go">C          float32</span>
+<span class="go">D            int32</span>
+<span class="go">E         category</span>
+<span class="go">F           object</span>
+<span class="go">dtype: object</span>
+
+<span class="gp">In [19]: </span><span class="n">df2</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="gh">Out[19]: </span>
+<span class="go">array([[1.0, Timestamp('2013-01-02 00:00:00'), 1.0, 3, 'test', 'foo'],</span>
+<span class="go">       [1.0, Timestamp('2013-01-02 00:00:00'), 1.0, 3, 'train', 'foo'],</span>
+<span class="go">       [1.0, Timestamp('2013-01-02 00:00:00'), 1.0, 3, 'test', 'foo'],</span>
+<span class="go">       [1.0, Timestamp('2013-01-02 00:00:00'), 1.0, 3, 'train', 'foo']],</span>
+<span class="go">      dtype=object)</span>
+</pre></div>
+</div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.describe.html#pandas.DataFrame.describe" title="pandas.DataFrame.describe"><code class="xref py py-func docutils literal notranslate"><span class="pre">describe()</span></code></a>显示数据的快速统计摘要</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="gh">Out[20]: </span>
+<span class="go">              A         B         C         D</span>
+<span class="go">count  6.000000  6.000000  6.000000  6.000000</span>
+<span class="go">mean   0.073711 -0.431125 -0.687758 -0.233103</span>
+<span class="go">std    0.843157  0.922818  0.779887  0.973118</span>
+<span class="go">min   -0.861849 -2.104569 -1.509059 -1.135632</span>
+<span class="go">25%   -0.611510 -0.600794 -1.368714 -1.076610</span>
+<span class="go">50%    0.022070 -0.228039 -0.767252 -0.386188</span>
+<span class="go">75%    0.658444  0.041933 -0.034326  0.461706</span>
+<span class="go">max    1.212112  0.567020  0.276232  1.071804</span>
+</pre></div>
+</div>
+<p>转置数据</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">df</span><span class="o">.</span><span class="n">T</span>
+<span class="gh">Out[21]: </span>
+<span class="go">   2013-01-01  2013-01-02  2013-01-03  2013-01-04  2013-01-05  2013-01-06</span>
+<span class="go">A    0.469112    1.212112   -0.861849    0.721555   -0.424972   -0.673690</span>
+<span class="go">B   -0.282863   -0.173215   -2.104569   -0.706771    0.567020    0.113648</span>
+<span class="go">C   -1.509059    0.119209   -0.494929   -1.039575    0.276232   -1.478427</span>
+<span class="go">D   -1.135632   -1.044236    1.071804    0.271860   -1.087401    0.524988</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.sort_index.html#pandas.DataFrame.sort_index" title="pandas.DataFrame.sort_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.sort_index()</span></code></a>按轴排序</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gh">Out[22]: </span>
+<span class="go">                   D         C         B         A</span>
+<span class="go">2013-01-01 -1.135632 -1.509059 -0.282863  0.469112</span>
+<span class="go">2013-01-02 -1.044236  0.119209 -0.173215  1.212112</span>
+<span class="go">2013-01-03  1.071804 -0.494929 -2.104569 -0.861849</span>
+<span class="go">2013-01-04  0.271860 -1.039575 -0.706771  0.721555</span>
+<span class="go">2013-01-05 -1.087401  0.276232  0.567020 -0.424972</span>
+<span class="go">2013-01-06  0.524988 -1.478427  0.113648 -0.673690</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.sort_values.html#pandas.DataFrame.sort_values" title="pandas.DataFrame.sort_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.sort_values()</span></code></a>按值排序</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"B"</span><span class="p">)</span>
+<span class="gh">Out[23]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span>
+<span class="go">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span>
+<span class="go">2013-01-06 -0.673690  0.113648 -1.478427  0.524988</span>
+<span class="go">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span>
+</pre></div>
+</div>
+</section>
+<section id="selection">
+<h2>选择<a class="headerlink" href="10min.html#selection" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>虽然用于选择和设置的标准 Python / NumPy 表达式直观且便于交互式工作，但对于生产代码，我们推荐使用优化的 pandas 数据访问方法：<a class="reference internal" href="../reference/api/pandas.DataFrame.at.html#pandas.DataFrame.at" title="pandas.DataFrame.at"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.at()</span></code></a>、<a class="reference internal" href="../reference/api/pandas.DataFrame.iat.html#pandas.DataFrame.iat" title="pandas.DataFrame.iat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.iat()</span></code></a>、<a class="reference internal" href="../reference/api/pandas.DataFrame.loc.html#pandas.DataFrame.loc" title="pandas.DataFrame.loc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.loc()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.iloc.html#pandas.DataFrame.iloc" title="pandas.DataFrame.iloc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.iloc()</span></code></a>。</p>
+</div>
+<p>请参阅索引文档<a class="reference internal" href="indexing.html#indexing"><span class="std std-ref">索引与选择数据</span></a>和<a class="reference internal" href="advanced.html#advanced"><span class="std std-ref">MultiIndex / 高级索引</span></a>。</p>
+<section id="getitem">
+<h3>Getitem (<code class="docutils literal notranslate"><span class="pre">[]</span></code>)<a class="headerlink" href="10min.html#getitem" title="Link to this heading">#</a></h3>
+<p>对于<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>，传入单个标签会选择一列并生成一个<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>，等同于 <code class="docutils literal notranslate"><span class="pre">df.A</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+<span class="gh">Out[24]: </span>
+<span class="go">2013-01-01    0.469112</span>
+<span class="go">2013-01-02    1.212112</span>
+<span class="go">2013-01-03   -0.861849</span>
+<span class="go">2013-01-04    0.721555</span>
+<span class="go">2013-01-05   -0.424972</span>
+<span class="go">2013-01-06   -0.673690</span>
+<span class="go">Freq: D, Name: A, dtype: float64</span>
+</pre></div>
+</div>
+<p>对于<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>，传入切片 <code class="docutils literal notranslate"><span class="pre">:</span></code> 会选择匹配的行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="gh">Out[25]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span>
+
+<span class="gp">In [26]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"20130102"</span><span class="p">:</span><span class="s2">"20130104"</span><span class="p">]</span>
+<span class="gh">Out[26]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span>
+</pre></div>
+</div>
+</section>
+<section id="selection-by-label">
+<h3>按标签选择<a class="headerlink" href="10min.html#selection-by-label" title="Link to this heading">#</a></h3>
+<p>更多信息请参阅<a class="reference internal" href="indexing.html#indexing-label"><span class="std std-ref">按标签选择</span></a>，使用<a class="reference internal" href="../reference/api/pandas.DataFrame.loc.html#pandas.DataFrame.loc" title="pandas.DataFrame.loc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.loc()</span></code></a>或<a class="reference internal" href="../reference/api/pandas.DataFrame.at.html#pandas.DataFrame.at" title="pandas.DataFrame.at"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.at()</span></code></a>。</p>
+<p>选择与标签匹配的行</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="gh">Out[27]: </span>
+<span class="go">A    0.469112</span>
+<span class="go">B   -0.282863</span>
+<span class="go">C   -1.509059</span>
+<span class="go">D   -1.135632</span>
+<span class="go">Name: 2013-01-01 00:00:00, dtype: float64</span>
+</pre></div>
+</div>
+<p>选择所有行 (<code class="docutils literal notranslate"><span class="pre">:</span></code>) 和选定的列标签</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">]]</span>
+<span class="gh">Out[28]: </span>
+<span class="go">                   A         B</span>
+<span class="go">2013-01-01  0.469112 -0.282863</span>
+<span class="go">2013-01-02  1.212112 -0.173215</span>
+<span class="go">2013-01-03 -0.861849 -2.104569</span>
+<span class="go">2013-01-04  0.721555 -0.706771</span>
+<span class="go">2013-01-05 -0.424972  0.567020</span>
+<span class="go">2013-01-06 -0.673690  0.113648</span>
+</pre></div>
+</div>
+<p>对于标签切片，两个端点都<b>包含</b>在内</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"20130102"</span><span class="p">:</span><span class="s2">"20130104"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">]]</span>
+<span class="gh">Out[29]: </span>
+<span class="go">                   A         B</span>
+<span class="go">2013-01-02  1.212112 -0.173215</span>
+<span class="go">2013-01-03 -0.861849 -2.104569</span>
+<span class="go">2013-01-04  0.721555 -0.706771</span>
+</pre></div>
+</div>
+<p>选择单个行和列标签会返回一个标量</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"A"</span><span class="p">]</span>
+<span class="gh">Out[30]: </span><span class="go">0.4691122999071863</span>
+</pre></div>
+</div>
+<p>为了快速访问标量（等同于之前的方法）</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"A"</span><span class="p">]</span>
+<span class="gh">Out[31]: </span><span class="go">0.4691122999071863</span>
+</pre></div>
+</div>
+</section>
+<section id="selection-by-position">
+<h3>按位置选择<a class="headerlink" href="10min.html#selection-by-position" title="Link to this heading">#</a></h3>
+<p>更多信息请参阅<a class="reference internal" href="indexing.html#indexing-integer"><span class="std std-ref">按位置选择</span></a>，使用<a class="reference internal" href="../reference/api/pandas.DataFrame.iloc.html#pandas.DataFrame.iloc" title="pandas.DataFrame.iloc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.iloc()</span></code></a>或<a class="reference internal" href="../reference/api/pandas.DataFrame.iat.html#pandas.DataFrame.iat" title="pandas.DataFrame.iat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.iat()</span></code></a>。</p>
+<p>通过传入整数的位置进行选择</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="gh">Out[32]: </span>
+<span class="go">A    0.721555</span>
+<span class="go">B   -0.706771</span>
+<span class="go">C   -1.039575</span>
+<span class="go">D    0.271860</span>
+<span class="go">Name: 2013-01-04 00:00:00, dtype: float64</span>
+</pre></div>
+</div>
+<p>整数切片行为类似于 NumPy/Python</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[33]: </span>
+<span class="go">                   A         B</span>
+<span class="go">2013-01-04  0.721555 -0.706771</span>
+<span class="go">2013-01-05 -0.424972  0.567020</span>
+</pre></div>
+</div>
+<p>整数位置列表</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gh">Out[34]: </span>
+<span class="go">                   A         C</span>
+<span class="go">2013-01-02  1.212112  0.119209</span>
+<span class="go">2013-01-03 -0.861849 -0.494929</span>
+<span class="go">2013-01-05 -0.424972  0.276232</span>
+</pre></div>
+</div>
+<p>显式切片行</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span>
+<span class="gh">Out[35]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span>
+</pre></div>
+</div>
+<p>显式切片列</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="gh">Out[36]: </span>
+<span class="go">                   B         C</span>
+<span class="go">2013-01-01 -0.282863 -1.509059</span>
+<span class="go">2013-01-02 -0.173215  0.119209</span>
+<span class="go">2013-01-03 -2.104569 -0.494929</span>
+<span class="go">2013-01-04 -0.706771 -1.039575</span>
+<span class="go">2013-01-05  0.567020  0.276232</span>
+<span class="go">2013-01-06  0.113648 -1.478427</span>
+</pre></div>
+</div>
+<p>显式获取值</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gh">Out[37]: </span><span class="go">-0.17321464905330858</span>
+</pre></div>
+</div>
+<p>为了快速访问标量（等同于之前的方法）</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gh">Out[38]: </span><span class="go">-0.17321464905330858</span>
+</pre></div>
+</div>
+</section>
+<section id="boolean-indexing">
+<h3>布尔索引<a class="headerlink" href="10min.html#boolean-indexing" title="Link to this heading">#</a></h3>
+<p>选择 <code class="docutils literal notranslate"><span class="pre">df.A</span></code> 大于 <code class="docutils literal notranslate"><span class="pre">0</span></code> 的行。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gh">Out[39]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span>
+</pre></div>
+</div>
+<p>从满足布尔条件的<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>中选择值</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gh">Out[40]: </span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-01  0.469112       NaN       NaN       NaN</span>
+<span class="go">2013-01-02  1.212112       NaN  0.119209       NaN</span>
+<span class="go">2013-01-03       NaN       NaN       NaN  1.071804</span>
+<span class="go">2013-01-04  0.721555       NaN       NaN  0.271860</span>
+<span class="go">2013-01-05       NaN  0.567020  0.276232       NaN</span>
+<span class="go">2013-01-06       NaN  0.113648       NaN  0.524988</span>
+</pre></div>
+</div>
+<p>使用<a class="reference internal" href="../reference/api/pandas.Series.isin.html#pandas.Series.isin" title="pandas.Series.isin"><code class="xref py py-func docutils literal notranslate"><span class="pre">isin()</span></code></a>方法进行过滤</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="gp">In [42]: </span><span class="n">df2</span><span class="p">[</span><span class="s2">"E"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"one"</span><span class="p">,</span> <span class="s2">"one"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">,</span> <span class="s2">"four"</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">]</span>
+
+<span class="gp">In [43]: </span><span class="n">df2</span>
+<span class="gh">Out[43]: </span>
+<span class="go">                   A         B         C         D      E</span>
+<span class="go">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632    one</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236    one</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804    two</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  0.271860  three</span>
+<span class="go">2013-01-05 -0.424972  0.567020  0.276232 -1.087401   four</span>
+<span class="go">2013-01-06 -0.673690  0.113648 -1.478427  0.524988  three</span>
+
+<span class="gp">In [44]: </span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s2">"E"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"two"</span><span class="p">,</span> <span class="s2">"four"</span><span class="p">])]</span>
+<span class="gh">Out[44]: </span>
+<span class="go">                   A         B         C         D     E</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804   two</span>
+<span class="go">2013-01-05 -0.424972  0.567020  0.276232 -1.087401  four</span>
+</pre></div>
+</div>
+</section>
+<section id="setting">
+<h3>设置<a class="headerlink" href="10min.html#setting" title="Link to this heading">#</a></h3>
+<p>设置新列会自动按索引对齐数据</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"20130102"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="gp">In [46]: </span><span class="n">s1</span>
+<span class="gh">Out[46]: </span>
+<span class="go">2013-01-02    1</span>
+<span class="go">2013-01-03    2</span>
+<span class="go">2013-01-04    3</span>
+<span class="go">2013-01-05    4</span>
+<span class="go">2013-01-06    5</span>
+<span class="go">2013-01-07    6</span>
+<span class="go">Freq: D, dtype: int64</span>
+
+<span class="gp">In [47]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"F"</span><span class="p">]</span> <span class="o">=</span> <span class="n">s1</span>
+</pre></div>
+</div>
+<p>按标签设置值</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"A"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>按位置设置值</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>通过分配 NumPy 数组进行设置</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"D"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>先前的设置操作的结果</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [51]: </span><span class="n">df</span>
+<span class="gh">Out[51]: </span>
+<span class="go">                   A         B         C    D    F</span>
+<span class="go">2013-01-01  0.000000  0.000000 -1.509059  5.0  NaN</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209  5.0  1.0</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  5.0  2.0</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  5.0  3.0</span>
+<span class="go">2013-01-05 -0.424972  0.567020  0.276232  5.0  4.0</span>
+<span class="go">2013-01-06 -0.673690  0.113648 -1.478427  5.0  5.0</span>
+</pre></div>
+</div>
+<p>带设置的 <code class="docutils literal notranslate"><span class="pre">where</span></code> 操作</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [52]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="gp">In [53]: </span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">df2</span>
+
+<span class="gp">In [54]: </span><span class="n">df2</span>
+<span class="gh">Out[54]: </span>
+<span class="go">                   A         B         C    D    F</span>
+<span class="go">2013-01-01  0.000000  0.000000 -1.509059 -5.0  NaN</span>
+<span class="go">2013-01-02 -1.212112 -0.173215 -0.119209 -5.0 -1.0</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929 -5.0 -2.0</span>
+<span class="go">2013-01-04 -0.721555 -0.706771 -1.039575 -5.0 -3.0</span>
+<span class="go">2013-01-05 -0.424972 -0.567020 -0.276232 -5.0 -4.0</span>
+<span class="go">2013-01-06 -0.673690 -0.113648 -1.478427 -5.0 -5.0</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="missing-data">
+<h2>缺失数据<a class="headerlink" href="10min.html#missing-data" title="Link to this heading">#</a></h2>
+<p>对于 NumPy 数据类型，<code class="docutils literal notranslate"><span class="pre">np.nan</span></code> 表示缺失数据。默认情况下，它不包含在计算中。请参阅<a class="reference internal" href="missing_data.html#missing-data"><span class="std std-ref">缺失数据</span></a>部分。</p>
+<p>重新索引允许你更改/添加/删除指定轴上的索引。这会返回数据的副本。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"E"</span><span class="p">])</span>
+
+<span class="gp">In [56]: </span><span class="n">df1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">dates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"E"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="gp">In [57]: </span><span class="n">df1</span>
+<span class="gh">Out[57]: </span>
+<span class="go">                   A         B         C    D    F    E</span>
+<span class="go">2013-01-01  0.000000  0.000000 -1.509059  5.0  NaN  1.0</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209  5.0  1.0  1.0</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  5.0  2.0  NaN</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  5.0  3.0  NaN</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.dropna.html#pandas.DataFrame.dropna" title="pandas.DataFrame.dropna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.dropna()</span></code></a>删除任何包含缺失数据的行</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="n">df1</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s2">"any"</span><span class="p">)</span>
+<span class="gh">Out[58]: </span>
+<span class="go">                   A         B         C    D    F    E</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209  5.0  1.0  1.0</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.fillna.html#pandas.DataFrame.fillna" title="pandas.DataFrame.fillna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.fillna()</span></code></a>填充缺失数据</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="n">df1</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[59]: </span>
+<span class="go">                   A         B         C    D    F    E</span>
+<span class="go">2013-01-01  0.000000  0.000000 -1.509059  5.0  5.0  1.0</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209  5.0  1.0  1.0</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  5.0  2.0  5.0</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  5.0  3.0  5.0</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-func docutils literal notranslate"><span class="pre">isna()</span></code></a>获取值为 <code class="docutils literal notranslate"><span class="pre">nan</span></code> 的布尔掩码</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+<span class="gh">Out[60]: </span>
+<span class="go">                A      B      C      D      F      E</span>
+<span class="go">2013-01-01  False  False  False  False   True  False</span>
+<span class="go">2013-01-02  False  False  False  False  False  False</span>
+<span class="go">2013-01-03  False  False  False  False  False   True</span>
+<span class="go">2013-01-04  False  False  False  False  False   True</span>
+</pre></div>
+</div>
+</section>
+<section id="operations">
+<h2>操作<a class="headerlink" href="10min.html#operations" title="Link to this heading">#</a></h2>
+<p>请参阅<a class="reference internal" href="basics.html#basics-binop"><span class="std std-ref">二元运算基本部分</span></a>。</p>
+<section id="stats">
+<h3>统计<a class="headerlink" href="10min.html#stats" title="Link to this heading">#</a></h3>
+<p>操作通常<b>排除</b>缺失数据。</p>
+<p>计算每列的平均值</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[61]: </span>
+<span class="go">A   -0.004474</span>
+<span class="go">B   -0.383981</span>
+<span class="go">C   -0.687758</span>
+<span class="go">D    5.000000</span>
+<span class="go">F    3.000000</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>计算每行的平均值</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[62]: </span>
+<span class="go">2013-01-01    0.872735</span>
+<span class="go">2013-01-02    1.431621</span>
+<span class="go">2013-01-03    0.707731</span>
+<span class="go">2013-01-04    1.395042</span>
+<span class="go">2013-01-05    1.883656</span>
+<span class="go">2013-01-06    1.592306</span>
+<span class="go">Freq: D, dtype: float64</span>
+</pre></div>
+</div>
+<p>与具有不同索引或列的另一个<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>或<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>进行操作时，结果将与索引或列标签的并集对齐。此外，pandas 会沿指定维度自动广播，并将未对齐的标签填充为<code class="docutils literal notranslate"><span class="pre">np.nan</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [64]: </span><span class="n">s</span>
+<span class="gh">Out[64]: </span>
+<span class="go">2013-01-01    NaN</span>
+<span class="go">2013-01-02    NaN</span>
+<span class="go">2013-01-03    1.0</span>
+<span class="go">2013-01-04    3.0</span>
+<span class="go">2013-01-05    5.0</span>
+<span class="go">2013-01-06    NaN</span>
+<span class="go">Freq: D, dtype: float64</span>
+
+<span class="gp">In [65]: </span><span class="n">df</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">"index"</span><span class="p">)</span>
+<span class="gh">Out[65]: </span>
+<span class="go">                   A         B         C    D    F</span>
+<span class="go">2013-01-01       NaN       NaN       NaN  NaN  NaN</span>
+<span class="go">2013-01-02       NaN       NaN       NaN  NaN  NaN</span>
+<span class="go">2013-01-03 -1.861849 -3.104569 -1.494929  4.0  1.0</span>
+<span class="go">2013-01-04 -2.278445 -3.706771 -4.039575  2.0  0.0</span>
+<span class="go">2013-01-05 -5.424972 -4.432980 -4.723768  0.0 -1.0</span>
+<span class="go">2013-01-06       NaN       NaN       NaN  NaN  NaN</span>
+</pre></div>
+</div>
+</section>
+<section id="user-defined-functions">
+<h3>用户定义函数<a class="headerlink" href="10min.html#user-defined-functions" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg" title="pandas.DataFrame.agg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.agg()</span></code></a>和<a class="reference internal" href="../reference/api/pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.transform()</span></code></a>分别应用一个用户定义函数，该函数会减少或广播其结果。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">df</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mf">5.6</span><span class="p">)</span>
+<span class="gh">Out[66]: </span>
+<span class="go">A    -0.025054</span>
+<span class="go">B    -2.150294</span>
+<span class="go">C    -3.851445</span>
+<span class="go">D    28.000000</span>
+<span class="go">F    16.800000</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [67]: </span><span class="n">df</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">101.2</span><span class="p">)</span>
+<span class="gh">Out[67]: </span>
+<span class="go">                     A           B           C      D      F</span>
+<span class="go">2013-01-01    0.000000    0.000000 -152.716721  506.0    NaN</span>
+<span class="go">2013-01-02  122.665737  -17.529322   12.063922  506.0  101.2</span>
+<span class="go">2013-01-03  -87.219115 -212.982405  -50.086843  506.0  202.4</span>
+<span class="go">2013-01-04   73.021382  -71.525239 -105.204988  506.0  303.6</span>
+<span class="go">2013-01-05  -43.007200   57.382459   27.954680  506.0  404.8</span>
+<span class="go">2013-01-06  -68.177398   11.501219 -149.616767  506.0  506.0</span>
+</pre></div>
+</div>
+</section>
+<section id="value-counts">
+<h3>值计数<a class="headerlink" href="10min.html#value-counts" title="Link to this heading">#</a></h3>
+<p>更多信息请参阅<a class="reference internal" href="basics.html#basics-discretization"><span class="std std-ref">直方图和离散化</span></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [68]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="gp">In [69]: </span><span class="n">s</span>
+<span class="gh">Out[69]: </span>
+<span class="go">0    4</span>
+<span class="go">1    2</span>
+<span class="go">2    1</span>
+<span class="go">3    2</span>
+<span class="go">4    6</span>
+<span class="go">5    4</span>
+<span class="go">6    4</span>
+<span class="go">7    6</span>
+<span class="go">8    4</span>
+<span class="go">9    4</span>
+<span class="go">dtype: int64</span>
+
+<span class="gp">In [70]: </span><span class="n">s</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="gh">Out[70]: </span>
+<span class="go">4    5</span>
+<span class="go">2    2</span>
+<span class="go">6    2</span>
+<span class="go">1    1</span>
+<span class="go">Name: count, dtype: int64</span>
+</pre></div>
+</div>
+</section>
+<section id="string-methods">
+<h3>字符串方法<a class="headerlink" href="10min.html#string-methods" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>在 <code class="docutils literal notranslate"><span class="pre">str</span></code> 属性中配备了一组字符串处理方法，可以轻松地对数组的每个元素进行操作，如下面的代码片段所示。更多信息请参阅<a class="reference internal" href="text.html#text-string-methods"><span class="std std-ref">矢量化字符串方法</span></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"Aaba"</span><span class="p">,</span> <span class="s2">"Baca"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"CABA"</span><span class="p">,</span> <span class="s2">"dog"</span><span class="p">,</span> <span class="s2">"cat"</span><span class="p">])</span>
+
+<span class="gp">In [72]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="gh">Out[72]: </span>
+<span class="go">0       a</span>
+<span class="go">1       b</span>
+<span class="go">2       c</span>
+<span class="go">3    aaba</span>
+<span class="go">4    baca</span>
+<span class="go">5     NaN</span>
+<span class="go">6    caba</span>
+<span class="go">7     dog</span>
+<span class="go">8     cat</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="merge">
+<h2>合并<a class="headerlink" href="10min.html#merge" title="Link to this heading">#</a></h2>
+<section id="concat">
+<h3>拼接<a class="headerlink" href="10min.html#concat" title="Link to this heading">#</a></h3>
+<p>pandas 提供了各种功能，可以轻松地将 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 对象与各种集合逻辑（用于索引）和关系代数功能（用于连接/合并类型操作）结合在一起。</p>
+<p>请参阅<a class="reference internal" href="merging.html#merging"><span class="std std-ref">合并</span></a>部分。</p>
+<p>使用<a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a>按行拼接 pandas 对象</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="gp">In [74]: </span><span class="n">df</span>
+<span class="gh">Out[74]: </span>
+<span class="go">          0         1         2         3</span>
+<span class="go">0 -0.548702  1.467327 -1.015962 -0.483075</span>
+<span class="go">1  1.637550 -1.217659 -0.291519 -1.745505</span>
+<span class="go">2 -0.263952  0.991460 -0.919069  0.266046</span>
+<span class="go">3 -0.709661  1.669052  1.037882 -1.705775</span>
+<span class="go">4 -0.919854 -0.042379  1.247642 -0.009920</span>
+<span class="go">5  0.290213  0.495767  0.362949  1.548106</span>
+<span class="go">6 -1.131345 -0.089329  0.337863 -0.945867</span>
+<span class="go">7 -0.932132  1.956030  0.017587 -0.016692</span>
+<span class="go">8 -0.575247  0.254161 -1.143704  0.215897</span>
+<span class="go">9  1.193555 -0.077118 -0.408530 -0.862495</span>
+
+<span class="go"># break it into pieces</span>
+<span class="gp">In [75]: </span><span class="n">pieces</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="mi">7</span><span class="p">:]]</span>
+
+<span class="gp">In [76]: </span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
+<span class="gh">Out[76]: </span>
+<span class="go">          0         1         2         3</span>
+<span class="go">0 -0.548702  1.467327 -1.015962 -0.483075</span>
+<span class="go">1  1.637550 -1.217659 -0.291519 -1.745505</span>
+<span class="go">2 -0.263952  0.991460 -0.919069  0.266046</span>
+<span class="go">3 -0.709661  1.669052  1.037882 -1.705775</span>
+<span class="go">4 -0.919854 -0.042379  1.247642 -0.009920</span>
+<span class="go">5  0.290213  0.495767  0.362949  1.548106</span>
+<span class="go">6 -1.131345 -0.089329  0.337863 -0.945867</span>
+<span class="go">7 -0.932132  1.956030  0.017587 -0.016692</span>
+<span class="go">8 -0.575247  0.254161 -1.143704  0.215897</span>
+<span class="go">9  1.193555 -0.077118 -0.408530 -0.862495</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>向<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>添加列相对较快。然而，添加行需要复制，可能开销较大。我们建议向<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>构造函数传入预构建的记录列表，而不是通过迭代地向其追加记录来构建<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>。</p>
+</div>
+</section>
+<section id="join">
+<h3>连接<a class="headerlink" href="10min.html#join" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge()</span></code></a>支持沿着特定列进行 SQL 风格的连接。请参阅<a class="reference internal" href="merging.html#merging-join"><span class="std std-ref">数据库风格连接</span></a>部分。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">],</span> <span class="s2">"lval"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+
+<span class="gp">In [78]: </span><span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">],</span> <span class="s2">"rval"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+
+<span class="gp">In [79]: </span><span class="n">left</span>
+<span class="gh">Out[79]: </span>
+<span class="go">   key  lval</span>
+<span class="go">0  foo     1</span>
+<span class="go">1  foo     2</span>
+
+<span class="gp">In [80]: </span><span class="n">right</span>
+<span class="gh">Out[80]: </span>
+<span class="go">   key  rval</span>
+<span class="go">0  foo     4</span>
+<span class="go">1  foo     5</span>
+
+<span class="gp">In [81]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"key"</span><span class="p">)</span>
+<span class="gh">Out[81]: </span>
+<span class="go">   key  lval  rval</span>
+<span class="go">0  foo     1     4</span>
+<span class="go">1  foo     1     5</span>
+<span class="go">2  foo     2     4</span>
+<span class="go">3  foo     2     5</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge()</span></code></a> 基于唯一键进行合并</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [82]: </span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">],</span> <span class="s2">"lval"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+
+<span class="gp">In [83]: </span><span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">],</span> <span class="s2">"rval"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+
+<span class="gp">In [84]: </span><span class="n">left</span>
+<span class="gh">Out[84]: </span>
+<span class="go">   key  lval</span>
+<span class="go">0  foo     1</span>
+<span class="go">1  bar     2</span>
+
+<span class="gp">In [85]: </span><span class="n">right</span>
+<span class="gh">Out[85]: </span>
+<span class="go">   key  rval</span>
+<span class="go">0  foo     4</span>
+<span class="go">1  bar     5</span>
+
+<span class="gp">In [86]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"key"</span><span class="p">)</span>
+<span class="gh">Out[86]: </span>
+<span class="go">   key  lval  rval</span>
+<span class="go">0  foo     1     4</span>
+<span class="go">1  bar     2     5</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="grouping">
+<h2>分组<a class="headerlink" href="10min.html#grouping" title="Link to this heading">#</a></h2>
+<p>“分组”指的是一个或多个以下步骤的过程</p>
+<ul class="simple">
+<li><p>根据某些条件将数据<b>分拆</b>成组</p></li>
+<li><p>对每个组独立地<b>应用</b>一个函数</p></li>
+<li><p>将结果<b>组合</b>成一个数据结构</p></li>
+</ul>
+<p>请参阅<a class="reference internal" href="groupby.html#groupby"><span class="std std-ref">分组</span></a>部分。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [87]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span>
+<span class="gp">   ....: </span>        <span class="s2">"A"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">],</span>
+<span class="gp">   ....: </span>        <span class="s2">"B"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"one"</span><span class="p">,</span> <span class="s2">"one"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"one"</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">],</span>
+<span class="gp">   ....: </span>        <span class="s2">"C"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+<span class="gp">   ....: </span>        <span class="s2">"D"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+<span class="gp">   ....: </span>    <span class="p">}</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [88]: </span><span class="n">df</span>
+<span class="gh">Out[88]: </span>
+<span class="go">     A      B         C         D</span>
+<span class="go">0  foo    one  1.346061 -1.577585</span>
+<span class="go">1  bar    one  1.511763  0.396823</span>
+<span class="go">2  foo    two  1.627081 -0.105381</span>
+<span class="go">3  bar  three -0.990582 -0.532532</span>
+<span class="go">4  foo    two -0.441652  1.453749</span>
+<span class="go">5  bar    two  1.211526  1.208843</span>
+<span class="go">6  foo    one  0.268520 -0.080952</span>
+<span class="go">7  foo  three  0.024580 -0.264610</span>
+</pre></div>
+</div>
+<p>按列标签分组，选择列标签，然后将<a class="reference internal" href="../reference/api/pandas.core.groupby.DataFrameGroupBy.sum.html#pandas.core.groupby.DataFrameGroupBy.sum" title="pandas.core.groupby.DataFrameGroupBy.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrameGroupBy.sum()</span></code></a>函数应用于结果组</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [89]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)[[</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[89]: </span>
+<span class="go">            C         D</span>
+<span class="go">A                      </span>
+<span class="go">bar  1.732707  1.073134</span>
+<span class="go">foo  2.824590 -0.574779</span>
+</pre></div>
+</div>
+<p>按多列标签分组会形成<a class="reference internal" href="../reference/api/pandas.MultiIndex.html#pandas.MultiIndex" title="pandas.MultiIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiIndex</span></code></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [90]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[90]: </span>
+<span class="go">                  C         D</span>
+<span class="go">A   B                        </span>
+<span class="go">bar one    1.511763  0.396823</span>
+<span class="go">    three -0.990582 -0.532532</span>
+<span class="go">    two    1.211526  1.208843</span>
+<span class="go">foo one    1.614581 -1.658537</span>
+<span class="go">    three  0.024580 -0.264610</span>
+<span class="go">    two    1.185429  1.348368</span>
+</pre></div>
+</div>
+</section>
+<section id="reshaping">
+<h2>重塑<a class="headerlink" href="10min.html#reshaping" title="Link to this heading">#</a></h2>
+<p>请参阅<a class="reference internal" href="advanced.html#advanced-hierarchical"><span class="std std-ref">层次化索引</span></a>和<a class="reference internal" href="reshaping.html#reshaping-stacking"><span class="std std-ref">重塑</span></a>部分。</p>
+<section id="stack">
+<h3>堆叠<a class="headerlink" href="10min.html#stack" title="Link to this heading">#</a></h3>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [91]: </span><span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">   ....: </span>   <span class="p">[</span><span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"qux"</span><span class="p">,</span> <span class="s2">"qux"</span><span class="p">],</span>
+<span class="gp">   ....: </span>   <span class="p">[</span><span class="s2">"one"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"one"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"one"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"one"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">],</span>
+<span class="gp">   ....: </span><span class="p">]</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [92]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">"first"</span><span class="p">,</span> <span class="s2">"second"</span><span class="p">])</span>
+
+<span class="gp">In [93]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">])</span>
+
+<span class="gp">In [94]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="gp">In [95]: </span><span class="n">df2</span>
+<span class="gh">Out[95]: </span>
+<span class="go">                     A         B</span>
+<span class="go">first second                    </span>
+<span class="go">bar   one    -0.727965 -0.589346</span>
+<span class="go">      two     0.339969 -0.693205</span>
+<span class="go">baz   one    -0.339355  0.593616</span>
+<span class="go">      two     0.884345  1.591431</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.stack.html#pandas.DataFrame.stack" title="pandas.DataFrame.stack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stack()</span></code></a>方法“压缩”了 DataFrame 列中的一个层</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [96]: </span><span class="n">stacked</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">future_stack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [97]: </span><span class="n">stacked</span>
+<span class="gh">Out[97]: </span>
+<span class="go">first  second   </span>
+<span class="go">bar    one     A   -0.727965</span>
+<span class="go">               B   -0.589346</span>
+<span class="go">       two     A    0.339969</span>
+<span class="go">               B   -0.693205</span>
+<span class="go">baz    one     A   -0.339355</span>
+<span class="go">               B    0.593616</span>
+<span class="go">       two     A    0.884345</span>
+<span class="go">               B    1.591431</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>对于一个“堆叠”的 DataFrame 或 Series（其 <code class="docutils literal notranslate"><span class="pre">index</span></code> 为 <a class="reference internal" href="../reference/api/pandas.MultiIndex.html#pandas.MultiIndex" title="pandas.MultiIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiIndex</span></code></a>），<a class="reference internal" href="../reference/api/pandas.DataFrame.stack.html#pandas.DataFrame.stack" title="pandas.DataFrame.stack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stack()</span></code></a> 的逆操作是 <a class="reference internal" href="../reference/api/pandas.DataFrame.unstack.html#pandas.DataFrame.unstack" title="pandas.DataFrame.unstack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unstack()</span></code></a>，它默认会解除堆叠<b>最底层</b></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [98]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="gh">Out[98]: </span>
+<span class="go">                     A         B</span>
+<span class="go">first second                    </span>
+<span class="go">bar   one    -0.727965 -0.589346</span>
+<span class="go">      two     0.339969 -0.693205</span>
+<span class="go">baz   one    -0.339355  0.593616</span>
+<span class="go">      two     0.884345  1.591431</span>
+
+<span class="gp">In [99]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[99]: </span>
+<span class="go">second        one       two</span>
+<span class="go">first                      </span>
+<span class="go">bar   A -0.727965  0.339969</span>
+<span class="go">      B -0.589346 -0.693205</span>
+<span class="go">baz   A -0.339355  0.884345</span>
+<span class="go">      B  0.593616  1.591431</span>
+
+<span class="gp">In [100]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gh">Out[100]: </span>
+<span class="go">first          bar       baz</span>
+<span class="go">second                      </span>
+<span class="go">one    A -0.727965 -0.339355</span>
+<span class="go">       B -0.589346  0.593616</span>
+<span class="go">two    A  0.339969  0.884345</span>
+<span class="go">       B -0.693205  1.591431</span>
+</pre></div>
+</div>
+</section>
+<section id="pivot-tables">
+<h3>透视表<a class="headerlink" href="10min.html#pivot-tables" title="Link to this heading">#</a></h3>
+<p>请参阅<a class="reference internal" href="reshaping.html#reshaping-pivot"><span class="std std-ref">透视表</span></a>部分。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [101]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">{</span>
+<span class="gp">   .....: </span>        <span class="s2">"A"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"one"</span><span class="p">,</span> <span class="s2">"one"</span><span class="p">,</span> <span class="s2">"two"</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
+<span class="gp">   .....: </span>        <span class="s2">"B"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span>
+<span class="gp">   .....: </span>        <span class="s2">"C"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">   .....: </span>        <span class="s2">"D"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+<span class="gp">   .....: </span>        <span class="s2">"E"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+<span class="gp">   .....: </span>    <span class="p">}</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [102]: </span><span class="n">df</span>
+<span class="gh">Out[102]: </span>
+<span class="go">        A  B    C         D         E</span>
+<span class="go">0     one  A  foo -1.202872  0.047609</span>
+<span class="go">1     one  B  foo -1.814470 -0.136473</span>
+<span class="go">2     two  C  foo  1.018601 -0.561757</span>
+<span class="go">3   three  A  bar -0.595447 -1.623033</span>
+<span class="go">4     one  B  bar  1.395433  0.029399</span>
+<span class="go">5     one  C  bar -0.392670 -0.542108</span>
+<span class="go">6     two  A  foo  0.007207  0.282696</span>
+<span class="go">7   three  B  foo  1.928123 -0.087302</span>
+<span class="go">8     one  C  foo -0.055224 -1.575170</span>
+<span class="go">9     one  A  bar  2.395985  1.771208</span>
+<span class="go">10    two  B  bar  1.552825  0.816482</span>
+<span class="go">11  three  C  bar  0.166599  1.100230</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">pivot_table()</span></code></a>通过指定<code class="docutils literal notranslate"><span class="pre">values</span></code>、<code class="docutils literal notranslate"><span class="pre">index</span></code>和<code class="docutils literal notranslate"><span class="pre">columns</span></code>来透视<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [103]: </span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"D"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"C"</span><span class="p">])</span>
+<span class="gh">Out[103]: </span>
+<span class="go">C             bar       foo</span>
+<span class="go">A     B                    </span>
+<span class="go">one   A  2.395985 -1.202872</span>
+<span class="go">      B  1.395433 -1.814470</span>
+<span class="go">      C -0.392670 -0.055224</span>
+<span class="go">three A -0.595447       NaN</span>
+<span class="go">      B       NaN  1.928123</span>
+<span class="go">      C  0.166599       NaN</span>
+<span class="go">two   A       NaN  0.007207</span>
+<span class="go">      B  1.552825       NaN</span>
+<span class="go">      C       NaN  1.018601</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="time-series">
+<h2>时间序列<a class="headerlink" href="10min.html#time-series" title="Link to this heading">#</a></h2>
+<p>pandas 具有简单、强大且高效的功能，用于在频率转换期间执行重采样操作（例如，将秒级数据转换为 5 分钟级数据）。这在金融应用中非常常见，但不仅限于此。请参阅<a class="reference internal" href="timeseries.html#timeseries"><span class="std std-ref">时间序列</span></a>部分。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [104]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"1/1/2012"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"s"</span><span class="p">)</span>
+
+<span class="gp">In [105]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+
+<span class="gp">In [106]: </span><span class="n">ts</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">"5Min"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[106]: </span>
+<span class="go">2012-01-01    24182</span>
+<span class="go">Freq: 5min, dtype: int64</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.Series.tz_localize.html#pandas.Series.tz_localize" title="pandas.Series.tz_localize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.tz_localize()</span></code></a>将时间序列本地化到某个时区</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [107]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"3/6/2012 00:00"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"D"</span><span class="p">)</span>
+
+<span class="gp">In [108]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">rng</span><span class="p">)</span>
+
+<span class="gp">In [109]: </span><span class="n">ts</span>
+<span class="gh">Out[109]: </span>
+<span class="go">2012-03-06    1.857704</span>
+<span class="go">2012-03-07   -1.193545</span>
+<span class="go">2012-03-08    0.677510</span>
+<span class="go">2012-03-09   -0.153931</span>
+<span class="go">2012-03-10    0.520091</span>
+<span class="go">Freq: D, dtype: float64</span>
+
+<span class="gp">In [110]: </span><span class="n">ts_utc</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s2">"UTC"</span><span class="p">)</span>
+
+<span class="gp">In [111]: </span><span class="n">ts_utc</span>
+<span class="gh">Out[111]: </span>
+<span class="go">2012-03-06 00:00:00+00:00    1.857704</span>
+<span class="go">2012-03-07 00:00:00+00:00   -1.193545</span>
+<span class="go">2012-03-08 00:00:00+00:00    0.677510</span>
+<span class="go">2012-03-09 00:00:00+00:00   -0.153931</span>
+<span class="go">2012-03-10 00:00:00+00:00    0.520091</span>
+<span class="go">Freq: D, dtype: float64</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.Series.tz_convert.html#pandas.Series.tz_convert" title="pandas.Series.tz_convert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.tz_convert()</span></code></a>将时区感知的时间序列转换为另一个时区</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [112]: </span><span class="n">ts_utc</span><span class="o">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="s2">"US/Eastern"</span><span class="p">)</span>
+<span class="gh">Out[112]: </span>
+<span class="go">2012-03-05 19:00:00-05:00    1.857704</span>
+<span class="go">2012-03-06 19:00:00-05:00   -1.193545</span>
+<span class="go">2012-03-07 19:00:00-05:00    0.677510</span>
+<span class="go">2012-03-08 19:00:00-05:00   -0.153931</span>
+<span class="go">2012-03-09 19:00:00-05:00    0.520091</span>
+<span class="go">Freq: D, dtype: float64</span>
+</pre></div>
+</div>
+<p>向时间序列添加非固定时长（<a class="reference internal" href="../reference/api/pandas.tseries.offsets.BusinessDay.html#pandas.tseries.offsets.BusinessDay" title="pandas.tseries.offsets.BusinessDay"><code class="xref py py-class docutils literal notranslate"><span class="pre">BusinessDay</span></code></a>）</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [113]: </span><span class="n">rng</span>
+<span class="gh">Out[113]: </span>
+<span class="go">DatetimeIndex(['2012-03-06', '2012-03-07', '2012-03-08', '2012-03-09',</span>
+<span class="go">               '2012-03-10'],</span>
+<span class="go">              dtype='datetime64[ns]', freq='D')</span>
+
+<span class="gp">In [114]: </span><span class="n">rng</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BusinessDay</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gh">Out[114]: </span>
+<span class="go">DatetimeIndex(['2012-03-13', '2012-03-14', '2012-03-15', '2012-03-16',</span>
+<span class="go">               '2012-03-16'],</span>
+<span class="go">              dtype='datetime64[ns]', freq=None)</span>
+</pre></div>
+</div>
+</section>
+<section id="categoricals">
+<h2>分类数据<a class="headerlink" href="10min.html#categoricals" title="Link to this heading">#</a></h2>
+<p>pandas 可以在<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>中包含分类数据。有关完整文档，请参阅<a class="reference internal" href="categorical.html#categorical"><span class="std std-ref">分类简介</span></a>和<a class="reference internal" href="../reference/arrays.html#api-arrays-categorical"><span class="std std-ref">API 文档</span></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [115]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">{</span><span class="s2">"id"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s2">"raw_grade"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"e"</span><span class="p">]}</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+</pre></div>
+</div>
+<p>将原始等级转换为分类数据类型</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [116]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"grade"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"raw_grade"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span>
+
+<span class="gp">In [117]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"grade"</span><span class="p">]</span>
+<span class="gh">Out[117]: </span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    b</span>
+<span class="go">3    a</span>
+<span class="go">4    a</span>
+<span class="go">5    e</span>
+<span class="go">Name: grade, dtype: category</span>
+<span class="go">Categories (3, object): ['a', 'b', 'e']</span>
+</pre></div>
+</div>
+<p>将类别重命名为更有意义的名称</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [118]: </span><span class="n">new_categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"very good"</span><span class="p">,</span> <span class="s2">"good"</span><span class="p">,</span> <span class="s2">"very bad"</span><span class="p">]</span>
+
+<span class="gp">In [119]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"grade"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"grade"</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">rename_categories</span><span class="p">(</span><span class="n">new_categories</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>重新排序类别并同时添加缺失的类别（<a class="reference internal" href="../reference/api/pandas.Series.cat.html#pandas.Series.cat" title="pandas.Series.cat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.cat()</span></code></a>下的方法默认返回一个新的<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>）</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [120]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"grade"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"grade"</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">[</span><span class="s2">"very bad"</span><span class="p">,</span> <span class="s2">"bad"</span><span class="p">,</span> <span class="s2">"medium"</span><span class="p">,</span> <span class="s2">"good"</span><span class="p">,</span> <span class="s2">"very good"</span><span class="p">]</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [121]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"grade"</span><span class="p">]</span>
+<span class="gh">Out[121]: </span>
+<span class="go">0    very good</span>
+<span class="go">1         good</span>
+<span class="go">2         good</span>
+<span class="go">3    very good</span>
+<span class="go">4    very good</span>
+<span class="go">5     very bad</span>
+<span class="go">Name: grade, dtype: category</span>
+<span class="go">Categories (5, object): ['very bad', 'bad', 'medium', 'good', 'very good']</span>
+</pre></div>
+</div>
+<p>排序是按类别顺序，而不是字典顺序</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [122]: </span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">"grade"</span><span class="p">)</span>
+<span class="gh">Out[122]: </span>
+<span class="go">   id raw_grade      grade</span>
+<span class="go">5   6         e   very bad</span>
+<span class="go">1   2         b       good</span>
+<span class="go">2   3         b       good</span>
+<span class="go">0   1         a  very good</span>
+<span class="go">3   4         a  very good</span>
+<span class="go">4   5         a  very good</span>
+</pre></div>
+</div>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">observed=False</span></code> 按分类列分组也会显示空类别</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [123]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"grade"</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="gh">Out[123]: </span>
+<span class="go">grade</span>
+<span class="go">very bad     1</span>
+<span class="go">bad          0</span>
+<span class="go">medium       0</span>
+<span class="go">good         2</span>
+<span class="go">very good    3</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+</section>
+<section id="plotting">
+<h2>绘图<a class="headerlink" href="10min.html#plotting" title="Link to this heading">#</a></h2>
+<p>请参阅<a class="reference internal" href="visualization.html#visualization"><span class="std std-ref">绘图</span></a>文档。</p>
+<p>我们使用标准约定来引用 matplotlib API</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [124]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="gp">In [125]: </span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">"all"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">plt.close</span></code> 方法用于<a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.close.html">关闭</a>图形窗口</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [126]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"1/1/2000"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+
+<span class="gp">In [127]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [128]: </span><span class="n">ts</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="../_images/series_plot_basic.png" src="../_images/series_plot_basic.png">
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>当使用 Jupyter 时，图表将通过<a class="reference internal" href="../reference/api/pandas.Series.plot.html#pandas.Series.plot" title="pandas.Series.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a>显示。否则，请使用<a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.show.html">matplotlib.pyplot.show</a>来显示，或使用<a class="reference external" href="https://matplotlib.net.cn/stable/api/_as_gen/matplotlib.pyplot.savefig.html">matplotlib.pyplot.savefig</a>将其写入文件。</p>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a>绘制所有列</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [129]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">]</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [130]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [131]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+
+<span class="gp">In [132]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+
+<span class="gp">In [133]: </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'best'</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_basic.png" src="../_images/frame_plot_basic.png">
+</section>
+<section id="importing-and-exporting-data">
+<h2>导入和导出数据<a class="headerlink" href="10min.html#importing-and-exporting-data" title="Link to this heading">#</a></h2>
+<p>请参阅<a class="reference internal" href="io.html#io"><span class="std std-ref">IO 工具</span></a>部分。</p>
+<section id="csv">
+<h3>CSV<a class="headerlink" href="10min.html#csv" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="io.html#io-store-in-csv"><span class="std std-ref">写入 CSV 文件：</span></a>使用<a class="reference internal" href="../reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" title="pandas.DataFrame.to_csv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_csv()</span></code></a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [134]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+
+<span class="gp">In [135]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"foo.csv"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="io.html#io-read-csv-table"><span class="std std-ref">从 CSV 文件读取：</span></a>使用<a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_csv()</span></code></a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [136]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"foo.csv"</span><span class="p">)</span>
+<span class="gh">Out[136]: </span>
+<span class="go">   Unnamed: 0  0  1  2  3  4</span>
+<span class="go">0           0  4  3  1  1  2</span>
+<span class="go">1           1  1  0  2  3  2</span>
+<span class="go">2           2  1  4  2  1  2</span>
+<span class="go">3           3  0  4  0  2  2</span>
+<span class="go">4           4  4  2  2  3  4</span>
+<span class="go">5           5  4  0  4  3  1</span>
+<span class="go">6           6  2  1  2  0  3</span>
+<span class="go">7           7  4  0  4  4  4</span>
+<span class="go">8           8  4  4  1  0  1</span>
+<span class="go">9           9  0  4  3  0  3</span>
+</pre></div>
+</div>
+</section>
+<section id="parquet">
+<h3>Parquet<a class="headerlink" href="10min.html#parquet" title="Link to this heading">#</a></h3>
+<p>写入 Parquet 文件</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [137]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s2">"foo.parquet"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用<a class="reference internal" href="../reference/api/pandas.read_parquet.html#pandas.read_parquet" title="pandas.read_parquet"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_parquet()</span></code></a>从 Parquet 文件读取</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [138]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s2">"foo.parquet"</span><span class="p">)</span>
+<span class="gh">Out[138]: </span>
+<span class="go">   0  1  2  3  4</span>
+<span class="go">0  4  3  1  1  2</span>
+<span class="go">1  1  0  2  3  2</span>
+<span class="go">2  1  4  2  1  2</span>
+<span class="go">3  0  4  0  2  2</span>
+<span class="go">4  4  2  2  3  4</span>
+<span class="go">5  4  0  4  3  1</span>
+<span class="go">6  2  1  2  0  3</span>
+<span class="go">7  4  0  4  4  4</span>
+<span class="go">8  4  4  1  0  1</span>
+<span class="go">9  0  4  3  0  3</span>
+</pre></div>
+</div>
+</section>
+<section id="excel">
+<h3>Excel<a class="headerlink" href="10min.html#excel" title="Link to this heading">#</a></h3>
+<p>读写<a class="reference internal" href="io.html#io-excel"><span class="std std-ref">Excel</span></a>。</p>
+<p>使用<a class="reference internal" href="../reference/api/pandas.DataFrame.to_excel.html#pandas.DataFrame.to_excel" title="pandas.DataFrame.to_excel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_excel()</span></code></a>写入 Excel 文件</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [139]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">"foo.xlsx"</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">"Sheet1"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用<a class="reference internal" href="../reference/api/pandas.read_excel.html#pandas.read_excel" title="pandas.read_excel"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_excel()</span></code></a>从 Excel 文件读取</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [140]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"foo.xlsx"</span><span class="p">,</span> <span class="s2">"Sheet1"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">"NA"</span><span class="p">])</span>
+<span class="gh">Out[140]: </span>
+<span class="go">   Unnamed: 0  0  1  2  3  4</span>
+<span class="go">0           0  4  3  1  1  2</span>
+<span class="go">1           1  1  0  2  3  2</span>
+<span class="go">2           2  1  4  2  1  2</span>
+<span class="go">3           3  0  4  0  2  2</span>
+<span class="go">4           4  4  2  2  3  4</span>
+<span class="go">5           5  4  0  4  3  1</span>
+<span class="go">6           6  2  1  2  0  3</span>
+<span class="go">7           7  4  0  4  4  4</span>
+<span class="go">8           8  4  4  1  0  1</span>
+<span class="go">9           9  0  4  3  0  3</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gotchas">
+<h2>常见陷阱<a class="headerlink" href="10min.html#gotchas" title="Link to this heading">#</a></h2>
+<p>如果您尝试对<a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>或<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>执行布尔操作，可能会看到类似以下的异常：</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [141]: </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]):</span>
+<span class="gp">   .....: </span>     <span class="nb">print</span><span class="p">(</span><span class="s2">"I was true"</span><span class="p">)</span>
+<span class="gp">   .....: </span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-141-b27eb9c1dfc0&gt;</span> in <span class="ni">?</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>      <span class="nb">print</span><span class="p">(</span><span class="s2">"I was true"</span><span class="p">)</span>
+
+<span class="nn">~/work/pandas/pandas/pandas/core/generic.py</span> in <span class="ni">?</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1575</span>     <span class="nd">@final</span>
+<span class="g g-Whitespace">   </span><span class="mi">1576</span>     <span class="k">def</span><span class="w"> </span><span class="nf">__nonzero__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1577</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1578</span>             <span class="sa">f</span><span class="s2">"The truth value of a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> is ambiguous. "</span>
+<span class="g g-Whitespace">   </span><span class="mi">1579</span>             <span class="s2">"Use a.empty, a.bool(), a.item(), a.any() or a.all()."</span>
+<span class="g g-Whitespace">   </span><span class="mi">1580</span>         <span class="p">)</span>
+
+<span class="ne">ValueError</span>: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+</pre></div>
+</div>
+<p>请参阅<a class="reference internal" href="basics.html#basics-compare"><span class="std std-ref">比较</span></a>和<a class="reference internal" href="gotchas.html#gotchas"><span class="std std-ref">常见陷阱</span></a>以获取解释和解决方法。</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="index.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">用户指南</p> </div> </a> <a class="right-next" href="dsintro.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">数据结构简介</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#basic-data-structures-in-pandas">pandas 中的基本数据结构</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#object-creation">对象创建</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#viewing-data">查看数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#selection">选择</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#getitem">Getitem (<code class="docutils literal notranslate"><span class="pre">[]</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#selection-by-label">按标签选择</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#selection-by-position">按位置选择</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#boolean-indexing">布尔索引</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#setting">设置</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#missing-data">缺失数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#operations">操作</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#stats">统计</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#user-defined-functions">用户定义函数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#value-counts">值计数</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#string-methods">字符串方法</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#merge">合并</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#concat">拼接</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#join">连接</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#grouping">分组</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#reshaping">重塑</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#stack">堆叠</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#pivot-tables">透视表</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#time-series">时间序列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#categoricals">分类数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#plotting">绘图</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#importing-and-exporting-data">导入和导出数据</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#csv">CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#parquet">Parquet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#excel">Excel</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="10min.html#gotchas">常见陷阱</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/10min.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> 由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

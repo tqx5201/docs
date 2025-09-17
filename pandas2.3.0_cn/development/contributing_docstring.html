@@ -1,0 +1,1314 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pandas 文档字符串指南 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'development/contributing_docstring';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing to the code base" href="contributing_codebase.html" />
+    <link rel="prev" title="Contributing to the documentation" href="contributing_documentation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="contributing_docstring.html#main-content">跳到主内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">贡献给 pandas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_environment.html">创建开发环境</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_gitpod.html">使用 Gitpod 进行 pandas 开发</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="contributing_documentation.html">贡献文档</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="contributing_docstring.html#">pandas 文档字符串指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_codebase.html">贡献代码库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining.html">pandas 维护</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals.html">内部</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging_extensions.html">调试 C 扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">扩展 pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">开发者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">政策</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">贡献者社区</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">开发</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="contributing_documentation.html" class="nav-link">贡献文档</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pandas...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="pandas-docstring-guide">
+<span id="docstring"></span><h1>pandas 文档字符串指南<a class="headerlink" href="contributing_docstring.html#pandas-docstring-guide" title="链接到此标题">#</a></h1>
+<section id="about-docstrings-and-standards">
+<h2>关于文档字符串和标准<a class="headerlink" href="contributing_docstring.html#about-docstrings-and-standards" title="链接到此标题">#</a></h2>
+<p>Python 文档字符串是用于记录 Python 模块、类、函数或方法的字符串，这样程序员无需阅读实现的细节即可理解其功能。</p>
+<p>此外，从文档字符串自动生成在线 (html) 文档是一种常见做法。<a class="reference external" href="https://sphinx-doc.cn">Sphinx</a> 用于此目的。</p>
+<p>以下示例展示了文档字符串的样式</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add up two integer numbers.</span>
+
+<span class="sd">    This function simply wraps the ``+`` operator, and does not</span>
+<span class="sd">    do anything interesting, except for illustrating what</span>
+<span class="sd">    the docstring of a very simple function looks like.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    num1 : int</span>
+<span class="sd">        First number to add.</span>
+<span class="sd">    num2 : int</span>
+<span class="sd">        Second number to add.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        The sum of ``num1`` and ``num2``.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    subtract : Subtract one integer from another.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; add(2, 2)</span>
+<span class="sd">    4</span>
+<span class="sd">    &gt;&gt;&gt; add(25, 0)</span>
+<span class="sd">    25</span>
+<span class="sd">    &gt;&gt;&gt; add(10, -10)</span>
+<span class="sd">    0</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span>
+</pre></div>
+</div>
+<p>存在一些关于文档字符串的标准，它们使文档字符串更易于阅读，并允许将其轻松导出为其他格式，例如 HTML 或 PDF。</p>
+<p>每个 Python 文档字符串都应遵循的首要约定定义在 <a class="reference external" href="https://pythonlang.cn/dev/peps/pep-0257/">PEP-257</a> 中。</p>
+<p>由于 PEP-257 范围很广，也存在其他更具体的标准。对于 pandas 而言，遵循 NumPy 文档字符串约定。这些约定将在本文档中解释</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html">numpydoc 文档字符串指南</a></p></li>
+</ul>
+<p>numpydoc 是一个 Sphinx 扩展，用于支持 NumPy 文档字符串约定。</p>
+<p>该标准使用 reStructuredText (reST)。reStructuredText 是一种标记语言，允许在纯文本文件中编码样式。有关 reStructuredText 的文档可在以下链接中找到</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sphinx-doc.cn/en/stable/rest.html">Sphinx reStructuredText 入门</a></p></li>
+<li><p><a class="reference external" href="https://docutils.sourceforge.io/docs/user/rst/quickref.html">reStructuredText 快速参考</a></p></li>
+<li><p><a class="reference external" href="https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html">reStructuredText 完整规范</a></p></li>
+</ul>
+<p>pandas 具有一些帮助在相关类之间共享文档字符串的辅助工具，参见 <a class="reference internal" href="contributing_docstring.html#docstring-sharing"><span class="std std-ref">共享文档字符串</span></a>。</p>
+<p>本文档的其余部分将总结上述所有指南，并提供特定于 pandas 项目的附加约定。</p>
+</section>
+<section id="writing-a-docstring">
+<span id="docstring-tutorial"></span><h2>编写文档字符串<a class="headerlink" href="contributing_docstring.html#writing-a-docstring" title="链接到此标题">#</a></h2>
+<section id="general-rules">
+<span id="docstring-general"></span><h3>一般规则<a class="headerlink" href="contributing_docstring.html#general-rules" title="链接到此标题">#</a></h3>
+<p>文档字符串必须用三个双引号定义。文档字符串前后不应留空行。文本从开引号后的下一行开始。闭引号独占一行（意味着它们不在最后一句话的末尾）。</p>
+<p>在极少数情况下，文档字符串中会使用粗体或斜体等 reST 样式，但通常会有内联代码，它们用反引号括起来。以下被视为内联代码</p>
+<ul class="simple">
+<li><p>参数的名称</p></li>
+<li><p>Python 代码、模块、函数、内置类型、字面量……（例如 <code class="docutils literal notranslate"><span class="pre">os</span></code>、<code class="docutils literal notranslate"><span class="pre">list</span></code>、<code class="docutils literal notranslate"><span class="pre">numpy.abs</span></code>、<code class="docutils literal notranslate"><span class="pre">datetime.date</span></code>、<code class="docutils literal notranslate"><span class="pre">True</span></code>）</p></li>
+<li><p>一个 pandas 类（形式为 <code class="docutils literal notranslate"><span class="pre">:class:`pandas.Series`</span></code>）</p></li>
+<li><p>一个 pandas 方法（形式为 <code class="docutils literal notranslate"><span class="pre">:meth:`pandas.Series.sum`</span></code>）</p></li>
+<li><p>一个 pandas 函数（形式为 <code class="docutils literal notranslate"><span class="pre">:func:`pandas.to_datetime`</span></code>）</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>要仅显示链接的类、方法或函数的最后一个组成部分，请在其前面加上 <code class="docutils literal notranslate"><span class="pre">~</span></code>。例如，<code class="docutils literal notranslate"><span class="pre">:class:`~pandas.Series`</span></code> 将链接到 <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code>，但仅显示最后一部分 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 作为链接文本。有关详细信息，请参见 <a class="reference external" href="https://sphinx-doc.cn/en/stable/domains.html#cross-referencing-syntax">Sphinx 交叉引用语法</a>。</p>
+</div>
+<p><strong>好的示例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">add_values</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Add the values in ``arr``.</span>
+
+<span class="sd">    This is equivalent to Python ``sum`` of :meth:`pandas.Series.sum`.</span>
+
+<span class="sd">    Some sections are omitted here for simplicity.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>不好的示例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">func</span><span class="p">():</span>
+
+<span class="w">    </span><span class="sd">"""Some function.</span>
+
+<span class="sd">    With several mistakes in the docstring.</span>
+
+<span class="sd">    It has a blank like after the signature ``def func():``.</span>
+
+<span class="sd">    The text 'Some function' should go in the line after the</span>
+<span class="sd">    opening quotes of the docstring, not in the same line.</span>
+
+<span class="sd">    There is a blank line between the docstring and the first line</span>
+<span class="sd">    of code ``foo = 1``.</span>
+
+<span class="sd">    The closing quotes should be in the next line, not in this one."""</span>
+
+    <span class="n">foo</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">foo</span> <span class="o">+</span> <span class="n">bar</span>
+</pre></div>
+</div>
+</section>
+<section id="section-1-short-summary">
+<span id="docstring-short-summary"></span><h3>第一部分：简要摘要<a class="headerlink" href="contributing_docstring.html#section-1-short-summary" title="链接到此标题">#</a></h3>
+<p>简要摘要是一个单句，以简洁的方式表达函数的功能。</p>
+<p>简要摘要必须以大写字母开头，以句号结尾，并能容纳在一行中。它需要表达对象的功能而不提供细节。对于函数和方法，简要摘要必须以动词不定式开头。</p>
+<p><strong>好的示例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Cast Series type.</span>
+
+<span class="sd">    This section will provide further details.</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p><strong>不好的示例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Casts Series type.</span>
+
+<span class="sd">    Verb in third-person of the present simple, should be infinitive.</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Method to cast Series type.</span>
+
+<span class="sd">    Does not start with verb.</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Cast Series type</span>
+
+<span class="sd">    Missing dot at the end.</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Cast Series type from its current type to the new type defined in</span>
+<span class="sd">    the parameter dtype.</span>
+
+<span class="sd">    Summary is too verbose and doesn't fit in a single line.</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="section-2-extended-summary">
+<span id="docstring-extended-summary"></span><h3>第二部分：扩展摘要<a class="headerlink" href="contributing_docstring.html#section-2-extended-summary" title="链接到此标题">#</a></h3>
+<p>扩展摘要详细说明了函数的功能。它不应涉及参数的细节，也不应讨论实现说明，这些内容应放在其他部分。</p>
+<p>简要摘要和扩展摘要之间应留一个空行。扩展摘要中的每个段落都以句号结尾。</p>
+<p>扩展摘要应提供函数有用性的详细信息及其用例（如果不是太通用）。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unstack</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pivot a row index to columns.</span>
+
+<span class="sd">    When using a MultiIndex, a level can be pivoted so each value in</span>
+<span class="sd">    the index becomes a column. This is especially useful when a subindex</span>
+<span class="sd">    is repeated for the main index, and data is easier to visualize as a</span>
+<span class="sd">    pivot table.</span>
+
+<span class="sd">    The index level will be automatically removed from the index when added</span>
+<span class="sd">    as columns.</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="section-3-parameters">
+<span id="docstring-parameters"></span><h3>第三部分：参数<a class="headerlink" href="contributing_docstring.html#section-3-parameters" title="链接到此标题">#</a></h3>
+<p>参数的详细信息将在此部分添加。本节的标题为“Parameters”，其后是每字母下方带有连字符的一行。在节标题前留一个空行，但标题后不留，并且“Parameters”字样所在行与连字符行之间不留空行。</p>
+<p>标题后，签名中的每个参数都必须被文档化，包括 <code class="docutils literal notranslate"><span class="pre">*args</span></code> 和 <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code>，但不包括 <code class="docutils literal notranslate"><span class="pre">self</span></code>。</p>
+<p>参数由其名称定义，后跟一个空格、一个冒号、另一个空格和类型（或多种类型）。请注意，名称和冒号之间的空格很重要。<code class="docutils literal notranslate"><span class="pre">*args</span></code> 和 <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> 不需要定义类型，但所有其他参数必须定义类型。在参数定义之后，必须有一行参数描述，该描述应缩进，并且可以有多行。描述必须以大写字母开头，并以句号结尾。</p>
+<p>对于带有默认值的关键字参数，默认值将列在类型末尾的逗号之后。在这种情况下，类型的确切形式将是“int, default 0”。在某些情况下，解释默认参数的含义可能很有用，这可以在逗号后添加，例如“int, default -1, meaning all cpus”。</p>
+<p>在默认值为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 的情况下，表示该值不会被使用。此时，最好写成 <code class="docutils literal notranslate"><span class="pre">"str,</span> <span class="pre">optional"</span></code>，而不是 <code class="docutils literal notranslate"><span class="pre">"str,</span> <span class="pre">default</span> <span class="pre">None"</span></code>。当 <code class="docutils literal notranslate"><span class="pre">None</span></code> 是一个正在使用的值时，我们将保留形式“str, default None”。例如，在 <code class="docutils literal notranslate"><span class="pre">df.to_csv(compression=None)</span></code> 中，<code class="docutils literal notranslate"><span class="pre">None</span></code> 并非一个正在使用的值，而是表示压缩是可选的，如果未提供则不使用压缩。在这种情况下，我们将使用 <code class="docutils literal notranslate"><span class="pre">"str,</span> <span class="pre">optional"</span></code>。只有在像 <code class="docutils literal notranslate"><span class="pre">func(value=None)</span></code> 这样，<code class="docutils literal notranslate"><span class="pre">None</span></code> 的使用方式与 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或 <code class="docutils literal notranslate"><span class="pre">foo</span></code> 相同的情况下，我们才会指定“str, int or None, default None”。</p>
+<p><strong>好的示例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Series</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Generate a plot.</span>
+
+<span class="sd">        Render the data in the Series as a matplotlib plot of the</span>
+<span class="sd">        specified kind.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kind : str</span>
+<span class="sd">            Kind of matplotlib plot.</span>
+<span class="sd">        color : str, default 'blue'</span>
+<span class="sd">            Color name or rgb code.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            These parameters will be passed to the matplotlib plotting</span>
+<span class="sd">            function.</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p><strong>不好的示例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Series</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Generate a plot.</span>
+
+<span class="sd">        Render the data in the Series as a matplotlib plot of the</span>
+<span class="sd">        specified kind.</span>
+
+<span class="sd">        Note the blank line between the parameters title and the first</span>
+<span class="sd">        parameter. Also, note that after the name of the parameter ``kind``</span>
+<span class="sd">        and before the colon, a space is missing.</span>
+
+<span class="sd">        Also, note that the parameter descriptions do not start with a</span>
+<span class="sd">        capital letter, and do not finish with a dot.</span>
+
+<span class="sd">        Finally, the ``**kwargs`` parameter is missing.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        kind: str</span>
+<span class="sd">            kind of matplotlib plot</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<section id="parameter-types">
+<span id="docstring-parameter-types"></span><h4>参数类型<a class="headerlink" href="contributing_docstring.html#parameter-types" title="链接到此标题">#</a></h4>
+<p>在指定参数类型时，可以直接使用 Python 内置数据类型（Python 类型优于更冗长的 string, integer, boolean 等）。</p>
+<ul class="simple">
+<li><p>int</p></li>
+<li><p>float</p></li>
+<li><p>str</p></li>
+<li><p>bool</p></li>
+</ul>
+<p>对于复杂类型，定义子类型。对于 <code class="docutils literal notranslate"><span class="pre">dict</span></code> 和 <code class="docutils literal notranslate"><span class="pre">tuple</span></code>，由于存在多种类型，我们使用括号来帮助读取类型（<code class="docutils literal notranslate"><span class="pre">dict</span></code> 使用花括号，<code class="docutils literal notranslate"><span class="pre">tuple</span></code> 使用普通括号）</p>
+<ul class="simple">
+<li><p>int 列表</p></li>
+<li><p>dict，键为 str，值为 int（即 {str : int}）</p></li>
+<li><p>tuple，包含 (str, int, int)</p></li>
+<li><p>tuple，包含 (str,)</p></li>
+<li><p>str 集合</p></li>
+</ul>
+<p>如果只允许一组值，请将它们列在花括号中，并用逗号（后跟一个空格）分隔。如果这些值是有序的，请按该顺序列表。否则，如果有默认值，请首先列出默认值</p>
+<ul class="simple">
+<li><p>{0, 10, 25}</p></li>
+<li><p>{‘simple’, ‘advanced’}</p></li>
+<li><p>{‘low’, ‘medium’, ‘high’}</p></li>
+<li><p>{‘cat’, ‘dog’, ‘bird’}</p></li>
+</ul>
+<p>如果类型定义在 Python 模块中，则必须指定模块</p>
+<ul class="simple">
+<li><p>datetime.date</p></li>
+<li><p>datetime.datetime</p></li>
+<li><p>decimal.Decimal</p></li>
+</ul>
+<p>如果类型在一个包中，也必须指定模块</p>
+<ul class="simple">
+<li><p>numpy.ndarray</p></li>
+<li><p>scipy.sparse.coo_matrix</p></li>
+</ul>
+<p>如果类型是 pandas 类型，除了 Series 和 DataFrame 之外，也需要指定 pandas</p>
+<ul class="simple">
+<li><p>Series</p></li>
+<li><p>DataFrame</p></li>
+<li><p>pandas.Index</p></li>
+<li><p>pandas.Categorical</p></li>
+<li><p>pandas.arrays.SparseArray</p></li>
+</ul>
+<p>如果确切的类型不重要，但必须与 NumPy 数组兼容，则可以指定 array-like。如果接受任何可迭代的类型，则可以使用 iterable</p>
+<ul class="simple">
+<li><p>array-like</p></li>
+<li><p>iterable</p></li>
+</ul>
+<p>如果接受多种类型，则用逗号分隔，但最后两种类型之间需要用“或”字分隔</p>
+<ul class="simple">
+<li><p>int 或 float</p></li>
+<li><p>float, decimal.Decimal 或 None</p></li>
+<li><p>str 或 str 列表</p></li>
+</ul>
+<p>如果 <code class="docutils literal notranslate"><span class="pre">None</span></code> 是被接受的值之一，它始终需要是列表中的最后一个。</p>
+<p>对于轴（axis），约定是使用类似以下形式</p>
+<ul class="simple">
+<li><p>axis : {0 或 ‘index’, 1 或 ‘columns’, None}, 默认为 None</p></li>
+</ul>
+</section>
+</section>
+<section id="section-4-returns-or-yields">
+<span id="docstring-returns"></span><h3>第四部分：返回值或生成值<a class="headerlink" href="contributing_docstring.html#section-4-returns-or-yields" title="链接到此标题">#</a></h3>
+<p>如果方法返回值，将在本节中记录。如果方法生成输出，也在此记录。</p>
+<p>本节的标题定义方式与“参数”部分相同。标题为“Returns”或“Yields”，后跟一行，其连字符数量与前一个单词的字母数量相同。</p>
+<p>返回值的文档也类似于参数。但在这种情况下，除非方法返回或生成多个值（一个值的元组），否则不提供名称。</p>
+<p>“Returns”和“Yields”的类型与“Parameters”的类型相同。此外，描述必须以句号结尾。</p>
+<p>例如，单个值的情况</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate and return a random number.</span>
+
+<span class="sd">    The value is sampled from a continuous uniform distribution between</span>
+<span class="sd">    0 and 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        Random number generated.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>多个值的情况</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">random_letters</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate and return a sequence of random letters.</span>
+
+<span class="sd">    The length of the returned string is also random, and is also</span>
+<span class="sd">    returned.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    length : int</span>
+<span class="sd">        Length of the returned string.</span>
+<span class="sd">    letters : str</span>
+<span class="sd">        String of random letters.</span>
+<span class="sd">    """</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">letters</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span>
+                      <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">length</span><span class="p">,</span> <span class="n">letters</span>
+</pre></div>
+</div>
+<p>如果方法生成其值</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_values</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate an infinite sequence of random numbers.</span>
+
+<span class="sd">    The values are sampled from a continuous uniform distribution between</span>
+<span class="sd">    0 and 1.</span>
+
+<span class="sd">    Yields</span>
+<span class="sd">    ------</span>
+<span class="sd">    float</span>
+<span class="sd">        Random number generated.</span>
+<span class="sd">    """</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="section-5-see-also">
+<span id="docstring-see-also"></span><h3>第五部分：另请参阅<a class="headerlink" href="contributing_docstring.html#section-5-see-also" title="链接到此标题">#</a></h3>
+<p>本节用于告知用户与当前文档功能相关的 pandas 功能。在极少数情况下，如果完全找不到相关方法或函数，本节可以跳过。</p>
+<p>一个明显的例子是 <code class="docutils literal notranslate"><span class="pre">head()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">tail()</span></code> 方法。由于 <code class="docutils literal notranslate"><span class="pre">tail()</span></code> 的功能与 <code class="docutils literal notranslate"><span class="pre">head()</span></code> 等效，但作用于 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的末尾而非开头，因此告知用户这一点是很好的。</p>
+<p>为了直观了解哪些可以被视为相关，这里有一些示例</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">loc</span></code> 和 <code class="docutils literal notranslate"><span class="pre">iloc</span></code>，它们功能相同，但一个提供标签索引，另一个提供位置索引</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max</span></code> 和 <code class="docutils literal notranslate"><span class="pre">min</span></code>，它们功能相反</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iterrows</span></code>、<code class="docutils literal notranslate"><span class="pre">itertuples</span></code> 和 <code class="docutils literal notranslate"><span class="pre">items</span></code>，因为用户在寻找遍历列的方法时很容易误入遍历行的方法，反之亦然</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fillna</span></code> 和 <code class="docutils literal notranslate"><span class="pre">dropna</span></code>，因为这两种方法都用于处理缺失值</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_csv</span></code> 和 <code class="docutils literal notranslate"><span class="pre">to_csv</span></code>，因为它们是互补的</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">merge</span></code> 和 <code class="docutils literal notranslate"><span class="pre">join</span></code>，因为一个是另一个的泛化</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">astype</span></code> 和 <code class="docutils literal notranslate"><span class="pre">pandas.to_datetime</span></code>，因为用户可能正在阅读 <code class="docutils literal notranslate"><span class="pre">astype</span></code> 的文档以了解如何转换为日期类型，而转换的方法是使用 <code class="docutils literal notranslate"><span class="pre">pandas.to_datetime</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">where</span></code> 与 <code class="docutils literal notranslate"><span class="pre">numpy.where</span></code> 相关，因为其功能基于后者</p></li>
+</ul>
+<p>在决定哪些是相关内容时，您主要应运用常识，并思考哪些对阅读文档的用户有用，尤其是经验较少的用户。</p>
+<p>在关联到其他库（主要是 <code class="docutils literal notranslate"><span class="pre">numpy</span></code>）时，首先使用模块的名称（而非像 <code class="docutils literal notranslate"><span class="pre">np</span></code> 这样的别名）。如果函数位于非主模块中，例如 <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code>，请列出完整的模块（例如 <code class="docutils literal notranslate"><span class="pre">scipy.sparse.coo_matrix</span></code>）。</p>
+<p>本节有一个标题，“See Also”（注意 S 和 A 大写），其后是带有连字符的行，之前有一个空行。</p>
+<p>在标题之后，我们将为每个相关方法或函数添加一行，后跟一个空格、一个冒号、另一个空格，以及一个简短的描述，说明此方法或函数的功能、其在此上下文中的相关性，以及被文档化的函数与被引用的函数之间的主要区别。描述也必须以句号结尾。</p>
+<p>请注意，在“Returns”和“Yields”部分中，描述位于类型之后的行。但在本节中，它位于同一行，中间用冒号分隔。如果描述无法在一行中容纳，则可以继续到其他行，这些行必须进一步缩进。</p>
+<p>例如</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Series</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Return the first 5 elements of the Series.</span>
+
+<span class="sd">        This function is mainly useful to preview the values of the</span>
+<span class="sd">        Series without displaying the whole of it.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Series</span>
+<span class="sd">            Subset of the original series with the 5 first values.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        Series.tail : Return the last 5 elements of the Series.</span>
+<span class="sd">        Series.iloc : Return a slice of the elements in the Series,</span>
+<span class="sd">            which can also be used to return the first or last n.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="section-6-notes">
+<span id="docstring-notes"></span><h3>第六部分：说明<a class="headerlink" href="contributing_docstring.html#section-6-notes" title="链接到此标题">#</a></h3>
+<p>这是一个可选部分，用于说明算法的实现细节，或记录函数行为的技术方面。</p>
+<p>可以跳过此部分，除非您熟悉算法的实现，或者在为函数编写示例时发现了某些反直觉的行为。</p>
+<p>本节的格式与扩展摘要部分相同。</p>
+</section>
+<section id="section-7-examples">
+<span id="docstring-examples"></span><h3>第七部分：示例<a class="headerlink" href="contributing_docstring.html#section-7-examples" title="链接到此标题">#</a></h3>
+<p>这是文档字符串最重要的部分之一，尽管它位于最后，因为人们通常通过示例比通过精确解释更好地理解概念。</p>
+<p>文档字符串中的示例除了说明函数或方法的用法外，还必须是有效的 Python 代码，以确定性方式返回给定输出，并且可以由用户复制和运行。</p>
+<p>示例以 Python 终端会话的形式呈现。<code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> 用于表示代码。<code class="docutils literal notranslate"><span class="pre">...</span></code> 用于表示代码从上一行继续。输出紧跟在生成输出的最后一行代码之后（中间没有空行）。可以在示例描述的注释前后添加空行。</p>
+<p>呈现示例的方式如下</p>
+<ol class="arabic simple">
+<li><p>导入所需的库（<code class="docutils literal notranslate"><span class="pre">numpy</span></code> 和 <code class="docutils literal notranslate"><span class="pre">pandas</span></code> 除外）</p></li>
+<li><p>创建示例所需的数据</p></li>
+<li><p>展示一个非常基本的示例，给出最常见用例的概要</p></li>
+<li><p>添加带有解释的示例，说明如何使用参数来扩展功能</p></li>
+</ol>
+<p>一个简单的例子可以是</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Series</span><span class="p">:</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Return the first elements of the Series.</span>
+
+<span class="sd">        This function is mainly useful to preview the values of the</span>
+<span class="sd">        Series without displaying all of it.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n : int</span>
+<span class="sd">            Number of values to return.</span>
+
+<span class="sd">        Return</span>
+<span class="sd">        ------</span>
+<span class="sd">        pandas.Series</span>
+<span class="sd">            Subset of the original series with the n first values.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        tail : Return the last n elements of the Series.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; ser = pd.Series(['Ant', 'Bear', 'Cow', 'Dog', 'Falcon',</span>
+<span class="sd">        ...                'Lion', 'Monkey', 'Rabbit', 'Zebra'])</span>
+<span class="sd">        &gt;&gt;&gt; ser.head()</span>
+<span class="sd">        0   Ant</span>
+<span class="sd">        1   Bear</span>
+<span class="sd">        2   Cow</span>
+<span class="sd">        3   Dog</span>
+<span class="sd">        4   Falcon</span>
+<span class="sd">        dtype: object</span>
+
+<span class="sd">        With the ``n`` parameter, we can change the number of returned rows:</span>
+
+<span class="sd">        &gt;&gt;&gt; ser.head(n=3)</span>
+<span class="sd">        0   Ant</span>
+<span class="sd">        1   Bear</span>
+<span class="sd">        2   Cow</span>
+<span class="sd">        dtype: object</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>示例应尽可能简洁。如果函数的复杂性需要较长的示例，建议使用带有粗体标题的块。使用双星号 <code class="docutils literal notranslate"><span class="pre">**</span></code> 使文本粗体，例如 <code class="docutils literal notranslate"><span class="pre">**this</span> <span class="pre">example**</span></code>。</p>
+<section id="conventions-for-the-examples">
+<span id="docstring-example-conventions"></span><h4>示例约定<a class="headerlink" href="contributing_docstring.html#conventions-for-the-examples" title="链接到此标题">#</a></h4>
+<p>示例中的代码假定始终以不显示的这两行开始</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<p>示例中使用的任何其他模块都必须显式导入，每行一个（如 <span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.pythonlang.cn/pep-0008/#imports"><strong>PEP 8#imports</strong></a> 中建议），并避免使用别名。避免过度导入，但如果需要，标准库的导入优先，其次是第三方库（如 matplotlib）。</p>
+<p>在使用单个 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 演示示例时，使用名称 <code class="docutils literal notranslate"><span class="pre">ser</span></code>；如果使用单个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 演示，则使用名称 <code class="docutils literal notranslate"><span class="pre">df</span></code>。对于索引，首选名称是 <code class="docutils literal notranslate"><span class="pre">idx</span></code>。如果使用一组同质的 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 或 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>，则将其命名为 <code class="docutils literal notranslate"><span class="pre">ser1</span></code>、<code class="docutils literal notranslate"><span class="pre">ser2</span></code>、<code class="docutils literal notranslate"><span class="pre">ser3</span></code>……或 <code class="docutils literal notranslate"><span class="pre">df1</span></code>、<code class="docutils literal notranslate"><span class="pre">df2</span></code>、<code class="docutils literal notranslate"><span class="pre">df3</span></code>……。如果数据不同质，且需要多个结构，则应赋予其有意义的名称，例如 <code class="docutils literal notranslate"><span class="pre">df_main</span></code> 和 <code class="docutils literal notranslate"><span class="pre">df_to_join</span></code>。</p>
+<p>示例中使用的数据应尽可能紧凑。行数建议保持在 4 左右，但请确保该数字对特定示例有意义。例如，在 <code class="docutils literal notranslate"><span class="pre">head</span></code> 方法中，它需要高于 5 行才能显示带默认值的示例。如果计算 <code class="docutils literal notranslate"><span class="pre">mean</span></code>，我们可以使用像 <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> 这样的数据，这样很容易看出返回的值是平均值。</p>
+<p>对于更复杂的示例（例如分组），避免使用没有解释的数据，例如带有列 A, B, C, D… 的随机数矩阵。而应使用有意义的示例，这样更容易理解概念。除非示例需要，否则使用动物名称及其数值属性，以保持示例的一致性。</p>
+<p>调用方法时，关键字参数 <code class="docutils literal notranslate"><span class="pre">head(n=3)</span></code> 优于位置参数 <code class="docutils literal notranslate"><span class="pre">head(3)</span></code>。</p>
+<p><strong>好的示例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Series</span><span class="p">:</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute the mean of the input.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; ser = pd.Series([1, 2, 3])</span>
+<span class="sd">        &gt;&gt;&gt; ser.mean()</span>
+<span class="sd">        2</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fillna</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Replace missing values by ``value``.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; ser = pd.Series([1, np.nan, 3])</span>
+<span class="sd">        &gt;&gt;&gt; ser.fillna(0)</span>
+<span class="sd">        [1, 0, 3]</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">groupby_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Group by index and return mean.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; ser = pd.Series([380., 370., 24., 26],</span>
+<span class="sd">        ...               name='max_speed',</span>
+<span class="sd">        ...               index=['falcon', 'falcon', 'parrot', 'parrot'])</span>
+<span class="sd">        &gt;&gt;&gt; ser.groupby_mean()</span>
+<span class="sd">        index</span>
+<span class="sd">        falcon    375.0</span>
+<span class="sd">        parrot     25.0</span>
+<span class="sd">        Name: max_speed, dtype: float64</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">nan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Return whether each value contains ``pattern``.</span>
+
+<span class="sd">        In this case, we are illustrating how to use sections, even</span>
+<span class="sd">        if the example is simple enough and does not require them.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; ser = pd.Series('Antelope', 'Lion', 'Zebra', np.nan)</span>
+<span class="sd">        &gt;&gt;&gt; ser.contains(pattern='a')</span>
+<span class="sd">        0    False</span>
+<span class="sd">        1    False</span>
+<span class="sd">        2     True</span>
+<span class="sd">        3      NaN</span>
+<span class="sd">        dtype: bool</span>
+
+<span class="sd">        **Case sensitivity**</span>
+
+<span class="sd">        With ``case_sensitive`` set to ``False`` we can match ``a`` with both</span>
+<span class="sd">        ``a`` and ``A``:</span>
+
+<span class="sd">        &gt;&gt;&gt; s.contains(pattern='a', case_sensitive=False)</span>
+<span class="sd">        0     True</span>
+<span class="sd">        1    False</span>
+<span class="sd">        2     True</span>
+<span class="sd">        3      NaN</span>
+<span class="sd">        dtype: bool</span>
+
+<span class="sd">        **Missing values**</span>
+
+<span class="sd">        We can fill missing values in the output using the ``na`` parameter:</span>
+
+<span class="sd">        &gt;&gt;&gt; ser.contains(pattern='a', na=False)</span>
+<span class="sd">        0    False</span>
+<span class="sd">        1    False</span>
+<span class="sd">        2     True</span>
+<span class="sd">        3    False</span>
+<span class="sd">        dtype: bool</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p><strong>不好的示例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A sample DataFrame method.</span>
+
+<span class="sd">    Do not import NumPy and pandas.</span>
+
+<span class="sd">    Try to use meaningful data, when it makes the example easier</span>
+<span class="sd">    to understand.</span>
+
+<span class="sd">    Try to avoid positional arguments like in ``df.method(1)``. They</span>
+<span class="sd">    can be all right if previously defined with a meaningful name,</span>
+<span class="sd">    like in ``present_value(interest_rate)``, but avoid them otherwise.</span>
+
+<span class="sd">    When presenting the behavior with different parameters, do not place</span>
+<span class="sd">    all the calls one next to the other. Instead, add a short sentence</span>
+<span class="sd">    explaining what the example shows.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">    &gt;&gt;&gt; df = pd.DataFrame(np.random.randn(3, 3),</span>
+<span class="sd">    ...                   columns=('a', 'b', 'c'))</span>
+<span class="sd">    &gt;&gt;&gt; df.method(1)</span>
+<span class="sd">    21</span>
+<span class="sd">    &gt;&gt;&gt; df.method(bar=14)</span>
+<span class="sd">    123</span>
+<span class="sd">    """</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="tips-for-getting-your-examples-pass-the-doctests">
+<span id="docstring-doctest-tips"></span><h4>让示例通过 doctests 的技巧<a class="headerlink" href="contributing_docstring.html#tips-for-getting-your-examples-pass-the-doctests" title="链接到此标题">#</a></h4>
+<p>让示例通过验证脚本中的 doctests 有时会很棘手。以下是一些注意事项</p>
+<ul>
+<li><p>导入所有必需的库（<code class="docutils literal notranslate"><span class="pre">pandas</span></code> 和 <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> 除外，它们已作为 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pandas</span> <span class="pre">as</span> <span class="pre">pd</span></code> 和 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code> 导入）并定义示例中使用的所有变量。</p></li>
+<li><p>尽量避免使用随机数据。但在某些情况下，随机数据可能是可以的，例如如果您正在文档化的函数涉及概率分布，或者使函数结果有意义所需的数据量太大，以至于手动创建非常麻烦。在这些情况下，请始终使用固定的随机种子，以使生成的示例可预测。示例</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'normal'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)})</span>
+</pre></div>
+</div>
+</li>
+<li><p>如果您的代码片段跨越多行，您需要在续行上使用‘…’</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">],</span>
+<span class="gp">... </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'A'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">])</span>
+</pre></div>
+</div>
+</li>
+<li><p>如果您想展示一个抛出异常的示例，可以这样做</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s2">"712-01-01"</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">OutOfBoundsDatetime</span>: <span class="n">Out of bounds nanosecond timestamp: 712-01-01 00:00:00</span>
+</pre></div>
+</div>
+<p>包含“Traceback (most recent call last):”是必不可少的，但对于实际错误，仅错误名称就足够了。</p>
+</li>
+<li><p>如果结果的一小部分可能变化（例如对象表示中的哈希值），您可以使用 <code class="docutils literal notranslate"><span class="pre">...</span></code> 来表示此部分。</p>
+<p>如果您想展示 <code class="docutils literal notranslate"><span class="pre">s.plot()</span></code> 返回一个 matplotlib AxesSubplot 对象，这会使 doctest 失败</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7efd0c0b0690&gt;</span>
+</pre></div>
+</div>
+<p>但是，您可以这样做（注意需要添加的注释）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>  
+<span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at ...&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="plots-in-examples">
+<span id="docstring-example-plots"></span><h4>示例中的图表<a class="headerlink" href="contributing_docstring.html#plots-in-examples" title="链接到此标题">#</a></h4>
+<p>pandas 中有一些方法会返回图表。为了在文档中渲染示例生成的图表，存在 <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">plot::</span></code> 指令。</p>
+<p>要使用它，请将以下代码放在“示例”标题之后，如下所示。构建文档时将自动生成图表。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Series</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Generate a plot with the ``Series`` data.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; ser = pd.Series([1, 2, 3])</span>
+<span class="sd">            &gt;&gt;&gt; ser.plot()</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="sharing-docstrings">
+<span id="docstring-sharing"></span><h2>共享文档字符串<a class="headerlink" href="contributing_docstring.html#sharing-docstrings" title="链接到此标题">#</a></h2>
+<p>pandas 有一套系统，用于在类之间共享文档字符串，并允许微小变化。这有助于我们保持文档字符串的一致性，同时让读者清楚理解。代价是编写时会增加一些复杂性。</p>
+<p>每个共享文档字符串都将有一个带有变量（如 <code class="docutils literal notranslate"><span class="pre">{klass}</span></code>）的基础模板。这些变量稍后使用 <code class="docutils literal notranslate"><span class="pre">doc</span></code> 装饰器填充。最后，文档字符串也可以使用 <code class="docutils literal notranslate"><span class="pre">doc</span></code> 装饰器进行追加。</p>
+<p>在此示例中，我们将正常创建一个父文档字符串（这类似于 <code class="docutils literal notranslate"><span class="pre">pandas.core.generic.NDFrame</span></code>）。然后我们将有两个子文档字符串（类似于 <code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code> 和 <code class="docutils literal notranslate"><span class="pre">pandas.core.frame.DataFrame</span></code>）。我们将在该文档字符串中替换类名。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="p">:</span>
+    <span class="nd">@doc</span><span class="p">(</span><span class="n">klass</span><span class="o">=</span><span class="s2">"Parent"</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Apply my function to {klass}."""</span>
+        <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ChildA</span><span class="p">(</span><span class="n">Parent</span><span class="p">):</span>
+    <span class="nd">@doc</span><span class="p">(</span><span class="n">Parent</span><span class="o">.</span><span class="n">my_function</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s2">"ChildA"</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ChildB</span><span class="p">(</span><span class="n">Parent</span><span class="p">):</span>
+    <span class="nd">@doc</span><span class="p">(</span><span class="n">Parent</span><span class="o">.</span><span class="n">my_function</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s2">"ChildB"</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>生成的文档字符串是</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Parent</span><span class="o">.</span><span class="n">my_function</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="go">Apply my function to Parent.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ChildA</span><span class="o">.</span><span class="n">my_function</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="go">Apply my function to ChildA.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ChildB</span><span class="o">.</span><span class="n">my_function</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="go">Apply my function to ChildB.</span>
+</pre></div>
+</div>
+<p>请注意</p>
+<ol class="arabic simple">
+<li><p>我们将父文档字符串“追加”到最初为空的子文档字符串中。</p></li>
+</ol>
+<p>我们的文件通常会包含一个模块级别的 <code class="docutils literal notranslate"><span class="pre">_shared_doc_kwargs</span></code>，其中包含一些常见的替换值（例如 <code class="docutils literal notranslate"><span class="pre">klass</span></code>、<code class="docutils literal notranslate"><span class="pre">axes</span></code> 等）。</p>
+<p>您可以通过以下方式一次性完成替换和追加</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@doc</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="o">**</span><span class="n">_shared_doc_kwargs</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">template</span></code> 可能来自将函数名称映射到文档字符串的模块级 <code class="docutils literal notranslate"><span class="pre">_shared_docs</span></code> 字典。在可能的情况下，我们更倾向于使用 <code class="docutils literal notranslate"><span class="pre">doc</span></code>，因为文档字符串编写过程与正常编写更为接近。</p>
+<p>请参见 <code class="docutils literal notranslate"><span class="pre">pandas.core.generic.NDFrame.fillna</span></code> 以获取示例模板，以及 <code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series.fillna</span></code> 和 <code class="docutils literal notranslate"><span class="pre">pandas.core.generic.frame.fillna</span></code> 以获取填充后的版本。</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="contributing_documentation.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一篇</p> <p class="prev-next-title">贡献文档</p> </div> </a> <a class="right-next" href="contributing_codebase.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一篇</p> <p class="prev-next-title">贡献代码库</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 在本页</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#about-docstrings-and-standards">关于文档字符串和标准</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#writing-a-docstring">编写文档字符串</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#general-rules">一般规则</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#section-1-short-summary">第一部分：简要摘要</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#section-2-extended-summary">第二部分：扩展摘要</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#section-3-parameters">第三部分：参数</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#parameter-types">参数类型</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#section-4-returns-or-yields">第四部分：返回值或生成值</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#section-5-see-also">第五部分：另请参阅</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#section-6-notes">第六部分：说明</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#section-7-examples">第七部分：示例</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#conventions-for-the-examples">示例约定</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#tips-for-getting-your-examples-pass-the-doctests">让示例通过 doctests 的技巧</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#plots-in-examples">示例中的图表</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_docstring.html#sharing-docstrings">共享文档字符串</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/development/contributing_docstring.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源代码</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">基于 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

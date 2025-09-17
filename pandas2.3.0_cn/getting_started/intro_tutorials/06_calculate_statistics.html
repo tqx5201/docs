@@ -1,0 +1,797 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>如何计算摘要统计量 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/intro_tutorials/06_calculate_statistics';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to reshape the layout of tables" href="07_reshape_table_layout.html" />
+    <link rel="prev" title="How to create new columns derived from existing columns" href="05_add_columns.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="06_calculate_statistics.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">包概览</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">入门教程</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_table_oriented.html">pandas 处理哪种数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_read_write.html">如何读取和写入表格数据？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_subset_data.html">如何选择 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 的子集？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_plotting.html">如何在 pandas 中创建图表？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_add_columns.html">如何从现有列创建新列</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="06_calculate_statistics.html#">如何计算摘要统计量</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_reshape_table_layout.html">如何重塑表的布局</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_combine_dataframes.html">如何合并来自多个表的数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_timeseries.html">如何轻松处理时间序列数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_text_data.html">如何操作文本数据</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../comparison/index.html">与其他工具的比较</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_r.html">与 R / R 库的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sql.html">与 SQL 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_spreadsheets.html">与电子表格的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_sas.html">与 SAS 的比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison/comparison_with_stata.html">与 Stata 的比较</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">社区教程</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">入门</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">入门教程</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">操作指南...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="highlight-ipython notranslate" id="min-tut-06-stats"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="card gs-data">
+    <div class="card-header gs-data-header">
+        <div class="gs-data-title">本教程中使用的数据</div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item gs-data-list"><div data-bs-toggle="collapse" href="#collapsedata" role="button" aria-expanded="false" aria-controls="collapsedata">
+    <span class="badge bg-secondary">泰坦尼克号数据</span>
+</div>
+<div class="collapse" id="collapsedata">
+    <div class="card-body">
+        <p class="card-text"></p><p>本教程使用以 CSV 格式存储的泰坦尼克号数据集。数据包含以下数据列</p>
+<ul class="simple">
+<li><p>PassengerId: 每位乘客的 ID。</p></li>
+<li><p>Survived: 表示乘客是否生还。<code class="docutils literal notranslate"><span class="pre">0</span></code> 表示是，<code class="docutils literal notranslate"><span class="pre">1</span></code> 表示否。</p></li>
+<li><p>Pclass: 三个票类中的一个：<code class="docutils literal notranslate"><span class="pre">1</span></code> 等舱，<code class="docutils literal notranslate"><span class="pre">2</span></code> 等舱和 <code class="docutils literal notranslate"><span class="pre">3</span></code> 等舱。</p></li>
+<li><p>Name: 乘客姓名。</p></li>
+<li><p>Sex: 乘客性别。</p></li>
+<li><p>Age: 乘客年龄（以年为单位）。</p></li>
+<li><p>SibSp: 船上的兄弟姐妹或配偶数量。</p></li>
+<li><p>Parch: 船上的父母或子女数量。</p></li>
+<li><p>Ticket: 乘客票号。</p></li>
+<li><p>Fare: 表示票价。</p></li>
+<li><p>Cabin: 乘客客舱号。</p></li>
+<li><p>Embarked: 登船港口。</p></li>
+</ul>
+        <p></p>
+        <a href="https://github.com/pandas-dev/pandas/raw/main/doc/data/titanic.csv" class="btn btn-dark btn-sm">到原始数据</a>
+    </div>
+</div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">titanic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/titanic.csv"</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gh">Out[3]: </span>
+<span class="go">   PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked</span>
+<span class="go">0            1         0       3  ...   7.2500   NaN         S</span>
+<span class="go">1            2         1       1  ...  71.2833   C85         C</span>
+<span class="go">2            3         1       3  ...   7.9250   NaN         S</span>
+<span class="go">3            4         1       1  ...  53.1000  C123         S</span>
+<span class="go">4            5         0       3  ...   8.0500   NaN         S</span>
+
+<span class="go">[5 rows x 12 columns]</span>
+</pre></div>
+</div>
+        </li>
+    </ul>
+</div><section id="how-to-calculate-summary-statistics">
+<h1>如何计算摘要统计量<a class="headerlink" href="06_calculate_statistics.html#how-to-calculate-summary-statistics" title="链接到此标题">#</a></h1>
+<section id="aggregating-statistics">
+<h2>聚合统计量<a class="headerlink" href="06_calculate_statistics.html#aggregating-statistics" title="链接到此标题">#</a></h2>
+<img alt="../../_images/06_aggregate.svg" class="align-center" src="../../_images/06_aggregate.svg">
+<ul class="task-bullet">
+    <li><p>泰坦尼克号乘客的平均年龄是多少？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[4]: </span><span class="go">29.69911764705882</span>
+</pre></div>
+</div>
+    </li>
+</ul><p>可以使用不同的统计量，并将其应用于包含数值数据的列。操作通常排除缺失数据，并默认跨行进行。</p>
+<img alt="../../_images/06_reduction.svg" class="align-center" src="../../_images/06_reduction.svg">
+<ul class="task-bullet">
+    <li><p>泰坦尼克号乘客的年龄中位数和票价中位数是多少？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">titanic</span><span class="p">[[</span><span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"Fare"</span><span class="p">]]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="gh">Out[5]: </span>
+<span class="go">Age     28.0000</span>
+<span class="go">Fare    14.4542</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>应用于 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 多个列的统计量（选择两个列会返回一个 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>，参见<a class="reference internal" href="03_subset_data.html#min-tut-03-subset"><span class="std std-ref">数据子集教程</span></a>）是为每个数值列计算的。</p>
+    </li>
+</ul><p>可以同时为多个列计算聚合统计量。还记得<a class="reference internal" href="01_table_oriented.html#min-tut-01-tableoriented"><span class="std std-ref">第一个教程</span></a>中的 <code class="docutils literal notranslate"><span class="pre">describe</span></code> 函数吗？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">titanic</span><span class="p">[[</span><span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"Fare"</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="gh">Out[6]: </span>
+<span class="go">              Age        Fare</span>
+<span class="go">count  714.000000  891.000000</span>
+<span class="go">mean    29.699118   32.204208</span>
+<span class="go">std     14.526497   49.693429</span>
+<span class="go">min      0.420000    0.000000</span>
+<span class="go">25%     20.125000    7.910400</span>
+<span class="go">50%     28.000000   14.454200</span>
+<span class="go">75%     38.000000   31.000000</span>
+<span class="go">max     80.000000  512.329200</span>
+</pre></div>
+</div>
+<p>除了预定义的统计量之外，还可以使用 <a class="reference internal" href="../../reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg" title="pandas.DataFrame.agg"><code class="xref py py-func docutils literal notranslate"><span class="pre">DataFrame.agg()</span></code></a> 方法定义给定列的特定聚合统计量组合</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="p">{</span>
+<span class="gp">   ...: </span>        <span class="s2">"Age"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"min"</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">,</span> <span class="s2">"median"</span><span class="p">,</span> <span class="s2">"skew"</span><span class="p">],</span>
+<span class="gp">   ...: </span>        <span class="s2">"Fare"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"min"</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">,</span> <span class="s2">"median"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">],</span>
+<span class="gp">   ...: </span>    <span class="p">}</span>
+<span class="gp">   ...: </span><span class="p">)</span>
+<span class="gp">   ...: </span>
+<span class="gh">Out[7]: </span>
+<span class="go">              Age        Fare</span>
+<span class="go">min      0.420000    0.000000</span>
+<span class="go">max     80.000000  512.329200</span>
+<span class="go">median  28.000000   14.454200</span>
+<span class="go">skew     0.389108         NaN</span>
+<span class="go">mean          NaN   32.204208</span>
+</pre></div>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">到用户指南</span><p>有关描述性统计量的详细信息，请参阅用户指南的<a class="reference internal" href="../../user_guide/basics.html#basics-stats"><span class="std std-ref">描述性统计量</span></a>部分。</p>
+</div></section>
+<section id="aggregating-statistics-grouped-by-category">
+<h2>按类别分组的聚合统计量<a class="headerlink" href="06_calculate_statistics.html#aggregating-statistics-grouped-by-category" title="链接到此标题">#</a></h2>
+<img alt="../../_images/06_groupby.svg" class="align-center" src="../../_images/06_groupby.svg">
+<ul class="task-bullet">
+    <li><p>泰坦尼克号男性和女性乘客的平均年龄分别是多少？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">titanic</span><span class="p">[[</span><span class="s2">"Sex"</span><span class="p">,</span> <span class="s2">"Age"</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Sex"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[8]: </span>
+<span class="go">              Age</span>
+<span class="go">Sex              </span>
+<span class="go">female  27.915709</span>
+<span class="go">male    30.726645</span>
+</pre></div>
+</div>
+<p>由于我们感兴趣的是每个性别的平均年龄，因此首先对这两列进行子选择：<code class="docutils literal notranslate"><span class="pre">titanic[["Sex",</span> <span class="pre">"Age"]]</span></code>。接下来，将 <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> 方法应用于 <code class="docutils literal notranslate"><span class="pre">Sex</span></code> 列，以便为每个类别创建一个组。然后计算并返回<em>每个性别</em>的平均年龄。</p>
+    </li>
+</ul><p>计算<em>列中每个类别</em>的给定统计量（例如 <code class="docutils literal notranslate"><span class="pre">mean</span></code> 年龄，例如 <code class="docutils literal notranslate"><span class="pre">Sex</span></code> 列中的男性/女性）是一种常见模式。<code class="docutils literal notranslate"><span class="pre">groupby</span></code> 方法用于支持此类操作。这符合更通用的 <code class="docutils literal notranslate"><span class="pre">split-apply-combine</span></code> 模式</p>
+<ul class="simple">
+<li><p><strong>拆分</strong>数据成组</p></li>
+<li><p><strong>应用</strong>函数到每个组独立执行</p></li>
+<li><p><strong>组合</strong>结果成数据结构</p></li>
+</ul>
+<p>在 pandas 中，应用和组合步骤通常一起完成。</p>
+<p>在前面的示例中，我们首先明确选择了 2 列。如果未选择，<code class="docutils literal notranslate"><span class="pre">mean</span></code> 方法将通过传递 <code class="docutils literal notranslate"><span class="pre">numeric_only=True</span></code> 应用于每个包含数值数据的列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Sex"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[9]: </span>
+<span class="go">        PassengerId  Survived    Pclass  ...     SibSp     Parch       Fare</span>
+<span class="go">Sex                                      ...                               </span>
+<span class="go">female   431.028662  0.742038  2.159236  ...  0.694268  0.649682  44.479818</span>
+<span class="go">male     454.147314  0.188908  2.389948  ...  0.429809  0.235702  25.523893</span>
+
+<span class="go">[2 rows x 7 columns]</span>
+</pre></div>
+</div>
+<p>获取 <code class="docutils literal notranslate"><span class="pre">Pclass</span></code> 的平均值意义不大。如果只对每个性别的平均年龄感兴趣，也可以在分组数据上支持列的选择（像往常一样使用方括号 <code class="docutils literal notranslate"><span class="pre">[]</span></code>）</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Sex"</span><span class="p">)[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[10]: </span>
+<span class="go">Sex</span>
+<span class="go">female    27.915709</span>
+<span class="go">male      30.726645</span>
+<span class="go">Name: Age, dtype: float64</span>
+</pre></div>
+</div>
+<img alt="../../_images/06_groupby_select_detail.svg" class="align-center" src="../../_images/06_groupby_select_detail.svg">
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pclass</span></code> 列包含数值数据，但实际上代表了 3 个类别（或因子），分别带有标签 '1'、'2' 和 '3'。对这些数据进行统计计算意义不大。因此，pandas 提供了一个 <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> 数据类型来处理此类数据。更多信息请参阅用户指南的<a class="reference internal" href="../../user_guide/categorical.html#categorical"><span class="std std-ref">分类数据</span></a>部分。</p>
+</div>
+<ul class="task-bullet">
+    <li><p>每个性别和客舱等级组合的平均票价是多少？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"Sex"</span><span class="p">,</span> <span class="s2">"Pclass"</span><span class="p">])[</span><span class="s2">"Fare"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[11]: </span>
+<span class="go">Sex     Pclass</span>
+<span class="go">female  1         106.125798</span>
+<span class="go">        2          21.970121</span>
+<span class="go">        3          16.118810</span>
+<span class="go">male    1          67.226127</span>
+<span class="go">        2          19.741782</span>
+<span class="go">        3          12.661633</span>
+<span class="go">Name: Fare, dtype: float64</span>
+</pre></div>
+</div>
+<p>可以同时按多个列进行分组。将列名作为列表提供给 <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> 方法。</p>
+    </li>
+</ul><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">到用户指南</span><p>关于 split-apply-combine 方法的完整描述，请参阅用户指南中关于<a class="reference internal" href="../../user_guide/groupby.html#groupby"><span class="std std-ref">groupby 操作</span></a>的部分。</p>
+</div></section>
+<section id="count-number-of-records-by-category">
+<h2>按类别统计记录数<a class="headerlink" href="06_calculate_statistics.html#count-number-of-records-by-category" title="链接到此标题">#</a></h2>
+<img alt="../../_images/06_valuecounts.svg" class="align-center" src="../../_images/06_valuecounts.svg">
+<ul class="task-bullet">
+    <li><p>每个客舱等级中有多少乘客？</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">titanic</span><span class="p">[</span><span class="s2">"Pclass"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="gh">Out[12]: </span>
+<span class="go">Pclass</span>
+<span class="go">3    491</span>
+<span class="go">1    216</span>
+<span class="go">2    184</span>
+<span class="go">Name: count, dtype: int64</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../reference/api/pandas.Series.value_counts.html#pandas.Series.value_counts" title="pandas.Series.value_counts"><code class="xref py py-meth docutils literal notranslate"><span class="pre">value_counts()</span></code></a> 方法统计列中每个类别的记录数。</p>
+    </li>
+</ul><p>此函数是一个快捷方式，因为它实际上是 groupby 操作与计数每个组内记录数的组合</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Pclass"</span><span class="p">)[</span><span class="s2">"Pclass"</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="gh">Out[13]: </span>
+<span class="go">Pclass</span>
+<span class="go">1    216</span>
+<span class="go">2    184</span>
+<span class="go">3    491</span>
+<span class="go">Name: Pclass, dtype: int64</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><code class="docutils literal notranslate"><span class="pre">size</span></code> 和 <code class="docutils literal notranslate"><span class="pre">count</span></code> 都可以与 <code class="docutils literal notranslate"><span class="pre">groupby</span></code> 结合使用。<code class="docutils literal notranslate"><span class="pre">size</span></code> 包含 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> 值并仅提供行数（表的尺寸），而 <code class="docutils literal notranslate"><span class="pre">count</span></code> 排除缺失值。在 <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> 方法中，使用 <code class="docutils literal notranslate"><span class="pre">dropna</span></code> 参数来包含或排除 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> 值。</p>
+</div>
+<div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">到用户指南</span><p>用户指南中有一个专门介绍 <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> 的部分，请参阅关于<a class="reference internal" href="../../user_guide/basics.html#basics-discretization"><span class="std std-ref">离散化</span></a>的页面。</p>
+</div><div class="shadow gs-callout gs-callout-remember">
+    <h4>记住</h4><ul class="simple">
+<li><p>聚合统计量可以在整个列或行上计算。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">groupby</span></code> 提供了<em>拆分-应用-组合</em>模式的强大功能。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value_counts</span></code> 是一个方便的快捷方式，用于统计变量中每个类别的条目数。</p></li>
+</ul>
+</div><div class="d-flex flex-row gs-torefguide">
+    <span class="badge badge-info">到用户指南</span><p>关于 split-apply-combine 方法的完整描述，请参阅用户指南中关于<a class="reference internal" href="../../user_guide/groupby.html#groupby"><span class="std std-ref">groupby 操作</span></a>的页面。</p>
+</div></section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="05_add_columns.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一篇</p> <p class="prev-next-title">如何从现有列创建新列</p> </div> </a> <a class="right-next" href="07_reshape_table_layout.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一篇</p> <p class="prev-next-title">如何重塑表的布局</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 在本页</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="06_calculate_statistics.html#aggregating-statistics">聚合统计量</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="06_calculate_statistics.html#aggregating-statistics-grouped-by-category">按类别分组的聚合统计量</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="06_calculate_statistics.html#count-number-of-records-by-category">按类别统计记录数</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/getting_started/intro_tutorials/06_calculate_statistics.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 经由 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 提供。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

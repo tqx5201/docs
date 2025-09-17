@@ -1,0 +1,802 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>参与贡献 pandas — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'development/contributing';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creating a development environment" href="contributing_environment.html" />
+    <link rel="prev" title="Development" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="contributing.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">开始</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="contributing.html#">参与贡献 pandas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_environment.html">创建开发环境</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_gitpod.html">使用 Gitpod 进行 pandas 开发</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_documentation.html">参与贡献文档</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html">pandas docstring 指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_codebase.html">参与贡献代码库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining.html">pandas 维护</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals.html">内部</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (Copy on write)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging_extensions.html">调试 C 扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">扩展 pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">开发者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">政策</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">贡献者社区</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">开发</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">贡献...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="contributing-to-pandas">
+<span id="contributing"></span><h1>参与贡献 pandas<a class="headerlink" href="contributing.html#contributing-to-pandas" title="Link to this heading">#</a></h1>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">目录</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="contributing.html#bug-reports-and-enhancement-requests" id="id1">错误报告和增强请求</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#finding-an-issue-to-contribute-to" id="id2">找到要贡献的问题</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#submitting-a-pull-request" id="id3">提交拉取请求</a></p>
+<ul>
+<li><p><a class="reference internal" href="contributing.html#version-control-git-and-github" id="id4">版本控制、Git 和 GitHub</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#getting-started-with-git" id="id5">Git 入门</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#create-a-fork-of-pandas" id="id6">创建 pandas 的派生（fork）</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#creating-a-feature-branch" id="id7">创建功能分支</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#making-code-changes" id="id8">进行代码更改</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#pushing-your-changes" id="id9">推送你的更改</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#making-a-pull-request" id="id10">提出拉取请求</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#updating-your-pull-request" id="id11">更新你的拉取请求</a></p></li>
+<li><p><a class="reference internal" href="contributing.html#updating-the-development-environment" id="id12">更新开发环境</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="contributing.html#tips-for-a-successful-pull-request" id="id13">成功拉取请求的技巧</a></p></li>
+</ul>
+</nav>
+<p>欢迎所有贡献、错误报告、错误修复、文档改进、增强和想法。</p>
+<section id="bug-reports-and-enhancement-requests">
+<span id="contributing-bug-reports"></span><h2><a class="toc-backref" href="contributing.html#id1" role="doc-backlink">错误报告和增强请求</a><a class="headerlink" href="contributing.html#bug-reports-and-enhancement-requests" title="Link to this heading">#</a></h2>
+<p>错误报告和增强请求是使 pandas 更稳定的重要组成部分，并通过 Github issues 进行管理。报告问题或请求时，请选择<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/new/choose">适当的类别并完整填写问题表单</a>，以确保其他人以及核心开发团队能够完全理解问题的范围。</p>
+<p>该问题随后将显示给 pandas 社区，并开放供他人评论/提供想法。</p>
+</section>
+<section id="finding-an-issue-to-contribute-to">
+<h2><a class="toc-backref" href="contributing.html#id2" role="doc-backlink">找到要贡献的问题</a><a class="headerlink" href="contributing.html#finding-an-issue-to-contribute-to" title="Link to this heading">#</a></h2>
+<p>如果你是 pandas 或开源开发的新手，我们建议你搜索 <a class="reference external" href="https://github.com/pandas-dev/pandas/issues">GitHub“Issues”选项卡</a>，以找到你感兴趣的问题。未分配且标记为 <a class="reference external" href="https://github.com/pandas-dev/pandas/issues?q=is%3Aopen+sort%3Aupdated-desc+label%3ADocs+no%3Aassignee">Docs</a> 和 <a class="reference external" href="https://github.com/pandas-dev/pandas/issues?q=is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22+no%3Aassignee">good first issue</a> 的问题通常适合新贡献者。</p>
+<p>一旦你找到了一个感兴趣的问题，最好将问题分配给自己，这样就没有其他人重复工作。在 Github 问题上，评论精确文本 <code class="docutils literal notranslate"><span class="pre">take</span></code> 将自动将问题分配给你（这需要几秒钟，并且可能需要刷新页面才能看到）。</p>
+<p>如果出于某种原因你无法继续处理该问题，请取消分配，以便其他人知道它再次可用。你可以检查已分配问题的列表，因为人们可能不再处理它们。如果你想处理一个已分配的问题，请随时礼貌地询问当前分配者你是否可以接手（请至少等待一周的不活动期，然后再考虑该问题已中断）。</p>
+<p>我们有几个<a class="reference internal" href="community.html#community"><span class="std std-ref">贡献者社区</span></a>交流渠道，欢迎你加入并提出问题，以便你理清思路。其中包括新贡献者定期会议、开发者会议、开发者邮件列表以及贡献者社区的 Slack。所有 pandas 贡献者都欢迎加入这些空间，在那里他们可以相互联系。即使是长期与我们合作的维护者，在刚开始时也和现在的你一样，他们很乐意欢迎你并支持你了解我们的工作方式和资源位置。请查看下一节以了解更多信息。</p>
+</section>
+<section id="submitting-a-pull-request">
+<span id="contributing-github"></span><h2><a class="toc-backref" href="contributing.html#id3" role="doc-backlink">提交拉取请求</a><a class="headerlink" href="contributing.html#submitting-a-pull-request" title="Link to this heading">#</a></h2>
+<section id="version-control-git-and-github">
+<span id="contributing-version-control"></span><h3><a class="toc-backref" href="contributing.html#id4" role="doc-backlink">版本控制、Git 和 GitHub</a><a class="headerlink" href="contributing.html#version-control-git-and-github" title="Link to this heading">#</a></h3>
+<p>pandas 托管在 <a class="reference external" href="https://www.github.com/pandas-dev/pandas">GitHub</a> 上，要做出贡献，你需要注册一个<a class="reference external" href="https://github.com/signup/free">免费的 GitHub 帐户</a>。我们使用 <a class="reference external" href="https://git-scm.cn/">Git</a> 进行版本控制，以允许许多人共同参与项目。</p>
+<p>如果你是 Git 新手，可以参考以下一些学习 Git 的资源。如果需要帮助，请随时联系<a class="reference internal" href="community.html#community"><span class="std std-ref">贡献者社区</span></a></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://git-scm.cn/doc">Git 文档</a>.</p></li>
+<li><p><a class="reference external" href="https://numpy.com.cn/doc/stable/dev/gitwash/git_resources.html">Numpy 的 Git 资源</a>教程。</p></li>
+</ul>
+<p>此外，该项目遵循此页面进一步描述的派生工作流，即贡献者派生存储库，进行更改，然后创建拉取请求。因此，请务必阅读并遵循本指南中的所有说明。</p>
+<p>如果你是 GitHub 上通过派生参与项目的新手，请查看<a class="reference external" href="https://githubdocs.cn/en/get-started/quickstart/contributing-to-projects">GitHub 关于参与项目</a>的文档。GitHub 提供了一个使用测试仓库的快速教程，这可能有助于你更熟悉派生仓库、克隆派生、创建功能分支、推送更改和发出拉取请求。</p>
+<p>以下是一些关于在 GitHub 上了解更多派生和拉取请求的有用资源</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://githubdocs.cn/en/get-started/quickstart/fork-a-repo">GitHub 派生仓库文档</a>。</p></li>
+<li><p><a class="reference external" href="https://githubdocs.cn/en/pull-requests/collaborating-with-pull-requests">GitHub 协作拉取请求文档</a>。</p></li>
+<li><p><a class="reference external" href="https://githubdocs.cn/en/pull-requests/collaborating-with-pull-requests/working-with-forks">GitHub 使用派生文档</a>。</p></li>
+</ul>
+</section>
+<section id="getting-started-with-git">
+<h3><a class="toc-backref" href="contributing.html#id5" role="doc-backlink">Git 入门</a><a class="headerlink" href="contributing.html#getting-started-with-git" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://githubdocs.cn/en/get-started/quickstart/set-up-git">GitHub 有关于</a>安装 Git、设置 SSH 密钥和配置 Git 的说明。所有这些步骤都需要在你的本地仓库和 GitHub 之间无缝协作之前完成。</p>
+</section>
+<section id="create-a-fork-of-pandas">
+<span id="contributing-forking"></span><h3><a class="toc-backref" href="contributing.html#id6" role="doc-backlink">创建 pandas 的派生（fork）</a><a class="headerlink" href="contributing.html#create-a-fork-of-pandas" title="Link to this heading">#</a></h3>
+<p>你需要一份自己的 pandas 副本（即派生，fork）来处理代码。访问 <a class="reference external" href="https://github.com/pandas-dev/pandas">pandas 项目页面</a>并点击 <code class="docutils literal notranslate"><span class="pre">Fork</span></code> 按钮。在选择 <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">Fork</span></code> 之前，请取消勾选“仅复制主分支”的选项。你需要将你的派生克隆到你的机器上</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-user-name/pandas.git<span class="w"> </span>pandas-yourname
+<span class="nb">cd</span><span class="w"> </span>pandas-yourname
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/pandas-dev/pandas.git
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+</pre></div>
+</div>
+<p>这将创建目录 <code class="docutils literal notranslate"><span class="pre">pandas-yourname</span></code> 并将你的仓库连接到上游（主项目）<em>pandas</em> 仓库。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>执行浅克隆（使用 <code class="docutils literal notranslate"><span class="pre">--depth==N</span></code>，其中 <code class="docutils literal notranslate"><span class="pre">N</span></code> 大于或等于 1）可能会破坏某些测试和功能，例如 <code class="docutils literal notranslate"><span class="pre">pd.show_versions()</span></code>，因为版本号无法再计算。</p>
+</div>
+</section>
+<section id="creating-a-feature-branch">
+<h3><a class="toc-backref" href="contributing.html#id7" role="doc-backlink">创建功能分支</a><a class="headerlink" href="contributing.html#creating-a-feature-branch" title="Link to this heading">#</a></h3>
+<p>你的本地 <code class="docutils literal notranslate"><span class="pre">main</span></code> 分支应始终反映 pandas 仓库的当前状态。首先确保它与主 pandas 仓库保持同步。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main<span class="w"> </span>--ff-only
+</pre></div>
+</div>
+<p>然后，创建一个功能分支来修改。例如</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>shiny-new-feature
+</pre></div>
+</div>
+<p>这将你的工作分支从 <code class="docutils literal notranslate"><span class="pre">main</span></code> 更改为 <code class="docutils literal notranslate"><span class="pre">shiny-new-feature</span></code> 分支。将此分支中的任何更改限制为特定的一个错误或功能，以便清楚该分支为 pandas 带来了什么。你可以有许多功能分支，并使用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> 命令在它们之间切换。</p>
+<p>如果你想在创建分支后，用 main 分支的更改来更新功能分支，请查看<a class="reference internal" href="contributing.html#contributing-update-pr"><span class="std std-ref">更新拉取请求</span></a>一节。</p>
+</section>
+<section id="making-code-changes">
+<span id="contributing-commit-code"></span><h3><a class="toc-backref" href="contributing.html#id8" role="doc-backlink">进行代码更改</a><a class="headerlink" href="contributing.html#making-code-changes" title="Link to this heading">#</a></h3>
+<p>在修改任何代码之前，请确保你遵循<a class="reference internal" href="contributing_environment.html#contributing-environment"><span class="std std-ref">贡献环境</span></a>指南来设置合适的开发环境。</p>
+<p>一旦你进行了代码更改，可以通过运行以下命令查看所有当前所做的更改。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
+</pre></div>
+</div>
+<p>对于你打算修改或添加的文件，运行。</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>path/to/file-to-be-added-or-changed.py
+</pre></div>
+</div>
+<p>再次运行 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> 应该显示</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>On<span class="w"> </span>branch<span class="w"> </span>shiny-new-feature
+
+<span class="w">     </span>modified:<span class="w">   </span>/relative/path/to/file-to-be-added-or-changed.py
+</pre></div>
+</div>
+<p>最后，使用解释性提交消息将你的更改提交到本地仓库</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"your commit message goes here"</span>
+</pre></div>
+</div>
+</section>
+<section id="pushing-your-changes">
+<span id="contributing-push-code"></span><h3><a class="toc-backref" href="contributing.html#id9" role="doc-backlink">推送你的更改</a><a class="headerlink" href="contributing.html#pushing-your-changes" title="Link to this heading">#</a></h3>
+<p>当你想让你的更改公开显示在你的 GitHub 页面上时，推送你的派生功能分支的提交</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>shiny-new-feature
+</pre></div>
+</div>
+<p>这里 <code class="docutils literal notranslate"><span class="pre">origin</span></code> 是你的 GitHub 远程仓库的默认名称。你可以查看远程仓库</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>如果你按照上面描述添加了上游仓库，你将看到类似</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>origin<span class="w">  </span><a href="https://pandas.ac.cn/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="">[email&nbsp;protected]</a>:yourname/pandas.git<span class="w"> </span><span class="o">(</span>fetch<span class="o">)</span>
+origin<span class="w">  </span><a href="https://pandas.ac.cn/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="">[email&nbsp;protected]</a>:yourname/pandas.git<span class="w"> </span><span class="o">(</span>push<span class="o">)</span>
+upstream<span class="w">        </span>git://github.com/pandas-dev/pandas.git<span class="w"> </span><span class="o">(</span>fetch<span class="o">)</span>
+upstream<span class="w">        </span>git://github.com/pandas-dev/pandas.git<span class="w"> </span><span class="o">(</span>push<span class="o">)</span>
+</pre></div>
+</div>
+<p>现在你的代码已在 GitHub 上，但它尚未成为 pandas 项目的一部分。为此，需要在 GitHub 上提交拉取请求。</p>
+</section>
+<section id="making-a-pull-request">
+<h3><a class="toc-backref" href="contributing.html#id10" role="doc-backlink">提出拉取请求</a><a class="headerlink" href="contributing.html#making-a-pull-request" title="Link to this heading">#</a></h3>
+<p>完成代码更改后，你的代码更改需要遵循<a class="reference internal" href="contributing_codebase.html#contributing-codebase"><span class="std std-ref">pandas 贡献指南</span></a>才能成功接受。</p>
+<p>如果一切看起来不错，你就可以提出拉取请求了。拉取请求是你本地仓库中的代码如何提供给 GitHub 社区进行审查并合并到项目中，以出现在下一个发布版本中的方式。要提交拉取请求</p>
+<ol class="arabic">
+<li><p>导航到你的 GitHub 仓库</p></li>
+<li><p>点击 <code class="docutils literal notranslate"><span class="pre">Compare</span> <span class="pre">&amp;</span> <span class="pre">pull</span> <span class="pre">request</span></code> 按钮</p></li>
+<li><p>然后你可以点击 <code class="docutils literal notranslate"><span class="pre">Commits</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Files</span> <span class="pre">Changed</span></code> 再次确认一切正常</p></li>
+<li><p>编写一个带有前缀的描述性标题。pandas 对标题前缀有约定。以下是一些常见的前缀以及何时使用它们的一般指南</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ENH: 增强，新功能</p></li>
+<li><p>BUG: 错误修复</p></li>
+<li><p>DOC: 文档添加/更新</p></li>
+<li><p>TST: 测试添加/更新</p></li>
+<li><p>BLD: 构建过程/脚本更新</p></li>
+<li><p>PERF: 性能改进</p></li>
+<li><p>TYP: 类型注解</p></li>
+<li><p>CLN: 代码清理</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">Preview</span> <span class="pre">Discussion</span></code> 选项卡中编写你的更改描述</p></li>
+<li><p>点击 <code class="docutils literal notranslate"><span class="pre">Send</span> <span class="pre">Pull</span> <span class="pre">Request</span></code>。</p></li>
+</ol>
+<p>此请求随后将发送给仓库维护者，他们将审查代码。</p>
+</section>
+<section id="updating-your-pull-request">
+<span id="contributing-update-pr"></span><h3><a class="toc-backref" href="contributing.html#id11" role="doc-backlink">更新你的拉取请求</a><a class="headerlink" href="contributing.html#updating-your-pull-request" title="Link to this heading">#</a></h3>
+<p>根据你在拉取请求中收到的评论，你可能需要对代码进行一些更改。你可以再次遵循<a class="reference internal" href="contributing.html#contributing-commit-code"><span class="std std-ref">代码提交步骤</span></a>来处理任何反馈并更新你的拉取请求。</p>
+<p>同样重要的是，pandas <code class="docutils literal notranslate"><span class="pre">main</span></code> 分支中的更新应反映在你的拉取请求中。要用 pandas <code class="docutils literal notranslate"><span class="pre">main</span></code> 分支中的更改更新你的功能分支，请运行</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>shiny-new-feature
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+git<span class="w"> </span>merge<span class="w"> </span>upstream/main
+</pre></div>
+</div>
+<p>如果没有冲突（或者可以自动修复），将打开一个带有默认提交消息的文件，你可以简单地保存并退出此文件。</p>
+<p>如果存在合并冲突，你需要解决这些冲突。例如，请参阅 <a class="reference external" href="https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/">https://help.github.com/articles/resolving-a-merge-conflict-using-the-command-line/</a> 以了解如何操作的解释。</p>
+<p>一旦冲突解决，运行</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-u</span></code> 来暂存任何你已更新的文件；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> 来完成合并。</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>如果你在想要用 <code class="docutils literal notranslate"><span class="pre">main</span></code> 更新分支时有未提交的更改，你将需要在更新之前 <code class="docutils literal notranslate"><span class="pre">stash</span></code> 它们（参见 <a class="reference external" href="https://git-scm.cn/book/en/v2/Git-Tools-Stashing-and-Cleaning">stash 文档</a>）。这将有效地存储你的更改，并在更新后重新应用它们。</p>
+</div>
+<p>在本地功能分支更新后，你现在可以通过推送到 GitHub 上的分支来更新你的拉取请求</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>shiny-new-feature
+</pre></div>
+</div>
+<p>任何 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> 都将自动使用你的分支更改更新你的拉取请求，并重新启动<a class="reference internal" href="contributing_codebase.html#contributing-ci"><span class="std std-ref">持续集成</span></a>检查。</p>
+</section>
+<section id="updating-the-development-environment">
+<span id="contributing-update-dev"></span><h3><a class="toc-backref" href="contributing.html#id12" role="doc-backlink">更新开发环境</a><a class="headerlink" href="contributing.html#updating-the-development-environment" title="Link to this heading">#</a></h3>
+<p>定期更新你的本地 <code class="docutils literal notranslate"><span class="pre">main</span></code> 分支与 pandas <code class="docutils literal notranslate"><span class="pre">main</span></code> 分支的更新，并更新你的开发环境以反映开发过程中使用的各种包的任何更改，这一点很重要。</p>
+<p>如果使用 <a class="reference internal" href="contributing_environment.html#contributing-mamba"><span class="std std-ref">mamba</span></a>，运行</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+git<span class="w"> </span>merge<span class="w"> </span>upstream/main
+mamba<span class="w"> </span>activate<span class="w"> </span>pandas-dev
+mamba<span class="w"> </span>env<span class="w"> </span>update<span class="w"> </span>-f<span class="w"> </span>environment.yml<span class="w"> </span>--prune
+</pre></div>
+</div>
+<p>如果使用 <a class="reference internal" href="contributing_environment.html#contributing-pip"><span class="std std-ref">pip</span></a>，执行</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+git<span class="w"> </span>merge<span class="w"> </span>upstream/main
+<span class="c1"># activate the virtual environment based on your platform</span>
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tips-for-a-successful-pull-request">
+<h2><a class="toc-backref" href="contributing.html#id13" role="doc-backlink">成功拉取请求的技巧</a><a class="headerlink" href="contributing.html#tips-for-a-successful-pull-request" title="Link to this heading">#</a></h2>
+<p>如果你已经到了<a class="reference internal" href="contributing.html#making-a-pull-request">提出拉取请求</a>阶段，其中一位核心贡献者可能会进行查看。但是请注意，少数人负责审查所有贡献，这通常会导致瓶颈。</p>
+<p>为了提高你的拉取请求被审查的机会，你应该</p>
+<ul class="simple">
+<li><p>对于非琐碎的更改，<b>引用一个开放问题</b>以阐明拉取请求的目的</p></li>
+<li><p><b>确保你有适当的测试</b>。这些应该是任何拉取请求的第一部分</p></li>
+<li><p><b>让你的拉取请求尽可能简单</b>。较大的拉取请求需要更长的审查时间</p></li>
+<li><p><b>确保 CI 处于绿色状态</b>。否则，审查者甚至可能不会查看</p></li>
+<li><p><b>持续</b><a class="reference internal" href="contributing.html#updating-your-pull-request">更新你的拉取请求</a>，无论是根据要求还是每隔几天</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="index.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">开发</p> </div> </a> <a class="right-next" href="contributing_environment.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">创建开发环境</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 在本页</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#bug-reports-and-enhancement-requests">错误报告和增强请求</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#finding-an-issue-to-contribute-to">找到要贡献的问题</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#submitting-a-pull-request">提交拉取请求</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#version-control-git-and-github">版本控制、Git 和 GitHub</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#getting-started-with-git">Git 入门</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#create-a-fork-of-pandas">创建 pandas 的派生（fork）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#creating-a-feature-branch">创建功能分支</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#making-code-changes">进行代码更改</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#pushing-your-changes">推送你的更改</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#making-a-pull-request">提出拉取请求</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#updating-your-pull-request">更新你的拉取请求</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#updating-the-development-environment">更新开发环境</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing.html#tips-for-a-successful-pull-request">成功拉取请求的技巧</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/development/contributing.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> 由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

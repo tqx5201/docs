@@ -1,0 +1,1737 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>处理缺失数据 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/missing_data';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Duplicate Labels" href="duplicates.html" />
+    <link rel="prev" title="Working with text data" href="text.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="missing_data.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10min.html">pandas 十分钟入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本核心功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具（文本、CSV、HDF5 等）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引和数据选择</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">多重索引 / 高级索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、拼接和比较</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">数据重塑和透视表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">处理文本数据</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="missing_data.html#">处理缺失数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">重复标签</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可空整数数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可空布尔数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">图表可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组：拆分-应用-组合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enhancingperf.html">性能优化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">扩展到大型数据集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">操作指南</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">用户指南</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">处理...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="working-with-missing-data">
+<span id="missing-data"></span><h1>处理缺失数据<a class="headerlink" href="missing_data.html#working-with-missing-data" title="Link to this heading">#</a></h1>
+<section id="values-considered-missing">
+<h2>被视为“缺失”的值<a class="headerlink" href="missing_data.html#values-considered-missing" title="Link to this heading">#</a></h2>
+<p>pandas 根据数据类型使用不同的哨兵值来表示缺失值（也称为 NA）。</p>
+<p><code class="docutils literal notranslate"><span class="pre">numpy.nan</span></code> 用于 NumPy 数据类型。使用 NumPy 数据类型的缺点是原始数据类型将被强制转换为 <code class="docutils literal notranslate"><span class="pre">np.float64</span></code> 或 <code class="docutils literal notranslate"><span class="pre">object</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gh">Out[1]: </span>
+<span class="go">0    1.0</span>
+<span class="go">1    2.0</span>
+<span class="go">2    NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [2]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gh">Out[2]: </span>
+<span class="go">0     True</span>
+<span class="go">1    False</span>
+<span class="go">2      NaN</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>对于 NumPy 的 <code class="docutils literal notranslate"><span class="pre">np.datetime64</span></code>、<code class="docutils literal notranslate"><span class="pre">np.timedelta64</span></code> 和 <a class="reference internal" href="../reference/api/pandas.PeriodDtype.html#pandas.PeriodDtype" title="pandas.PeriodDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">PeriodDtype</span></code></a>，使用 <a class="reference internal" href="../reference/api/pandas.NaT.html#pandas.NaT" title="pandas.NaT"><code class="xref py py-class docutils literal notranslate"><span class="pre">NaT</span></code></a>。对于类型应用，请使用 <code class="xref py py-class docutils literal notranslate"><span class="pre">api.types.NaTType</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">"timedelta64[ns]"</span><span class="p">))</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gh">Out[3]: </span>
+<span class="go">0   0 days 00:00:00.000000001</span>
+<span class="go">1   0 days 00:00:00.000000002</span>
+<span class="go">2                         NaT</span>
+<span class="go">dtype: timedelta64[ns]</span>
+
+<span class="gp">In [4]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">"datetime64[ns]"</span><span class="p">))</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gh">Out[4]: </span>
+<span class="go">0   1970-01-01 00:00:00.000000001</span>
+<span class="go">1   1970-01-01 00:00:00.000000002</span>
+<span class="go">2                             NaT</span>
+<span class="go">dtype: datetime64[ns]</span>
+
+<span class="gp">In [5]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"2020"</span><span class="p">,</span> <span class="s2">"2020"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">PeriodDtype</span><span class="p">(</span><span class="s2">"D"</span><span class="p">))</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gh">Out[5]: </span>
+<span class="go">0    2020-01-01</span>
+<span class="go">1    2020-01-01</span>
+<span class="go">2           NaT</span>
+<span class="go">dtype: period[D]</span>
+</pre></div>
+</div>
+<p>对于 <a class="reference internal" href="../reference/api/pandas.StringDtype.html#pandas.StringDtype" title="pandas.StringDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">StringDtype</span></code></a>、<a class="reference internal" href="../reference/api/pandas.Int64Dtype.html#pandas.Int64Dtype" title="pandas.Int64Dtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">Int64Dtype</span></code></a>（以及其他位宽）、<code class="xref py py-class docutils literal notranslate"><span class="pre">Float64Dtype</span></code>（以及其他位宽）、<code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanDtype</span></code> 和 <a class="reference internal" href="../reference/api/pandas.ArrowDtype.html#pandas.ArrowDtype" title="pandas.ArrowDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrowDtype</span></code></a>，使用 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a>。这些类型将保持数据的原始数据类型。对于类型应用，请使用 <code class="xref py py-class docutils literal notranslate"><span class="pre">api.types.NAType</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"Int64"</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gh">Out[6]: </span>
+<span class="go">0       1</span>
+<span class="go">1       2</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">dtype: Int64</span>
+
+<span class="gp">In [7]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"boolean[pyarrow]"</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gh">Out[7]: </span>
+<span class="go">0     True</span>
+<span class="go">1    False</span>
+<span class="go">2     &lt;NA&gt;</span>
+<span class="go">dtype: bool[pyarrow]</span>
+</pre></div>
+</div>
+<p>要检测这些缺失值，请使用 <a class="reference internal" href="../reference/api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-func docutils literal notranslate"><span class="pre">isna()</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.notna.html#pandas.notna" title="pandas.notna"><code class="xref py py-func docutils literal notranslate"><span class="pre">notna()</span></code></a> 方法。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2020-01-01"</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span><span class="p">])</span>
+
+<span class="gp">In [9]: </span><span class="n">ser</span>
+<span class="gh">Out[9]: </span>
+<span class="go">0   2020-01-01</span>
+<span class="go">1          NaT</span>
+<span class="go">dtype: datetime64[ns]</span>
+
+<span class="gp">In [10]: </span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">ser</span><span class="p">)</span>
+<span class="gh">Out[10]: </span>
+<span class="go">0    False</span>
+<span class="go">1     True</span>
+<span class="go">dtype: bool</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><a class="reference internal" href="../reference/api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-func docutils literal notranslate"><span class="pre">isna()</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.notna.html#pandas.notna" title="pandas.notna"><code class="xref py py-func docutils literal notranslate"><span class="pre">notna()</span></code></a> 也会将 <code class="docutils literal notranslate"><span class="pre">None</span></code> 视为缺失值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+
+<span class="gp">In [12]: </span><span class="n">ser</span>
+<span class="gh">Out[12]: </span>
+<span class="go">0       1</span>
+<span class="go">1    None</span>
+<span class="go">dtype: object</span>
+
+<span class="gp">In [13]: </span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">ser</span><span class="p">)</span>
+<span class="gh">Out[13]: </span>
+<span class="go">0    False</span>
+<span class="go">1     True</span>
+<span class="go">dtype: bool</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>、<a class="reference internal" href="../reference/api/pandas.NaT.html#pandas.NaT" title="pandas.NaT"><code class="xref py py-class docutils literal notranslate"><span class="pre">NaT</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 之间的相等比较的行为与 <code class="docutils literal notranslate"><span class="pre">None</span></code> 不同。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="kc">None</span> <span class="o">==</span> <span class="kc">None</span>  <span class="c1"># noqa: E711</span>
+<span class="gh">Out[14]: </span><span class="go">True</span>
+
+<span class="gp">In [15]: </span><span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="gh">Out[15]: </span><span class="go">False</span>
+
+<span class="gp">In [16]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
+<span class="gh">Out[16]: </span><span class="go">False</span>
+
+<span class="gp">In [17]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[17]: </span><span class="go">&lt;NA&gt;</span>
+</pre></div>
+</div>
+<p>因此，<a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 与这些缺失值之一进行相等比较时，不会提供与 <a class="reference internal" href="../reference/api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-func docutils literal notranslate"><span class="pre">isna()</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.notna.html#pandas.notna" title="pandas.notna"><code class="xref py py-func docutils literal notranslate"><span class="pre">notna()</span></code></a> 相同的信息。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"boolean[pyarrow]"</span><span class="p">)</span>
+
+<span class="gp">In [19]: </span><span class="n">ser</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[19]: </span>
+<span class="go">0    &lt;NA&gt;</span>
+<span class="go">1    &lt;NA&gt;</span>
+<span class="go">dtype: bool[pyarrow]</span>
+
+<span class="gp">In [20]: </span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">ser</span><span class="p">)</span>
+<span class="gh">Out[20]: </span>
+<span class="go">0    False</span>
+<span class="go">1     True</span>
+<span class="go">dtype: bool</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="na-semantics">
+<span id="missing-data-na"></span><h2><a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 语义<a class="headerlink" href="missing_data.html#na-semantics" title="Link to this heading">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>实验性：<code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code> 的行为仍可能在不发出警告的情况下改变。</p>
+</div>
+<p>从 pandas 1.0 开始，提供了一个实验性的 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 值（单例）来表示标量缺失值。<a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 的目标是提供一个可以在不同数据类型中一致使用的“缺失”指示符（而不是根据数据类型使用 <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>、<code class="docutils literal notranslate"><span class="pre">None</span></code> 或 <code class="docutils literal notranslate"><span class="pre">pd.NaT</span></code>）。</p>
+<p>例如，当 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 包含可空整数数据类型的缺失值时，它将使用 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"Int64"</span><span class="p">)</span>
+
+<span class="gp">In [22]: </span><span class="n">s</span>
+<span class="gh">Out[22]: </span>
+<span class="go">0       1</span>
+<span class="go">1       2</span>
+<span class="go">2    &lt;NA&gt;</span>
+<span class="go">dtype: Int64</span>
+
+<span class="gp">In [23]: </span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="gh">Out[23]: </span><span class="go">&lt;NA&gt;</span>
+
+<span class="gp">In [24]: </span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[24]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<p>目前，pandas 默认情况下尚未在 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 中使用那些使用 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 的数据类型，因此您需要显式指定 dtype。将数据转换为这些 dtype 的简单方法在<a class="reference internal" href="missing_data.html#missing-data-na-conversion"><span class="std std-ref">转换部分</span></a>中解释。</p>
+<section id="propagation-in-arithmetic-and-comparison-operations">
+<h3>在算术和比较操作中的传播<a class="headerlink" href="missing_data.html#propagation-in-arithmetic-and-comparison-operations" title="Link to this heading">#</a></h3>
+<p>通常，缺失值会在涉及 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 的操作中<em>传播</em>。当其中一个操作数未知时，操作的结果也未知。</p>
+<p>例如，<a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 在算术操作中传播，类似于 <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gh">Out[25]: </span><span class="go">&lt;NA&gt;</span>
+
+<span class="gp">In [26]: </span><span class="s2">"a"</span> <span class="o">*</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[26]: </span><span class="go">&lt;NA&gt;</span>
+</pre></div>
+</div>
+<p>在少数特殊情况下，即使其中一个操作数为 <code class="docutils literal notranslate"><span class="pre">NA</span></code>，结果也是已知的。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span> <span class="o">**</span> <span class="mi">0</span>
+<span class="gh">Out[27]: </span><span class="go">1</span>
+
+<span class="gp">In [28]: </span><span class="mi">1</span> <span class="o">**</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[28]: </span><span class="go">1</span>
+</pre></div>
+</div>
+<p>在相等和比较操作中，<a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 也会传播。这与 <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> 的行为不同，因为与 <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> 的比较总是返回 <code class="docutils literal notranslate"><span class="pre">False</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="gh">Out[29]: </span><span class="go">&lt;NA&gt;</span>
+
+<span class="gp">In [30]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[30]: </span><span class="go">&lt;NA&gt;</span>
+
+<span class="gp">In [31]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span> <span class="o">&lt;</span> <span class="mf">2.5</span>
+<span class="gh">Out[31]: </span><span class="go">&lt;NA&gt;</span>
+</pre></div>
+</div>
+<p>要检查值是否等于 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a>，请使用 <a class="reference internal" href="../reference/api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-func docutils literal notranslate"><span class="pre">isna()</span></code></a>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">)</span>
+<span class="gh">Out[32]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>此基本传播规则的一个例外是<em>聚合操作</em>（如均值或最小值），其中 pandas 默认跳过缺失值。更多信息请参见<a class="reference internal" href="missing_data.html#missing-data-calculations"><span class="std std-ref">计算部分</span></a>。</p>
+</div>
+</section>
+<section id="logical-operations">
+<h3>逻辑操作<a class="headerlink" href="missing_data.html#logical-operations" title="Link to this heading">#</a></h3>
+<p>对于逻辑操作，<a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 遵循<a class="reference external" href="https://en.wikipedia.org/wiki/Three-valued_logic">三值逻辑</a>（或<em>克莱尼逻辑</em>，类似于 R、SQL 和 Julia）的规则。这种逻辑意味着只有在逻辑上需要时才传播缺失值。</p>
+<p>例如，对于逻辑“或”操作（<code class="docutils literal notranslate"><span class="pre">|</span></code>），如果其中一个操作数为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，我们已经知道结果将是 <code class="docutils literal notranslate"><span class="pre">True</span></code>，无论另一个值是什么（所以无论缺失值是 <code class="docutils literal notranslate"><span class="pre">True</span></code> 还是 <code class="docutils literal notranslate"><span class="pre">False</span></code>）。在这种情况下，<a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 不会传播。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="kc">True</span> <span class="o">|</span> <span class="kc">False</span>
+<span class="gh">Out[33]: </span><span class="go">True</span>
+
+<span class="gp">In [34]: </span><span class="kc">True</span> <span class="o">|</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[34]: </span><span class="go">True</span>
+
+<span class="gp">In [35]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span> <span class="o">|</span> <span class="kc">True</span>
+<span class="gh">Out[35]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<p>另一方面，如果其中一个操作数为 <code class="docutils literal notranslate"><span class="pre">False</span></code>，则结果取决于另一个操作数的值。因此，在这种情况下，<a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 会传播。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="kc">False</span> <span class="o">|</span> <span class="kc">True</span>
+<span class="gh">Out[36]: </span><span class="go">True</span>
+
+<span class="gp">In [37]: </span><span class="kc">False</span> <span class="o">|</span> <span class="kc">False</span>
+<span class="gh">Out[37]: </span><span class="go">False</span>
+
+<span class="gp">In [38]: </span><span class="kc">False</span> <span class="o">|</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[38]: </span><span class="go">&lt;NA&gt;</span>
+</pre></div>
+</div>
+<p>逻辑“与”操作（<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>）的行为可以使用类似逻辑推导（如果其中一个操作数已经为 <code class="docutils literal notranslate"><span class="pre">False</span></code>，则 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 不会传播）。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="kc">False</span> <span class="o">&amp;</span> <span class="kc">True</span>
+<span class="gh">Out[39]: </span><span class="go">False</span>
+
+<span class="gp">In [40]: </span><span class="kc">False</span> <span class="o">&amp;</span> <span class="kc">False</span>
+<span class="gh">Out[40]: </span><span class="go">False</span>
+
+<span class="gp">In [41]: </span><span class="kc">False</span> <span class="o">&amp;</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[41]: </span><span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="kc">True</span> <span class="o">&amp;</span> <span class="kc">True</span>
+<span class="gh">Out[42]: </span><span class="go">True</span>
+
+<span class="gp">In [43]: </span><span class="kc">True</span> <span class="o">&amp;</span> <span class="kc">False</span>
+<span class="gh">Out[43]: </span><span class="go">False</span>
+
+<span class="gp">In [44]: </span><span class="kc">True</span> <span class="o">&amp;</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span>
+<span class="gh">Out[44]: </span><span class="go">&lt;NA&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="na-in-a-boolean-context">
+<h3>布尔上下文中的 <code class="docutils literal notranslate"><span class="pre">NA</span></code><a class="headerlink" href="missing_data.html#na-in-a-boolean-context" title="Link to this heading">#</a></h3>
+<p>由于 NA 的实际值未知，将 NA 转换为布尔值是模糊的。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="nb">bool</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">45</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">bool</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">)</span>
+
+<span class="nn">File ~/work/pandas/pandas/pandas/_libs/missing.pyx:392,</span> in <span class="ni">pandas._libs.missing.NAType.__bool__</span><span class="nt">()</span>
+
+<span class="ne">TypeError</span>: boolean value of NA is ambiguous
+</pre></div>
+</div>
+<p>这也意味着 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 不能在被评估为布尔值的上下文中使用，例如 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">condition:</span> <span class="pre">...</span></code>，其中 <code class="docutils literal notranslate"><span class="pre">condition</span></code> 可能是 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a>。在这种情况下，可以使用 <a class="reference internal" href="../reference/api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-func docutils literal notranslate"><span class="pre">isna()</span></code></a> 来检查 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a>，或者可以避免 <code class="docutils literal notranslate"><span class="pre">condition</span></code> 为 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 的情况，例如通过预先填充缺失值。</p>
+<p>在使用 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 对象在 <code class="docutils literal notranslate"><span class="pre">if</span></code> 语句中时也会出现类似情况，请参见<a class="reference internal" href="gotchas.html#gotchas-truth"><span class="std std-ref">在 pandas 中使用 if/truth 语句</span></a>。</p>
+</section>
+<section id="numpy-ufuncs">
+<h3>NumPy ufuncs<a class="headerlink" href="missing_data.html#numpy-ufuncs" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pandas.NA</span></code></a> 实现了 NumPy 的 <code class="docutils literal notranslate"><span class="pre">__array_ufunc__</span></code> 协议。大多数 ufunc 都可以与 <code class="docutils literal notranslate"><span class="pre">NA</span></code> 一起工作，并且通常返回 <code class="docutils literal notranslate"><span class="pre">NA</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">)</span>
+<span class="gh">Out[46]: </span><span class="go">&lt;NA&gt;</span>
+
+<span class="gp">In [47]: </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[47]: </span><span class="go">&lt;NA&gt;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>目前，涉及 ndarray 和 <code class="docutils literal notranslate"><span class="pre">NA</span></code> 的 ufunc 将返回一个填充有 NA 值的对象数据类型。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [49]: </span><span class="n">np</span><span class="o">.</span><span class="n">greater</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">)</span>
+<span class="gh">Out[49]: </span><span class="go">array([&lt;NA&gt;, &lt;NA&gt;, &lt;NA&gt;], dtype=object)</span>
+</pre></div>
+</div>
+<p>此处的返回类型将来可能会更改为返回不同的数组类型。</p>
+</div>
+<p>有关 ufunc 的更多信息，请参见<a class="reference internal" href="dsintro.html#dsintro-numpy-interop"><span class="std std-ref">DataFrame 与 NumPy 函数的互操作性</span></a>。</p>
+<section id="conversion">
+<span id="missing-data-na-conversion"></span><h4>转换<a class="headerlink" href="missing_data.html#conversion" title="Link to this heading">#</a></h4>
+<p>如果您有一个使用 <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> 的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>，可以使用 <a class="reference internal" href="../reference/api/pandas.Series.convert_dtypes.html#pandas.Series.convert_dtypes" title="pandas.Series.convert_dtypes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.convert_dtypes()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.convert_dtypes.html#pandas.DataFrame.convert_dtypes" title="pandas.DataFrame.convert_dtypes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.convert_dtypes()</span></code></a> 将数据转换为使用 <a class="reference internal" href="../reference/api/pandas.NA.html#pandas.NA" title="pandas.NA"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code></a> 的数据类型，例如 <a class="reference internal" href="../reference/api/pandas.Int64Dtype.html#pandas.Int64Dtype" title="pandas.Int64Dtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">Int64Dtype</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.ArrowDtype.html#pandas.ArrowDtype" title="pandas.ArrowDtype"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrowDtype</span></code></a>。这在通过 IO 方法读取数据集并推断数据类型后特别有用。</p>
+<p>在此示例中，虽然所有列的 dtype 都已更改，但我们仅显示前 10 列的结果。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+
+<span class="gp">In [51]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="s2">"a,b</span><span class="se">\n</span><span class="s2">,True</span><span class="se">\n</span><span class="s2">2,"</span><span class="p">)</span>
+
+<span class="gp">In [52]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="gp">In [53]: </span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[53]: </span>
+<span class="go">a    float64</span>
+<span class="go">b     object</span>
+<span class="go">dtype: object</span>
+
+<span class="gp">In [54]: </span><span class="n">df_conv</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">convert_dtypes</span><span class="p">()</span>
+
+<span class="gp">In [55]: </span><span class="n">df_conv</span>
+<span class="gh">Out[55]: </span>
+<span class="go">      a     b</span>
+<span class="go">0  &lt;NA&gt;  True</span>
+<span class="go">1     2  &lt;NA&gt;</span>
+
+<span class="gp">In [56]: </span><span class="n">df_conv</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[56]: </span>
+<span class="go">a      Int64</span>
+<span class="go">b    boolean</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="inserting-missing-data">
+<span id="missing-inserting"></span><h2>插入缺失数据<a class="headerlink" href="missing_data.html#inserting-missing-data" title="Link to this heading">#</a></h2>
+<p>您可以通过简单地赋值给 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 来插入缺失值。使用的缺失值哨兵将根据 dtype 进行选择。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">])</span>
+
+<span class="gp">In [58]: </span><span class="n">ser</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="gp">In [59]: </span><span class="n">ser</span>
+<span class="gh">Out[59]: </span>
+<span class="go">0    NaN</span>
+<span class="go">1    2.0</span>
+<span class="go">2    3.0</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [60]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2021"</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2021"</span><span class="p">)])</span>
+
+<span class="gp">In [61]: </span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [62]: </span><span class="n">ser</span>
+<span class="gh">Out[62]: </span>
+<span class="go">0          NaT</span>
+<span class="go">1   2021-01-01</span>
+<span class="go">dtype: datetime64[ns]</span>
+
+<span class="gp">In [63]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"boolean[pyarrow]"</span><span class="p">)</span>
+
+<span class="gp">In [64]: </span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="gp">In [65]: </span><span class="n">ser</span>
+<span class="gh">Out[65]: </span>
+<span class="go">0     &lt;NA&gt;</span>
+<span class="go">1    False</span>
+<span class="go">dtype: bool[pyarrow]</span>
+</pre></div>
+</div>
+<p>对于 <code class="docutils literal notranslate"><span class="pre">object</span></code> 类型，pandas 将使用给定值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+
+<span class="gp">In [67]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="gp">In [68]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [69]: </span><span class="n">s</span>
+<span class="gh">Out[69]: </span>
+<span class="go">0    None</span>
+<span class="go">1     NaN</span>
+<span class="go">2       c</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+</section>
+<section id="calculations-with-missing-data">
+<span id="missing-data-calculations"></span><h2>缺失数据的计算<a class="headerlink" href="missing_data.html#calculations-with-missing-data" title="Link to this heading">#</a></h2>
+<p>缺失值在 pandas 对象之间的算术操作中传播。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">ser1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [71]: </span><span class="n">ser2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="gp">In [72]: </span><span class="n">ser1</span>
+<span class="gh">Out[72]: </span>
+<span class="go">0    NaN</span>
+<span class="go">1    NaN</span>
+<span class="go">2    2.0</span>
+<span class="go">3    3.0</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [73]: </span><span class="n">ser2</span>
+<span class="gh">Out[73]: </span>
+<span class="go">0    NaN</span>
+<span class="go">1    1.0</span>
+<span class="go">2    NaN</span>
+<span class="go">3    4.0</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [74]: </span><span class="n">ser1</span> <span class="o">+</span> <span class="n">ser2</span>
+<span class="gh">Out[74]: </span>
+<span class="go">0    NaN</span>
+<span class="go">1    NaN</span>
+<span class="go">2    NaN</span>
+<span class="go">3    7.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>在<a class="reference internal" href="basics.html#basics-stats"><span class="std std-ref">数据结构概述</span></a>中讨论的描述性统计和计算方法（以及<a class="reference internal" href="../reference/series.html#api-series-stats"><span class="std std-ref">此处</span></a>和<a class="reference internal" href="../reference/frame.html#api-dataframe-stats"><span class="std std-ref">此处</span></a>列出的）都考虑了缺失数据。</p>
+<p>求和数据时，NA 值或空数据将被视为零。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[75]: </span><span class="go">0.0</span>
+
+<span class="gp">In [76]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"float64"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[76]: </span><span class="go">0.0</span>
+</pre></div>
+</div>
+<p>求积时，NA 值或空数据将被视为 1。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
+<span class="gh">Out[77]: </span><span class="go">1.0</span>
+
+<span class="gp">In [78]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"float64"</span><span class="p">)</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
+<span class="gh">Out[78]: </span><span class="go">1.0</span>
+</pre></div>
+</div>
+<p>累积方法（如 <a class="reference internal" href="../reference/api/pandas.DataFrame.cumsum.html#pandas.DataFrame.cumsum" title="pandas.DataFrame.cumsum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumsum()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.cumprod.html#pandas.DataFrame.cumprod" title="pandas.DataFrame.cumprod"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumprod()</span></code></a>）默认忽略 NA 值，但将其保留在结果中。此行为可以通过 <code class="docutils literal notranslate"><span class="pre">skipna</span></code> 更改。</p>
+<ul class="simple">
+<li><p>累积方法（如 <a class="reference internal" href="../reference/api/pandas.DataFrame.cumsum.html#pandas.DataFrame.cumsum" title="pandas.DataFrame.cumsum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumsum()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.cumprod.html#pandas.DataFrame.cumprod" title="pandas.DataFrame.cumprod"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumprod()</span></code></a>）默认忽略 NA 值，但将其保留在结果数组中。要覆盖此行为并包含 NA 值，请使用 <code class="docutils literal notranslate"><span class="pre">skipna=False</span></code>。</p></li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [79]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+
+<span class="gp">In [80]: </span><span class="n">ser</span>
+<span class="gh">Out[80]: </span>
+<span class="go">0    1.0</span>
+<span class="go">1    NaN</span>
+<span class="go">2    3.0</span>
+<span class="go">3    NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [81]: </span><span class="n">ser</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="gh">Out[81]: </span>
+<span class="go">0    1.0</span>
+<span class="go">1    NaN</span>
+<span class="go">2    4.0</span>
+<span class="go">3    NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [82]: </span><span class="n">ser</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gh">Out[82]: </span>
+<span class="go">0    1.0</span>
+<span class="go">1    NaN</span>
+<span class="go">2    NaN</span>
+<span class="go">3    NaN</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+</section>
+<section id="dropping-missing-data">
+<span id="missing-data-dropna"></span><h2>删除缺失数据<a class="headerlink" href="missing_data.html#dropping-missing-data" title="Link to this heading">#</a></h2>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.dropna.html#pandas.DataFrame.dropna" title="pandas.DataFrame.dropna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dropna()</span></code></a> 删除含有缺失值的行或列。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [83]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+
+<span class="gp">In [84]: </span><span class="n">df</span>
+<span class="gh">Out[84]: </span>
+<span class="go">     0  1    2</span>
+<span class="go">0  NaN  1  2.0</span>
+<span class="go">1  1.0  2  NaN</span>
+<span class="go">2  1.0  2  3.0</span>
+
+<span class="gp">In [85]: </span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="gh">Out[85]: </span>
+<span class="go">     0  1    2</span>
+<span class="go">2  1.0  2  3.0</span>
+
+<span class="gp">In [86]: </span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[86]: </span>
+<span class="go">   1</span>
+<span class="go">0  1</span>
+<span class="go">1  2</span>
+<span class="go">2  2</span>
+
+<span class="gp">In [87]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"int64[pyarrow]"</span><span class="p">)</span>
+
+<span class="gp">In [88]: </span><span class="n">ser</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="gh">Out[88]: </span>
+<span class="go">0    1</span>
+<span class="go">dtype: int64[pyarrow]</span>
+</pre></div>
+</div>
+</section>
+<section id="filling-missing-data">
+<h2>填充缺失数据<a class="headerlink" href="missing_data.html#filling-missing-data" title="Link to this heading">#</a></h2>
+<section id="filling-by-value">
+<span id="missing-data-fillna"></span><h3>按值填充<a class="headerlink" href="missing_data.html#filling-by-value" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.fillna.html#pandas.DataFrame.fillna" title="pandas.DataFrame.fillna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fillna()</span></code></a> 用非 NA 数据替换 NA 值。</p>
+<p>用标量值替换 NA</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [89]: </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"np"</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">"arrow"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"float64[pyarrow]"</span><span class="p">)}</span>
+
+<span class="gp">In [90]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="gp">In [91]: </span><span class="n">df</span>
+<span class="gh">Out[91]: </span>
+<span class="go">    np  arrow</span>
+<span class="go">0  1.0    1.0</span>
+<span class="go">1  NaN   &lt;NA&gt;</span>
+<span class="go">2  NaN   &lt;NA&gt;</span>
+<span class="go">3  2.0    2.0</span>
+
+<span class="gp">In [92]: </span><span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gh">Out[92]: </span>
+<span class="go">    np  arrow</span>
+<span class="go">0  1.0    1.0</span>
+<span class="go">1  0.0    0.0</span>
+<span class="go">2  0.0    0.0</span>
+<span class="go">3  2.0    2.0</span>
+</pre></div>
+</div>
+<p>向前或向后填充空值</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [93]: </span><span class="n">df</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+<span class="gh">Out[93]: </span>
+<span class="go">    np  arrow</span>
+<span class="go">0  1.0    1.0</span>
+<span class="go">1  1.0    1.0</span>
+<span class="go">2  1.0    1.0</span>
+<span class="go">3  2.0    2.0</span>
+
+<span class="gp">In [94]: </span><span class="n">df</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
+<span class="gh">Out[94]: </span>
+<span class="go">    np  arrow</span>
+<span class="go">0  1.0    1.0</span>
+<span class="go">1  2.0    2.0</span>
+<span class="go">2  2.0    2.0</span>
+<span class="go">3  2.0    2.0</span>
+</pre></div>
+</div>
+<p id="missing-data-fillna-limit">限制填充的 NA 值数量</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [95]: </span><span class="n">df</span><span class="o">.</span><span class="n">ffill</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[95]: </span>
+<span class="go">    np  arrow</span>
+<span class="go">0  1.0    1.0</span>
+<span class="go">1  1.0    1.0</span>
+<span class="go">2  NaN   &lt;NA&gt;</span>
+<span class="go">3  2.0    2.0</span>
+</pre></div>
+</div>
+<p>NA 值可以用 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 中对应的值替换，其中原始对象和填充对象之间的索引和列对齐。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [96]: </span><span class="n">dff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">"ABC"</span><span class="p">))</span>
+
+<span class="gp">In [97]: </span><span class="n">dff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [98]: </span><span class="n">dff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [99]: </span><span class="n">dff</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [100]: </span><span class="n">dff</span>
+<span class="gh">Out[100]: </span>
+<span class="go">      A     B     C</span>
+<span class="go">0   0.0   1.0   2.0</span>
+<span class="go">1   3.0   4.0   5.0</span>
+<span class="go">2   6.0   7.0   8.0</span>
+<span class="go">3   NaN  10.0  11.0</span>
+<span class="go">4   NaN   NaN  14.0</span>
+<span class="go">5  15.0   NaN   NaN</span>
+<span class="go">6  18.0  19.0   NaN</span>
+<span class="go">7  21.0  22.0   NaN</span>
+<span class="go">8  24.0  25.0  26.0</span>
+<span class="go">9  27.0  28.0  29.0</span>
+
+<span class="gp">In [101]: </span><span class="n">dff</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">dff</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="gh">Out[101]: </span>
+<span class="go">       A     B          C</span>
+<span class="go">0   0.00   1.0   2.000000</span>
+<span class="go">1   3.00   4.0   5.000000</span>
+<span class="go">2   6.00   7.0   8.000000</span>
+<span class="go">3  14.25  10.0  11.000000</span>
+<span class="go">4  14.25  14.5  14.000000</span>
+<span class="go">5  15.00  14.5  13.571429</span>
+<span class="go">6  18.00  19.0  13.571429</span>
+<span class="go">7  21.00  22.0  13.571429</span>
+<span class="go">8  24.00  25.0  26.000000</span>
+<span class="go">9  27.00  28.0  29.000000</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.where.html#pandas.DataFrame.where" title="pandas.DataFrame.where"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.where()</span></code></a> 也可以用于填充 NA 值。结果与上述相同。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [102]: </span><span class="n">dff</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">notna</span><span class="p">(</span><span class="n">dff</span><span class="p">),</span> <span class="n">dff</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="s2">"columns"</span><span class="p">)</span>
+<span class="gh">Out[102]: </span>
+<span class="go">       A     B          C</span>
+<span class="go">0   0.00   1.0   2.000000</span>
+<span class="go">1   3.00   4.0   5.000000</span>
+<span class="go">2   6.00   7.0   8.000000</span>
+<span class="go">3  14.25  10.0  11.000000</span>
+<span class="go">4  14.25  14.5  14.000000</span>
+<span class="go">5  15.00  14.5  13.571429</span>
+<span class="go">6  18.00  19.0  13.571429</span>
+<span class="go">7  21.00  22.0  13.571429</span>
+<span class="go">8  24.00  25.0  26.000000</span>
+<span class="go">9  27.00  28.0  29.000000</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="interpolation">
+<span id="missing-data-interpolate"></span><h3>插值<a class="headerlink" href="missing_data.html#interpolation" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.interpolate.html#pandas.DataFrame.interpolate" title="pandas.DataFrame.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.interpolate()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.Series.interpolate.html#pandas.Series.interpolate" title="pandas.Series.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.interpolate()</span></code></a> 使用各种插值方法填充 NA 值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [103]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   .....: </span>    <span class="p">{</span>
+<span class="gp">   .....: </span>        <span class="s2">"A"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">,</span> <span class="mf">5.6</span><span class="p">,</span> <span class="mf">6.8</span><span class="p">],</span>
+<span class="gp">   .....: </span>        <span class="s2">"B"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">12.2</span><span class="p">,</span> <span class="mf">14.4</span><span class="p">],</span>
+<span class="gp">   .....: </span>    <span class="p">}</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [104]: </span><span class="n">df</span>
+<span class="gh">Out[104]: </span>
+<span class="go">     A      B</span>
+<span class="go">0  1.0   0.25</span>
+<span class="go">1  2.1    NaN</span>
+<span class="go">2  NaN    NaN</span>
+<span class="go">3  4.7   4.00</span>
+<span class="go">4  5.6  12.20</span>
+<span class="go">5  6.8  14.40</span>
+
+<span class="gp">In [105]: </span><span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+<span class="gh">Out[105]: </span>
+<span class="go">     A      B</span>
+<span class="go">0  1.0   0.25</span>
+<span class="go">1  2.1   1.50</span>
+<span class="go">2  3.4   2.75</span>
+<span class="go">3  4.7   4.00</span>
+<span class="go">4  5.6  12.20</span>
+<span class="go">5  6.8  14.40</span>
+
+<span class="gp">In [106]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">"2020-01-01"</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">"D"</span><span class="p">)</span>
+
+<span class="gp">In [107]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="gp">In [108]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
+
+<span class="gp">In [109]: </span><span class="n">ts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [110]: </span><span class="n">ts</span>
+<span class="gh">Out[110]: </span>
+<span class="go">2020-01-01    8.0</span>
+<span class="go">2020-01-02    NaN</span>
+<span class="go">2020-01-03    NaN</span>
+<span class="go">2020-01-04    2.0</span>
+<span class="go">2020-01-05    4.0</span>
+<span class="go">2020-01-06    NaN</span>
+<span class="go">2020-01-07    NaN</span>
+<span class="go">2020-01-08    0.0</span>
+<span class="go">2020-01-09    3.0</span>
+<span class="go">2020-01-10    NaN</span>
+<span class="go">Freq: D, dtype: float64</span>
+
+<span class="gp">In [111]: </span><span class="n">ts</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="gh">Out[111]: </span><span class="go">&lt;Axes: &gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/series_before_interpolate.png" src="../_images/series_before_interpolate.png">
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [112]: </span><span class="n">ts</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+<span class="gh">Out[112]: </span>
+<span class="go">2020-01-01    8.000000</span>
+<span class="go">2020-01-02    6.000000</span>
+<span class="go">2020-01-03    4.000000</span>
+<span class="go">2020-01-04    2.000000</span>
+<span class="go">2020-01-05    4.000000</span>
+<span class="go">2020-01-06    2.666667</span>
+<span class="go">2020-01-07    1.333333</span>
+<span class="go">2020-01-08    0.000000</span>
+<span class="go">2020-01-09    3.000000</span>
+<span class="go">2020-01-10    3.000000</span>
+<span class="go">Freq: D, dtype: float64</span>
+
+<span class="gp">In [113]: </span><span class="n">ts</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="gh">Out[113]: </span><span class="go">&lt;Axes: &gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/series_interpolate.png" src="../_images/series_interpolate.png">
+<p>通过设置 <code class="docutils literal notranslate"><span class="pre">method="time"</span></code>，可以根据 <a class="reference internal" href="../reference/api/pandas.DatetimeIndex.html#pandas.DatetimeIndex" title="pandas.DatetimeIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code></a> 中的 <a class="reference internal" href="../reference/api/pandas.Timestamp.html#pandas.Timestamp" title="pandas.Timestamp"><code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code></a> 进行插值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [114]: </span><span class="n">ts2</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
+
+<span class="gp">In [115]: </span><span class="n">ts2</span>
+<span class="gh">Out[115]: </span>
+<span class="go">2020-01-01    8.0</span>
+<span class="go">2020-01-02    NaN</span>
+<span class="go">2020-01-04    2.0</span>
+<span class="go">2020-01-08    0.0</span>
+<span class="go">2020-01-10    NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [116]: </span><span class="n">ts2</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+<span class="gh">Out[116]: </span>
+<span class="go">2020-01-01    8.0</span>
+<span class="go">2020-01-02    5.0</span>
+<span class="go">2020-01-04    2.0</span>
+<span class="go">2020-01-08    0.0</span>
+<span class="go">2020-01-10    0.0</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [117]: </span><span class="n">ts2</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"time"</span><span class="p">)</span>
+<span class="gh">Out[117]: </span>
+<span class="go">2020-01-01    8.0</span>
+<span class="go">2020-01-02    6.0</span>
+<span class="go">2020-01-04    2.0</span>
+<span class="go">2020-01-08    0.0</span>
+<span class="go">2020-01-10    0.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>对于浮点索引，请使用 <code class="docutils literal notranslate"><span class="pre">method='values'</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [118]: </span><span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]</span>
+
+<span class="gp">In [119]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span> <span class="n">idx</span><span class="p">)</span>
+
+<span class="gp">In [120]: </span><span class="n">ser</span>
+<span class="gh">Out[120]: </span>
+<span class="go">0.0      0.0</span>
+<span class="go">1.0      NaN</span>
+<span class="go">10.0    10.0</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [121]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+<span class="gh">Out[121]: </span>
+<span class="go">0.0      0.0</span>
+<span class="go">1.0      5.0</span>
+<span class="go">10.0    10.0</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [122]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"values"</span><span class="p">)</span>
+<span class="gh">Out[122]: </span>
+<span class="go">0.0      0.0</span>
+<span class="go">1.0      1.0</span>
+<span class="go">10.0    10.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>如果安装了 <a class="reference external" href="https://scipy.org.cn/">scipy</a>，您可以将 1 维插值例程的名称传递给 <code class="docutils literal notranslate"><span class="pre">method</span></code>，具体请参见 scipy 插值<a class="reference external" href="https://docs.scipy.org.cn/doc/scipy/reference/interpolate.html#univariate-interpolation">文档</a>和参考<a class="reference external" href="https://docs.scipy.org.cn/doc/scipy/tutorial/interpolate.html">指南</a>。合适的插值方法将取决于数据类型。</p>
+<div class="admonition tip">
+<p class="admonition-title">提示</p>
+<p>如果处理的是增长速度不断提高的时间序列，请使用 <code class="docutils literal notranslate"><span class="pre">method='barycentric'</span></code>。</p>
+<p>如果您的值近似于累积分布函数，请使用 <code class="docutils literal notranslate"><span class="pre">method='pchip'</span></code>。</p>
+<p>为了以平滑绘图为目标填充缺失值，请使用 <code class="docutils literal notranslate"><span class="pre">method='akima'</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [123]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   .....: </span>   <span class="p">{</span>
+<span class="gp">   .....: </span>      <span class="s2">"A"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">4.7</span><span class="p">,</span> <span class="mf">5.6</span><span class="p">,</span> <span class="mf">6.8</span><span class="p">],</span>
+<span class="gp">   .....: </span>      <span class="s2">"B"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">12.2</span><span class="p">,</span> <span class="mf">14.4</span><span class="p">],</span>
+<span class="gp">   .....: </span>   <span class="p">}</span>
+<span class="gp">   .....: </span><span class="p">)</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [124]: </span><span class="n">df</span>
+<span class="gh">Out[124]: </span>
+<span class="go">     A      B</span>
+<span class="go">0  1.0   0.25</span>
+<span class="go">1  2.1    NaN</span>
+<span class="go">2  NaN    NaN</span>
+<span class="go">3  4.7   4.00</span>
+<span class="go">4  5.6  12.20</span>
+<span class="go">5  6.8  14.40</span>
+
+<span class="gp">In [125]: </span><span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"barycentric"</span><span class="p">)</span>
+<span class="gh">Out[125]: </span>
+<span class="go">      A       B</span>
+<span class="go">0  1.00   0.250</span>
+<span class="go">1  2.10  -7.660</span>
+<span class="go">2  3.53  -4.515</span>
+<span class="go">3  4.70   4.000</span>
+<span class="go">4  5.60  12.200</span>
+<span class="go">5  6.80  14.400</span>
+
+<span class="gp">In [126]: </span><span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"pchip"</span><span class="p">)</span>
+<span class="gh">Out[126]: </span>
+<span class="go">         A          B</span>
+<span class="go">0  1.00000   0.250000</span>
+<span class="go">1  2.10000   0.672808</span>
+<span class="go">2  3.43454   1.928950</span>
+<span class="go">3  4.70000   4.000000</span>
+<span class="go">4  5.60000  12.200000</span>
+<span class="go">5  6.80000  14.400000</span>
+
+<span class="gp">In [127]: </span><span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"akima"</span><span class="p">)</span>
+<span class="gh">Out[127]: </span>
+<span class="go">          A          B</span>
+<span class="go">0  1.000000   0.250000</span>
+<span class="go">1  2.100000  -0.873316</span>
+<span class="go">2  3.406667   0.320034</span>
+<span class="go">3  4.700000   4.000000</span>
+<span class="go">4  5.600000  12.200000</span>
+<span class="go">5  6.800000  14.400000</span>
+</pre></div>
+</div>
+</div>
+<p>通过多项式或样条近似进行插值时，还必须指定近似的度数或阶数。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [128]: </span><span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"spline"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[128]: </span>
+<span class="go">          A          B</span>
+<span class="go">0  1.000000   0.250000</span>
+<span class="go">1  2.100000  -0.428598</span>
+<span class="go">2  3.404545   1.206900</span>
+<span class="go">3  4.700000   4.000000</span>
+<span class="go">4  5.600000  12.200000</span>
+<span class="go">5  6.800000  14.400000</span>
+
+<span class="gp">In [129]: </span><span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"polynomial"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[129]: </span>
+<span class="go">          A          B</span>
+<span class="go">0  1.000000   0.250000</span>
+<span class="go">1  2.100000  -2.703846</span>
+<span class="go">2  3.451351  -1.453846</span>
+<span class="go">3  4.700000   4.000000</span>
+<span class="go">4  5.600000  12.200000</span>
+<span class="go">5  6.800000  14.400000</span>
+</pre></div>
+</div>
+<p>比较几种方法。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [130]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [131]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">37</span><span class="p">))</span>
+
+<span class="gp">In [132]: </span><span class="n">missing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">29</span><span class="p">])</span>
+
+<span class="gp">In [133]: </span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">missing</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [134]: </span><span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"linear"</span><span class="p">,</span> <span class="s2">"quadratic"</span><span class="p">,</span> <span class="s2">"cubic"</span><span class="p">]</span>
+
+<span class="gp">In [135]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">m</span><span class="p">:</span> <span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">})</span>
+
+<span class="gp">In [136]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="gh">Out[136]: </span><span class="go">&lt;Axes: &gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/compare_interpolations.png" src="../_images/compare_interpolations.png">
+<p>使用 <a class="reference internal" href="../reference/api/pandas.Series.reindex.html#pandas.Series.reindex" title="pandas.Series.reindex"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.reindex()</span></code></a> 从扩展数据中插值新观测值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [137]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)))</span>
+
+<span class="go"># interpolate at new_index</span>
+<span class="gp">In [138]: </span><span class="n">new_index</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="mf">49.25</span><span class="p">,</span> <span class="mf">49.5</span><span class="p">,</span> <span class="mf">49.75</span><span class="p">,</span> <span class="mf">50.25</span><span class="p">,</span> <span class="mf">50.5</span><span class="p">,</span> <span class="mf">50.75</span><span class="p">]))</span>
+
+<span class="gp">In [139]: </span><span class="n">interp_s</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">)</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"pchip"</span><span class="p">)</span>
+
+<span class="gp">In [140]: </span><span class="n">interp_s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">49</span><span class="p">:</span><span class="mi">51</span><span class="p">]</span>
+<span class="gh">Out[140]: </span>
+<span class="go">49.00    0.471410</span>
+<span class="go">49.25    0.476841</span>
+<span class="go">49.50    0.481780</span>
+<span class="go">49.75    0.485998</span>
+<span class="go">50.00    0.489266</span>
+<span class="go">50.25    0.491814</span>
+<span class="go">50.50    0.493995</span>
+<span class="go">50.75    0.495763</span>
+<span class="go">51.00    0.497074</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<section id="interpolation-limits">
+<span id="missing-data-interp-limits"></span><h4>插值限制<a class="headerlink" href="missing_data.html#interpolation-limits" title="Link to this heading">#</a></h4>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.interpolate.html#pandas.DataFrame.interpolate" title="pandas.DataFrame.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a> 接受一个 <code class="docutils literal notranslate"><span class="pre">limit</span></code> 关键字参数，用于限制自上次有效观测以来填充的连续 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> 值的数量。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [141]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+
+<span class="gp">In [142]: </span><span class="n">ser</span>
+<span class="gh">Out[142]: </span>
+<span class="go">0     NaN</span>
+<span class="go">1     NaN</span>
+<span class="go">2     5.0</span>
+<span class="go">3     NaN</span>
+<span class="go">4     NaN</span>
+<span class="go">5     NaN</span>
+<span class="go">6    13.0</span>
+<span class="go">7     NaN</span>
+<span class="go">8     NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [143]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+<span class="gh">Out[143]: </span>
+<span class="go">0     NaN</span>
+<span class="go">1     NaN</span>
+<span class="go">2     5.0</span>
+<span class="go">3     7.0</span>
+<span class="go">4     9.0</span>
+<span class="go">5    11.0</span>
+<span class="go">6    13.0</span>
+<span class="go">7    13.0</span>
+<span class="go">8    13.0</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [144]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[144]: </span>
+<span class="go">0     NaN</span>
+<span class="go">1     NaN</span>
+<span class="go">2     5.0</span>
+<span class="go">3     7.0</span>
+<span class="go">4     NaN</span>
+<span class="go">5     NaN</span>
+<span class="go">6    13.0</span>
+<span class="go">7    13.0</span>
+<span class="go">8     NaN</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>默认情况下，<code class="docutils literal notranslate"><span class="pre">NaN</span></code> 值以 <code class="docutils literal notranslate"><span class="pre">forward</span></code> 方向填充。使用 <code class="docutils literal notranslate"><span class="pre">limit_direction</span></code> 参数可以向 <code class="docutils literal notranslate"><span class="pre">backward</span></code> 或从 <code class="docutils literal notranslate"><span class="pre">both</span></code> 方向填充。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [145]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">limit_direction</span><span class="o">=</span><span class="s2">"backward"</span><span class="p">)</span>
+<span class="gh">Out[145]: </span>
+<span class="go">0     NaN</span>
+<span class="go">1     5.0</span>
+<span class="go">2     5.0</span>
+<span class="go">3     NaN</span>
+<span class="go">4     NaN</span>
+<span class="go">5    11.0</span>
+<span class="go">6    13.0</span>
+<span class="go">7     NaN</span>
+<span class="go">8     NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [146]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">limit_direction</span><span class="o">=</span><span class="s2">"both"</span><span class="p">)</span>
+<span class="gh">Out[146]: </span>
+<span class="go">0     NaN</span>
+<span class="go">1     5.0</span>
+<span class="go">2     5.0</span>
+<span class="go">3     7.0</span>
+<span class="go">4     NaN</span>
+<span class="go">5    11.0</span>
+<span class="go">6    13.0</span>
+<span class="go">7    13.0</span>
+<span class="go">8     NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [147]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit_direction</span><span class="o">=</span><span class="s2">"both"</span><span class="p">)</span>
+<span class="gh">Out[147]: </span>
+<span class="go">0     5.0</span>
+<span class="go">1     5.0</span>
+<span class="go">2     5.0</span>
+<span class="go">3     7.0</span>
+<span class="go">4     9.0</span>
+<span class="go">5    11.0</span>
+<span class="go">6    13.0</span>
+<span class="go">7    13.0</span>
+<span class="go">8    13.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>默认情况下，<code class="docutils literal notranslate"><span class="pre">NaN</span></code> 值无论是被现有有效值包围还是在现有有效值之外都会被填充。<code class="docutils literal notranslate"><span class="pre">limit_area</span></code> 参数将填充限制为内部值或外部值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># fill one consecutive inside value in both directions</span>
+<span class="gp">In [148]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit_direction</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span> <span class="n">limit_area</span><span class="o">=</span><span class="s2">"inside"</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[148]: </span>
+<span class="go">0     NaN</span>
+<span class="go">1     NaN</span>
+<span class="go">2     5.0</span>
+<span class="go">3     7.0</span>
+<span class="go">4     NaN</span>
+<span class="go">5    11.0</span>
+<span class="go">6    13.0</span>
+<span class="go">7     NaN</span>
+<span class="go">8     NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="go"># fill all consecutive outside values backward</span>
+<span class="gp">In [149]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit_direction</span><span class="o">=</span><span class="s2">"backward"</span><span class="p">,</span> <span class="n">limit_area</span><span class="o">=</span><span class="s2">"outside"</span><span class="p">)</span>
+<span class="gh">Out[149]: </span>
+<span class="go">0     5.0</span>
+<span class="go">1     5.0</span>
+<span class="go">2     5.0</span>
+<span class="go">3     NaN</span>
+<span class="go">4     NaN</span>
+<span class="go">5     NaN</span>
+<span class="go">6    13.0</span>
+<span class="go">7     NaN</span>
+<span class="go">8     NaN</span>
+<span class="go">dtype: float64</span>
+
+<span class="go"># fill all consecutive outside values in both directions</span>
+<span class="gp">In [150]: </span><span class="n">ser</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit_direction</span><span class="o">=</span><span class="s2">"both"</span><span class="p">,</span> <span class="n">limit_area</span><span class="o">=</span><span class="s2">"outside"</span><span class="p">)</span>
+<span class="gh">Out[150]: </span>
+<span class="go">0     5.0</span>
+<span class="go">1     5.0</span>
+<span class="go">2     5.0</span>
+<span class="go">3     NaN</span>
+<span class="go">4     NaN</span>
+<span class="go">5     NaN</span>
+<span class="go">6    13.0</span>
+<span class="go">7    13.0</span>
+<span class="go">8    13.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="replacing-values">
+<span id="missing-data-replace"></span><h3>替换值<a class="headerlink" href="missing_data.html#replacing-values" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.Series.replace.html#pandas.Series.replace" title="pandas.Series.replace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.replace()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.replace.html#pandas.DataFrame.replace" title="pandas.DataFrame.replace"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.replace()</span></code></a> 可以类似于 <a class="reference internal" href="../reference/api/pandas.Series.fillna.html#pandas.Series.fillna" title="pandas.Series.fillna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.fillna()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.fillna.html#pandas.DataFrame.fillna" title="pandas.DataFrame.fillna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.fillna()</span></code></a> 来替换或插入缺失值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [151]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="gp">In [152]: </span><span class="n">df</span>
+<span class="gh">Out[152]: </span>
+<span class="go">     0    1    2</span>
+<span class="go">0  1.0  0.0  0.0</span>
+<span class="go">1  0.0  1.0  0.0</span>
+<span class="go">2  0.0  0.0  1.0</span>
+
+<span class="gp">In [153]: </span><span class="n">df_missing</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+<span class="gp">In [154]: </span><span class="n">df_missing</span>
+<span class="gh">Out[154]: </span>
+<span class="go">     0    1    2</span>
+<span class="go">0  1.0  NaN  NaN</span>
+<span class="go">1  NaN  1.0  NaN</span>
+<span class="go">2  NaN  NaN  1.0</span>
+
+<span class="gp">In [155]: </span><span class="n">df_filled</span> <span class="o">=</span> <span class="n">df_missing</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [156]: </span><span class="n">df_filled</span>
+<span class="gh">Out[156]: </span>
+<span class="go">     0    1    2</span>
+<span class="go">0  1.0  2.0  2.0</span>
+<span class="go">1  2.0  1.0  2.0</span>
+<span class="go">2  2.0  2.0  1.0</span>
+</pre></div>
+</div>
+<p>通过传递列表可以替换多个值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [157]: </span><span class="n">df_filled</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">44</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+<span class="gh">Out[157]: </span>
+<span class="go">     0    1    2</span>
+<span class="go">0  2.0  2.0  2.0</span>
+<span class="go">1  2.0  2.0  2.0</span>
+<span class="go">2  2.0  2.0  2.0</span>
+</pre></div>
+</div>
+<p>使用映射字典进行替换。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [158]: </span><span class="n">df_filled</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">28</span><span class="p">})</span>
+<span class="gh">Out[158]: </span>
+<span class="go">      0     1     2</span>
+<span class="go">0  44.0  28.0  28.0</span>
+<span class="go">1  28.0  44.0  28.0</span>
+<span class="go">2  28.0  28.0  44.0</span>
+</pre></div>
+</div>
+<section id="regular-expression-replacement">
+<span id="missing-data-replace-expression"></span><h4>正则表达式替换<a class="headerlink" href="missing_data.html#regular-expression-replacement" title="Link to this heading">#</a></h4>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>以字符 <code class="docutils literal notranslate"><span class="pre">r</span></code> 为前缀的 Python 字符串（例如 <code class="docutils literal notranslate"><span class="pre">r'hello</span> <span class="pre">world'</span></code>）是<a class="reference external" href="https://docs.pythonlang.cn/3/reference/lexical_analysis.html#string-and-bytes-literals">“原始字符串”</a>。它们在反斜杠方面的语义与没有此前缀的字符串不同。原始字符串中的反斜杠将被解释为转义的反斜杠，例如 <code class="docutils literal notranslate"><span class="pre">r'\'</span> <span class="pre">==</span> <span class="pre">'\\'</span></code>。</p>
+</div>
+<p>用 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> 替换 ‘.’。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [159]: </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="s2">"b"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="s2">"ab.."</span><span class="p">),</span> <span class="s2">"c"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">]}</span>
+
+<span class="gp">In [160]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="gp">In [161]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="gh">Out[161]: </span>
+<span class="go">   a    b    c</span>
+<span class="go">0  0    a    a</span>
+<span class="go">1  1    b    b</span>
+<span class="go">2  2  NaN  NaN</span>
+<span class="go">3  3  NaN    d</span>
+</pre></div>
+</div>
+<p>用删除周围空白字符的正则表达式将 ‘.’ 替换为 <code class="docutils literal notranslate"><span class="pre">NaN</span></code>。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [162]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\s*\.\s*"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[162]: </span>
+<span class="go">   a    b    c</span>
+<span class="go">0  0    a    a</span>
+<span class="go">1  1    b    b</span>
+<span class="go">2  2  NaN  NaN</span>
+<span class="go">3  3  NaN    d</span>
+</pre></div>
+</div>
+<p>用正则表达式列表替换。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [163]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="sa">r</span><span class="s2">"\."</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"(a)"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"dot"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\1stuff"</span><span class="p">],</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[163]: </span>
+<span class="go">   a       b       c</span>
+<span class="go">0  0  astuff  astuff</span>
+<span class="go">1  1       b       b</span>
+<span class="go">2  2     dot     NaN</span>
+<span class="go">3  3     dot       d</span>
+</pre></div>
+</div>
+<p>在映射字典中使用正则表达式进行替换。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [164]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">"b"</span><span class="p">:</span> <span class="sa">r</span><span class="s2">"\s*\.\s*"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"b"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">},</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[164]: </span>
+<span class="go">   a    b    c</span>
+<span class="go">0  0    a    a</span>
+<span class="go">1  1    b    b</span>
+<span class="go">2  2  NaN  NaN</span>
+<span class="go">3  3  NaN    d</span>
+</pre></div>
+</div>
+<p>传递使用 <code class="docutils literal notranslate"><span class="pre">regex</span></code> 关键字的嵌套正则表达式字典。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [165]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">"b"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"b"</span><span class="p">:</span> <span class="sa">r</span><span class="s2">""</span><span class="p">}},</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[165]: </span>
+<span class="go">   a  b    c</span>
+<span class="go">0  0  a    a</span>
+<span class="go">1  1       b</span>
+<span class="go">2  2  .  NaN</span>
+<span class="go">3  3  .    d</span>
+
+<span class="gp">In [166]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="p">{</span><span class="s2">"b"</span><span class="p">:</span> <span class="p">{</span><span class="sa">r</span><span class="s2">"\s*\.\s*"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">}})</span>
+<span class="gh">Out[166]: </span>
+<span class="go">   a    b    c</span>
+<span class="go">0  0    a    a</span>
+<span class="go">1  1    b    b</span>
+<span class="go">2  2  NaN  NaN</span>
+<span class="go">3  3  NaN    d</span>
+
+<span class="gp">In [167]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">"b"</span><span class="p">:</span> <span class="sa">r</span><span class="s2">"\s*(\.)\s*"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"b"</span><span class="p">:</span> <span class="sa">r</span><span class="s2">"\1ty"</span><span class="p">},</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[167]: </span>
+<span class="go">   a    b    c</span>
+<span class="go">0  0    a    a</span>
+<span class="go">1  1    b    b</span>
+<span class="go">2  2  .ty  NaN</span>
+<span class="go">3  3  .ty    d</span>
+</pre></div>
+</div>
+<p>传递一个正则表达式列表，它们将把匹配项替换为标量。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [168]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="sa">r</span><span class="s2">"\s*\.\s*"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"a|b"</span><span class="p">],</span> <span class="s2">"placeholder"</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[168]: </span>
+<span class="go">   a            b            c</span>
+<span class="go">0  0  placeholder  placeholder</span>
+<span class="go">1  1  placeholder  placeholder</span>
+<span class="go">2  2  placeholder          NaN</span>
+<span class="go">3  3  placeholder            d</span>
+</pre></div>
+</div>
+<p>所有正则表达式示例也可以通过 <code class="docutils literal notranslate"><span class="pre">to_replace</span></code> 参数作为 <code class="docutils literal notranslate"><span class="pre">regex</span></code> 参数传递。在这种情况下，必须显式按名称传递 <code class="docutils literal notranslate"><span class="pre">value</span></code> 参数，或者 <code class="docutils literal notranslate"><span class="pre">regex</span></code> 必须是嵌套字典。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [169]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s2">"\s*\.\s*"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"a|b"</span><span class="p">],</span> <span class="n">value</span><span class="o">=</span><span class="s2">"placeholder"</span><span class="p">)</span>
+<span class="gh">Out[169]: </span>
+<span class="go">   a            b            c</span>
+<span class="go">0  0  placeholder  placeholder</span>
+<span class="go">1  1  placeholder  placeholder</span>
+<span class="go">2  2  placeholder          NaN</span>
+<span class="go">3  3  placeholder            d</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>来自 <code class="docutils literal notranslate"><span class="pre">re.compile</span></code> 的正则表达式对象也是有效输入。</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="text.html" title="上一页"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">处理文本数据</p> </div> </a> <a class="right-next" href="duplicates.html" title="下一页"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">重复标签</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#values-considered-missing">被视为“缺失”的值</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#na-semantics"><code class="xref py py-class docutils literal notranslate"><span class="pre">NA</span></code> 语义</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#propagation-in-arithmetic-and-comparison-operations">在算术和比较操作中的传播</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#logical-operations">逻辑操作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#na-in-a-boolean-context">布尔上下文中的 <code class="docutils literal notranslate"><span class="pre">NA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#numpy-ufuncs">NumPy ufuncs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#conversion">转换</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#inserting-missing-data">插入缺失数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#calculations-with-missing-data">缺失数据的计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#dropping-missing-data">删除缺失数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#filling-missing-data">填充缺失数据</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#filling-by-value">按值填充</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#interpolation">插值</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#interpolation-limits">插值限制</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#replacing-values">替换值</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="missing_data.html#regular-expression-replacement">正则表达式替换</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/missing_data.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源文件</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a> 提供。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

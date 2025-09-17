@@ -1,0 +1,599 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>样式 — pandas 2.2.1 文档 - pandas 数据分析库</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+
+<link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+<link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=fa44fd50.css">
+<link rel="stylesheet" type="text/css" href="../_static/plot_directive.css">
+<link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css">
+<link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css%3Fv=0a3b3ea7.css">
+<link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css">
+<link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css">
+
+<link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd">
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd">
+<script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/documentation_options.js%3Fv=166560180"></script>
+<script src="../_static/doctools.js%3Fv=888ff710"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=f281be69"></script>
+<script src="../_static/design-tabs.js%3Fv=36754332"></script>
+<script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'reference/style';</script>
+<script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.2';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+<link rel="icon" href="../_static/favicon.ico">
+<link rel="index" title="Index" href="../genindex.html">
+<link rel="search" title="Search" href="../search.html">
+<link rel="next" title="pandas.io.formats.style.Styler" href="api/pandas.io.formats.style.Styler.html">
+<link rel="prev" title="pandas.core.resample.Resampler.quantile" href="api/pandas.core.resample.Resampler.quantile.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="docsearch:language" content="en">
+</head>
+<body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+<a class="skip-link" href="style.html#main-content">跳至主要内容</a>
+<div id="pst-scroll-pixel-helper"></div>
+<button type="button" class="btn rounded-pill" id="pst-back-to-top">
+<i class="fa-solid fa-arrow-up"></i> 返回顶部
+</button>
+<input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+<label class="overlay overlay-primary" for="__primary"></label>
+<input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+<label class="overlay overlay-secondary" for="__secondary"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+<i class="fa-solid fa-magnifying-glass"></i> <input type="search" class="form-control" name="q" id="search-input" placeholder="搜索文档..." aria-label="搜索文档..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"> <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+</div>
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+<label class="sidebar-toggle primary-toggle" for="__primary">
+<span class="fa-solid fa-bars"></span>
+</label>
+<div class=" navbar-header-items__start">
+<div class="navbar-item">
+<a class="navbar-brand logo" href="../index.html">
+<img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.2.1 documentation - Home">
+<script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.2.1 documentation - Home"/>`);</script>
+</a></div>
+</div>
+<div class=" navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
+<nav class="navbar-nav">
+<p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+网站导航
+</p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../getting_started/index.html">
+入门
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../user_guide/index.html">
+用户指南
+</a>
+</li>
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html">
+API 参考
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../development/index.html">
+开发
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../whatsnew/index.html">
+发行说明
+</a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+</div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+<div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+<li class="nav-item">
+<a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+</li>
+<li class="nav-item">
+<a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+</li>
+<li class="nav-item">
+<a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+</div>
+<label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+<span class="fa-solid fa-outdent"></span>
+</label>
+</div>
+</nav>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<nav class="navbar-nav">
+<p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+网站导航
+</p>
+<ul class="bd-navbar-elements navbar-nav">
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../getting_started/index.html">
+入门
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../user_guide/index.html">
+用户指南
+</a>
+</li>
+<li class="nav-item current active">
+<a class="nav-link nav-internal" href="index.html">
+API 参考
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../development/index.html">
+开发
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link nav-internal" href="../whatsnew/index.html">
+发行说明
+</a>
+</li>
+</ul>
+</nav></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+<div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+<div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+<li class="nav-item">
+<a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+</li>
+<li class="nav-item">
+<a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+</li>
+<li class="nav-item">
+<a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+<div class="bd-toc-item navbar-nav">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="io.html">输入/输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="general_functions.html">通用函数</a></li>
+<li class="toctree-l1"><a class="reference internal" href="series.html">Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arrays.html">pandas 数组、标量和数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="offset_frequency.html">日期偏移</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resampling.html">重采样</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="style.html#">样式</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.html">pandas.io.formats.style.Styler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.from_custom_template.html">pandas.io.formats.style.Styler.from_custom_template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.env.html">pandas.io.formats.style.Styler.env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_html.html">pandas.io.formats.style.Styler.template_html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_html_style.html">pandas.io.formats.style.Styler.template_html_style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_html_table.html">pandas.io.formats.style.Styler.template_html_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_latex.html">pandas.io.formats.style.Styler.template_latex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_string.html">pandas.io.formats.style.Styler.template_string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.loader.html">pandas.io.formats.style.Styler.loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.apply.html">pandas.io.formats.style.Styler.apply</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.map.html">pandas.io.formats.style.Styler.map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.apply_index.html">pandas.io.formats.style.Styler.apply_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.map_index.html">pandas.io.formats.style.Styler.map_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.format.html">pandas.io.formats.style.Styler.format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.format_index.html">pandas.io.formats.style.Styler.format_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.relabel_index.html">pandas.io.formats.style.Styler.relabel_index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.hide.html">pandas.io.formats.style.Styler.hide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.concat.html">pandas.io.formats.style.Styler.concat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_td_classes.html">pandas.io.formats.style.Styler.set_td_classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_table_styles.html">pandas.io.formats.style.Styler.set_table_styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_table_attributes.html">pandas.io.formats.style.Styler.set_table_attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_tooltips.html">pandas.io.formats.style.Styler.set_tooltips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_caption.html">pandas.io.formats.style.Styler.set_caption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_sticky.html">pandas.io.formats.style.Styler.set_sticky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_properties.html">pandas.io.formats.style.Styler.set_properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_uuid.html">pandas.io.formats.style.Styler.set_uuid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.clear.html">pandas.io.formats.style.Styler.clear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.pipe.html">pandas.io.formats.style.Styler.pipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_null.html">pandas.io.formats.style.Styler.highlight_null</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_max.html">pandas.io.formats.style.Styler.highlight_max</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_min.html">pandas.io.formats.style.Styler.highlight_min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_between.html">pandas.io.formats.style.Styler.highlight_between</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_quantile.html">pandas.io.formats.style.Styler.highlight_quantile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.background_gradient.html">pandas.io.formats.style.Styler.background_gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.text_gradient.html">pandas.io.formats.style.Styler.text_gradient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.bar.html">pandas.io.formats.style.Styler.bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.to_html.html">pandas.io.formats.style.Styler.to_html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.to_latex.html">pandas.io.formats.style.Styler.to_latex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.to_excel.html">pandas.io.formats.style.Styler.to_excel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.to_string.html">pandas.io.formats.style.Styler.to_string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.export.html">pandas.io.formats.style.Styler.export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/pandas.io.formats.style.Styler.use.html">pandas.io.formats.style.Styler.use</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">测试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_value.html">缺失值</a></li>
+</ul>
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main id="main-content" class="bd-main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item">
+<nav aria-label="Breadcrumb">
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a href="../index.html" class="nav-link" aria-label="Home">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a href="index.html" class="nav-link">API 参考</a></li>
+<li class="breadcrumb-item active" aria-current="page">样式</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+<div id="searchbox"></div>
+<article class="bd-article" role="main">
+<section id="style">
+<span id="api-style"></span><h1>样式<a class="headerlink" href="style.html#style" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Styler</span></code> 对象由 <a class="reference internal" href="api/pandas.DataFrame.style.html#pandas.DataFrame.style" title="pandas.DataFrame.style"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pandas.DataFrame.style</span></code></a> 返回。</p>
+<section id="styler-constructor">
+<h2>Styler 构造函数<a class="headerlink" href="style.html#styler-constructor" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.html#pandas.io.formats.style.Styler" title="pandas.io.formats.style.Styler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler</span></code></a>(data[,&nbsp;precision,&nbsp;table_styles,&nbsp;...])</p></td>
+<td><p>使用 HTML 和 CSS 帮助根据数据对 DataFrame 或 Series 进行样式设置。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.from_custom_template.html#pandas.io.formats.style.Styler.from_custom_template" title="pandas.io.formats.style.Styler.from_custom_template"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.from_custom_template</span></code></a>(searchpath[,&nbsp;...])</p></td>
+<td><p>用于创建 <code class="docutils literal notranslate"><span class="pre">Styler</span></code> 子类的工厂函数。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="styler-properties">
+<h2>Styler 属性<a class="headerlink" href="style.html#styler-properties" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.env.html#pandas.io.formats.style.Styler.env" title="pandas.io.formats.style.Styler.env"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.env</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_html.html#pandas.io.formats.style.Styler.template_html" title="pandas.io.formats.style.Styler.template_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.template_html</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_html_style.html#pandas.io.formats.style.Styler.template_html_style" title="pandas.io.formats.style.Styler.template_html_style"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.template_html_style</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_html_table.html#pandas.io.formats.style.Styler.template_html_table" title="pandas.io.formats.style.Styler.template_html_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.template_html_table</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_latex.html#pandas.io.formats.style.Styler.template_latex" title="pandas.io.formats.style.Styler.template_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.template_latex</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.template_string.html#pandas.io.formats.style.Styler.template_string" title="pandas.io.formats.style.Styler.template_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.template_string</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.loader.html#pandas.io.formats.style.Styler.loader" title="pandas.io.formats.style.Styler.loader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.loader</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="style-application">
+<h2>样式应用<a class="headerlink" href="style.html#style-application" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.apply.html#pandas.io.formats.style.Styler.apply" title="pandas.io.formats.style.Styler.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.apply</span></code></a>(func[,&nbsp;axis,&nbsp;subset])</p></td>
+<td><p>按列、按行或按表应用 CSS 样式函数。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.map.html#pandas.io.formats.style.Styler.map" title="pandas.io.formats.style.Styler.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.map</span></code></a>(func[,&nbsp;subset])</p></td>
+<td><p>逐元素应用 CSS 样式函数。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.apply_index.html#pandas.io.formats.style.Styler.apply_index" title="pandas.io.formats.style.Styler.apply_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.apply_index</span></code></a>(func[,&nbsp;axis,&nbsp;level])</p></td>
+<td><p>按层级将 CSS 样式函数应用于索引或列标题。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.map_index.html#pandas.io.formats.style.Styler.map_index" title="pandas.io.formats.style.Styler.map_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.map_index</span></code></a>(func[,&nbsp;axis,&nbsp;level])</p></td>
+<td><p>逐元素将 CSS 样式函数应用于索引或列标题。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.format.html#pandas.io.formats.style.Styler.format" title="pandas.io.formats.style.Styler.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.format</span></code></a>([formatter,&nbsp;subset,&nbsp;na_rep,&nbsp;...])</p></td>
+<td><p>格式化单元格的文本显示值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.format_index.html#pandas.io.formats.style.Styler.format_index" title="pandas.io.formats.style.Styler.format_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.format_index</span></code></a>([formatter,&nbsp;axis,&nbsp;...])</p></td>
+<td><p>格式化索引标签或列标题的文本显示值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.relabel_index.html#pandas.io.formats.style.Styler.relabel_index" title="pandas.io.formats.style.Styler.relabel_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.relabel_index</span></code></a>(labels[,&nbsp;axis,&nbsp;level])</p></td>
+<td><p>重新标记索引或列标题键以显示一组指定的值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.hide.html#pandas.io.formats.style.Styler.hide" title="pandas.io.formats.style.Styler.hide"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.hide</span></code></a>([subset,&nbsp;axis,&nbsp;level,&nbsp;names])</p></td>
+<td><p>隐藏整个索引/列标题，或隐藏特定行/列的显示。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.concat.html#pandas.io.formats.style.Styler.concat" title="pandas.io.formats.style.Styler.concat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.concat</span></code></a>(other)</p></td>
+<td><p>将另一个 Styler 附加到一起，将输出合并到一个表中。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_td_classes.html#pandas.io.formats.style.Styler.set_td_classes" title="pandas.io.formats.style.Styler.set_td_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.set_td_classes</span></code></a>(classes)</p></td>
+<td><p>设置 <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> HTML 元素的 <code class="docutils literal notranslate"><span class="pre">class</span></code> 属性。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_table_styles.html#pandas.io.formats.style.Styler.set_table_styles" title="pandas.io.formats.style.Styler.set_table_styles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.set_table_styles</span></code></a>([table_styles,&nbsp;...])</p></td>
+<td><p>设置包含在 <code class="docutils literal notranslate"><span class="pre">&lt;style&gt;</span></code> HTML 元素中的表格样式。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_table_attributes.html#pandas.io.formats.style.Styler.set_table_attributes" title="pandas.io.formats.style.Styler.set_table_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.set_table_attributes</span></code></a>(attributes)</p></td>
+<td><p>设置添加到 <code class="docutils literal notranslate"><span class="pre">&lt;table&gt;</span></code> HTML 元素的表格属性。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_tooltips.html#pandas.io.formats.style.Styler.set_tooltips" title="pandas.io.formats.style.Styler.set_tooltips"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.set_tooltips</span></code></a>(ttips[,&nbsp;props,&nbsp;css_class])</p></td>
+<td><p>在 <code class="docutils literal notranslate"><span class="pre">Styler</span></code> 上设置字符串的 DataFrame，生成 <code class="docutils literal notranslate"><span class="pre">:hover</span></code> 工具提示。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_caption.html#pandas.io.formats.style.Styler.set_caption" title="pandas.io.formats.style.Styler.set_caption"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.set_caption</span></code></a>(caption)</p></td>
+<td><p>设置添加到 <code class="docutils literal notranslate"><span class="pre">&lt;caption&gt;</span></code> HTML 元素的文本。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_sticky.html#pandas.io.formats.style.Styler.set_sticky" title="pandas.io.formats.style.Styler.set_sticky"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.set_sticky</span></code></a>([axis,&nbsp;pixel_size,&nbsp;levels])</p></td>
+<td><p>添加 CSS 以在滚动帧中永久显示索引或列标题。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_properties.html#pandas.io.formats.style.Styler.set_properties" title="pandas.io.formats.style.Styler.set_properties"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.set_properties</span></code></a>([subset])</p></td>
+<td><p>将定义的 CSS 属性设置为给定子集的每个 <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> HTML 元素。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.set_uuid.html#pandas.io.formats.style.Styler.set_uuid" title="pandas.io.formats.style.Styler.set_uuid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.set_uuid</span></code></a>(uuid)</p></td>
+<td><p>设置应用于 HTML 元素的 <code class="docutils literal notranslate"><span class="pre">id</span></code> 属性的 uuid。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.clear.html#pandas.io.formats.style.Styler.clear" title="pandas.io.formats.style.Styler.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.clear</span></code></a>()</p></td>
+<td><p>重置 <code class="docutils literal notranslate"><span class="pre">Styler</span></code>，删除任何先前应用的样式。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.pipe.html#pandas.io.formats.style.Styler.pipe" title="pandas.io.formats.style.Styler.pipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.pipe</span></code></a>(func,&nbsp;*args,&nbsp;**kwargs)</p></td>
+<td><p>应用 <code class="docutils literal notranslate"><span class="pre">func(self,</span> <span class="pre">*args,</span> <span class="pre">**kwargs)</span></code>，并返回结果。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="builtin-styles">
+<h2>内置样式<a class="headerlink" href="style.html#builtin-styles" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_null.html#pandas.io.formats.style.Styler.highlight_null" title="pandas.io.formats.style.Styler.highlight_null"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.highlight_null</span></code></a>([color,&nbsp;subset,&nbsp;props])</p></td>
+<td><p>使用样式突出显示缺失值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_max.html#pandas.io.formats.style.Styler.highlight_max" title="pandas.io.formats.style.Styler.highlight_max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.highlight_max</span></code></a>([subset,&nbsp;color,&nbsp;axis,&nbsp;...])</p></td>
+<td><p>使用样式突出显示最大值。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_min.html#pandas.io.formats.style.Styler.highlight_min" title="pandas.io.formats.style.Styler.highlight_min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.highlight_min</span></code></a>([subset,&nbsp;color,&nbsp;axis,&nbsp;...])</p></td>
+<td><p>使用样式突出显示最小值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_between.html#pandas.io.formats.style.Styler.highlight_between" title="pandas.io.formats.style.Styler.highlight_between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.highlight_between</span></code></a>([subset,&nbsp;color,&nbsp;...])</p></td>
+<td><p>使用样式突出显示定义的范围。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.highlight_quantile.html#pandas.io.formats.style.Styler.highlight_quantile" title="pandas.io.formats.style.Styler.highlight_quantile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.highlight_quantile</span></code></a>([subset,&nbsp;color,&nbsp;...])</p></td>
+<td><p>使用样式突出显示由分位数定义的值。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.background_gradient.html#pandas.io.formats.style.Styler.background_gradient" title="pandas.io.formats.style.Styler.background_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.background_gradient</span></code></a>([cmap,&nbsp;low,&nbsp;...])</p></td>
+<td><p>以渐变样式为背景着色。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.text_gradient.html#pandas.io.formats.style.Styler.text_gradient" title="pandas.io.formats.style.Styler.text_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.text_gradient</span></code></a>([cmap,&nbsp;low,&nbsp;high,&nbsp;...])</p></td>
+<td><p>以渐变样式为文本着色。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.bar.html#pandas.io.formats.style.Styler.bar" title="pandas.io.formats.style.Styler.bar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.bar</span></code></a>([subset,&nbsp;axis,&nbsp;color,&nbsp;cmap,&nbsp;...])</p></td>
+<td><p>在单元格背景中绘制条形图。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="style-export-and-import">
+<h2>样式导出和导入<a class="headerlink" href="style.html#style-export-and-import" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.to_html.html#pandas.io.formats.style.Styler.to_html" title="pandas.io.formats.style.Styler.to_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.to_html</span></code></a>([buf,&nbsp;table_uuid,&nbsp;...])</p></td>
+<td><p>将 Styler 写入 HTML-CSS 格式的文件、缓冲区或字符串。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.to_latex.html#pandas.io.formats.style.Styler.to_latex" title="pandas.io.formats.style.Styler.to_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.to_latex</span></code></a>([buf,&nbsp;column_format,&nbsp;...])</p></td>
+<td><p>将 Styler 写入 LaTeX 格式的文件、缓冲区或字符串。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.to_excel.html#pandas.io.formats.style.Styler.to_excel" title="pandas.io.formats.style.Styler.to_excel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.to_excel</span></code></a>(excel_writer[,&nbsp;sheet_name,&nbsp;...])</p></td>
+<td><p>将 Styler 写入 Excel 表格。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.to_string.html#pandas.io.formats.style.Styler.to_string" title="pandas.io.formats.style.Styler.to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.to_string</span></code></a>([buf,&nbsp;encoding,&nbsp;...])</p></td>
+<td><p>将 Styler 写入文件、缓冲区或字符串的文本格式。</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.export.html#pandas.io.formats.style.Styler.export" title="pandas.io.formats.style.Styler.export"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.export</span></code></a>()</p></td>
+<td><p>导出应用于当前 Styler 的样式。</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.io.formats.style.Styler.use.html#pandas.io.formats.style.Styler.use" title="pandas.io.formats.style.Styler.use"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Styler.use</span></code></a>(styles)</p></td>
+<td><p>设置当前 Styler 的样式。</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</article>
+<footer class="prev-next-footer">
+<div class="prev-next-area">
+<a class="left-prev" href="api/pandas.core.resample.Resampler.quantile.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">previous</p> <p class="prev-next-title">pandas.core.resample.Resampler.quantile</p> </div> </a> <a class="right-next" href="api/pandas.io.formats.style.Styler.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">next</p> <p class="prev-next-title">pandas.io.formats.style.Styler</p> </div> <i class="fa-solid fa-angle-right"></i> </a>
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> 本页内容
+</div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="style.html#styler-constructor">Styler 构造函数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="style.html#styler-properties">Styler 属性</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="style.html#style-application">样式应用</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="style.html#builtin-styles">内置样式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="style.html#style-export-and-import">样式导出和导入</a></li>
+</ul>
+</nav></div>
+<div class="sidebar-secondary-item">
+<div class="tocsection sourcelink">
+<a href="../_sources/reference/style.rst.txt">
+<i class="fa-solid fa-file-lines"></i> 显示源代码
+</a>
+</div>
+</div>
+</div></div>
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+
+<script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+<footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+<div class="footer-items__start">
+<div class="footer-item"><p class="copyright">
+© 2024, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> 托管于 <a href="https://www.ovhcloud.com">OVHcloud</a>.
+</p></div>
+<div class="footer-item">
+<p class="sphinx-version">
+使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 7.2.6 创建。
+<br>
+</p>
+</div>
+</div>
+<div class="footer-items__end">
+<div class="footer-item">
+<p class="theme-version">
+使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx 主题</a> 0.14.4 构建。
+</p></div>
+</div>
+</div>
+</footer>
+
+</body></html>

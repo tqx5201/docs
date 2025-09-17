@@ -1,0 +1,52 @@
+name: 将别人项目下载到某文件夹
+
+on:
+  watch:
+    types: [started]
+  #schedule:
+    #- cron: 0 0,22 * * *
+  workflow_dispatch:
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  download_file:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - userName: zprial
+            repoName: cozeworkflows
+            branchName: main
+      
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: GetTime
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+
+    - name: 获取文件
+      run: |
+        cd coze_workflows
+        # 需要下载的文件
+        #rm -f EPG_HK.xml && wget https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1729240644479/waxy.zip -O waxy.zip
+        rm -f Temp.zip && wget https://codeload.github.com/${{ matrix.userName }}/${{ matrix.repoName }}/zip/refs/heads/${{ matrix.branchName }} -O Temp.zip
+        unzip Temp.zip
+        echo "Auto Update in ${{ steps.date.outputs.date }}" > README.md
+    
+    - name: Clean
+      run: |
+        cd coze_workflows
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git checkout --orphan latest_branch
+        git add -A
+        git commit -am "${{ steps.date.outputs.date }}"
+        git branch -D main
+        git branch -m main
+    
+    - name: 推送更新
+      run: git push -f origin main

@@ -1,0 +1,716 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>贡献文档 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'development/contributing_documentation';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas docstring guide" href="contributing_docstring.html" />
+    <link rel="prev" title="Using Gitpod for pandas development" href="contributing_gitpod.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="contributing_documentation.html#main-content">跳到主要内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">贡献 pandas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing_environment.html">创建开发环境</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_gitpod.html">使用 Gitpod 进行 pandas 开发</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="contributing_documentation.html#">贡献文档</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox" /><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html">pandas docstring 指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing_codebase.html">贡献代码库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintaining.html">pandas 维护</a></li>
+<li class="toctree-l1"><a class="reference internal" href="internals.html">内部</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging_extensions.html">调试 C 扩展</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending.html">扩展 pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">开发者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policies.html">策略</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community.html">贡献者社区</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">开发</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">贡献...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="contributing-to-the-documentation">
+<span id="contributing-documentation"></span><h1>贡献文档<a class="headerlink" href="contributing_documentation.html#contributing-to-the-documentation" title="Link to this heading">#</a></h1>
+<p>贡献文档对所有使用 pandas 的人都有益。我们鼓励您帮助我们改进文档，而且您无需成为 pandas 专家即可做到！事实上，文档的某些部分在专家编写后反而变得更糟。如果文档中的某些内容让您感到困惑，那么在您弄清楚之后更新相关部分是确保它能帮助下一个人的好方法。请访问<a class="reference external" href="https://github.com/pandas-dev/pandas/issues?page=1&amp;q=is%3Aopen+sort%3Aupdated-desc+label%3ADocs">问题页面</a>，获取当前关于 Pandas 文档的所有未解决问题的完整列表。</p>
+<nav class="contents local" id="documentation">
+<p class="topic-title">文档</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="contributing_documentation.html#about-the-pandas-documentation" id="id1">关于 pandas 文档</a></p></li>
+<li><p><a class="reference internal" href="contributing_documentation.html#updating-a-pandas-docstring" id="id2">更新 pandas docstring</a></p></li>
+<li><p><a class="reference internal" href="contributing_documentation.html#how-to-build-the-pandas-documentation" id="id3">如何构建 pandas 文档</a></p>
+<ul>
+<li><p><a class="reference internal" href="contributing_documentation.html#requirements" id="id4">要求</a></p></li>
+<li><p><a class="reference internal" href="contributing_documentation.html#building-the-documentation" id="id5">构建文档</a></p></li>
+<li><p><a class="reference internal" href="contributing_documentation.html#building-main-branch-documentation" id="id6">构建主分支文档</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="contributing_documentation.html#previewing-changes" id="id7">预览更改</a></p></li>
+</ul>
+</nav>
+<section id="about-the-pandas-documentation">
+<h2><a class="toc-backref" href="contributing_documentation.html#id1" role="doc-backlink">关于 pandas 文档</a><a class="headerlink" href="contributing_documentation.html#about-the-pandas-documentation" title="Link to this heading">#</a></h2>
+<p>文档使用 <strong>reStructuredText</strong> 编写，这几乎就像用纯英语写作一样，并使用 <a class="reference external" href="https://sphinx-doc.cn/en/master/">Sphinx</a> 构建。Sphinx 文档提供了出色的 <a class="reference external" href="https://sphinx-doc.cn/en/master/usage/restructuredtext/basics.html">reST 入门</a>。您还可以查阅 Sphinx 文档以进行更复杂的文档修改。</p>
+<p>关于文档的其他重要事项</p>
+<ul>
+<li><p>pandas 文档由两部分组成：代码本身的 docstrings 和 <code class="docutils literal notranslate"><span class="pre">doc/</span></code> 文件夹中的文档。</p>
+<p>docstrings 清晰解释了各个函数的用法，而此文件夹中的文档则包含按主题划分的教程式概述以及其他信息（新特性、安装等）。</p>
+</li>
+<li><p>docstrings 遵循基于 <strong>Numpy Docstring 标准</strong>的 pandas 约定。请遵循 <a class="reference internal" href="contributing_docstring.html#docstring"><span class="std std-ref">pandas docstring 指南</span></a>，获取如何编写正确 docstring 的详细说明。</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing_docstring.html">pandas docstring 指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html#about-docstrings-and-standards">关于 docstrings 和标准</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html#writing-a-docstring">编写 docstring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_docstring.html#sharing-docstrings">共享 docstrings</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+<li><p>教程大量使用了 <a class="reference external" href="https://matplotlib.net.cn/sampledoc/ipython_directive.html">IPython directive</a> sphinx 扩展。此 directive 允许您将代码放入文档中，这些代码将在文档构建期间运行。例如</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">ipython</span><span class="p">::</span> <span class="n">python</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>将被渲染为</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="mi">8</span>
+</pre></div>
+</div>
+<p>文档中几乎所有的代码示例都会在文档构建期间运行（并保存输出）。这种方法意味着代码示例将始终保持最新，但这确实使文档构建变得稍微复杂一些。</p>
+</li>
+<li><p>我们位于 <code class="docutils literal notranslate"><span class="pre">doc/source/reference</span></code> 中的 API 文档文件包含从 docstrings 自动生成的文档。对于类，在控制哪些方法和属性自动生成页面方面存在一些细微之处。</p>
+<p>我们为类提供了两种自动摘要模板。</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_templates/autosummary/class.rst</span></code>。当您希望为类的每个公共方法和属性自动生成页面时使用此模板。<code class="docutils literal notranslate"><span class="pre">Attributes</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Methods</span></code> 部分将由 numpydoc 自动添加到类的渲染文档中。请参阅 <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> 作为示例。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_templates/autosummary/class_without_autosummary</span></code>。当您希望选择方法/属性的子集来自动生成页面时使用此模板。使用此模板时，您应该在类 docstring 中包含 <code class="docutils literal notranslate"><span class="pre">Attributes</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Methods</span></code> 部分。请参阅 <code class="docutils literal notranslate"><span class="pre">CategoricalIndex</span></code> 作为示例。</p></li>
+</ol>
+<p>每个方法都应包含在 <code class="docutils literal notranslate"><span class="pre">doc/source/reference</span></code> 中某个文档文件的 <code class="docutils literal notranslate"><span class="pre">toctree</span></code> 中，否则 Sphinx 将发出警告。</p>
+</li>
+</ul>
+<p>实用脚本 <code class="docutils literal notranslate"><span class="pre">scripts/validate_docstrings.py</span></code> 可用于获取 API 文档的 CSV 摘要。它还可以验证特定类、函数或方法的 docstring 中的常见错误。该摘要还比较了 <code class="docutils literal notranslate"><span class="pre">doc/source/reference</span></code> 中文件中记录的方法列表（用于生成 <a class="reference external" href="https://pandas.ac.cn/pandas-docs/stable/api.html">API 参考</a>页面）和实际的公共方法。这将识别在 <code class="docutils literal notranslate"><span class="pre">doc/source/reference</span></code> 中记录但实际上不是类方法的方法，以及存在但未在 <code class="docutils literal notranslate"><span class="pre">doc/source/reference</span></code> 中记录的方法。</p>
+</section>
+<section id="updating-a-pandas-docstring">
+<h2><a class="toc-backref" href="contributing_documentation.html#id2" role="doc-backlink">更新 pandas docstring</a><a class="headerlink" href="contributing_documentation.html#updating-a-pandas-docstring" title="Link to this heading">#</a></h2>
+<p>在改进单个函数或方法的 docstring 时，不一定需要构建完整的文档（参见下一节）。但是，有一个脚本可以检查 docstring（例如针对 <code class="docutils literal notranslate"><span class="pre">DataFrame.mean</span></code> 方法）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">validate_docstrings</span><span class="o">.</span><span class="n">py</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">mean</span>
+</pre></div>
+</div>
+<p>此脚本将指出存在的格式错误，并运行和测试 docstring 中包含的示例。请查阅 <a class="reference internal" href="contributing_docstring.html#docstring"><span class="std std-ref">pandas docstring 指南</span></a>，获取有关如何格式化 docstring 的详细指南。</p>
+<p>docstring 中的示例（“doctests”）必须是有效的 Python 代码，以确定性方式返回所示输出，并且可以由用户复制和运行。这可以使用上述脚本进行检查，也通过 Travis 进行测试。失败的 doctest 将阻碍 PR 的合并。请查阅 docstring 指南中的 <a class="reference internal" href="contributing_docstring.html#docstring-examples"><span class="std std-ref">示例</span></a>部分，获取一些使 doctest 通过的提示和技巧。</p>
+<p>提交包含 docstring 更新的 PR 时，最好在 GitHub 评论中发布验证脚本的输出。</p>
+</section>
+<section id="how-to-build-the-pandas-documentation">
+<span id="contributing-howto-build-docs"></span><h2><a class="toc-backref" href="contributing_documentation.html#id3" role="doc-backlink">如何构建 pandas 文档</a><a class="headerlink" href="contributing_documentation.html#how-to-build-the-pandas-documentation" title="Link to this heading">#</a></h2>
+<section id="requirements">
+<h3><a class="toc-backref" href="contributing_documentation.html#id4" role="doc-backlink">要求</a><a class="headerlink" href="contributing_documentation.html#requirements" title="Link to this heading">#</a></h3>
+<p>首先，您需要一个开发环境才能构建 pandas（请参阅有关<a class="reference internal" href="contributing_environment.html#contributing-environment"><span class="std std-ref">创建开发环境</span></a>的文档）。</p>
+</section>
+<section id="building-the-documentation">
+<h3><a class="toc-backref" href="contributing_documentation.html#id5" role="doc-backlink">构建文档</a><a class="headerlink" href="contributing_documentation.html#building-the-documentation" title="Link to this heading">#</a></h3>
+<p>那么如何构建文档呢？导航到控制台中的本地 <code class="docutils literal notranslate"><span class="pre">doc/</span></code> 目录并运行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>然后您可以在 <code class="docutils literal notranslate"><span class="pre">doc/build/html/</span></code> 文件夹中找到 HTML 输出。</p>
+<p>第一次构建文档需要相当长的时间，因为它必须运行所有代码示例并构建所有生成的 docstring 页面。在后续调用中，sphinx 将尝试仅构建已修改的页面。</p>
+<p>如果您想进行完全的干净构建，请执行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="n">clean</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>您可以告诉 <code class="docutils literal notranslate"><span class="pre">make.py</span></code> 仅编译文档的单个部分，从而大大减少检查更改的周转时间。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># omit autosummary and API section</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="n">clean</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">api</span>
+
+<span class="c1"># compile the docs with only a single section, relative to the "source" folder.</span>
+<span class="c1"># For example, compiling only this guide (doc/source/development/contributing.rst)</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="n">clean</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">single</span> <span class="n">development</span><span class="o">/</span><span class="n">contributing</span><span class="o">.</span><span class="n">rst</span>
+
+<span class="c1"># compile the reference docs for a single function</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="n">clean</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">single</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">join</span>
+
+<span class="c1"># compile whatsnew and API section (to resolve links in the whatsnew)</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="n">clean</span>
+<span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">whatsnew</span>
+</pre></div>
+</div>
+<p>相比之下，完整文档构建可能需要 15 分钟，但单个部分可能需要 15 秒。后续构建将只处理您更改的部分，速度会更快。</p>
+<p>构建将自动使用您机器上可用的核心数量来加速文档构建。您可以覆盖此设置</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">make</span><span class="o">.</span><span class="n">py</span> <span class="n">html</span> <span class="o">--</span><span class="n">num</span><span class="o">-</span><span class="n">jobs</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>在 Web 浏览器中打开以下文件以查看您刚刚构建的完整文档 <code class="docutils literal notranslate"><span class="pre">doc/build/html/index.html</span></code>。</p>
+<p>您将体验到看到新改进的文档的满足感！</p>
+</section>
+<section id="building-main-branch-documentation">
+<span id="contributing-dev-docs"></span><h3><a class="toc-backref" href="contributing_documentation.html#id6" role="doc-backlink">构建主分支文档</a><a class="headerlink" href="contributing_documentation.html#building-main-branch-documentation" title="Link to this heading">#</a></h3>
+<p>当拉取请求合并到 pandas <code class="docutils literal notranslate"><span class="pre">main</span></code> 分支时，文档的主要部分也由 Travis-CI 构建。这些文档随后托管在<a class="reference external" href="../dev/index.html">此处</a>，另请参阅 <a class="reference internal" href="contributing_codebase.html#contributing-ci"><span class="std std-ref">持续集成</span></a>部分。</p>
+</section>
+</section>
+<section id="previewing-changes">
+<h2><a class="toc-backref" href="contributing_documentation.html#id7" role="doc-backlink">预览更改</a><a class="headerlink" href="contributing_documentation.html#previewing-changes" title="Link to this heading">#</a></h2>
+<p>提交拉取请求后，GitHub Actions 将自动构建文档。要查看构建好的网站</p>
+<ol class="arabic simple">
+<li><p>等待 <code class="docutils literal notranslate"><span class="pre">CI</span> <span class="pre">/</span> <span class="pre">Web</span> <span class="pre">and</span> <span class="pre">docs</span></code> 检查完成。</p></li>
+<li><p>点击其旁边的 <code class="docutils literal notranslate"><span class="pre">Details</span></code>。</p></li>
+<li><p>从 <code class="docutils literal notranslate"><span class="pre">Artifacts</span></code> 下拉菜单中，点击 <code class="docutils literal notranslate"><span class="pre">docs</span></code> 或 <code class="docutils literal notranslate"><span class="pre">website</span></code> 以下载网站的 ZIP 文件。</p></li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="contributing_gitpod.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">使用 Gitpod 进行 pandas 开发</p> </div> </a> <a class="right-next" href="contributing_docstring.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">pandas docstring 指南</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_documentation.html#about-the-pandas-documentation">关于 pandas 文档</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_documentation.html#updating-a-pandas-docstring">更新 pandas docstring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_documentation.html#how-to-build-the-pandas-documentation">如何构建 pandas 文档</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_documentation.html#requirements">要求</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_documentation.html#building-the-documentation">构建文档</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_documentation.html#building-main-branch-documentation">构建主分支文档</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="contributing_documentation.html#previewing-changes">预览更改</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/development/contributing_documentation.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas via <a href="https://numfocus.org">NumFOCUS, Inc.</a> 由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

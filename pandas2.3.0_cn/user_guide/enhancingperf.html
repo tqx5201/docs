@@ -1,0 +1,1343 @@
+<!DOCTYPE html><html lang="zh-hans" data-content_root="../"><head><script>(l=location)[p='protocol'][5]||(l[p]='https')</script><meta name="referrer" content="no-referrer"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8543159550507237" crossorigin="anonymous"></script>
+
+<script>window.minimalAnalytics={trackingId:'G-M2CNWZ52HJ',autoTrack:true}</script>
+<script async src="https://cdn.jsdelivr.net.cn/npm/@minimal-analytics/ga4/dist/index.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>提升性能 — pandas 2.3.0 文档 - pandas 数据分析库</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css%3Fdigest=5b4479735964841361fd.css" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css%3Fv=150e0881.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css%3Fv=b7db95b1.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js%3Fdigest=5b4479735964841361fd"></script>
+
+    <script src="../_static/documentation_options.js%3Fv=c3c8ae58"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=f281be69"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="https://#/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/enhancingperf';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.ac.cn/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/favicon.ico" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Scaling to large datasets" href="scale.html" />
+    <link rel="prev" title="Options and settings" href="options.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="enhancingperf.html#main-content">跳到主内容</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i> 返回顶部</button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary" />
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pandas.svg" class="logo__image only-light" alt="pandas 2.3.0 documentation - Home">
+    <script>document.write(`<img src="../../static/img/pandas_white.svg" class="logo__image only-dark" alt="pandas 2.3.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">网站导航</p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">入门</a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">用户指南</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">API 参考</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../development/index.html">开发</a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../whatsnew/index.html">发布说明</a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span> <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/pandas_dev" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" title="Mastodon" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></span> <span class="sr-only">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="10min.html">pandas 10 分钟入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dsintro.html">数据结构介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">基本功能要点</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">IO 工具（文本、CSV、HDF5 等）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyarrow.html">PyArrow 功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="indexing.html">索引和数据选择</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced.html">多级索引 / 高级索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_on_write.html">写时复制 (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merging.html">合并、连接、拼接和比较</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reshaping.html">重塑和透视表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text.html">处理文本数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="missing_data.html">处理缺失数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duplicates.html">重复标签</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categorical.html">分类数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integer_na.html">可为空的整数数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boolean.html">可为空的布尔数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">图表可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">表格可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="groupby.html">分组：拆分-应用-组合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="window.html">窗口操作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseries.html">时间序列 / 日期功能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timedeltas.html">时间差</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">选项和设置</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="enhancingperf.html#">提升性能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scale.html">扩展到大型数据集</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sparse.html">稀疏数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gotchas.html">常见问题 (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">秘籍</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">用户指南</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">提升...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="enhancing-performance">
+<span id="enhancingperf"></span><h1>提升性能<a class="headerlink" href="enhancingperf.html#enhancing-performance" title="Link to this heading">#</a></h1>
+<p>在本教程的这一部分，我们将探讨如何使用 Cython、Numba 和 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 来加速操作 pandas <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的某些函数。通常，使用 Cython 和 Numba 可以比使用 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 提供更大的加速，但这需要更多的代码。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>除了遵循本教程中的步骤外，强烈建议对提升性能感兴趣的用户安装 pandas 的<a class="reference internal" href="../getting_started/install.html#install-recommended-dependencies"><span class="std std-ref">推荐依赖项</span></a>。这些依赖项通常默认不安装，但如果存在，将提供速度改进。</p>
+</div>
+<section id="cython-writing-c-extensions-for-pandas">
+<span id="enhancingperf-cython"></span><h2>Cython（为 pandas 编写 C 扩展）<a class="headerlink" href="enhancingperf.html#cython-writing-c-extensions-for-pandas" title="Link to this heading">#</a></h2>
+<p>对于许多用例，用纯 Python 和 NumPy 编写 pandas 代码就足够了。然而，在一些计算密集型应用中，通过将工作卸载到 <a class="reference external" href="https://cython.pythonlang.cn/">Cython</a>，可以实现显著的加速。</p>
+<p>本教程假设您已尽可能地在 Python 中重构代码，例如尝试删除 for 循环并利用 NumPy 向量化。始终值得先在 Python 中进行优化。</p>
+<p>本教程将介绍一个“典型”的 Cython 化慢速计算过程。我们使用<a class="reference external" href="https://cython-docs.pythonlang.cn/en/latest/src/quickstart/cythonize.html">来自 Cython 文档的示例</a>，但将其置于 pandas 的上下文中。我们最终的 Cython 化解决方案比纯 Python 解决方案快约 100 倍。</p>
+<section id="pure-python">
+<span id="enhancingperf-pure"></span><h3>纯 Python<a class="headerlink" href="enhancingperf.html#pure-python" title="Link to this heading">#</a></h3>
+<p>我们有一个 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>，我们希望对其按行应用一个函数。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="p">{</span>
+<span class="gp">   ...: </span>        <span class="s2">"a"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+<span class="gp">   ...: </span>        <span class="s2">"b"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+<span class="gp">   ...: </span>        <span class="s2">"N"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="p">(</span><span class="mi">1000</span><span class="p">)),</span>
+<span class="gp">   ...: </span>        <span class="s2">"x"</span><span class="p">:</span> <span class="s2">"x"</span><span class="p">,</span>
+<span class="gp">   ...: </span>    <span class="p">}</span>
+<span class="gp">   ...: </span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [2]: </span><span class="n">df</span>
+<span class="gh">Out[2]: </span>
+<span class="go">            a         b    N  x</span>
+<span class="go">0    0.469112 -0.218470  585  x</span>
+<span class="go">1   -0.282863 -0.061645  841  x</span>
+<span class="go">2   -1.509059 -0.723780  251  x</span>
+<span class="go">3   -1.135632  0.551225  972  x</span>
+<span class="go">4    1.212112 -0.497767  181  x</span>
+<span class="go">..        ...       ...  ... ..</span>
+<span class="go">995 -1.512743  0.874737  374  x</span>
+<span class="go">996  0.933753  1.120790  246  x</span>
+<span class="go">997 -0.308013  0.198768  157  x</span>
+<span class="go">998 -0.079915  1.757555  977  x</span>
+<span class="go">999 -1.010589 -1.115680  770  x</span>
+
+<span class="go">[1000 rows x 4 columns]</span>
+</pre></div>
+</div>
+<p>这是纯 Python 中的函数</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [4]: </span><span class="k">def</span><span class="w"> </span><span class="nf">integrate_f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">   ...: </span>    <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+<span class="gp">   ...: </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<span class="gp">   ...: </span>        <span class="n">s</span> <span class="o">+=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">s</span> <span class="o">*</span> <span class="n">dx</span>
+<span class="gp">   ...: </span>
+</pre></div>
+</div>
+<p>我们通过使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply" title="pandas.DataFrame.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.apply()</span></code></a>（按行）来获得结果</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="o">%</span><span class="k">timeit</span> df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)
+<span class="go">80.3 ms +- 1.18 ms per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+</pre></div>
+</div>
+<p>让我们使用 <a class="reference external" href="https://ipython-docs.pythonlang.cn/en/stable/interactive/magics.html#magic-prun">prun ipython magic 函数</a>来看看此操作中时间花在了哪里</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># most time consuming 4 calls</span>
+<span class="gp">In [6]: </span><span class="o">%</span><span class="k">prun</span> -l 4 df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)  # noqa E999
+<span class="go">         605956 function calls (605938 primitive calls) in 0.173 seconds</span>
+
+<span class="go">   Ordered by: internal time</span>
+<span class="go">   List reduced from 163 to 4 due to restriction &lt;4&gt;</span>
+
+<span class="go">   ncalls  tottime  percall  cumtime  percall filename:lineno(function)</span>
+<span class="go">     1000    0.101    0.000    0.154    0.000 &lt;ipython-input-4-c2a74e076cf0&gt;:1(integrate_f)</span>
+<span class="go">   552423    0.053    0.000    0.053    0.000 &lt;ipython-input-3-c138bdd570e3&gt;:1(f)</span>
+<span class="go">     3000    0.003    0.000    0.013    0.000 series.py:1104(__getitem__)</span>
+<span class="go">     3000    0.002    0.000    0.006    0.000 series.py:1229(_get_value)</span>
+</pre></div>
+</div>
+<p>绝大部分时间都花在 <code class="docutils literal notranslate"><span class="pre">integrate_f</span></code> 或 <code class="docutils literal notranslate"><span class="pre">f</span></code> 内部，因此我们将集中精力对这两个函数进行 Cython 化。</p>
+</section>
+<section id="plain-cython">
+<span id="enhancingperf-plain"></span><h3>普通 Cython<a class="headerlink" href="enhancingperf.html#plain-cython" title="Link to this heading">#</a></h3>
+<p>首先，我们需要将 Cython magic 函数导入 IPython</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="o">%</span><span class="k">load_ext</span> Cython
+</pre></div>
+</div>
+<p>现在，让我们简单地将函数复制到 Cython</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="o">%%</span><span class="k">cython</span>
+<span class="gp">   ...: </span>def f_plain(x):
+<span class="gp">   ...: </span>    return x * (x - 1)
+<span class="gp">   ...: </span>def integrate_f_plain(a, b, N):
+<span class="gp">   ...: </span>    s = 0
+<span class="gp">   ...: </span>    dx = (b - a) / N
+<span class="gp">   ...: </span>    for i in range(N):
+<span class="gp">   ...: </span>        s += f_plain(a + i * dx)
+<span class="gp">   ...: </span>    return s * dx
+<span class="gp">   ...: </span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="o">%</span><span class="k">timeit</span> df.apply(lambda x: integrate_f_plain(x["a"], x["b"], x["N"]), axis=1)
+<span class="go">48.7 ms +- 490 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+</pre></div>
+</div>
+<p>这将性能比纯 Python 方法提高了三分之一。</p>
+</section>
+<section id="declaring-c-types">
+<span id="enhancingperf-type"></span><h3>声明 C 类型<a class="headerlink" href="enhancingperf.html#declaring-c-types" title="Link to this heading">#</a></h3>
+<p>我们可以标注函数变量和返回类型，并使用 <code class="docutils literal notranslate"><span class="pre">cdef</span></code> 和 <code class="docutils literal notranslate"><span class="pre">cpdef</span></code> 来提升性能</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="o">%%</span><span class="k">cython</span>
+<span class="gp">   ....: </span>cdef double f_typed(double x) except? -2:
+<span class="gp">   ....: </span>    return x * (x - 1)
+<span class="gp">   ....: </span>cpdef double integrate_f_typed(double a, double b, int N):
+<span class="gp">   ....: </span>    cdef int i
+<span class="gp">   ....: </span>    cdef double s, dx
+<span class="gp">   ....: </span>    s = 0
+<span class="gp">   ....: </span>    dx = (b - a) / N
+<span class="gp">   ....: </span>    for i in range(N):
+<span class="gp">   ....: </span>        s += f_typed(a + i * dx)
+<span class="gp">   ....: </span>    return s * dx
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="o">%</span><span class="k">timeit</span> df.apply(lambda x: integrate_f_typed(x["a"], x["b"], x["N"]), axis=1)
+<span class="go">7.5 ms +- 29.6 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+<p>使用 C 类型标注函数可以使性能比原始 Python 实现提高十倍以上。</p>
+</section>
+<section id="using-ndarray">
+<span id="enhancingperf-ndarray"></span><h3>使用 ndarray<a class="headerlink" href="enhancingperf.html#using-ndarray" title="Link to this heading">#</a></h3>
+<p>重新分析性能时，时间花费在从每一行创建 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a>，以及从索引和 Series 调用 <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>（每行三次）上。这些 Python 函数调用开销很大，可以通过传递一个 <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> 来改进。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="o">%</span><span class="k">prun</span> -l 4 df.apply(lambda x: integrate_f_typed(x["a"], x["b"], x["N"]), axis=1)
+<span class="go">         52533 function calls (52515 primitive calls) in 0.019 seconds</span>
+
+<span class="go">   Ordered by: internal time</span>
+<span class="go">   List reduced from 161 to 4 due to restriction &lt;4&gt;</span>
+
+<span class="go">   ncalls  tottime  percall  cumtime  percall filename:lineno(function)</span>
+<span class="go">     3000    0.003    0.000    0.012    0.000 series.py:1104(__getitem__)</span>
+<span class="go">     3000    0.002    0.000    0.005    0.000 series.py:1229(_get_value)</span>
+<span class="go">     3000    0.002    0.000    0.003    0.000 indexing.py:2765(check_dict_or_set_indexers)</span>
+<span class="go">     3000    0.002    0.000    0.002    0.000 base.py:3784(get_loc)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="o">%%</span><span class="k">cython</span>
+<span class="gp">   ....: </span>cimport numpy as np
+<span class="gp">   ....: </span>import numpy as np
+<span class="gp">   ....: </span>cdef double f_typed(double x) except? -2:
+<span class="gp">   ....: </span>    return x * (x - 1)
+<span class="gp">   ....: </span>cpdef double integrate_f_typed(double a, double b, int N):
+<span class="gp">   ....: </span>    cdef int i
+<span class="gp">   ....: </span>    cdef double s, dx
+<span class="gp">   ....: </span>    s = 0
+<span class="gp">   ....: </span>    dx = (b - a) / N
+<span class="gp">   ....: </span>    for i in range(N):
+<span class="gp">   ....: </span>        s += f_typed(a + i * dx)
+<span class="gp">   ....: </span>    return s * dx
+<span class="gp">   ....: </span>cpdef np.ndarray[double] apply_integrate_f(np.ndarray col_a, np.ndarray col_b,
+<span class="gp">   ....: </span>                                           np.ndarray col_N):
+<span class="gp">   ....: </span>    assert (col_a.dtype == np.float64
+<span class="gp">   ....: </span>            and col_b.dtype == np.float64 and col_N.dtype == np.dtype(int))
+<span class="gp">   ....: </span>    cdef Py_ssize_t i, n = len(col_N)
+<span class="gp">   ....: </span>    assert (len(col_a) == len(col_b) == n)
+<span class="gp">   ....: </span>    cdef np.ndarray[double] res = np.empty(n)
+<span class="gp">   ....: </span>    for i in range(len(col_a)):
+<span class="gp">   ....: </span>        res[i] = integrate_f_typed(col_a[i], col_b[i], col_N[i])
+<span class="gp">   ....: </span>    return res
+<span class="gp">   ....: </span>
+<span class="go">Content of stderr:</span>
+<span class="go">In file included from /home/runner/micromamba/envs/test/lib/python3.10/site-packages/numpy/core/include/numpy/ndarraytypes.h:1929,</span>
+<span class="go">                 from /home/runner/micromamba/envs/test/lib/python3.10/site-packages/numpy/core/include/numpy/ndarrayobject.h:12,</span>
+<span class="go">                 from /home/runner/micromamba/envs/test/lib/python3.10/site-packages/numpy/core/include/numpy/arrayobject.h:5,</span>
+<span class="go">                 from /home/runner/.cache/ipython/cython/_cython_magic_1f8c1b875aeb076a8ef75ac5199664d0fea77dfb626f30a4e36b3263c3db7ec2.c:1138:</span>
+<span class="go">/home/runner/micromamba/envs/test/lib/python3.10/site-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:17:2: warning: #warning "Using deprecated NumPy API, disable it with " "#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]</span>
+<span class="go">   17 | #warning "Using deprecated NumPy API, disable it with " \</span>
+<span class="go">      |  ^~~~~~~</span>
+</pre></div>
+</div>
+<p>此实现创建一个零数组，并插入将 <code class="docutils literal notranslate"><span class="pre">integrate_f_typed</span></code> 应用于每一行的结果。在 Cython 中，遍历 <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> 比遍历 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 对象更快。</p>
+<p>由于 <code class="docutils literal notranslate"><span class="pre">apply_integrate_f</span></code> 被类型化为接受 <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>，因此需要调用 <a class="reference internal" href="../reference/api/pandas.Series.to_numpy.html#pandas.Series.to_numpy" title="pandas.Series.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code></a> 来使用此函数。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="o">%</span><span class="k">timeit</span> apply_integrate_f(df["a"].to_numpy(), df["b"].to_numpy(), df["N"].to_numpy())
+<span class="go">830 us +- 945 ns per loop (mean +- std. dev. of 7 runs, 1,000 loops each)</span>
+</pre></div>
+</div>
+<p>性能比之前的实现提高了近十倍。</p>
+</section>
+<section id="disabling-compiler-directives">
+<span id="enhancingperf-boundswrap"></span><h3>禁用编译器指令<a class="headerlink" href="enhancingperf.html#disabling-compiler-directives" title="Link to this heading">#</a></h3>
+<p>现在大部分时间都花在 <code class="docutils literal notranslate"><span class="pre">apply_integrate_f</span></code> 中。禁用 Cython 的 <code class="docutils literal notranslate"><span class="pre">boundscheck</span></code> 和 <code class="docutils literal notranslate"><span class="pre">wraparound</span></code> 检查可以带来更高的性能。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="o">%</span><span class="k">prun</span> -l 4 apply_integrate_f(df["a"].to_numpy(), df["b"].to_numpy(), df["N"].to_numpy())
+<span class="go">         78 function calls in 0.001 seconds</span>
+
+<span class="go">   Ordered by: internal time</span>
+<span class="go">   List reduced from 21 to 4 due to restriction &lt;4&gt;</span>
+
+<span class="go">   ncalls  tottime  percall  cumtime  percall filename:lineno(function)</span>
+<span class="go">        1    0.001    0.001    0.001    0.001 &lt;string&gt;:1(&lt;module&gt;)</span>
+<span class="go">        1    0.000    0.000    0.001    0.001 {built-in method builtins.exec}</span>
+<span class="go">        3    0.000    0.000    0.000    0.000 frame.py:4067(__getitem__)</span>
+<span class="go">        3    0.000    0.000    0.000    0.000 base.py:545(to_numpy)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="o">%%</span><span class="k">cython</span>
+<span class="gp">   ....: </span>cimport cython
+<span class="gp">   ....: </span>cimport numpy as np
+<span class="gp">   ....: </span>import numpy as np
+<span class="gp">   ....: </span>cdef np.float64_t f_typed(np.float64_t x) except? -2:
+<span class="gp">   ....: </span>    return x * (x - 1)
+<span class="gp">   ....: </span>cpdef np.float64_t integrate_f_typed(np.float64_t a, np.float64_t b, np.int64_t N):
+<span class="gp">   ....: </span>    cdef np.int64_t i
+<span class="gp">   ....: </span>    cdef np.float64_t s = 0.0, dx
+<span class="gp">   ....: </span>    dx = (b - a) / N
+<span class="gp">   ....: </span>    for i in range(N):
+<span class="gp">   ....: </span>        s += f_typed(a + i * dx)
+<span class="gp">   ....: </span>    return s * dx
+<span class="gp">   ....: </span>@cython.boundscheck(False)
+<span class="gp">   ....: </span>@cython.wraparound(False)
+<span class="gp">   ....: </span>cpdef np.ndarray[np.float64_t] apply_integrate_f_wrap(
+<span class="gp">   ....: </span>    np.ndarray[np.float64_t] col_a,
+<span class="gp">   ....: </span>    np.ndarray[np.float64_t] col_b,
+<span class="gp">   ....: </span>    np.ndarray[np.int64_t] col_N
+<span class="gp">   ....: </span>):
+<span class="gp">   ....: </span>    cdef np.int64_t i, n = len(col_N)
+<span class="gp">   ....: </span>    assert len(col_a) == len(col_b) == n
+<span class="gp">   ....: </span>    cdef np.ndarray[np.float64_t] res = np.empty(n, dtype=np.float64)
+<span class="gp">   ....: </span>    for i in range(n):
+<span class="gp">   ....: </span>        res[i] = integrate_f_typed(col_a[i], col_b[i], col_N[i])
+<span class="gp">   ....: </span>    return res
+<span class="gp">   ....: </span>
+<span class="go">Content of stderr:</span>
+<span class="go">In file included from /home/runner/micromamba/envs/test/lib/python3.10/site-packages/numpy/core/include/numpy/ndarraytypes.h:1929,</span>
+<span class="go">                 from /home/runner/micromamba/envs/test/lib/python3.10/site-packages/numpy/core/include/numpy/ndarrayobject.h:12,</span>
+<span class="go">                 from /home/runner/micromamba/envs/test/lib/python3.10/site-packages/numpy/core/include/numpy/arrayobject.h:5,</span>
+<span class="go">                 from /home/runner/.cache/ipython/cython/_cython_magic_344a9e4468707236d239faf5bdfacf0d14a35efa7e89d2a7b09ae36b339492db.c:1139:</span>
+<span class="go">/home/runner/micromamba/envs/test/lib/python3.10/site-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:17:2: warning: #warning "Using deprecated NumPy API, disable it with " "#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]</span>
+<span class="go">   17 | #warning "Using deprecated NumPy API, disable it with " \</span>
+<span class="go">      |  ^~~~~~~</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="o">%</span><span class="k">timeit</span> apply_integrate_f_wrap(df["a"].to_numpy(), df["b"].to_numpy(), df["N"].to_numpy())
+<span class="go">624 us +- 2.43 us per loop (mean +- std. dev. of 7 runs, 1,000 loops each)</span>
+</pre></div>
+</div>
+<p>然而，如果循环索引器 <code class="docutils literal notranslate"><span class="pre">i</span></code> 访问数组中的无效位置，则会导致段错误，因为内存访问未被检查。有关 <code class="docutils literal notranslate"><span class="pre">boundscheck</span></code> 和 <code class="docutils literal notranslate"><span class="pre">wraparound</span></code> 的更多信息，请参阅 Cython 文档中关于<a class="reference external" href="https://cython-docs.pythonlang.cn/en/latest/src/userguide/source_files_and_compilation.html#compiler-directives">编译器指令</a>的部分。</p>
+</section>
+</section>
+<section id="numba-jit-compilation">
+<span id="enhancingperf-numba"></span><h2>Numba（JIT 编译）<a class="headerlink" href="enhancingperf.html#numba-jit-compilation" title="Link to this heading">#</a></h2>
+<p>静态编译 Cython 代码的替代方案是使用 <a class="reference external" href="https://numba.pydata.org.cn/">Numba</a> 的动态即时 (JIT) 编译器。</p>
+<p>Numba 允许您编写一个纯 Python 函数，该函数可以通过使用 <code class="docutils literal notranslate"><span class="pre">@jit</span></code> 装饰器对其进行 JIT 编译，生成与 C、C++ 和 Fortran 性能相似的本地机器指令。</p>
+<p>Numba 通过在导入时、运行时或静态地（使用附带的 pycc 工具）利用 LLVM 编译器基础设施生成优化的机器代码。Numba 支持将 Python 编译为在 CPU 或 GPU 硬件上运行，并旨在与 Python 科学软件栈集成。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p><code class="docutils literal notranslate"><span class="pre">@jit</span></code> 编译会增加函数的运行时开销，因此在处理小数据集时可能无法实现性能优势。考虑<a class="reference external" href="https://numba.readthedocs.cn/en/stable/developer/caching.html">缓存</a>您的函数，以避免每次运行函数时都产生编译开销。</p>
+</div>
+<p>Numba 可以通过两种方式与 pandas 一起使用</p>
+<ol class="arabic simple">
+<li><p>在部分 pandas 方法中指定 <code class="docutils literal notranslate"><span class="pre">engine="numba"</span></code> 关键字</p></li>
+<li><p>定义您自己的带有 <code class="docutils literal notranslate"><span class="pre">@jit</span></code> 装饰器的 Python 函数，并将 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 或 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的底层 NumPy 数组（使用 <a class="reference internal" href="../reference/api/pandas.Series.to_numpy.html#pandas.Series.to_numpy" title="pandas.Series.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code></a>）传入该函数</p></li>
+</ol>
+<section id="pandas-numba-engine">
+<h3>pandas Numba 引擎<a class="headerlink" href="enhancingperf.html#pandas-numba-engine" title="Link to this heading">#</a></h3>
+<p>如果安装了 Numba，可以在部分 pandas 方法中指定 <code class="docutils literal notranslate"><span class="pre">engine="numba"</span></code> 以使用 Numba 执行该方法。支持 <code class="docutils literal notranslate"><span class="pre">engine="numba"</span></code> 的方法还将有一个 <code class="docutils literal notranslate"><span class="pre">engine_kwargs</span></code> 关键字，它接受一个字典，允许指定布尔值 <code class="docutils literal notranslate"><span class="pre">"nogil"</span></code>、<code class="docutils literal notranslate"><span class="pre">"nopython"</span></code> 和 <code class="docutils literal notranslate"><span class="pre">"parallel"</span></code> 键以传递给 <code class="docutils literal notranslate"><span class="pre">@jit</span></code> 装饰器。如果未指定 <code class="docutils literal notranslate"><span class="pre">engine_kwargs</span></code>，则默认为 <code class="docutils literal notranslate"><span class="pre">{"nogil":</span> <span class="pre">False,</span> <span class="pre">"nopython":</span> <span class="pre">True,</span> <span class="pre">"parallel":</span> <span class="pre">False}</span></code>，除非另有说明。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>在性能方面，<strong>首次使用 Numba 引擎运行函数会很慢</strong>，因为 Numba 会有一些函数编译开销。然而，JIT 编译的函数会被缓存，后续调用将很快。通常，Numba 引擎在处理大量数据点（例如 100 万以上）时表现良好。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">))</span>  <span class="c1"># noqa: E225</span>
+
+<span class="gp">In [2]: </span><span class="n">roll</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="go"># Run the first time, compilation time will affect performance</span>
+<span class="gp">In [4]: </span><span class="o">%</span><span class="k">timeit</span> -r 1 -n 1 roll.apply(f, engine='numba', raw=True)
+<span class="go">1.23 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)</span>
+<span class="go"># Function is cached and performance will improve</span>
+<span class="gp">In [5]: </span><span class="o">%</span><span class="k">timeit</span> roll.apply(f, engine='numba', raw=True)
+<span class="go">188 ms ± 1.93 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)</span>
+
+<span class="gp">In [6]: </span><span class="o">%</span><span class="k">timeit</span> roll.apply(f, engine='cython', raw=True)
+<span class="go">3.92 s ± 59 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</span>
+</pre></div>
+</div>
+</div>
+<p>如果您的计算硬件包含多个 CPU，则通过将 <code class="docutils literal notranslate"><span class="pre">parallel</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 以利用多个 CPU，可以实现最大的性能提升。在内部，pandas 利用 Numba 并行化 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 列上的计算；因此，此性能优势仅对具有大量列的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 有利。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">numba</span>
+
+<span class="gp">In [2]: </span><span class="n">numba</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+<span class="gp">In [4]: </span><span class="n">roll</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="gp">In [5]: </span><span class="o">%</span><span class="k">timeit</span> roll.mean(engine="numba", engine_kwargs={"parallel": True})
+<span class="go">347 ms ± 26 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</span>
+
+<span class="gp">In [6]: </span><span class="n">numba</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [7]: </span><span class="o">%</span><span class="k">timeit</span> roll.mean(engine="numba", engine_kwargs={"parallel": True})
+<span class="go">201 ms ± 2.97 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</span>
+</pre></div>
+</div>
+</section>
+<section id="custom-function-examples">
+<h3>自定义函数示例<a class="headerlink" href="enhancingperf.html#custom-function-examples" title="Link to this heading">#</a></h3>
+<p>通过将 pandas 对象的 NumPy 数组表示形式与 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series.to_numpy" title="pandas.Series.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code></a> 一起传入，可以将带有 <code class="docutils literal notranslate"><span class="pre">@jit</span></code> 装饰器的自定义 Python 函数与 pandas 对象一起使用。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numba</span>
+
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_plain</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">integrate_f_numba</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">f_plain</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="o">*</span> <span class="n">dx</span>
+
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_integrate_f_numba</span><span class="p">(</span><span class="n">col_a</span><span class="p">,</span> <span class="n">col_b</span><span class="p">,</span> <span class="n">col_N</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">col_N</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"float64"</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">col_a</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">col_b</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">integrate_f_numba</span><span class="p">(</span><span class="n">col_a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">col_b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">col_N</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_numba</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">apply_integrate_f_numba</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s2">"N"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"result"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="o">%</span><span class="k">timeit</span> compute_numba(df)
+<span class="go">1000 loops, best of 3: 798 us per loop</span>
+</pre></div>
+</div>
+<p>在此示例中，使用 Numba 比 Cython 更快。</p>
+<p>Numba 还可以用于编写向量化函数，这些函数不需要用户显式地遍历向量的观测值；向量化函数将自动应用于每一行。考虑以下将每个观测值加倍的示例</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numba</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">double_every_value_nonumba</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">vectorize</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">double_every_value_withnumba</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>  <span class="c1"># noqa E501</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Custom function without numba</span>
+<span class="gp">In [5]: </span><span class="o">%</span><span class="k">timeit</span> df["col1_doubled"] = df["a"].apply(double_every_value_nonumba)  # noqa E501
+<span class="go">1000 loops, best of 3: 797 us per loop</span>
+
+<span class="go"># Standard implementation (faster than a custom function)</span>
+<span class="gp">In [6]: </span><span class="o">%</span><span class="k">timeit</span> df["col1_doubled"] = df["a"] * 2
+<span class="go">1000 loops, best of 3: 233 us per loop</span>
+
+<span class="go"># Custom function with numba</span>
+<span class="gp">In [7]: </span><span class="o">%</span><span class="k">timeit</span> df["col1_doubled"] = double_every_value_withnumba(df["a"].to_numpy())
+<span class="go">1000 loops, best of 3: 145 us per loop</span>
+</pre></div>
+</div>
+</section>
+<section id="caveats">
+<h3>注意事项<a class="headerlink" href="enhancingperf.html#caveats" title="Link to this heading">#</a></h3>
+<p>Numba 最擅长加速将数值函数应用于 NumPy 数组的函数。如果您尝试 <code class="docutils literal notranslate"><span class="pre">@jit</span></code> 包含不支持的 <a class="reference external" href="https://numba.readthedocs.cn/en/stable/reference/pysupported.html">Python</a> 或 <a class="reference external" href="https://numba.readthedocs.cn/en/stable/reference/numpysupported.html">NumPy</a> 代码的函数，编译将回退到<a class="reference external" href="https://numba.readthedocs.cn/en/stable/glossary.html#term-object-mode">对象模式</a>，这很可能不会加速您的函数。如果您希望 Numba 在无法以加速您代码的方式编译函数时抛出错误，请向 Numba 传递参数 <code class="docutils literal notranslate"><span class="pre">nopython=True</span></code>（例如 <code class="docutils literal notranslate"><span class="pre">@jit(nopython=True)</span></code>）。有关 Numba 模式故障排除的更多信息，请参阅 <a class="reference external" href="https://numba.pydata.org.cn/numba-doc/latest/user/troubleshoot.html#the-compiled-code-is-too-slow">Numba 故障排除页面</a>。</p>
+<p>如果线程层导致不安全行为，使用 <code class="docutils literal notranslate"><span class="pre">parallel=True</span></code>（例如 <code class="docutils literal notranslate"><span class="pre">@jit(parallel=True)</span></code>）可能会导致 <code class="docutils literal notranslate"><span class="pre">SIGABRT</span></code>。您可以在运行带有 <code class="docutils literal notranslate"><span class="pre">parallel=True</span></code> 的 JIT 函数之前，首先<a class="reference external" href="https://numba.readthedocs.cn/en/stable/user/threading-layer.html#selecting-a-threading-layer-for-safe-parallel-execution">指定一个安全的线程层</a>。</p>
+<p>通常，如果您在使用 Numba 时遇到段错误 (<code class="docutils literal notranslate"><span class="pre">SIGSEGV</span></code>)，请向 <a class="reference external" href="https://github.com/numba/numba/issues/new/choose">Numba 问题跟踪器</a>报告该问题。</p>
+</section>
+</section>
+<section id="expression-evaluation-via-eval">
+<span id="enhancingperf-eval"></span><h2>通过 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 进行表达式求值<a class="headerlink" href="enhancingperf.html#expression-evaluation-via-eval" title="Link to this heading">#</a></h2>
+<p>顶级函数 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 实现了对 <a class="reference internal" href="../reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的高性能表达式求值。表达式求值允许将操作表示为字符串，并且通过一次性评估大型 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的算术和布尔表达式，有可能提供性能改进。</p>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>您不应该将 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 用于简单表达式或涉及小型 DataFrame 的表达式。事实上，对于较小的表达式或对象，<a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 比纯 Python 慢很多个数量级。一个好的经验法则是，仅当您有一个行数超过 10,000 的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 时才使用 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a>。</p>
+</div>
+<section id="supported-syntax">
+<h3>支持的语法<a class="headerlink" href="enhancingperf.html#supported-syntax" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 支持以下操作</p>
+<ul class="simple">
+<li><p>算术运算，除了左移 (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>) 和右移 (<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>) 运算符，例如：<code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">pi</span> <span class="pre">/</span> <span class="pre">s</span> <span class="pre">**</span> <span class="pre">4</span> <span class="pre">%</span> <span class="pre">42</span> <span class="pre">-</span> <span class="pre">the_golden_ratio</span></code></p></li>
+<li><p>比较运算，包括链式比较，例如：<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span></code></p></li>
+<li><p>布尔运算，例如：<code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span> <span class="pre">and</span> <span class="pre">df3</span> <span class="pre">&lt;</span> <span class="pre">df4</span> <span class="pre">or</span> <span class="pre">not</span> <span class="pre">df_bool</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code> 和 <code class="docutils literal notranslate"><span class="pre">tuple</span></code> 字面量，例如：<code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span></code> 或 <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code></p></li>
+<li><p>属性访问，例如：<code class="docutils literal notranslate"><span class="pre">df.a</span></code></p></li>
+<li><p>下标表达式，例如：<code class="docutils literal notranslate"><span class="pre">df[0]</span></code></p></li>
+<li><p>简单变量求值，例如：<code class="docutils literal notranslate"><span class="pre">pd.eval("df")</span></code>（这不是很实用）</p></li>
+<li><p>数学函数：<code class="docutils literal notranslate"><span class="pre">sin</span></code>、<code class="docutils literal notranslate"><span class="pre">cos</span></code>、<code class="docutils literal notranslate"><span class="pre">exp</span></code>、<code class="docutils literal notranslate"><span class="pre">log</span></code>、<code class="docutils literal notranslate"><span class="pre">expm1</span></code>、<code class="docutils literal notranslate"><span class="pre">log1p</span></code>、<code class="docutils literal notranslate"><span class="pre">sqrt</span></code>、<code class="docutils literal notranslate"><span class="pre">sinh</span></code>、<code class="docutils literal notranslate"><span class="pre">cosh</span></code>、<code class="docutils literal notranslate"><span class="pre">tanh</span></code>、<code class="docutils literal notranslate"><span class="pre">arcsin</span></code>、<code class="docutils literal notranslate"><span class="pre">arccos</span></code>、<code class="docutils literal notranslate"><span class="pre">arctan</span></code>、<code class="docutils literal notranslate"><span class="pre">arccosh</span></code>、<code class="docutils literal notranslate"><span class="pre">arcsinh</span></code>、<code class="docutils literal notranslate"><span class="pre">arctanh</span></code>、<code class="docutils literal notranslate"><span class="pre">abs</span></code>、<code class="docutils literal notranslate"><span class="pre">arctan2</span></code> 和 <code class="docutils literal notranslate"><span class="pre">log10</span></code>。</p></li>
+</ul>
+<p>以下 Python 语法<strong>不</strong>允许使用</p>
+<ul>
+<li><p>表达式</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>除了数学函数之外的函数调用。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is</span></code>/<code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code> 操作</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> 表达式</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lambda</span></code> 表达式</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>/<code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">dict</span></code> 推导式</p></li>
+<li><p>字面量 <code class="docutils literal notranslate"><span class="pre">dict</span></code> 和 <code class="docutils literal notranslate"><span class="pre">set</span></code> 表达式</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yield</span></code> 表达式</p></li>
+<li><p>生成器表达式</p></li>
+<li><p>仅由标量值组成的布尔表达式</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>语句</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>简单语句和复合语句均不允许。这包括 <code class="docutils literal notranslate"><span class="pre">for</span></code>、<code class="docutils literal notranslate"><span class="pre">while</span></code> 和 <code class="docutils literal notranslate"><span class="pre">if</span></code>。</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="local-variables">
+<h3>局部变量<a class="headerlink" href="enhancingperf.html#local-variables" title="Link to this heading">#</a></h3>
+<p>您必须通过在变量名前加上 <code class="docutils literal notranslate"><span class="pre">@</span></code> 字符来<em>显式引用</em>您想在表达式中使用的任何局部变量。此机制对于 <a class="reference internal" href="../reference/api/pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.query()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.eval()</span></code></a> 都是相同的。例如，</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">"ab"</span><span class="p">))</span>
+
+<span class="gp">In [19]: </span><span class="n">newcol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="gp">In [20]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"b + @newcol"</span><span class="p">)</span>
+<span class="gh">Out[20]: </span>
+<span class="go">0   -0.206122</span>
+<span class="go">1   -1.029587</span>
+<span class="go">2    0.519726</span>
+<span class="go">3   -2.052589</span>
+<span class="go">4    1.453210</span>
+<span class="go">dtype: float64</span>
+
+<span class="gp">In [21]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"b &lt; @newcol"</span><span class="p">)</span>
+<span class="gh">Out[21]: </span>
+<span class="go">          a         b</span>
+<span class="go">1  0.160268 -0.848896</span>
+<span class="go">3  0.333758 -1.180355</span>
+<span class="go">4  0.572182  0.439895</span>
+</pre></div>
+</div>
+<p>如果您没有在局部变量前加上 <code class="docutils literal notranslate"><span class="pre">@</span></code> 前缀，pandas 将会引发异常，告知您该变量未定义。</p>
+<p>当使用 <a class="reference internal" href="../reference/api/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.eval()</span></code></a> 和 <a class="reference internal" href="../reference/api/pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.query()</span></code></a> 时，这允许您在表达式中拥有一个与 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 列同名的局部变量。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+
+<span class="gp">In [23]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"@a &lt; a"</span><span class="p">)</span>
+<span class="gh">Out[23]: </span>
+<span class="go">          a         b</span>
+<span class="go">0  0.473349  0.891236</span>
+<span class="go">1  0.160268 -0.848896</span>
+<span class="go">2  0.803311  1.662031</span>
+<span class="go">3  0.333758 -1.180355</span>
+<span class="go">4  0.572182  0.439895</span>
+
+<span class="gp">In [24]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]]</span>  <span class="c1"># same as the previous expression</span>
+<span class="gh">Out[24]: </span>
+<span class="go">          a         b</span>
+<span class="go">0  0.473349  0.891236</span>
+<span class="go">1  0.160268 -0.848896</span>
+<span class="go">2  0.803311  1.662031</span>
+<span class="go">3  0.333758 -1.180355</span>
+<span class="go">4  0.572182  0.439895</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>如果您无法使用 <code class="docutils literal notranslate"><span class="pre">@</span></code> 前缀，因为在该上下文中未定义，<a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 将引发异常。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+
+<span class="gp">In [26]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"@a + b"</span><span class="p">)</span>
+<span class="go">Traceback (most recent call last):</span>
+
+<span class="go">  File ~/micromamba/envs/test/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3579 in run_code</span>
+<span class="go">    exec(code_obj, self.user_global_ns, self.user_ns)</span>
+
+<span class="go">  Cell In[26], line 1</span>
+<span class="go">    pd.eval("@a + b")</span>
+
+<span class="go">  File ~/work/pandas/pandas/pandas/core/computation/eval.py:328 in eval</span>
+<span class="go">    _check_for_locals(expr, level, parser)</span>
+
+<span class="go">  File ~/work/pandas/pandas/pandas/core/computation/eval.py:170 in _check_for_locals</span>
+<span class="go">    raise SyntaxError(msg)</span>
+
+<span class="go">  File &lt;string&gt;</span>
+<span class="go">SyntaxError: The '@' prefix is not allowed in top-level eval calls.</span>
+<span class="go">please refer to your variables by name without the '@' prefix.</span>
+</pre></div>
+</div>
+<p>在这种情况下，您应该像在标准 Python 中一样简单地引用变量。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"a + b"</span><span class="p">)</span>
+<span class="gh">Out[27]: </span><span class="go">3</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="pandas-eval-parsers">
+<h3><a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 解析器<a class="headerlink" href="enhancingperf.html#pandas-eval-parsers" title="Link to this heading">#</a></h3>
+<p>有两种不同的表达式语法解析器。</p>
+<p>默认的 <code class="docutils literal notranslate"><span class="pre">'pandas'</span></code> 解析器允许更直观的语法来表达查询类操作（比较、合取和析取）。特别是，<code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 和 <code class="docutils literal notranslate"><span class="pre">|</span></code> 运算符的优先级被设置为与相应的布尔操作 <code class="docutils literal notranslate"><span class="pre">and</span></code> 和 <code class="docutils literal notranslate"><span class="pre">or</span></code> 的优先级相等。</p>
+<p>例如，上述合取可以不带括号书写。另外，您可以使用 <code class="docutils literal notranslate"><span class="pre">'python'</span></code> 解析器来强制执行严格的 Python 语义。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">20000</span><span class="p">,</span> <span class="mi">100</span>
+
+<span class="gp">In [29]: </span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">df3</span><span class="p">,</span> <span class="n">df4</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+
+<span class="gp">In [30]: </span><span class="n">expr</span> <span class="o">=</span> <span class="s2">"(df1 &gt; 0) &amp; (df2 &gt; 0) &amp; (df3 &gt; 0) &amp; (df4 &gt; 0)"</span>
+
+<span class="gp">In [31]: </span><span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="s2">"python"</span><span class="p">)</span>
+
+<span class="gp">In [32]: </span><span class="n">expr_no_parens</span> <span class="o">=</span> <span class="s2">"df1 &gt; 0 &amp; df2 &gt; 0 &amp; df3 &gt; 0 &amp; df4 &gt; 0"</span>
+
+<span class="gp">In [33]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">expr_no_parens</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="s2">"pandas"</span><span class="p">)</span>
+
+<span class="gp">In [34]: </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span>
+<span class="gh">Out[34]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<p>同一个表达式也可以与单词 <a class="reference external" href="https://docs.pythonlang.cn/3/reference/expressions.html#and" title="(in Python v3.13)"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">and</span></code></a> 一起进行“与”操作</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">expr</span> <span class="o">=</span> <span class="s2">"(df1 &gt; 0) &amp; (df2 &gt; 0) &amp; (df3 &gt; 0) &amp; (df4 &gt; 0)"</span>
+
+<span class="gp">In [36]: </span><span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="s2">"python"</span><span class="p">)</span>
+
+<span class="gp">In [37]: </span><span class="n">expr_with_ands</span> <span class="o">=</span> <span class="s2">"df1 &gt; 0 and df2 &gt; 0 and df3 &gt; 0 and df4 &gt; 0"</span>
+
+<span class="gp">In [38]: </span><span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">expr_with_ands</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="s2">"pandas"</span><span class="p">)</span>
+
+<span class="gp">In [39]: </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span>
+<span class="gh">Out[39]: </span><span class="go">True</span>
+</pre></div>
+</div>
+<p>此处的 <a class="reference external" href="https://docs.pythonlang.cn/3/reference/expressions.html#and" title="(in Python v3.13)"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">and</span></code></a> 和 <a class="reference external" href="https://docs.pythonlang.cn/3/reference/expressions.html#or" title="(in Python v3.13)"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">or</span></code></a> 运算符具有与在 Python 中相同的优先级。</p>
+</section>
+<section id="pandas-eval-engines">
+<h3><a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 引擎<a class="headerlink" href="enhancingperf.html#pandas-eval-engines" title="Link to this heading">#</a></h3>
+<p>有两种不同的表达式引擎。</p>
+<p>性能更强的 <code class="docutils literal notranslate"><span class="pre">'numexpr'</span></code> 引擎，对于大型 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>，与标准 Python 语法相比，它可以带来性能改进。此引擎需要安装可选依赖项 <code class="docutils literal notranslate"><span class="pre">numexpr</span></code>。</p>
+<p><code class="docutils literal notranslate"><span class="pre">'python'</span></code> 引擎通常<em>不</em>实用，除非用于测试其他求值引擎。使用 <code class="docutils literal notranslate"><span class="pre">engine='python'</span></code> 的 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 将<strong>不会</strong>带来性能提升，甚至可能导致性能下降。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="o">%</span><span class="k">timeit</span> df1 + df2 + df3 + df4
+<span class="go">7.75 ms +- 186 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="o">%</span><span class="k">timeit</span> pd.eval("df1 + df2 + df3 + df4", engine="python")
+<span class="go">8.54 ms +- 73.2 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+</section>
+<section id="the-dataframe-eval-method">
+<h3><a class="reference internal" href="../reference/api/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.eval()</span></code></a> 方法<a class="headerlink" href="enhancingperf.html#the-dataframe-eval-method" title="Link to this heading">#</a></h3>
+<p>除了顶层 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 函数外，您还可以在 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的“上下文”中评估表达式。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">])</span>
+
+<span class="gp">In [43]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"a + b"</span><span class="p">)</span>
+<span class="gh">Out[43]: </span>
+<span class="go">0   -0.161099</span>
+<span class="go">1    0.805452</span>
+<span class="go">2    0.747447</span>
+<span class="go">3    1.189042</span>
+<span class="go">4   -2.057490</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>任何有效的 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 表达式也是有效的 <a class="reference internal" href="../reference/api/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.eval()</span></code></a> 表达式，其额外好处是您不必在要评估的列名前加上 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 的名称。</p>
+<p>此外，您可以在表达式中执行列赋值。这允许进行<em>公式化求值</em>。赋值目标可以是新列名或现有列名，并且它必须是有效的 Python 标识符。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">b</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+
+<span class="gp">In [45]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"c = a + b"</span><span class="p">)</span>
+
+<span class="gp">In [46]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"d = a + b + c"</span><span class="p">)</span>
+
+<span class="gp">In [47]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"a = 1"</span><span class="p">)</span>
+
+<span class="gp">In [48]: </span><span class="n">df</span>
+<span class="gh">Out[48]: </span>
+<span class="go">   a  b   c   d</span>
+<span class="go">0  1  5   5  10</span>
+<span class="go">1  1  6   7  14</span>
+<span class="go">2  1  7   9  18</span>
+<span class="go">3  1  8  11  22</span>
+<span class="go">4  1  9  13  26</span>
+</pre></div>
+</div>
+<p>返回包含新列或修改列的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 副本，原始框架保持不变。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">df</span>
+<span class="gh">Out[49]: </span>
+<span class="go">   a  b   c   d</span>
+<span class="go">0  1  5   5  10</span>
+<span class="go">1  1  6   7  14</span>
+<span class="go">2  1  7   9  18</span>
+<span class="go">3  1  8  11  22</span>
+<span class="go">4  1  9  13  26</span>
+
+<span class="gp">In [50]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"e = a - c"</span><span class="p">)</span>
+<span class="gh">Out[50]: </span>
+<span class="go">   a  b   c   d   e</span>
+<span class="go">0  1  5   5  10  -4</span>
+<span class="go">1  1  6   7  14  -6</span>
+<span class="go">2  1  7   9  18  -8</span>
+<span class="go">3  1  8  11  22 -10</span>
+<span class="go">4  1  9  13  26 -12</span>
+
+<span class="gp">In [51]: </span><span class="n">df</span>
+<span class="gh">Out[51]: </span>
+<span class="go">   a  b   c   d</span>
+<span class="go">0  1  5   5  10</span>
+<span class="go">1  1  6   7  14</span>
+<span class="go">2  1  7   9  18</span>
+<span class="go">3  1  8  11  22</span>
+<span class="go">4  1  9  13  26</span>
+</pre></div>
+</div>
+<p>可以通过使用多行字符串执行多个列赋值。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [52]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span>
+<span class="gp">   ....: </span><span class="w">    </span><span class="sd">"""</span>
+<span class="gp">   ....: </span><span class="sd">c = a + b</span>
+<span class="gp">   ....: </span><span class="sd">d = a + b + c</span>
+<span class="gp">   ....: </span><span class="sd">a = 1"""</span><span class="p">,</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="gh">Out[52]: </span>
+<span class="go">   a  b   c   d</span>
+<span class="go">0  1  5   6  12</span>
+<span class="go">1  1  6   7  14</span>
+<span class="go">2  1  7   8  16</span>
+<span class="go">3  1  8   9  18</span>
+<span class="go">4  1  9  10  20</span>
+</pre></div>
+</div>
+<p>标准 Python 中的等效代码将是</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">b</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+
+<span class="gp">In [54]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"c"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span>
+
+<span class="gp">In [55]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"d"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">"c"</span><span class="p">]</span>
+
+<span class="gp">In [56]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="gp">In [57]: </span><span class="n">df</span>
+<span class="gh">Out[57]: </span>
+<span class="go">   a  b   c   d</span>
+<span class="go">0  1  5   5  10</span>
+<span class="go">1  1  6   7  14</span>
+<span class="go">2  1  7   9  18</span>
+<span class="go">3  1  8  11  22</span>
+<span class="go">4  1  9  13  26</span>
+</pre></div>
+</div>
+</section>
+<section id="eval-performance-comparison">
+<h3><a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 性能比较<a class="headerlink" href="enhancingperf.html#eval-performance-comparison" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 在包含大型数组的表达式中表现良好。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">20000</span><span class="p">,</span> <span class="mi">100</span>
+
+<span class="gp">In [59]: </span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">df3</span><span class="p">,</span> <span class="n">df4</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 算术运算</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="o">%</span><span class="k">timeit</span> df1 + df2 + df3 + df4
+<span class="go">7.83 ms +- 224 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="o">%</span><span class="k">timeit</span> pd.eval("df1 + df2 + df3 + df4")
+<span class="go">3.16 ms +- 106 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 比较运算</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="o">%</span><span class="k">timeit</span> (df1 &gt; 0) &amp; (df2 &gt; 0) &amp; (df3 &gt; 0) &amp; (df4 &gt; 0)
+<span class="go">5.53 ms +- 34 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="o">%</span><span class="k">timeit</span> pd.eval("(df1 &gt; 0) &amp; (df2 &gt; 0) &amp; (df3 &gt; 0) &amp; (df4 &gt; 0)")
+<span class="go">8.68 ms +- 53.9 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+<p>具有未对齐轴的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 算术运算。</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [64]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
+
+<span class="gp">In [65]: </span><span class="o">%</span><span class="k">timeit</span> df1 + df2 + df3 + df4 + s
+<span class="go">12.7 ms +- 83.8 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="o">%</span><span class="k">timeit</span> pd.eval("df1 + df2 + df3 + df4 + s")
+<span class="go">3.65 ms +- 45.4 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>诸如</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="ow">and</span> <span class="mi">2</span>  <span class="c1"># would parse to 1 &amp; 2, but should evaluate to 2</span>
+<span class="mi">3</span> <span class="ow">or</span> <span class="mi">4</span>  <span class="c1"># would parse to 3 | 4, but should evaluate to 3</span>
+<span class="o">~</span><span class="mi">1</span>  <span class="c1"># this is okay, but slower when using eval</span>
+</pre></div>
+</div>
+<p>应该在 Python 中执行。如果您尝试对非 <code class="docutils literal notranslate"><span class="pre">bool</span></code> 或 <code class="docutils literal notranslate"><span class="pre">np.bool_</span></code> 类型的标量操作数执行任何布尔/位运算，将引发异常。</p>
+</div>
+<p>这里有一张图表，显示了 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 的运行时间与计算中涉及的框架大小的函数关系。两条线代表两种不同的引擎。</p>
+<img alt="../_images/eval-perf.png" src="../_images/eval-perf.png">
+<p>只有当您的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 具有超过大约 100,000 行时，您才能看到使用 <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> 引擎与 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> 带来的性能优势。</p>
+<p>此图表是使用一个具有 3 列的 <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> 创建的，每列包含使用 <code class="docutils literal notranslate"><span class="pre">numpy.random.randn()</span></code> 生成的浮点值。</p>
+</section>
+<section id="expression-evaluation-limitations-with-numexpr">
+<h3>使用 <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> 进行表达式求值的限制<a class="headerlink" href="enhancingperf.html#expression-evaluation-limitations-with-numexpr" title="Link to this heading">#</a></h3>
+<p>会会导致对象 dtype 或因 <code class="docutils literal notranslate"><span class="pre">NaT</span></code> 而涉及日期时间操作的表达式必须在 Python 空间中求值，但表达式的一部分仍然可以使用 <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> 进行求值。例如</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ....: </span>    <span class="p">{</span><span class="s2">"strings"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s2">"cba"</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"nums"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">3</span><span class="p">)}</span>
+<span class="gp">   ....: </span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [68]: </span><span class="n">df</span>
+<span class="gh">Out[68]: </span>
+<span class="go">  strings  nums</span>
+<span class="go">0       c     0</span>
+<span class="go">1       c     0</span>
+<span class="go">2       c     0</span>
+<span class="go">3       b     1</span>
+<span class="go">4       b     1</span>
+<span class="go">5       b     1</span>
+<span class="go">6       a     2</span>
+<span class="go">7       a     2</span>
+<span class="go">8       a     2</span>
+
+<span class="gp">In [69]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"strings == 'a' and nums == 1"</span><span class="p">)</span>
+<span class="gh">Out[69]: </span>
+<span class="go">Empty DataFrame</span>
+<span class="go">Columns: [strings, nums]</span>
+<span class="go">Index: []</span>
+</pre></div>
+</div>
+<p>比较的数值部分 (<code class="docutils literal notranslate"><span class="pre">nums</span> <span class="pre">==</span> <span class="pre">1</span></code>) 将由 <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> 求值，而比较的对象部分 (<code class="docutils literal notranslate"><span class="pre">"strings</span> <span class="pre">==</span> <span class="pre">'a'</span></code>) 将由 Python 求值。</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="options.html" title="previous page"> <i class="fa-solid fa-angle-left"></i> <div class="prev-next-info"> <p class="prev-next-subtitle">上一页</p> <p class="prev-next-title">选项和设置</p> </div> </a> <a class="right-next" href="scale.html" title="next page"> <div class="prev-next-info"> <p class="prev-next-subtitle">下一页</p> <p class="prev-next-title">扩展到大型数据集</p> </div> <i class="fa-solid fa-angle-right"></i> </a></div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 本页内容</div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#cython-writing-c-extensions-for-pandas">Cython（为 pandas 编写 C 扩展）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#pure-python">纯 Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#plain-cython">普通 Cython</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#declaring-c-types">声明 C 类型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#using-ndarray">使用 ndarray</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#disabling-compiler-directives">禁用编译器指令</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#numba-jit-compilation">Numba（JIT 编译）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#pandas-numba-engine">pandas Numba 引擎</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#custom-function-examples">自定义函数示例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#caveats">注意事项</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#expression-evaluation-via-eval">通过 <code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code> 进行表达式求值</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#supported-syntax">支持的语法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#local-variables">局部变量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#pandas-eval-parsers"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code> 解析器</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#pandas-eval-engines"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code> 引擎</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#the-dataframe-eval-method"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.eval()</span></code> 方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#eval-performance-comparison"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code> 性能比较</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="enhancingperf.html#expression-evaluation-limitations-with-numexpr">使用 <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> 进行表达式求值的限制</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/enhancingperf.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> 显示源</a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js%3Fdigest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright">© 2025, pandas 通过 <a href="https://numfocus.org">NumFOCUS, Inc.</a>。由 <a href="https://www.ovhcloud.com">OVHcloud</a> 托管。</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">使用 <a href="https://sphinx-doc.cn/">Sphinx</a> 8.1.3 创建。<br />
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">使用 <a href="https://pydata.sphinx-doc.cn/en/stable/index.html">PyData Sphinx Theme</a> 0.14.4 构建。</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>
