@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-批量  外层zip→内层zip→coze-clipboard-data
-输出到 穷人粘贴版/*.json
-并生成 文件名-desc对照表.txt
+容错版：外层 zip 损坏时 → 直接当粘连流切分
+python batch_share2poor_robust.py
 """
-import json, yaml, tempfile, zipfile, sys
+import json, yaml, tempfile, zipfile, re, sys
 from pathlib import Path
 
 OUT_DIR = Path('穷人粘贴版')
 MAP_FILE = OUT_DIR / '文件名-desc对照表.txt'
+
+JSON_PAT = re.compile(rb'-draft\.json(.*)MANIFEST\.yml', re.DOTALL)
 
 def json_from_raw(raw: bytes) -> dict:
     start = raw.index(b'{')
@@ -21,10 +22,12 @@ def json_from_raw(raw: bytes) -> dict:
     if depth: raise ValueError('JSON 括号不平衡')
     return json.loads(raw[start:i])
 
-def convert_one(inner_zip: Path) -> tuple[str, str]:
-    with zipfile.ZipFile(inner_zip, 'r') as zf:
-        draft = json_from_raw(zf.read(next(n for n in zf.namelist() if n.endswith('-draft.json'))))
-        manifest = yaml.safe_load(zf.read('MANIFEST.yml'))
+def convert_from_blob(blob: bytes) -> tuple[str, str]:
+    """粘连流 -> clipboard json + desc"""
+    m = JSON_PAT.search(blob)
+    if not m: raise ValueError('未找到 JSON/MANIFEST 段')
+    draft = json_from_raw(m.group(1))
+    manifest = yaml.safe_load(blob[blob.rfind(b'MANIFEST.yml'):].split(b'\n', 1)[1].decode('utf-8', errors='ignore'))
     clipboard = {
         "type": "coze-workflow-clipboard-data",
         "source": {
@@ -39,7 +42,6 @@ def convert_one(inner_zip: Path) -> tuple[str, str]:
     return json.dumps(clipboard, ensure_ascii=False, separators=(",", ":")), manifest["main"]["desc"]
 
 def safe_name(base: str) -> Path:
-    """重名自动加序号"""
     target = OUT_DIR / f"{base}.json"
     idx = 1
     while target.exists():
@@ -48,29 +50,32 @@ def safe_name(base: str) -> Path:
     return target
 
 def main():
-    #top = Path.cwd()
-    # 脚本放在上一级，扫描下一级「工作流200+合集分享」
     top = Path(__file__).parent / '工作流200+合集分享'
-
-    if not OUT_DIR.exists():
-        OUT_DIR.mkdir(exist_ok=True)
+    if not top.exists():
+        sys.exit('目录「工作流200+合集分享」不存在')
+    OUT_DIR.mkdir(exist_ok=True)
 
     map_lines = []
     for outer in top.glob('*.zip'):
         try:
+            # ① 先当正常 zip 解
             with tempfile.TemporaryDirectory() as tmp:
                 tmp = Path(tmp)
-                with zipfile.ZipFile(outer, 'r') as zf:
-                    zf.extractall(tmp)
-                inner = tmp / (outer.stem + '.zip')
-                if not inner.exists():
-                    print(f'⚠️  内层zip缺失: {outer.name}')
-                    continue
-                single_line_json, desc = convert_one(inner)
-                out_file = safe_name(outer.stem)
-                out_file.write_text(single_line_json, encoding='utf-8')
-                map_lines.append(f"{out_file.name}\t{desc}")
-                print(f'✅ 完成: {out_file.name}')
+                try:
+                    with zipfile.ZipFile(outer, 'r') as zf:
+                        zf.extractall(tmp)
+                    inner = tmp / (outer.stem + '.zip')
+                    if not inner.exists():
+                        raise FileNotFoundError('内层 zip 不存在')
+                    single_line_json, desc = convert_from_blob(inner.read_bytes())
+                except (zipfile.BadZipFile, FileNotFoundError):
+                    # ② 失败 → 直接当粘连流
+                    single_line_json, desc = convert_from_blob(outer.read_bytes())
+
+            out_file = safe_name(outer.stem)
+            out_file.write_text(single_line_json, encoding='utf-8')
+            map_lines.append(f"{out_file.name}\t{desc}")
+            print(f'✅ 完成: {out_file.name}')
         except Exception as e:
             print(f'❌ 失败: {outer.name}  {e}')
 
