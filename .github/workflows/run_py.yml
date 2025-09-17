@@ -22,9 +22,9 @@ jobs:
       run: |
           pip install pyyaml
 
-    - name: 登录
+    - name: 运行脚本
       run: |
-          python docs/coze_workflows/cozeworkflows-main/main.py
+          python coze_workflows/cozeworkflows-main/main.py
 
     - name: 添加更新
       run: |
