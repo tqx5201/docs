@@ -27,6 +27,16 @@ def convert_from_blob(blob: bytes) -> tuple[str, str]:
     m = JSON_PAT.search(blob)
     if not m: raise ValueError('未找到 JSON/MANIFEST 段')
     draft = json_from_raw(m.group(1))
+    for node in draft["nodes"]:
+        node["_temp"] = {
+            "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            }
+        }
+
     manifest = yaml.safe_load(blob[blob.rfind(b'MANIFEST.yml'):].split(b'\n', 1)[1].decode('utf-8', errors='ignore'))
     clipboard = {
         "type": "coze-workflow-clipboard-data",
