@@ -1,4 +1,4 @@
-name: iptv.cc自动签到
+name: 运行py脚本
 
 on:
   #schedule:
@@ -20,9 +20,8 @@ jobs:
 
       - name: 装插件
         run: |
-            pip install requests
-            pip install beautifulsoup4
+            pip install pyyaml
 
       - name: 登录
         run: |
-          python jiaoben/checkin/main.py
+          python docs/coze_workflows/cozeworkflows-main/main.py
