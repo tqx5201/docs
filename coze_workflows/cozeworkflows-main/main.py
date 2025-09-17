@@ -48,7 +48,10 @@ def safe_name(base: str) -> Path:
     return target
 
 def main():
-    top = Path.cwd()
+    #top = Path.cwd()
+    # 脚本放在上一级，扫描下一级「工作流200+合集分享」
+    top = Path(__file__).parent / '工作流200+合集分享'
+
     if not OUT_DIR.exists():
         OUT_DIR.mkdir(exist_ok=True)
 
