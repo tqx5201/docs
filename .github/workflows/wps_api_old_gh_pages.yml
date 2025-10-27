@@ -1,0 +1,37 @@
+name: 扒站并发布静态 HTML
+
+on:
+  #push:
+    #branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3   # 拉代码（虽然空仓库也行）
+
+      - name: 安装 wget
+        run: sudo apt-get update && sudo apt-get install -y wget
+
+      - name: 整站镜像
+        run: |
+          mkdir wps_api_old
+          wget --mirror \
+               --convert-links \
+               --adjust-extension \
+               --page-requisites \
+               --no-parent \
+               -e robots=off \
+               -P public \
+               https://open.wps.cn/previous/docs/client/wpsLoad
+
+      - name: 把绝对路径改成相对（可选，本地双击也能看）
+        run: |
+          find public -name '*.html' -exec sed -i 's|https://open.wps.cn/previous/docs/client/wpsLoad||g' {} \;
+
+      - name: 推到 gh-pages 分支
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./wps_api_old
