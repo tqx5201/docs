@@ -1,0 +1,40 @@
+name: 扒站并打包 ZIP
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 安装依赖
+        run: sudo apt-get update && sudo apt-get install -y wget zip
+
+      - name: 整站镜像
+        run: |
+          mkdir site
+          wget --mirror \
+               --convert-links \
+               --adjust-extension \
+               --page-requisites \
+               --no-parent \
+               -e robots=off \
+               -P site \
+               https://open.wps.cn/previous/docs/client/wpsLoad
+
+      - name: 打成 zip
+        run: |
+          cd site
+          zip -r ../wpsLoad.zip .
+
+      - name: 上传到 Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          files: wpsLoad.zip
+          title: "WPS 历史文档离线包"
+          body: "自动扒站 + ZIP，下载后解压即可浏览完整静态站点。"
